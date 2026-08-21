@@ -1,0 +1,67 @@
+.wrapper {
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+}
+
+.left {
+  align-items: flex-start;
+  text-align: left;
+  margin-right: auto;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.right {
+  align-items: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-secondary);
+  background-color: rgba(20, 184, 166, 0.08);
+  border: 1px solid rgba(20, 184, 166, 0.15);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.05);
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.15rem;
+  }
+}

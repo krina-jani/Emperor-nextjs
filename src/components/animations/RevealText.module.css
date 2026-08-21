@@ -1,0 +1,25 @@
+.textBlock {
+  display: inline-flex;
+  flex-wrap: wrap;
+  line-height: inherit;
+}
+
+.wordWrapper {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.word {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1),
+              opacity var(--transition-slow) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visible {
+  transform: translateY(0);
+  opacity: 1;
+}

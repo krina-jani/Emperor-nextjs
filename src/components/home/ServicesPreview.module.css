@@ -1,0 +1,228 @@
+.section {
+  padding: 8rem 0;
+  background-color: var(--bg-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  opacity: 0.6;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  max-width: 800px;
+  line-height: 1.15;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+.cardWrapper {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem 2rem;
+  height: 100%;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: hidden; /* Restrict to card boundary to ensure mix-blend-mode works correctly */
+  --mouse-x: -200px;
+  --mouse-y: -200px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(20, 33, 52, 0.15);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Cursor-following circular glow follower */
+.cursorFollower {
+  position: absolute;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(20, 33, 52, 0.03) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .cursorFollower {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+  max-width: 72%; /* Restrict width so title doesn't overlap the 3D graphic */
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.card:hover .iconContainer {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.cardSummary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+  max-width: 70%; /* Restrict width so description doesn't overlap the 3D graphic */
+}
+
+.cardFooter {
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.arrow {
+  transition: transform var(--transition-normal);
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+}
+
+.bottomAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+/* Color Themes */
+.bgBlue { background-color: #eaf1ff; border-color: #d1e2ff; }
+.bgPink { background-color: #ffeaef; border-color: #ffd1dc; }
+.bgYellow { background-color: #fff6d9; border-color: #ffe8ad; }
+.bgGreen { background-color: #e8f7ec; border-color: #c9ebd2; }
+.bgIndigo { background-color: #e6e8ff; border-color: #cbd0ff; }
+.bgBlueGray { background-color: #e5f1f7; border-color: #cadfe8; }
+.bgPurple { background-color: #f1ecfc; border-color: #ded1fc; }
+.bgTeal { background-color: #e5f6f4; border-color: #c7ede9; }
+
+/* 3D Image Positioning */
+.image3d {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 145px; /* Slightly adjusted to fit beautifully with text restriction */
+  height: 145px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .image3d {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+/* Custom Card Tag (Pill) */
+.cardTag {
+  display: inline-block;
+  font-size: 0.725rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.85rem;
+  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 100px;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  align-self: flex-start;
+  z-index: 2;
+  position: relative;
+  border: 1px solid rgba(20, 33, 52, 0.05);
+}
+
+/* Custom Grid spacing to match reference */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* Exact 4 cards per row */
+  }
+}

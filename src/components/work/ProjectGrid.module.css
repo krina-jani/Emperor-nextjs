@@ -1,0 +1,27 @@
+.section {
+  padding: 2rem 0 6rem 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.emptyBlock {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.emptyText {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 420px;
+  line-height: 1.5;
+}

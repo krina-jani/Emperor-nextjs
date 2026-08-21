@@ -1,0 +1,260 @@
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+  background-color: var(--bg-base);
+  display: flex;
+  align-items: center;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+.gridLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(20, 33, 52, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 33, 52, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px;
+  pointer-events: none;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 4.5rem;
+  }
+}
+
+/* ==========================================================================
+   Left Column: Typography & CTAs
+   ========================================================================= */
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+/* Editorial Title */
+.title {
+  font-size: clamp(2.5rem, 5.2vw, 4.35rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.titleLineAccent {
+  color: var(--text-primary);
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+  color: var(--text-primary);
+}
+
+/* Wavy Underline SVG */
+.wavyUnderline {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+}
+
+.desc {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+
+
+/* ==========================================================================
+   Right Column: Orbit Visual & Metrics Capsule
+   ========================================================================= */
+.visualCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Main Image Container */
+.teamPhotoContainer {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teamImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  mix-blend-mode: darken;
+}
+
+
+
+/* Bottom Capsule Metrics Strip */
+.trustStrip {
+  position: relative;
+  margin-top: -3.5rem; /* Pull up to attach over the image */
+  width: 95%;
+  max-width: 720px;
+  background-color: #ffffff;
+  border: 1px solid rgba(20, 33, 52, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 15px 40px rgba(20, 33, 52, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.trustIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(20, 33, 52, 0.03);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.trustInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.trustVal {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.trustLabel {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.stripDivider {
+  width: 1px;
+  height: 45px;
+  background-color: rgba(20, 33, 52, 0.1);
+  flex-shrink: 0;
+}
+
+/* Google middle col layout */
+.trustInfoCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.3;
+  width: 100%;
+}
+
+.googleBrand {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+}
+
+/* Original colors for Google trust symbol */
+.gBlue { color: #4285F4; }
+.gRed { color: #EA4335; }
+.gYellow { color: #FBBC05; }
+.gGreen { color: #34A853; }
+
+.starsRow {
+  display: flex;
+  gap: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.googleLabel {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+}
+
+/* ==========================================================================
+   Responsive Overrides
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 6rem 0;
+  }
+  .visualCol {
+    margin-top: 2rem;
+  }
+  .trustStrip {
+    width: 100%;
+    padding: 1.25rem;
+  }
+  .trustVal {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .trustStrip {
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  .stripDivider {
+    width: 100%;
+    height: 1px;
+  }
+}

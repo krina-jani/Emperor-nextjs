@@ -1,0 +1,74 @@
+.section {
+  width: 100%;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid rgba(20, 33, 52, 0.06);
+  border-bottom: 1px solid rgba(20, 33, 52, 0.06);
+  padding: 1.75rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.marquee {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.scroll {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 3rem;
+  animation: scrollMarquee 40s linear infinite;
+  will-change: transform;
+}
+
+/* Pause scroll animation on hover */
+.track:hover .scroll {
+  animation-play-state: paused;
+}
+
+.techItem {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.dot {
+  color: rgba(20, 33, 52, 0.35);
+  font-size: 1.25rem;
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.3333%, 0, 0); /* Loop seamlessly after repeating list */
+  }
+}

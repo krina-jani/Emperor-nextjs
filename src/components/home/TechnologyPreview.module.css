@@ -1,0 +1,270 @@
+/* ─── Section ─── */
+.section {
+  padding: 7rem 0;
+  background-color: var(--bg-base);
+  overflow: hidden;          /* clips the marquee overflow */
+}
+
+/* 80% wide, centered */
+.outerWrap {
+  width: 82%;
+  margin: 0 auto;
+}
+
+/* ─── Main Row ─── */
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 2rem;
+  overflow: hidden;          /* clips cards that slide off screen */
+  background: var(--bg-secondary);
+  border: 1px solid rgba(20, 33, 52, 0.07);
+  box-shadow: 0 4px 40px rgba(20, 33, 52, 0.06);
+  min-height: 380px;
+}
+
+/* ─── LEFT — Fixed Stat Card ─── */
+.stickyCard {
+  flex-shrink: 0;
+  width: 280px;
+  background: #e8e4f8;         /* soft lavender, matches reference */
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(20, 33, 52, 0.45);
+}
+
+.bigStat {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: var(--text-primary);
+  line-height: 1;
+  margin: 0;
+}
+
+.bigStatLabel {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.desc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(20, 33, 52, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* Mini stats row inside card */
+.miniStats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(20, 33, 52, 0.1);
+}
+
+.miniStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.miniNum {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.miniLabel {
+  font-size: 0.62rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(20, 33, 52, 0.5);
+}
+
+.miniDivider {
+  width: 1px;
+  height: 30px;
+  background: rgba(20, 33, 52, 0.15);
+}
+
+/* ─── RIGHT — Marquee Area ─── */
+.marqueeArea {
+  flex: 1;
+  position: relative;
+  overflow: hidden;           /* hard clip — cards disappear at the edge */
+  display: flex;
+  align-items: center;
+}
+
+/* Soft left fade so cards blend into the sticky card */
+.fadeLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to right, var(--bg-secondary) 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ─── Scrolling Track ─── */
+.marqueeTrack {
+  display: flex;
+  align-items: stretch;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem;
+  width: max-content;
+
+  /* Infinite scroll: move by exactly half (one copy of items) */
+  animation: marqueeScroll 45s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Tech Card ─── */
+.techCard {
+  flex-shrink: 0;
+  width: 290px;
+  min-height: 300px;
+  border-radius: 1.5rem;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.techCard:hover {
+  transform: translateY(-6px) scale(1.025);
+  box-shadow: 0 16px 40px rgba(20, 33, 52, 0.14);
+}
+
+/* ─── Card Top ─── */
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconWrap {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  backdrop-filter: blur(4px);
+  flex-shrink: 0;
+}
+
+.catTag {
+  font-size: 0.65rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(20, 33, 52, 0.5);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2rem;
+}
+
+/* ─── Card Body ─── */
+.cardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.techName {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.techDesc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(20, 33, 52, 0.6);
+}
+
+/* ─── Card Footer ─── */
+.cardFoot {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.profBar {
+  flex: 1;
+  height: 4px;
+  background: rgba(20, 33, 52, 0.12);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.profFill {
+  height: 100%;
+  background: rgba(20, 33, 52, 0.4);
+  border-radius: 2rem;
+}
+
+.profNum {
+  font-size: 0.68rem;
+  font-weight: 750;
+  color: rgba(20, 33, 52, 0.45);
+  flex-shrink: 0;
+  font-family: var(--font-mono, monospace);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .outerWrap {
+    width: 95%;
+  }
+
+  .row {
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .stickyCard {
+    width: 100%;
+    padding: 2rem 1.75rem;
+  }
+
+  .marqueeArea {
+    height: 280px;
+  }
+}

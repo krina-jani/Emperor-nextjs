@@ -1,0 +1,70 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-base); /* #f4f1ea cream background */
+  overflow: hidden;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8vh; /* Generous cream gap between bands */
+  pointer-events: auto;
+}
+
+.band {
+  position: relative;
+  width: 150vw; /* Exceed viewport width to hide slanted edges */
+  height: clamp(100px, 15vh, 220px); /* Oversized thick bands */
+  background-color: var(--bg-dark); /* #142134 dark navy bands */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(20, 33, 52, 0.05);
+  will-change: transform;
+}
+
+/* Diagonal Slants */
+.topBand {
+  transform: rotate(-2deg);
+}
+
+.bottomBand {
+  transform: rotate(1.5deg);
+}
+
+/* Continuous Marquee Track */
+.track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+}
+
+.text {
+  display: inline-block;
+  font-size: clamp(50px, 7.5vw, 160px); /* Massive typography */
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-secondary); /* #ffffff white text */
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: -0.02em;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+
+/* Responsive Scaling for smaller viewports */
+@media (max-width: 768px) {
+  .screen {
+    gap: 6vh;
+  }
+  .band {
+    height: clamp(80px, 12vh, 120px);
+    width: 170vw; /* Wider slants on mobile */
+  }
+  .text {
+    font-size: clamp(38px, 10vw, 70px);
+  }
+}

@@ -1,0 +1,118 @@
+/* ─── PillNav Core ─── */
+.pill-nav {
+  --nav-h: 44px;
+  --pill-pad-x: 20px;
+  --pill-gap: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.pill-nav-items {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+  background: var(--base, #f4f1ea);
+  border-radius: 9999px;
+  border: 1px solid rgba(20, 33, 52, 0.1);
+  box-shadow: 0 2px 12px rgba(20, 33, 52, 0.06);
+}
+
+.pill-list {
+  list-style: none;
+  display: flex;
+  align-items: stretch;
+  gap: var(--pill-gap);
+  margin: 0;
+  padding: 4px;
+  height: 100%;
+}
+
+.pill-list > li {
+  display: flex;
+  height: 100%;
+}
+
+/* ─── Individual Pill ─── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 var(--pill-pad-x);
+  background: transparent;
+  color: var(--pill-text, #142134);
+  text-decoration: none;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  font-weight: 650;
+  font-size: 0.8rem;
+  line-height: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.15s ease;
+}
+
+/* The GSAP circle that fills on hover */
+.pill .hover-circle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-radius: 50%;
+  background: var(--pill-bg, #142134);
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Label stack for the slide animation */
+.pill .label-stack {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.pill .pill-label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 1;
+  will-change: transform;
+  color: var(--pill-text, #142134);
+}
+
+.pill .pill-label-hover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--hover-text, #f4f1ea);
+  z-index: 3;
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ─── Active State ─── */
+.pill.is-active {
+  background: var(--pill-bg, #142134);
+  color: var(--hover-text, #f4f1ea);
+}
+
+.pill.is-active .pill-label {
+  color: var(--hover-text, #f4f1ea);
+}
+
+.pill.is-active .hover-circle {
+  /* Already filled — hide the GSAP circle on active */
+  display: none;
+}
+
+.pill.is-active .pill-label-hover {
+  display: none;
+}

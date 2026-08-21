@@ -1,0 +1,70 @@
+:root {
+  /* Color Palette - Premium Warm Cream & Dark Navy Theme */
+  --bg-base: #f4f1ea;
+  --bg-primary: #f4f1ea;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e6e2d6; /* Tonal variation of base for tracks/borders */
+  --bg-dark: #142134;
+
+  --text-primary: #142134;
+  --text-secondary: rgba(20, 33, 52, 0.75);
+  --text-muted: rgba(20, 33, 52, 0.45);
+
+  --text-on-dark: #ffffff;
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.75);
+  --text-on-dark-muted: rgba(255, 255, 255, 0.45);
+
+  /* Brand Colors matching #142134 and #ffffff */
+  --color-primary: #142134;
+  --color-primary-hover: rgba(20, 33, 52, 0.88);
+  --color-primary-rgb: 20, 33, 52;
+
+  --color-secondary: #ffffff;
+  --color-secondary-hover: rgba(255, 255, 255, 0.9);
+  --color-secondary-rgb: 255, 255, 255;
+
+  --color-accent: #142134;
+  --color-accent-hover: rgba(20, 33, 52, 0.88);
+
+  --color-border: rgba(20, 33, 52, 0.08);
+  --color-border-hover: rgba(20, 33, 52, 0.15);
+
+  --color-error: #b91c1c; /* Muted red for validation errors */
+  --color-success: #15803d; /* Muted green for successes */
+
+  /* Glassmorphism Design Tokens suited for Cream Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(20, 33, 52, 0.08);
+  --glass-border-hover: rgba(20, 33, 52, 0.15);
+  --glass-blur: 16px;
+  --glass-shadow: 0 8px 32px 0 rgba(20, 33, 52, 0.04);
+
+  /* Shadows - Minimal & Sophisticated */
+  --shadow-sm: 0 1px 2px 0 rgba(20, 33, 52, 0.02);
+  --shadow-md: 0 4px 10px rgba(20, 33, 52, 0.03);
+  --shadow-lg: 0 12px 24px rgba(20, 33, 52, 0.04);
+  --shadow-glow-primary: 0 0 20px rgba(20, 33, 52, 0.08);
+  --shadow-glow-secondary: 0 0 20px rgba(255, 255, 255, 0.5);
+
+  /* Border Radii (16px - 24px for cards, 12px - 14px for buttons) */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-button: 12px; /* Standard button radius 12px-14px */
+  --radius-md: 14px;
+  --radius-lg: 16px; /* Cards lower bounds */
+  --radius-xl: 24px; /* Cards upper bounds */
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-normal: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-spring: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+
+  /* Layout Sizes */
+  --header-height: 80px;
+  --header-scroll-height: 70px;
+  --container-max-width: 1720px; /* Expanded premium container width */
+}

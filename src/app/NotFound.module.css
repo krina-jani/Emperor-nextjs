@@ -1,0 +1,52 @@
+.pageWrapper {
+  min-height: calc(100vh - var(--header-height) - 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.title {
+  font-size: clamp(6rem, 15vw, 12rem);
+  line-height: 1;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.1;
+  margin-bottom: -2rem;
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 3rem;
+}
+
+.button {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  padding: 1rem 2.5rem;
+  border-radius: 3rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
