@@ -12,7 +12,7 @@ export const HomeCTA: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   
-  const text = "Ready To Launch Your Career? Schedule a free placement diagnostic session and review your transferable skills with global advisors.";
+  const text = "Ready to Scale Your Enterprise? ";
 
   useEffect(() => {
     if (!sectionRef.current || !textRef.current) return;

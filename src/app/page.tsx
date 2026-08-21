@@ -15,7 +15,6 @@ import IndustriesPreview from '../components/home/IndustriesPreview';
 import TechnologyPreview from '../components/home/TechnologyPreview';
 import FeaturedWork from '../components/home/FeaturedWork';
 import AboutPreview from '../components/home/AboutPreview';
-import HomeCTA from '../components/home/HomeCTA';
 
 export default function Home() {
   return (
@@ -41,7 +40,6 @@ export default function Home() {
       <div id="about">
         <AboutPreview />
       </div>
-      <HomeCTA />
     </>
   );
 }
