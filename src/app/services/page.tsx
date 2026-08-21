@@ -10,11 +10,14 @@ export const metadata = generatePageMetadata(
   '/services'
 );
 
+import ProcessTimeline from '../../components/home/ProcessTimeline';
+
 export default function ServicesPage() {
   return (
     <>
       <ServicesHero />
       <ServicesFullPage />
+      <ProcessTimeline />
       <ServicesCTA
         title="Ready to Start Your Project?"
         desc="Tell us your goal and we'll build the right solution around it. No templates, no shortcuts — just smart digital work built for you."

@@ -11,7 +11,7 @@ import TrustBar from '../components/home/TrustBar';
 import ServicesPreview from '../components/home/Whatwedo';
 import WhyChooseUs from '../components/home/WhyChooseUs';
 import IndustriesPreview from '../components/home/IndustriesPreview';
-import ProcessTimeline from '../components/home/ProcessTimeline';
+
 import TechnologyPreview from '../components/home/TechnologyPreview';
 import FeaturedWork from '../components/home/FeaturedWork';
 import AboutPreview from '../components/home/AboutPreview';
@@ -31,7 +31,7 @@ export default function Home() {
       <div id="solutions">
         <IndustriesPreview />
       </div>
-      <ProcessTimeline />
+
       <div id="technologies">
         <TechnologyPreview />
       </div>

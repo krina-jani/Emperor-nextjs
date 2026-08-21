@@ -66,6 +66,8 @@ export const TechnologyPreview: React.FC = () => {
           <div className={styles.marqueeArea}>
             {/* Fade edge on left */}
             <div className={styles.fadeLeft} />
+            {/* Fade edge on right */}
+            <div className={styles.fadeRight} />
 
             <div
               className={styles.marqueeTrack}
@@ -77,7 +79,7 @@ export const TechnologyPreview: React.FC = () => {
                 <div
                   key={`${tech.name}-${i}`}
                   className={styles.techCard}
-                  style={{ background: categoryColors[tech.category] ?? '#f0f0f0' }}
+                  style={{ background: Object.values(categoryColors)[i % Object.values(categoryColors).length] }}
                 >
                   <div className={styles.cardTop}>
                     <div className={styles.iconWrap}>
