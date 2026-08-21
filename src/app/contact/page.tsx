@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeCTA from '../../components/home/HomeCTA';
+import ContactForm from '../../components/contact/ContactForm';
 import Container from '../../components/ui/Container';
 import { generatePageMetadata } from '../../lib/seo';
 import styles from './ContactPage.module.css';
@@ -22,6 +23,7 @@ export default function ContactPage() {
           </p>
         </Container>
       </div>
+      <ContactForm />
       <HomeCTA />
     </main>
   );

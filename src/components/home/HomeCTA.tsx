@@ -56,23 +56,25 @@ export const HomeCTA: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.sectionAnimated}>
-      <div className={styles.containerAnimated}>
-        <h3 ref={textRef} className={styles.horizontalText}>
-          {text.split('').map((char, index) => (
-            <span key={index} className="char" style={{ display: 'inline-block' }}>
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
-        </h3>
-        
-        <div className={styles.btnWrapper}>
-          <button className={styles.ctaBtn}>
-            Start a Project &rarr;
-          </button>
+    <div className="home-cta-wrapper">
+      <section ref={sectionRef} className={styles.sectionAnimated}>
+        <div className={styles.containerAnimated}>
+          <h3 ref={textRef} className={styles.horizontalText}>
+            {text.split('').map((char, index) => (
+              <span key={index} className="char" style={{ display: 'inline-block' }}>
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </h3>
+          
+          <div className={styles.btnWrapper}>
+            <button className={styles.ctaBtn}>
+              Start a Project &rarr;
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
