@@ -47,6 +47,45 @@ const stages = [
   }
 ];
 
+const horizontalPoints = [
+  {
+    num: '01',
+    category: 'ALIGNMENT',
+    title: 'Discover',
+    desc: 'Deep architectural discovery, technical requirement mapping, entity modeling, and feasibility analysis.'
+  },
+  {
+    num: '02',
+    category: 'ROADMAP',
+    title: 'Strategize',
+    desc: 'Defining MVP boundaries, technical milestones, system architecture, and tech stack selection.'
+  },
+  {
+    num: '03',
+    category: 'EXPERIENCE',
+    title: 'Design',
+    desc: 'Interactive high-fidelity Figma prototypes, design tokens, and user journey optimization.'
+  },
+  {
+    num: '04',
+    category: 'CONNECTIVITY',
+    title: 'Integrate',
+    desc: 'Connecting third-party APIs, payment gateways, ERP webhooks, and AI pipelines.'
+  },
+  {
+    num: '05',
+    category: 'VALIDATION',
+    title: 'Test',
+    desc: 'Automated regression suites, concurrency load testing, and penetration security scans.'
+  },
+  {
+    num: '06',
+    category: 'RELEASE',
+    title: 'Deploy',
+    desc: 'Zero-downtime blue/green deployment, Docker container orchestration, and edge caching.'
+  }
+];
+
 const standards = [
   {
     num: '01. STRICT TYPE SAFETY',
@@ -158,45 +197,50 @@ export const HowWeWork = () => {
 
         {/* Quality Standards */}
         <div className={styles.qualitySection}>
-          <div className={styles.timelineSectionTitle}>
-            WHAT'S INCLUDED
+          <div className={styles.qualityHeader}>
+            <div className={styles.qualityBadge}>QUALITY GUARDRAILS</div>
+            <h2 className={styles.qualityTitle}>Non-Negotiable Quality Standards</h2>
+            <p className={styles.qualitySubtitle}>The fundamental guardrails applied across all Emperor production codebases.</p>
           </div>
 
           <div className={styles.qualityGrid}>
             {standards.map((std, i) => (
-              <div key={i} className={styles.qualityCard}>
-                <div className={styles.qualityIconWrap}>
-                  <div className={styles.qualityIcon}>{std.icon}</div>
-                  <h3 className={styles.qualityCardTitle}>{std.title}</h3>
-                </div>
-                <div className={styles.qualityCardNum}>{std.num}</div>
-                <p className={styles.qualityCardDesc}>{std.desc}</p>
+              <div key={i} className={styles.qualityCardWhite}>
+                <div className={styles.qualityCardNumWhite}>{std.num}</div>
+                <h3 className={styles.qualityCardTitleWhite}>{std.title}</h3>
+                <p className={styles.qualityCardDescWhite}>{std.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* CTA Glass Form */}
-        <div className={styles.ctaSection}>
-          <h2 className={styles.ctaTitle}>Want to join us,<br/>but still have questions?</h2>
-          <p className={styles.ctaDesc}>
-            Leave a request for a deep architectural discovery session.
-          </p>
-          
-          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Your name" className={styles.formInput} />
-            </div>
-            <div className={styles.formGroup}>
-              <input type="tel" placeholder="Phone number" className={styles.formInput} />
-            </div>
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Comment" className={styles.formInput} />
-            </div>
-            <button type="submit" className={styles.submitBtn}>
-              Send Request
-            </button>
-          </form>
+        {/* Horizontal Cards */}
+        <div className={styles.horizontalSection}>
+          <div className={styles.sixStepsTitleWrapper}>
+            <h2 className={styles.sixStepsTitle}>6 Steps: Predictable, tested, and disciplined .</h2>
+          </div>
+          <div className={styles.horizontalList}>
+            {horizontalPoints.map((pt, i) => (
+              <div key={i} className={styles.wideCard}>
+                <div className={styles.wideCardLeft}>
+                  <div className={styles.wideCardNumber}>{pt.num}</div>
+                  <div>
+                    <div className={styles.wideCardCategory}>{pt.category}</div>
+                    <div className={styles.wideCardTitle}>{pt.title}</div>
+                  </div>
+                </div>
+                <div className={styles.wideCardMiddle}>
+                  <p className={styles.wideCardDesc}>{pt.desc}</p>
+                </div>
+                <div className={styles.wideCardRight}>
+                  <div className={styles.milestoneBadge}>
+                    <span>Milestone Gate Approved</span>
+                    <CheckCircle2 size={18} className={styles.milestoneIcon} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

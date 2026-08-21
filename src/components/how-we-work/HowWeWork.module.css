@@ -234,6 +234,36 @@
   padding-bottom: 6rem;
 }
 
+.qualityHeader {
+  margin-bottom: 4rem;
+}
+
+.qualityBadge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #a0aec0;
+  margin-bottom: 1.5rem;
+}
+
+.qualityTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.qualitySubtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .qualityGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -246,114 +276,149 @@
   }
 }
 
-.qualityCard {
+.qualityCardWhite {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 2rem 1.5rem;
   border-radius: 12px;
-  transition: background 0.3s ease;
+  padding: 2rem;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.qualityCard:hover {
+.qualityCardWhite:hover {
+  transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.05);
 }
 
-.qualityIconWrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.qualityCardNumWhite {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.qualityCardTitleWhite {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
-.qualityIcon {
-  color: #c9a871; /* Gold accent like the image */
-}
-
-.qualityCardTitle {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.qualityCardNum {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.qualityCardDesc {
-  font-size: 0.875rem;
+.qualityCardDescWhite {
+  font-size: 0.95rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.6);
 }
 
 
-/* CTA Glassmorphism */
-.ctaSection {
-  margin-top: 4rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 3rem;
-  max-width: 500px;
+/* Horizontal Cards Section */
+.horizontalSection {
+  margin-top: 8rem;
+  padding-bottom: 6rem;
 }
 
-.ctaTitle {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+.sixStepsTitleWrapper {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sixStepsTitle {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
   line-height: 1.2;
 }
 
-.ctaDesc {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 2rem;
+.horizontalList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.formGroup {
-  margin-bottom: 1.5rem;
-}
-
-.formInput {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.75rem 0;
-  color: #ffffff;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.formInput:focus {
-  border-bottom-color: #ffffff;
-}
-
-.formInput::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.submitBtn {
-  width: 100%;
+.wideCard {
   background: #ffffff;
-  color: #0d1117;
-  border: none;
-  padding: 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.3s ease;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.submitBtn:hover {
-  background: #e2e8f0;
+.wideCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 992px) {
+  .wideCard {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+}
+
+.wideCardLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 0 0 280px;
+}
+
+.wideCardNumber {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #142134; /* Dark blue/black */
+  line-height: 1;
+}
+
+.wideCardCategory {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #a0aec0; /* Subdued gray */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.wideCardTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #142134;
+}
+
+.wideCardMiddle {
+  flex: 1;
+}
+
+.wideCardDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(20, 33, 52, 0.8);
+}
+
+.wideCardRight {
+  flex: 0 0 auto;
+}
+
+.milestoneBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f6f5f0; /* Beige background */
+  border: 1px solid rgba(20, 33, 52, 0.1);
+  padding: 0.75rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #142134;
+}
+
+.milestoneIcon {
+  color: #142134;
 }
 
 /* Responsive adjustments */
@@ -368,7 +433,7 @@
     height: 200px;
   }
 
-  .qualityGrid {
+  .horizontalGrid {
     grid-template-columns: 1fr;
   }
 }

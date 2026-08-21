@@ -41,9 +41,7 @@ export default function Home() {
       <div id="about">
         <AboutPreview />
       </div>
-      <div id="contact">
-        <HomeCTA />
-      </div>
+      <HomeCTA />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ServicesHero from '../../components/services/ServicesHero';
 import ServicesFullPage from '../../components/services/ServicesFullPage';
-import ServicesCTA from '../../components/services/ServicesCTA';
+import HomeCTA from '../../components/home/HomeCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
 export const metadata = generatePageMetadata(
@@ -18,11 +18,7 @@ export default function ServicesPage() {
       <ServicesHero />
       <ServicesFullPage />
       <ProcessTimeline />
-      <ServicesCTA
-        title="Ready to Start Your Project?"
-        desc="Tell us your goal and we'll build the right solution around it. No templates, no shortcuts — just smart digital work built for you."
-        buttonText="Get a Free Consultation"
-      />
+      <HomeCTA />
     </>
   );
 }
