@@ -29,7 +29,8 @@ export const HomeCTA: React.FC = () => {
           trigger: sectionRef.current,
           pin: true,
           end: '+=5000px',
-          scrub: true,
+          scrub: 1.5, // Smooth scrub
+          invalidateOnRefresh: true, // Recalculate on resize
         },
       });
 
@@ -46,7 +47,7 @@ export const HomeCTA: React.FC = () => {
             containerAnimation: scrollTween,
             start: 'left 100%',
             end: 'left 30%',
-            scrub: 1,
+            scrub: 1.5,
           },
         });
       });

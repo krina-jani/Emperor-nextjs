@@ -39,8 +39,10 @@
 }
 
 .logoIcon {
-  font-size: 1.6rem;
-  line-height: 1;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .logoTextContainer {

@@ -1,0 +1,44 @@
+.hero {
+  padding: 8rem 0 4rem;
+  color: var(--text-on-dark, #ffffff);
+  text-align: center;
+}
+
+.darkBlue {
+  background-color: var(--bg-dark, #142134);
+}
+
+.black {
+  background-color: #0A0A0A;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-on-dark, #ffffff);
+  opacity: 0.6;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full, 9999px);
+}
+
+.title {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  color: var(--text-on-dark, #ffffff);
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-on-dark-secondary, rgba(255, 255, 255, 0.75));
+  max-width: 680px;
+  margin: 0 auto;
+}

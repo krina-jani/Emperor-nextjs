@@ -8,7 +8,7 @@ export interface Project {
   title: string;
   slug: string;
   client: string;
-  category: 'AI & Data Science' | 'Web Engineering' | 'Mobile Solutions' | 'Cloud & DevOps' | 'Smart Devices (IoT)' | 'E-commerce Website Development' | 'Corporate Website Development' | 'Custom Web Application Development';
+  category: string;
   industry: string;
   summary: string;
   description: string;
@@ -16,6 +16,7 @@ export interface Project {
   solution: string;
   results: string[];
   metrics: ProjectMetric[];
+  deliverables?: string[];
   technologies: string[];
   imageUrl: string;
   galleryUrls?: string[];

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '../../lib/utils';
 import Navbar from './Navbar';
 import MobileMenu from './MobileMenu';
@@ -35,9 +36,15 @@ export const Header: React.FC = () => {
   return (
     <header className={cn(styles.header, isScrolled && styles.scrolled)}>
       <div className={cn('container', styles.container)}>
-        {/* Crown Logo */}
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoIcon}>👑</span>
+          <Image
+            src="/images/hero/e-logoicon.png"
+            alt="Emperor Smart Solution Logo"
+            width={54}
+            height={40}
+            className={styles.logoIcon}
+            priority
+          />
           <div className={styles.logoTextContainer}>
             <span className={styles.logoTextMain}>EMPEROR</span>
             <span className={styles.logoTextSub}>SMART SOLUTION</span>

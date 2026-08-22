@@ -1,6 +1,6 @@
 import React from 'react';
-import ServicesHero from '../../components/services/ServicesHero';
-import ServicesFullPage from '../../components/services/ServicesFullPage';
+import PageHero from '../../components/ui/PageHero';
+import ServicesGrid from '../../components/services/ServicesGrid';
 import HomeCTA from '../../components/home/HomeCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
@@ -15,8 +15,13 @@ import ProcessTimeline from '../../components/home/ProcessTimeline';
 export default function ServicesPage() {
   return (
     <>
-      <ServicesHero />
-      <ServicesFullPage />
+      <PageHero
+        title="Services Built For Your Growth"
+        description="From intelligent AI automation to complete digital transformation — we deliver end-to-end technology solutions that help businesses scale, operate smarter, and lead their markets."
+        badge="WHAT WE DO"
+        colorTheme="black"
+      />
+      <ServicesGrid />
       <ProcessTimeline />
       <HomeCTA />
     </>

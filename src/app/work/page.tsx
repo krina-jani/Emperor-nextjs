@@ -2,7 +2,6 @@ import React from 'react';
 import PageHero from '../../components/ui/PageHero';
 import ProjectGrid from '../../components/work/ProjectGrid';
 import WorkCTA from '../../components/work/WorkCTA';
-import HomeCTA from '../../components/home/HomeCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
 export const metadata = generatePageMetadata(
@@ -22,7 +21,6 @@ export default function WorkPage() {
       />
       <ProjectGrid />
       <WorkCTA />
-      <HomeCTA />
     </>
   );
 }

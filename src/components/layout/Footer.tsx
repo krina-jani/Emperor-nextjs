@@ -1,13 +1,56 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { cn } from '../../lib/utils';
 import styles from './Footer.module.css';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const Footer: React.FC = () => {
+  const footerRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const textContainer = textRef.current;
+    if (!textContainer) return;
+
+    // Use a small timeout to ensure DOM is fully painted before calculating ScrollTrigger
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const letters = gsap.utils.toArray('.footer-letter');
+        
+        gsap.fromTo(
+          letters,
+          { y: 150, opacity: 0 }, // Reduced y offset so it doesn't get clipped as easily
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: textContainer,
+              start: 'top 95%', // Start slightly before it enters fully
+              end: 'bottom 95%', // End before it reaches the absolute bottom to ensure completion
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      }, footerRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <footer className={styles.footer}>
+    <footer ref={footerRef} className={styles.footer}>
       <div className={cn('container', styles.container)}>
         <div className={styles.topSection}>
           {/* Left Side */}
@@ -57,7 +100,13 @@ export const Footer: React.FC = () => {
       
       {/* Huge Bottom Text */}
       <div className={styles.giantTextContainer}>
-        <h1 className={styles.giantText}>EMPEROR</h1>
+        <h1 ref={textRef} className={styles.giantText}>
+          {"EMPEROR".split("").map((char, index) => (
+            <span key={index} className="footer-letter" style={{ display: 'inline-block' }}>
+              {char}
+            </span>
+          ))}
+        </h1>
       </div>
     </footer>
   );

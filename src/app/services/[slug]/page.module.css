@@ -1,290 +1,169 @@
-.hero {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--glass-border);
+.pageWrapper {
+  background-color: var(--bg-primary, #F4F1EA);
+  min-height: 100vh;
+  padding: 8rem 0 6rem;
 }
 
-.heroGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+.backLink {
+  display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted, #666666);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
 }
 
-@media (min-width: 1024px) {
-  .heroGrid {
-    grid-template-columns: 1.2fr 1fr;
-    gap: 5rem;
-  }
+.backLink:hover {
+  color: var(--text-primary, #1A1A1A);
 }
 
-.heroContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.card {
+  background-color: var(--bg-secondary, #FFFFFF);
+  border-radius: 12px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.badgeRow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #666666);
+  background-color: var(--bg-tertiary, #EAE5DB);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
   margin-bottom: 1.5rem;
-}
-
-.iconContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(99, 102, 241, 0.08);
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  color: var(--color-primary);
 }
 
 .title {
-  font-size: 2.75rem;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #142134);
+  line-height: 1.2;
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 3.5rem;
-  }
 }
 
 .description {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-@media (min-width: 768px) {
-  .description {
-    font-size: 1.15rem;
-  }
-}
-
-/* Details Card */
-.heroDetails {
-  width: 100%;
-}
-
-.detailsCard {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--radius-xl);
-  padding: 2.5rem;
-  position: relative;
-}
-
-.detailsCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.35), transparent);
-}
-
-.detailsHeading {
-  font-size: 0.85rem;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.detailsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.detailsItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-.bulletDot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--color-secondary);
-  border-radius: var(--radius-full);
-  margin-top: 8px;
-  flex-shrink: 0;
-}
-
-/* Benefits Section */
-.benefitsSection {
-  padding: 6rem 0;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.benefitsHeader {
-  margin-bottom: 3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.benefitsBadge {
-  font-size: 0.725rem;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-secondary);
-  background-color: rgba(20, 184, 166, 0.05);
-  border: 1px solid rgba(20, 184, 166, 0.12);
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 1rem;
-}
-
-.benefitsTitle {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.benefitsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .benefitsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-}
-
-.benefitCard {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  transition: all var(--transition-normal);
-}
-
-.benefitCard:hover {
-  background: var(--glass-bg-hover);
-  border-color: rgba(20, 184, 166, 0.25);
-  transform: translateY(-2px);
-}
-
-.benefitIcon {
-  color: var(--color-secondary);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.benefitText {
-  font-size: 0.975rem;
+  font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-primary);
+  color: var(--text-muted, #666666);
+  max-width: 800px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #142134);
+  margin-bottom: 2rem;
+}
+
+/* Deliverables */
+.deliverablesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.deliverableItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--bg-tertiary, #F9F8F6);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #EAE5DB);
+  font-size: 0.875rem;
   font-weight: 500;
+  color: var(--text-primary, #142134);
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 250px;
 }
 
-/* FAQ Section */
-.faqSection {
-  padding: 6rem 0;
-  border-bottom: 1px solid var(--glass-border);
+.icon {
+  color: var(--text-muted, #666666);
 }
 
-.faqHeader {
-  margin-bottom: 3.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.faqBadge {
-  font-size: 0.725rem;
-  font-weight: 750;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-primary);
-  background-color: rgba(99, 102, 241, 0.05);
-  border: 1px solid rgba(99, 102, 241, 0.12);
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 1rem;
-}
-
-.faqTitle {
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.faqGrid {
+/* Process Grid */
+.processGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
 }
 
-.faqCard {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
+@media (min-width: 768px) {
+  .processGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.processItem {
+  background-color: var(--bg-tertiary, #F9F8F6);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #EAE5DB);
+}
+
+.stepNumber {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted, #999999);
+  margin-bottom: 0.5rem;
+}
+
+.stepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #142134);
+  margin-bottom: 0.5rem;
+}
+
+.stepDesc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted, #666666);
+}
+
+/* FAQs */
+.faqList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  transition: all var(--transition-normal);
+  gap: 1rem;
 }
 
-.faqCard:hover {
-  background: var(--glass-bg-hover);
-  border-color: rgba(99, 102, 241, 0.2);
-}
-
-.faqQuestionRow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--color-primary);
-}
-
-.faqIcon {
-  flex-shrink: 0;
+.faqItem {
+  background-color: var(--bg-tertiary, #F9F8F6);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #EAE5DB);
 }
 
 .faqQuestion {
-  font-size: 1.1rem;
-  font-weight: 750;
-  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #142134);
+  margin-bottom: 0.5rem;
 }
 
 .faqAnswer {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  padding-left: 1.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted, #666666);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .deliverableItem {
+    flex: 1 1 100%;
+  }
 }

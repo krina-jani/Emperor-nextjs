@@ -1,15 +1,10 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { services } from '../../../data/services';
 import Container from '../../../components/ui/Container';
-import Breadcrumbs from '../../../components/navigation/Breadcrumbs';
-import Process from '../../../components/services/Process';
-import ServicesCTA from '../../../components/services/ServicesCTA';
-import HomeCTA from '../../../components/home/HomeCTA';
-import Badge from '../../../components/ui/Badge';
-import Icon from '../../../components/ui/Icon';
 import styles from './page.module.css';
-import { CheckCircle2, HelpCircle } from 'lucide-react';
+import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { generatePageMetadata } from '../../../lib/seo';
 
 interface ServicePageProps {
@@ -29,7 +24,7 @@ export async function generateMetadata({ params }: ServicePageProps) {
 
   return generatePageMetadata(
     service.title,
-    service.summary,
+    service.summary || service.description,
     `/services/${slug}`
   );
 }
@@ -43,92 +38,67 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   }
 
   return (
-    <>
-      {/* Individual Service Hero */}
-      <section className={styles.hero}>
-        <Container>
-          <Breadcrumbs />
-          <div className={styles.heroGrid}>
-            <div className={styles.heroContent}>
-              <div className={styles.badgeRow}>
-                <div className={styles.iconContainer}>
-                  <Icon name={service.iconName} size={24} />
+    <div className={styles.pageWrapper}>
+      <Container>
+        <Link href="/services" className={styles.backLink}>
+          <ArrowLeft size={14} /> Back to all services
+        </Link>
+
+        {/* Hero Card */}
+        <div className={styles.card}>
+          <span className={styles.pill}>{service.tag || 'ENTERPRISE CORE'}</span>
+          <h1 className={styles.title}>{service.title}</h1>
+          <p className={styles.description}>{service.description}</p>
+        </div>
+
+        {/* Deliverables Card */}
+        {service.deliverables && service.deliverables.length > 0 && (
+          <div className={styles.card}>
+            <h2 className={styles.sectionTitle}>Production Deliverables & Artifacts</h2>
+            <div className={styles.deliverablesGrid}>
+              {service.deliverables.map((deliverable, index) => (
+                <div key={index} className={styles.deliverableItem}>
+                  <CheckCircle2 size={16} className={styles.icon} />
+                  <span>{deliverable}</span>
                 </div>
-                <Badge variant="secondary">Core Practice</Badge>
-              </div>
-              <h1 className={styles.title}>{service.title}</h1>
-              <p className={styles.description}>{service.description}</p>
-            </div>
-            
-            <div className={styles.heroDetails}>
-              <div className={styles.detailsCard}>
-                <h3 className={styles.detailsHeading}>Practice Core Targets</h3>
-                <ul className={styles.detailsList}>
-                  {service.features.map((feat) => (
-                    <li key={feat} className={styles.detailsItem}>
-                      <span className={styles.bulletDot} />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              ))}
             </div>
           </div>
-        </Container>
-      </section>
+        )}
 
-      {/* Structured Delivery Process */}
-      <Process steps={service.process} />
-
-      {/* Practice Benefits Section */}
-      <section className={styles.benefitsSection}>
-        <Container>
-          <div className={styles.benefitsHeader}>
-            <span className={styles.benefitsBadge}>BUSINESS OUTCOMES</span>
-            <h2 className={styles.benefitsTitle}>Value Delivery & Impact</h2>
-          </div>
-
-          <div className={styles.benefitsGrid}>
-            {service.benefits.map((benefit, idx) => (
-              <div key={idx} className={styles.benefitCard}>
-                <CheckCircle2 className={styles.benefitIcon} size={22} />
-                <p className={styles.benefitText}>{benefit}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Accordion FAQ Section */}
-      {service.faqs && service.faqs.length > 0 && (
-        <section className={styles.faqSection}>
-          <Container>
-            <div className={styles.faqHeader}>
-              <span className={styles.faqBadge}>COMMON INQUIRIES</span>
-              <h2 className={styles.faqTitle}>Practice FAQ</h2>
+        {/* Process Card */}
+        {service.process && service.process.length > 0 && (
+          <div className={styles.card}>
+            <h2 className={styles.sectionTitle}>Our Delivery Process</h2>
+            <div className={styles.processGrid}>
+              {service.process.map((step) => (
+                <div key={step.stepNumber} className={styles.processItem}>
+                  <span className={styles.stepNumber}>
+                    {String(step.stepNumber).padStart(2, '0')}
+                  </span>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <p className={styles.stepDesc}>{step.description}</p>
+                </div>
+              ))}
             </div>
+          </div>
+        )}
 
-            <div className={styles.faqGrid}>
+        {/* FAQs Card */}
+        {service.faqs && service.faqs.length > 0 && (
+          <div className={styles.card}>
+            <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
+            <div className={styles.faqList}>
               {service.faqs.map((faq) => (
-                <div key={faq.id} className={styles.faqCard}>
-                  <div className={styles.faqQuestionRow}>
-                    <HelpCircle className={styles.faqIcon} size={20} />
-                    <h3 className={styles.faqQuestion}>{faq.question}</h3>
-                  </div>
+                <div key={faq.id} className={styles.faqItem}>
+                  <h3 className={styles.faqQuestion}>{faq.question}</h3>
                   <p className={styles.faqAnswer}>{faq.answer}</p>
                 </div>
               ))}
             </div>
-          </Container>
-        </section>
-      )}
-
-      <ServicesCTA
-        title={`Accelerate with our ${service.title} Squad`}
-        desc="Let's execute an NDA-backed review. Partner with our senior developers and scientists to deploy high-impact configurations."
-      />
-      
-      <HomeCTA />
-    </>
+          </div>
+        )}
+      </Container>
+    </div>
   );
 }

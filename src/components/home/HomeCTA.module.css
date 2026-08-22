@@ -21,12 +21,20 @@
   display: flex;
   width: max-content;
   white-space: nowrap;
-  font-size: clamp(4rem, 15vw, 12rem); /* Much larger text like the video */
-  font-weight: 500;
-  line-height: 1.1;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 35vw; /* MASSIVE text on mobile */
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
   margin: 0;
   padding-left: 100vw;
-  color: #ffffff; /* Explicitly set text to white */
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .horizontalText {
+    font-size: clamp(8rem, 15vw, 12rem);
+  }
 }
 
 .btnWrapper {

@@ -37,6 +37,11 @@ export function generatePageMetadata(
     alternates: {
       canonical: finalUrl,
     },
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon.ico',
+      apple: '/favicon.ico',
+    },
     openGraph: {
       title: finalTitle,
       description: finalDesc,

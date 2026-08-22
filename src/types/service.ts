@@ -18,6 +18,7 @@ export interface Service {
   description: string;
   features: string[];
   benefits: string[];
+  deliverables?: string[];
   process: ProcessStep[];
   technologies: string[];
   faqs: FAQItem[];

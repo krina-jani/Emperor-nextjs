@@ -5,7 +5,6 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import SmoothScroll from '../components/animations/SmoothScroll';
 import CustomCursor from '../components/ui/CustomCursor';
-import LoadingScreen from '../components/ui/LoadingScreen';
 import { generatePageMetadata } from '../lib/seo';
 
 const outfit = Outfit({
@@ -30,7 +29,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
       <body suppressHydrationWarning>
-        <LoadingScreen />
         <CustomCursor />
         <SmoothScroll>
           <Header />
