@@ -140,8 +140,8 @@ export const ContactForm: React.FC = () => {
                 </div>
                 <div className={styles.itemContent}>
                   <span className={styles.itemLabel}>Email Us</span>
-                  <a href="mailto:hello@emperor.com" className={styles.itemValue}>
-                    hello@emperor.com
+                  <a href="mailto:info@emperorsmartsolutions.com" className={styles.itemValue}>
+                    info@emperorsmartsolutions.com
                   </a>
                 </div>
               </div>
@@ -153,8 +153,8 @@ export const ContactForm: React.FC = () => {
                 </div>
                 <div className={styles.itemContent}>
                   <span className={styles.itemLabel}>Call Us</span>
-                  <a href="tel:+919737483040" className={styles.itemValue}>
-                    +91 97374 83040
+                  <a href="tel:+916359120081" className={styles.itemValue}>
+                    +91 63591 20081
                   </a>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export const ContactForm: React.FC = () => {
                 </div>
                 <div className={styles.itemContent}>
                   <span className={styles.itemLabel}>Our Location</span>
-                  <span className={styles.itemValue}>Mumbai, India</span>
+                  <span className={styles.itemValue}>202, Shitiratna Complex, Panchvati, Navrangpura, Ahmedabad - 380009, Gujarat, India</span>
                 </div>
               </div>
 
@@ -186,14 +186,24 @@ export const ContactForm: React.FC = () => {
             <div className={styles.socialSection}>
               <span className={styles.socialLabel}>Follow Us</span>
               <div className={styles.socialLinks}>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                  Instagram
+                <a href="https://www.instagram.com/emperorsmartsolutions?igsh=aXR5YXhxMjZhYXAx" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E1306C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg> Instagram
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                  LinkedIn
+                <a href="https://www.linkedin.com/company/emperor-smart-solutions/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg> LinkedIn
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                  X / Twitter
+                <a href="https://www.facebook.com/people/Vardaan-smart-solutions/61575906045475/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1877F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg> Facebook
                 </a>
               </div>
             </div>
@@ -311,7 +321,7 @@ export const ContactForm: React.FC = () => {
         <div className={styles.mapSection}>
           <div className={styles.mapWrapper}>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823482!2d72.7410979570189!3d19.08219783961421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.8841022131975!2d72.55395561502123!3d23.0278775849503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84fa98d287bb%3A0x6739b69b068da6c9!2sShitiratna%20Complex!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
               width="100%"
               height="450"
               style={{ border: 0 }}
@@ -323,9 +333,9 @@ export const ContactForm: React.FC = () => {
             />
             <div className={styles.mapOverlay}>
               <h4 className={styles.overlayTitle}>Headquarters</h4>
-              <p className={styles.overlayText}>Mumbai, Maharashtra, India</p>
+              <p className={styles.overlayText}>202, Shitiratna Complex, Panchvati, Navrangpura, Ahmedabad - 380009, Gujarat, India</p>
               <a 
-                href="https://maps.google.com/?q=Mumbai,India" 
+                href="https://www.google.com/maps/dir/?api=1&destination=Shitiratna+Complex,+Panchvati,+Navrangpura,+Ahmedabad,+Gujarat,+India" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={styles.directionsBtn}
