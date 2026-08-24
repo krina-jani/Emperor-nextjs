@@ -15,7 +15,6 @@ body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  height: 100%;
   scroll-behavior: auto; /* Handled smoothly by Lenis */
 }
 
@@ -24,7 +23,7 @@ html {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: var(--text-primary);

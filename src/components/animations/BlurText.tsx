@@ -94,6 +94,7 @@ const BlurText: React.FC<BlurTextProps> = ({
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const spanTransition: any = {
           duration: totalDuration,
           times,
@@ -105,7 +106,9 @@ const BlurText: React.FC<BlurTextProps> = ({
           <motion.span
             className="inline-block will-change-[transform,filter,opacity]"
             key={index}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             initial={fromSnapshot as any}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             animate={(inView ? animateKeyframes : fromSnapshot) as any}
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}

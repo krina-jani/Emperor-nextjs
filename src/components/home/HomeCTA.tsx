@@ -35,6 +35,7 @@ export const HomeCTA: React.FC = () => {
       });
 
       // Animate each character using containerAnimation
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       chars.forEach((char: any) => {
         gsap.from(char, {
           yPercent: gsap.utils.random(-200, 200),

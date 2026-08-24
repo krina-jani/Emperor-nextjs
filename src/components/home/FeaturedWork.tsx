@@ -130,7 +130,7 @@ export const FeaturedWork: React.FC = () => {
               <p className={styles.ctaSubtitle}>Complete Project Collection</p>
               <p className={styles.ctaDesc}>
                 Discover our complete portfolio of innovative solutions across web development,
-                mobile apps, AI, cloud solutions, and more. See how we've helped businesses
+                mobile apps, AI, cloud solutions, and more. See how we&apos;ve helped businesses
                 transform digitally.
               </p>
               <div className={styles.ctaFeatures}>
@@ -149,18 +149,6 @@ export const FeaturedWork: React.FC = () => {
                 View All Projects <ExternalLink size={16} />
               </Link>
             </div>
-          </div>
-        </FadeIn>
-
-        {/* ── Bottom CTA ── */}
-        <FadeIn direction="up" delay="350ms">
-          <div className={styles.bottomCta}>
-            <p className={styles.bottomCtaEyebrow}>Ready to build the</p>
-            <h2 className={styles.bottomCtaTitle}>extraordinary?</h2>
-            <p className={styles.bottomCtaDesc}>Let's craft your digital legacy together.</p>
-            <Link href="/contact" className={styles.startBtn}>
-              Start a Project <ArrowRight size={16} />
-            </Link>
           </div>
         </FadeIn>
       </Container>

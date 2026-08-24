@@ -121,6 +121,7 @@ export const HowWeWork = () => {
     
     const stageElements = gsap.utils.toArray('.stage-anim');
     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     stageElements.forEach((stage: any) => {
       gsap.fromTo(stage, 
         { opacity: 0, y: 50 },

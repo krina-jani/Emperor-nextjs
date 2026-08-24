@@ -61,6 +61,7 @@ export interface MasonryItem {
   url: string;
   height: number;
   name?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -96,6 +97,7 @@ const Masonry: React.FC<MasonryProps> = ({
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getInitialPosition = (item: any) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
     if (!containerRect) return { x: item.x, y: item.y };
@@ -208,6 +210,7 @@ const Masonry: React.FC<MasonryProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseEnter = (e: React.MouseEvent, item: any) => {
     const element = e.currentTarget as HTMLElement;
     const selector = `[data-key="${item.id}"]`;
@@ -231,6 +234,7 @@ const Masonry: React.FC<MasonryProps> = ({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseLeave = (e: React.MouseEvent, item: any) => {
     const element = e.currentTarget as HTMLElement;
     const selector = `[data-key="${item.id}"]`;

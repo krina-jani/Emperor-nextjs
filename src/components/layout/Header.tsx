@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '../../lib/utils';
-import Navbar from './Navbar';
-import MobileMenu from './MobileMenu';
+import StaggeredMenu from './StaggeredMenu';
+import { mainNavLinks } from '../../data/navigation';
 import Button from '../ui/Button';
 import MagneticButton from '../animations/MagneticButton';
 import styles from './Header.module.css';
@@ -13,7 +13,6 @@ import { ArrowRight, Phone } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +42,7 @@ export const Header: React.FC = () => {
             width={54}
             height={40}
             className={styles.logoIcon}
-            priority
+            style={{ width: "auto" }}
           />
           <div className={styles.logoTextContainer}>
             <span className={styles.logoTextMain}>EMPEROR</span>
@@ -51,15 +50,9 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <Navbar className={styles.desktopNav} />
 
         {/* Header Right Actions */}
         <div className={styles.rightActions}>
-          <a href="tel:+919737483040" className={styles.phoneLink}>
-            <Phone size={14} className={styles.phoneIcon} />
-            <span>+91 97374 83040</span>
-          </a>
 
           <MagneticButton>
             <Button
@@ -73,25 +66,23 @@ export const Header: React.FC = () => {
             </Button>
           </MagneticButton>
 
-          {/* Mobile Menu Trigger */}
-          <button
-            type="button"
-            className={cn(styles.menuTrigger, isMobileMenuOpen && styles.active)}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Navigation Menu"
-          >
-            <span className={styles.burgerLine} />
-            <span className={styles.burgerLine} />
-            <span className={styles.burgerLine} />
-          </button>
+          <StaggeredMenu
+            position="right"
+            items={mainNavLinks.map(l => ({ label: l.label, link: l.href, ariaLabel: `Go to ${l.label}` }))}
+            socialItems={[
+              { label: 'LinkedIn', link: 'https://linkedin.com' },
+              { label: 'Instagram', link: 'https://instagram.com' },
+            ]}
+            displaySocials={true}
+            displayItemNumbering={true}
+            menuButtonColor="#142134"
+            openMenuButtonColor="#142134"
+            changeMenuColorOnOpen={true}
+            colors={['#f4f1ea', '#000000']}
+            accentColor="#E53E3E"
+          />
         </div>
       </div>
-
-      {/* Mobile Navigation Drawer */}
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
     </header>
   );
 };

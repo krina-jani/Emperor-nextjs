@@ -5,8 +5,10 @@
   width: 100%;
   z-index: 100;
   height: var(--header-height);
-  background-color: transparent;
-  border-bottom: 1px solid transparent;
+  background-color: rgba(216, 214, 208, 0.95);
+  border-bottom: 1px solid rgba(20, 33, 52, 0.08);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   align-items: center;
   transition: all var(--transition-normal);
@@ -14,8 +16,8 @@
 
 .scrolled {
   height: var(--header-scroll-height);
-  background-color: rgba(244, 241, 234, 0.85); /* Slightly transparent cream */
-  border-bottom: 1px solid rgba(20, 33, 52, 0.06);
+  background-color: rgba(216, 214, 208, 0.98);
+  border-bottom: 1px solid rgba(20, 33, 52, 0.1);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: 0 4px 30px rgba(20, 33, 52, 0.02);

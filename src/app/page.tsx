@@ -7,14 +7,16 @@ export const metadata = generatePageMetadata(
   '/'
 );
 import Hero from '../components/home/Hero';
-import TrustBar from '../components/home/TrustBar';
-import ServicesPreview from '../components/home/Whatwedo';
+
+import ProjectsTeaser from '../components/home/ProjectsTeaser';
+import AnimatedServices from '../components/home/AnimatedServices';
 import WhyChooseUs from '../components/home/WhyChooseUs';
 import IndustriesPreview from '../components/home/IndustriesPreview';
 
 import TechnologyPreview from '../components/home/TechnologyPreview';
 import FeaturedWork from '../components/home/FeaturedWork';
 import AboutPreview from '../components/home/AboutPreview';
+import HorizontalScrollCTA from '../components/home/HorizontalScrollCTA';
 
 export default function Home() {
   return (
@@ -22,9 +24,12 @@ export default function Home() {
       <div id="home">
         <Hero />
       </div>
-      <TrustBar />
+
+      <div id="projects-teaser">
+        <ProjectsTeaser />
+      </div>
       <div id="services">
-        <ServicesPreview />
+        <AnimatedServices />
       </div>
       <WhyChooseUs />
       <div id="solutions">
@@ -40,6 +45,7 @@ export default function Home() {
       <div id="about">
         <AboutPreview />
       </div>
+      <HorizontalScrollCTA />
     </>
   );
 }

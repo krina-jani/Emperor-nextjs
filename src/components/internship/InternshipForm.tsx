@@ -57,7 +57,7 @@ const InternshipForm = () => {
         <div className={styles.formContainer}>
           <div className={styles.header}>
             <h2 className={styles.title}>Apply for Internship</h2>
-            <p className={styles.subtitle}>Fill out the form below and we'll get back to you soon.</p>
+            <p className={styles.subtitle}>Fill out the form below and we&apos;ll get back to you soon.</p>
           </div>
 
           {!isSubmitted ? (

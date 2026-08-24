@@ -1,0 +1,200 @@
+.section {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  position: relative;
+  padding-top: 8rem;
+}
+
+.pinWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.introSlide {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  margin-bottom: 15vh; /* Space between text scrolling away and cards arriving */
+  flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+  .introSlide {
+    width: 100%;
+  }
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+}
+
+.learnMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 0.25rem;
+  width: max-content;
+  transition: border-color 0.3s ease;
+}
+
+.learnMore:hover {
+  border-color: #ffffff;
+}
+
+.rightCol {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
+}
+
+.summary {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.summaryLabel {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.summaryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: right;
+}
+
+.scrollContainer {
+  width: 100%;
+  overflow: visible;
+}
+
+.cardsWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center; /* Vertically center cards in pinWrapper */
+  padding: 0 4vw;
+}
+
+.card {
+  background-color: #0a0a0a;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 350px;
+  min-height: 400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+@media (min-width: 992px) {
+  .card {
+    flex: 1; /* Automatically fill available width */
+    max-width: none; /* Remove max-width on desktop so they stretch */
+    min-height: 480px;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .cardsWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 400px;
+    margin: 0 auto;
+    display: block;
+    padding: 0;
+  }
+
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: auto;
+    padding: 2rem;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: auto;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  white-space: pre-line;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .introSlide {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    width: 85vw;
+  }
+  
+  .rightCol {
+    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+  
+  .summaryList {
+    text-align: left;
+  }
+}

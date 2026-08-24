@@ -40,7 +40,7 @@ const InternshipDetails = () => {
             <div className={styles.aboutBox}>
               <h3 className={styles.aboutTitle}>About Emperor</h3>
               <p className={styles.aboutText}>
-                Emperor Inc. is a pioneering technology firm specializing in enterprise solutions, digital transformation, and innovative software development. We're committed to nurturing young talent through our comprehensive internship program that provides real-world experience and mentorship from industry experts.
+                Emperor Inc. is a pioneering technology firm specializing in enterprise solutions, digital transformation, and innovative software development. We&apos;re committed to nurturing young talent through our comprehensive internship program that provides real-world experience and mentorship from industry experts.
               </p>
             </div>
           </div>

@@ -156,7 +156,6 @@ export const Hero: React.FC = () => {
               width={700}
               height={700}
               className={styles.teamImg}
-              priority
             />
           </div>
 

@@ -83,6 +83,7 @@ export const ProcessTimeline: React.FC = () => {
         });
 
         // Sequential fade and scale of steps
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         gsap.utils.toArray('.process-step-card').forEach((card: any) => {
           gsap.fromTo(card,
             { opacity: 0.4, scale: 0.95 },
@@ -104,6 +105,7 @@ export const ProcessTimeline: React.FC = () => {
 
       // Simple vertical scroll reveal animations on mobile (screen width <= 1024px)
       mm.add('(max-width: 1024px)', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         gsap.utils.toArray('.process-step-card-mobile').forEach((card: any) => {
           gsap.from(card, {
             opacity: 0,

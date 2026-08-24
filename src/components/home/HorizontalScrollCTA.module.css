@@ -1,0 +1,54 @@
+.section {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  background-color: #030712;
+  color: #ffffff;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+}
+
+.text {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left: 100vw; /* Start from right edge */
+  color: #ffffff;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+}
+
+.ctaBtn {
+  background: #ffffff;
+  color: #030712;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.ctaBtn:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}

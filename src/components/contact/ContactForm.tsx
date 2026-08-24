@@ -126,9 +126,9 @@ export const ContactForm: React.FC = () => {
           {/* Left Column: Info */}
           <div className={styles.infoColumn}>
             <div className={styles.headerGroup}>
-              <h2 className={styles.infoTitle}>Let's start a conversation</h2>
+              <h2 className={styles.infoTitle}>Let&apos;s start a conversation</h2>
               <p className={styles.infoDesc}>
-                Whether you have a specific project outline, questions about our process, or simply want to explore how we can work together, we're here to help.
+                Whether you have a specific project outline, questions about our process, or simply want to explore how we can work together, we&apos;re here to help.
               </p>
             </div>
 

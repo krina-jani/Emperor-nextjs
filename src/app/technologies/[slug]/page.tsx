@@ -96,8 +96,8 @@ export default async function TechnologyDetailPage({ params }: TechPageProps) {
 
           <div className={styles.stack}>
             {relatedProjects.length > 0 ? (
-              relatedProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              relatedProjects.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} />
               ))
             ) : (
               <div className={styles.emptyCard}>

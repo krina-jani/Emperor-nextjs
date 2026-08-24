@@ -10,7 +10,7 @@ export const metadata = generatePageMetadata(
   '/services'
 );
 
-import ProcessTimeline from '../../components/home/ProcessTimeline';
+import TechnologyRadar from '../../components/services/TechnologyRadar';
 
 export default function ServicesPage() {
   return (
@@ -22,7 +22,7 @@ export default function ServicesPage() {
         colorTheme="black"
       />
       <ServicesGrid />
-      <ProcessTimeline />
+      <TechnologyRadar />
       <HomeCTA />
     </>
   );
