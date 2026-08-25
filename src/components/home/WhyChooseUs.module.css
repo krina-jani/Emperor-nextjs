@@ -1,6 +1,6 @@
 .section {
   padding: 8rem 0;
-  background-color: var(--bg-dark);
+  background-color: #000000;
   color: var(--text-on-dark);
   position: relative;
   overflow: hidden;
@@ -90,12 +90,12 @@
 }
 
 .blurParagraph {
-  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: clamp(1.6rem, 3vw, 2.5rem); /* Prominent heading size */
-  line-height: 1.3;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-on-dark);
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #ffffff;
   display: flex;
   flex-wrap: wrap;
   text-align: left;

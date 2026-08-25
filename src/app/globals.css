@@ -188,3 +188,16 @@ html.lenis body {
 .lenis-scrolling iframe {
   pointer-events: none;
 }
+
+body {
+  transition: background-color 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.dark-mode {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  --bg-base: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.45);
+}

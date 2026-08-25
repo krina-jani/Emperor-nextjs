@@ -1,5 +1,5 @@
 .section {
-  background-color: #0a0a0a;
+  background-color: #000000;
   color: #ffffff;
   position: relative;
   padding-top: 8rem;
@@ -54,16 +54,16 @@
   gap: 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #ff0000;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid #ff0000;
   padding-bottom: 0.25rem;
   width: max-content;
-  transition: border-color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .learnMore:hover {
-  border-color: #ffffff;
+  opacity: 0.8;
 }
 
 .rightCol {
@@ -110,7 +110,7 @@
 }
 
 .card {
-  background-color: #0a0a0a;
+  background-color: #000000;
   border-radius: 1rem;
   width: 100%;
   max-width: 350px;
