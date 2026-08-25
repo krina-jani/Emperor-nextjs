@@ -38,7 +38,7 @@
       background-color: var(--bg-base);
     }
 
-    .sticky-viewport {
+    .stickyViewport {
       position: sticky;
       top: 0;
       left: 0;
@@ -52,7 +52,7 @@
     }
 
     /* Phase 1: Full-Screen Hero Headline Overlay */
-    .hero-text-overlay {
+    .heroTextOverlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -63,26 +63,29 @@
       justify-content: center;
       z-index: 10;
       pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero-title {
+    .heroTitle {
       font-family: 'NeueHaasDisplay', 'FamiljenGrotesk', 'Space Grotesk', 'Outfit', sans-serif;
-      font-size: clamp(2.8rem, 6.2vw, 6.6rem);
+      font-size: clamp(3.8rem, 8.4vw, 8.6rem);
       font-weight: 800;
-      line-height: 0.92;
-      letter-spacing: -0.035em;
+      line-height: 0.90;
+      letter-spacing: -0.04em;
       text-transform: uppercase;
       text-align: center;
-      color: inherit;
+      color: #000000;
     }
 
-    .hero-title span {
+    body.dark-mode .heroTitle {
+      color: #ffffff;
+    }
+
+    .heroTitle span {
       display: block;
     }
 
     /* Phase 2: FULL-SCREEN 3D Stone Canvas Wrapper */
-    .stone-canvas-wrapper {
+    .stoneCanvasWrapper {
       position: absolute;
       top: 0;
       left: 0;
@@ -90,7 +93,6 @@
       height: 100vh;
       z-index: 5;
       opacity: 0;
-      transition: opacity 0.6s ease;
       pointer-events: none;
     }
 
@@ -102,7 +104,7 @@
     }
 
     /* Phase 3: Services Interactive Floating Cards Layer */
-    .services-cards-layer {
+    .servicesCardsLayer {
       position: absolute;
       top: 0;
       left: 0;
@@ -112,7 +114,7 @@
       pointer-events: none;
     }
 
-    .service-card {
+    .serviceCard {
       position: absolute;
       width: min(440px, 36vw);
       padding: 36px 40px;
@@ -124,32 +126,32 @@
       color: #ffffff;
       opacity: 0;
       transform: translateY(60px) scale(0.95);
-      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       pointer-events: auto;
     }
 
-    .service-card:hover {
+    .serviceCard:hover {
       border-color: rgba(255, 255, 255, 0.2);
       transform: translateY(-6px) scale(1.02);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     }
 
-    .service-card.left {
+    .serviceCard.left {
       left: 5vw;
     }
 
-    .service-card.right {
+    .serviceCard.right {
       right: 5vw;
     }
 
-    .card-top {
+    .cardTop {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 20px;
     }
 
-    .card-title {
+    .cardTitle {
       font-size: clamp(1.5rem, 2.2vw, 2.3rem);
       font-weight: 700;
       line-height: 1.15;
@@ -157,7 +159,7 @@
       color: #ffffff;
     }
 
-    .card-icon {
+    .cardIcon {
       width: 72px;
       height: 72px;
       display: flex;
@@ -167,18 +169,18 @@
       transition: transform 0.3s ease;
     }
 
-    .service-card:hover .card-icon {
+    .serviceCard:hover .cardIcon {
       transform: scale(1.05) rotate(5deg);
     }
 
-    .card-icon svg {
+    .cardIcon svg {
       width: 100%;
       height: 100%;
       stroke: rgba(255, 255, 255, 0.8);
       stroke-width: 1;
     }
 
-    .card-description {
+    .cardDescription {
       font-size: 14px;
       line-height: 1.65;
       color: #a0a5b5;
@@ -192,21 +194,83 @@
     :global(#card-wordpress) { top: 58%; }
 
     /* Bottom Status Bar */
-    .bottom-bar {
+    .bottomBar {
       position: absolute;
-      bottom: 36px;
+      bottom: 32px;
       left: 0;
       width: 100%;
       padding: 0 48px;
       z-index: 30;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
+      pointer-events: none;
     }
 
-    .sub-caption {
+    .bottomCenter {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+    }
+
+    .cookieBanner {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: 'Space Grotesk', monospace, sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      color: inherit;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .cookieBanner {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .cookieButtons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cookieBtn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: inherit;
+      text-transform: uppercase;
+      padding: 2px 4px;
+      transition: opacity 0.2s ease;
+    }
+
+    .cookieBtn:hover {
+      opacity: 0.6;
+    }
+
+    .subCaption {
       font-family: 'Space Grotesk', monospace;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -214,7 +278,58 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      text-align: center;
       transition: color 0.5s ease;
+    }
+
+    .viewServicesLink {
+      position: absolute;
+      right: 48px;
+      bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: inherit;
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      pointer-events: auto;
+      transition: border-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    body.dark-mode .viewServicesLink {
+      border-bottom-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .viewServicesLink:hover {
+      opacity: 0.8;
+      border-bottom-color: currentColor;
+    }
+
+    @media (max-width: 768px) {
+      .headerCenterTitle {
+        top: 24px;
+        font-size: 9.5px;
+      }
+      .bottomBar {
+        padding: 0 20px;
+        bottom: 20px;
+      }
+      .cookieBanner {
+        display: none;
+      }
+      .viewServicesLink {
+        display: none;
+      }
+      .subCaption {
+        font-size: 9.5px;
+        letter-spacing: 1px;
+      }
     }
 
     /* Preloader Overlay */
@@ -234,7 +349,7 @@
       transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    .preloader-spinner {
+    .preloaderSpinner {
       width: 48px;
       height: 48px;
       border: 3px solid rgba(255, 255, 255, 0.1);
@@ -244,7 +359,7 @@
       margin-bottom: 24px;
     }
 
-    .preloader-text {
+    .preloaderText {
       font-family: 'Space Grotesk', monospace;
       font-size: 12px;
       letter-spacing: 2.5px;
@@ -287,14 +402,14 @@
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       
-      .bottom-bar {
+      .bottomBar {
         padding: 0 20px;
         bottom: 20px;
         flex-direction: column;
         gap: 12px;
         align-items: flex-start;
       }
-      .service-card {
+      .serviceCard {
         width: 90vw !important;
         left: 5vw !important;
         right: auto !important;

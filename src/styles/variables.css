@@ -1,14 +1,14 @@
 :root {
-  /* Color Palette - Premium Warm Cream & Dark Navy Theme */
-  --bg-base: #f4f1ea;
-  --bg-primary: #f4f1ea;
+  /* Color Palette - Crisp Light Off-White & Pitch Black Theme */
+  --bg-base: #ededeb;
+  --bg-primary: #ededeb;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #e6e2d6; /* Tonal variation of base for tracks/borders */
-  --bg-dark: #142134;
+  --bg-tertiary: #e2e1dd; /* Tonal variation of base for tracks/borders */
+  --bg-dark: #000000;
 
-  --text-primary: #142134;
-  --text-secondary: rgba(20, 33, 52, 0.75);
-  --text-muted: rgba(20, 33, 52, 0.45);
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.75);
+  --text-muted: rgba(0, 0, 0, 0.50);
 
   --text-on-dark: #ffffff;
   --text-on-dark-secondary: rgba(255, 255, 255, 0.75);

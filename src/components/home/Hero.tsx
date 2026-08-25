@@ -1,11 +1,16 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Link from 'next/link';
 import styles from './Hero.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const TOTAL_FRAMES = 410;
+
+// Module-level image cache to prevent duplicate loads during React StrictMode / re-renders
+const globalImagesCache: HTMLImageElement[] = [];
+let isPreloadingStarted = false;
 
 // 3D Procedural Fallback Mesh Data
 const stone3DVertices = [
@@ -17,22 +22,28 @@ const stone3DVertices = [
 ];
 
 const stone3DFaces = [
-  { v: [0, 1, 16], baseCol: [28, 32, 42] }, { v: [1, 2, 16], baseCol: [38, 44, 58] },
-  { v: [2, 3, 16], baseCol: [32, 38, 50] }, { v: [3, 0, 16], baseCol: [22, 26, 34] },
-  { v: [0, 1, 5, 4], baseCol: [52, 60, 78] }, { v: [1, 2, 6, 5], baseCol: [82, 94, 120] },
-  { v: [2, 3, 7, 6], baseCol: [62, 72, 92] }, { v: [3, 0, 4, 7], baseCol: [35, 40, 52] },
-  { v: [4, 5, 9, 8], baseCol: [78, 90, 115] }, { v: [5, 6, 10, 9], baseCol: [110, 125, 155] },
-  { v: [6, 7, 11, 10], baseCol: [85, 98, 125] }, { v: [7, 4, 8, 11], baseCol: [48, 56, 72] },
-  { v: [8, 9, 13, 12], baseCol: [70, 80, 102] }, { v: [9, 10, 14, 13], baseCol: [98, 112, 142] },
-  { v: [10, 11, 15, 14], baseCol: [65, 75, 96] }, { v: [11, 8, 12, 15], baseCol: [42, 48, 62] },
-  { v: [12, 13, 17], baseCol: [90, 102, 130] }, { v: [13, 14, 17], baseCol: [120, 136, 170] },
-  { v: [14, 15, 17], baseCol: [85, 96, 122] }, { v: [15, 12, 17], baseCol: [55, 64, 82] }
+  { v: [0, 1, 16], baseCol: [50, 60, 80] }, { v: [1, 2, 16], baseCol: [70, 80, 105] },
+  { v: [2, 3, 16], baseCol: [60, 70, 95] }, { v: [3, 0, 16], baseCol: [45, 52, 70] },
+  { v: [0, 1, 5, 4], baseCol: [80, 95, 125] }, { v: [1, 2, 6, 5], baseCol: [110, 125, 160] },
+  { v: [2, 3, 7, 6], baseCol: [90, 105, 135] }, { v: [3, 0, 4, 7], baseCol: [60, 70, 95] },
+  { v: [4, 5, 9, 8], baseCol: [100, 115, 150] }, { v: [5, 6, 10, 9], baseCol: [130, 150, 190] },
+  { v: [6, 7, 11, 10], baseCol: [110, 125, 160] }, { v: [7, 4, 8, 11], baseCol: [75, 88, 115] },
+  { v: [8, 9, 13, 12], baseCol: [95, 110, 140] }, { v: [9, 10, 14, 13], baseCol: [125, 145, 185] },
+  { v: [10, 11, 15, 14], baseCol: [90, 105, 135] }, { v: [11, 8, 12, 15], baseCol: [65, 75, 100] },
+  { v: [12, 13, 17], baseCol: [115, 130, 170] }, { v: [13, 14, 17], baseCol: [145, 165, 210] },
+  { v: [14, 15, 17], baseCol: [110, 125, 160] }, { v: [15, 12, 17], baseCol: [80, 95, 125] }
 ];
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const stoneWrapperRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+  const cardAiRef = useRef<HTMLDivElement>(null);
+  const cardMobileRef = useRef<HTMLDivElement>(null);
+  const cardWebRef = useRef<HTMLDivElement>(null);
+  const cardWordpressRef = useRef<HTMLDivElement>(null);
   const ambientParticlesRef = useRef<{ x: number; y: number; z: number; r: number; }[]>([]);
 
   const [loadedCount, setLoadedCount] = useState(0);
@@ -42,6 +53,7 @@ export const Hero: React.FC = () => {
   const [captionText, setCaptionText] = useState('✦ DESIGN WITH INTENT. BUILT TO WORK.');
 
   const stoneObjRef = useRef({ frame: 1 });
+  const lastRenderedIndexRef = useRef<number>(0);
 
   // Get frame image URL format
   const getFrameUrl = (index: number, extension = 'webp') => {
@@ -49,60 +61,8 @@ export const Hero: React.FC = () => {
     return `/images/stone/frame_${frameNum}.${extension}`;
   };
 
-  // Render Frame on Canvas
-  const renderFrame = (frameIndex: number, forceProcedural = false) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-    }
-
-    // Render Procedural Fallback if images failed or force flag is true
-    if (useProceduralFallback || forceProcedural) {
-      renderProceduralStone3D(ctx, canvas, frameIndex, dpr);
-      return;
-    }
-
-    const index = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(frameIndex))) - 1;
-    const img = imagesRef.current[index];
-
-    if (!img || !img.complete || img.naturalWidth === 0) {
-      // Fallback in case this specific image isn't ready
-      renderProceduralStone3D(ctx, canvas, frameIndex, dpr);
-      return;
-    }
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const imgAspect = img.naturalWidth / img.naturalHeight;
-    const canvasAspect = canvas.width / canvas.height;
-
-    let drawWidth, drawHeight, drawX, drawY;
-
-    if (canvasAspect > imgAspect) {
-      drawWidth = canvas.width;
-      drawHeight = canvas.width / imgAspect;
-    } else {
-      drawHeight = canvas.height;
-      drawWidth = canvas.height * imgAspect;
-    }
-
-    drawX = (canvas.width - drawWidth) / 2;
-    drawY = (canvas.height - drawHeight) / 2;
-
-    ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
-  };
-
-  // 3D Procedural Engine Fallback Renderer
-  const renderProceduralStone3D = (
+  // 3D Procedural Engine Fallback Renderer (High-Contrast Cybernetic Wireframe)
+  const renderProceduralStone3D = useCallback((
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement,
     frameIndex: number,
@@ -123,13 +83,13 @@ export const Hero: React.FC = () => {
 
     // Transform 3D vertices
     const transformedVerts = stone3DVertices.map(v => {
-      let x = v[0], y = v[1], z = v[2];
-      let x1 = x * cosY - z * sinY;
-      let z1 = x * sinY + z * cosY;
-      let y2 = y * cosX - z1 * sinX;
-      let z2 = y * sinX + z1 * cosX;
-      let fov = 4.5;
-      let scaleProj = fov / (fov + z2);
+      const x = v[0], y = v[1], z = v[2];
+      const x1 = x * cosY - z * sinY;
+      const z1 = x * sinY + z * cosY;
+      const y2 = y * cosX - z1 * sinX;
+      const z2 = y * sinX + z1 * cosX;
+      const fov = 4.5;
+      const scaleProj = fov / (fov + z2);
       return {
         px: cx + x1 * scale * scaleProj,
         py: cy + y2 * scale * scaleProj,
@@ -138,10 +98,10 @@ export const Hero: React.FC = () => {
     });
 
     // Render ambient orbital dust particles
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
     ambientParticlesRef.current.forEach(p => {
-      let px = cx + (p.x * cosY - p.z * sinY) * scale * 0.5;
-      let py = cy + p.y * scale * 0.5;
+      const px = cx + (p.x * cosY - p.z * sinY) * scale * 0.5;
+      const py = cy + p.y * scale * 0.5;
       ctx.beginPath();
       ctx.arc(px, py, p.r * dpr, 0, Math.PI * 2);
       ctx.fill();
@@ -155,7 +115,7 @@ export const Hero: React.FC = () => {
       return { face, avgZ };
     }).sort((a, b) => b.avgZ - a.avgZ);
 
-    // Draw faces
+    // Draw faces with bright glowing lines
     sortedFaces.forEach(({ face }) => {
       const pts = face.v.map(idx => transformedVerts[idx]);
       ctx.beginPath();
@@ -165,25 +125,103 @@ export const Hero: React.FC = () => {
       }
       ctx.closePath();
 
-      const lightFactor = Math.max(0.15, Math.min(1.0, 0.6 + (pts[0].z * -0.2)));
-      const r = Math.floor(face.baseCol[0] * lightFactor);
-      const g = Math.floor(face.baseCol[1] * lightFactor);
-      const b = Math.floor(face.baseCol[2] * lightFactor);
+      const lightFactor = Math.max(0.4, Math.min(1.2, 0.8 + (pts[0].z * -0.25)));
+      const r = Math.min(255, Math.floor(face.baseCol[0] * lightFactor));
+      const g = Math.min(255, Math.floor(face.baseCol[1] * lightFactor));
+      const b = Math.min(255, Math.floor(face.baseCol[2] * lightFactor));
 
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.lineWidth = 1 * dpr;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
     });
-  };
+  }, []);
 
-  // Handle Mount
+  // Render Frame on Canvas with Nearest-Frame Fallback
+  const renderFrame = useCallback((frameIndex: number, forceProcedural = false) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+    }
+
+    if (useProceduralFallback || forceProcedural) {
+      renderProceduralStone3D(ctx, canvas, frameIndex, dpr);
+      return;
+    }
+
+    const targetIndex = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(frameIndex))) - 1;
+    let img = globalImagesCache[targetIndex];
+
+    // Nearest-Frame Retention: If target frame is still buffering, search adjacent frames
+    if (!img || !img.complete || img.naturalWidth === 0) {
+      // 1. Try last successfully rendered frame first
+      const lastIndex = lastRenderedIndexRef.current;
+      if (lastIndex >= 0 && globalImagesCache[lastIndex] && globalImagesCache[lastIndex].complete && globalImagesCache[lastIndex].naturalWidth > 0) {
+        img = globalImagesCache[lastIndex];
+      } else {
+        // 2. Search backward from target
+        for (let i = targetIndex - 1; i >= 0; i--) {
+          if (globalImagesCache[i] && globalImagesCache[i].complete && globalImagesCache[i].naturalWidth > 0) {
+            img = globalImagesCache[i];
+            break;
+          }
+        }
+        // 3. Search forward from target
+        if (!img || !img.complete || img.naturalWidth === 0) {
+          for (let i = targetIndex + 1; i < globalImagesCache.length; i++) {
+            if (globalImagesCache[i] && globalImagesCache[i].complete && globalImagesCache[i].naturalWidth > 0) {
+              img = globalImagesCache[i];
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (img && img.complete && img.naturalWidth > 0) {
+      lastRenderedIndexRef.current = targetIndex;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const imgAspect = img.naturalWidth / img.naturalHeight;
+      const canvasAspect = canvas.width / canvas.height;
+
+      let drawWidth: number;
+      let drawHeight: number;
+
+      if (canvasAspect > imgAspect) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgAspect;
+      } else {
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgAspect;
+      }
+
+      const drawX = (canvas.width - drawWidth) / 2;
+      const drawY = (canvas.height - drawHeight) / 2;
+
+      ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+      return;
+    }
+
+    // High-contrast procedural fallback if zero images are available
+    renderProceduralStone3D(ctx, canvas, frameIndex, dpr);
+  }, [useProceduralFallback, renderProceduralStone3D]);
+
+  // Handle Initial Mount
   useEffect(() => {
     setIsMounted(true);
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize dust particles
     ambientParticlesRef.current = Array.from({ length: 50 }, () => ({
       x: (Math.random() - 0.5) * 6,
       y: (Math.random() - 0.5) * 6,
@@ -192,25 +230,33 @@ export const Hero: React.FC = () => {
     }));
   }, []);
 
-  // Preload Images Sequence
+  // Preload Images Sequence into Global Cache (Runs ONCE across re-renders)
   useEffect(() => {
     if (!isMounted) return;
 
+    if (isPreloadingStarted && globalImagesCache.length === TOTAL_FRAMES) {
+      // Already preloaded or in progress
+      let ready = 0;
+      globalImagesCache.forEach(img => { if (img.complete && img.naturalWidth > 0) ready++; });
+      setLoadedCount(ready);
+      if (ready > 0) {
+        setIsLoaded(true);
+        setTimeout(() => renderFrame(1), 50);
+      }
+      return;
+    }
+
+    isPreloadingStarted = true;
     let localLoaded = 0;
     let localFailed = 0;
-    let isFinished = false;
 
-    // Safety fallback: switch to 3D engine after 2 seconds if folder is missing
+    // Safety timeout: Unlock UI quickly once initial frames arrive
     const fallbackTimeout = setTimeout(() => {
-      if (!isFinished) {
-        if (localLoaded < TOTAL_FRAMES / 2) {
-          setUseProceduralFallback(true);
-        }
-        setIsLoaded(true);
+      setIsLoaded(true);
+      if (localLoaded === 0) {
+        setUseProceduralFallback(true);
       }
-    }, 2000);
-
-    const tempImages: HTMLImageElement[] = [];
+    }, 4000);
 
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
@@ -221,44 +267,45 @@ export const Hero: React.FC = () => {
         setLoadedCount(localLoaded);
 
         if (localLoaded === 1) {
-          // Draw first frame immediately
-          setTimeout(() => renderFrame(1), 50);
+          // Paint frame 1 immediately
+          renderFrame(1);
+        }
+
+        // Show page as soon as first 10 frames are ready (progressive background load)
+        if (localLoaded >= 10) {
+          setIsLoaded(true);
+          clearTimeout(fallbackTimeout);
         }
 
         if (localLoaded === TOTAL_FRAMES) {
-          isFinished = true;
           clearTimeout(fallbackTimeout);
-          setTimeout(() => setIsLoaded(true), 200);
+          setIsLoaded(true);
         }
       };
 
       img.onerror = () => {
-        // Retry with jpg
         if (!img.dataset.triedJpg) {
           img.dataset.triedJpg = 'true';
           img.src = getFrameUrl(i, 'jpg');
         } else {
           localFailed++;
-          if (localFailed > 5) {
+          if (localFailed > 20 && localLoaded === 0) {
             setUseProceduralFallback(true);
-            isFinished = true;
-            clearTimeout(fallbackTimeout);
             setIsLoaded(true);
+            clearTimeout(fallbackTimeout);
           }
         }
       };
 
-      tempImages.push(img);
+      globalImagesCache.push(img);
     }
-
-    imagesRef.current = tempImages;
 
     return () => {
       clearTimeout(fallbackTimeout);
     };
-  }, [isMounted]);
+  }, [isMounted, renderFrame]);
 
-  // Handle Resize
+  // Handle Window Resize
   useEffect(() => {
     if (!isMounted) return;
 
@@ -268,78 +315,130 @@ export const Hero: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMounted, isLoaded]);
+  }, [isMounted, isLoaded, renderFrame]);
 
-  // Initialize GSAP Animation
+  // Initialize GSAP Animation Timeline with Direct Ref Bindings & Deterministic Bidirectional Tweens
   useEffect(() => {
     if (!isMounted || !isLoaded) return;
 
     const ctx = gsap.context(() => {
       const stoneObj = stoneObjRef.current;
+      renderFrame(1);
+
+      if (!sectionRef.current) return;
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: `.${styles.heroPinnedContainer}`,
+          trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom bottom',
           scrub: 0.8,
           onUpdate: (self) => {
             renderFrame(stoneObj.frame);
-          }
+
+            // Synchronize theme class & caption symmetrically in forward and reverse scroll
+            if (self.progress > 0.08) {
+              document.body.classList.add('dark-mode');
+            } else {
+              document.body.classList.remove('dark-mode');
+            }
+
+            if (self.progress > 0.12) {
+              setCaptionText('✦ DIFFERENT DISCIPLINES. ONE STANDARD OF CRAFT.');
+            } else {
+              setCaptionText('✦ DESIGN WITH INTENT. BUILT TO WORK.');
+            }
+          },
+          onLeaveBack: () => {
+            document.body.classList.remove('dark-mode');
+            setCaptionText('✦ DESIGN WITH INTENT. BUILT TO WORK.');
+            renderFrame(1);
+          },
+          onEnter: () => renderFrame(stoneObj.frame),
+          onEnterBack: () => renderFrame(stoneObj.frame),
+          onRefresh: () => renderFrame(stoneObj.frame)
         }
       });
 
-      // 1. Theme transition to pitch black & Hero Headline Fade Out
-      tl.to('body', {
+      // 1. Theme transition & Hero Headline Fade Out
+      tl.to(document.body, {
         backgroundColor: '#000000',
         color: '#ffffff',
         duration: 1,
-        onStart: () => document.body.classList.add('dark-mode'),
-        onReverseComplete: () => document.body.classList.remove('dark-mode')
-      }, 0)
-      
-      .to(`.${styles['hero-text-overlay']}`, {
-        opacity: 0,
-        scale: 0.85,
-        duration: 1
-      }, 0)
+        ease: 'power2.inOut'
+      }, 0);
+
+      if (heroTextRef.current) {
+        tl.fromTo(heroTextRef.current,
+          { opacity: 1, scale: 1 },
+          { opacity: 0, scale: 0.85, duration: 1, ease: 'power2.inOut' },
+          0
+        );
+      }
 
       // 2. Full-screen 3D Stone Canvas drops into center & scales up smoothly
-      .to(`.${styles['stone-canvas-wrapper']}`, {
-        opacity: 1,
-        scale: 1,
-        duration: 1.2
-      }, 0.3)
+      if (stoneWrapperRef.current) {
+        tl.fromTo(stoneWrapperRef.current,
+          { opacity: 0, scale: 0.85 },
+          { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
+          0.3
+        );
+      }
 
-      // 3. Update bottom caption on scroll stage
-      .call(() => {
-        setCaptionText('✦ DIFFERENT DISCIPLINES. ONE STANDARD OF CRAFT.');
-      }, [], 0.8)
+      // 3. Scrub stone 3D rotation frame sequence
+      tl.fromTo(stoneObj,
+        { frame: 1 },
+        { frame: TOTAL_FRAMES, ease: 'none', duration: 8 },
+        0.5
+      );
 
-      // 4. Scrub stone 3D rotation frame sequence
-      .to(stoneObj, {
-        frame: TOTAL_FRAMES,
-        ease: 'none',
-        duration: 8
-      }, 0.5)
-
-      // 5. Floating Interactive Service Cards Sequence
+      // 4. Floating Interactive Service Cards Sequence
       // Stage 1: AI & Mobile Design
-      .to('#card-ai', { opacity: 1, y: 0, duration: 1.2 }, 1.5)
-      .to('#card-mobile', { opacity: 1, y: 0, duration: 1.2 }, 1.8)
+      if (cardAiRef.current) {
+        tl.fromTo(cardAiRef.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
+          1.5
+        );
+      }
+      if (cardMobileRef.current) {
+        tl.fromTo(cardMobileRef.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
+          1.8
+        );
+      }
       
-      .to(['#card-ai', '#card-mobile'], { opacity: 0, y: -60, duration: 1 }, 3.5)
+      const stage1Cards = [cardAiRef.current, cardMobileRef.current].filter(Boolean);
+      if (stage1Cards.length > 0) {
+        tl.to(stage1Cards, { opacity: 0, y: -60, duration: 1, ease: 'power2.in' }, 3.5);
+      }
 
       // Stage 2: Web & WordPress Development
-      .to('#card-web', { opacity: 1, y: 0, duration: 1.2 }, 4.0)
-      .to('#card-wordpress', { opacity: 1, y: 0, duration: 1.2 }, 4.3)
+      if (cardWebRef.current) {
+        tl.fromTo(cardWebRef.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
+          4.0
+        );
+      }
+      if (cardWordpressRef.current) {
+        tl.fromTo(cardWordpressRef.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
+          4.3
+        );
+      }
 
-      .to(['#card-web', '#card-wordpress'], { opacity: 0, y: -60, duration: 1 }, 6.0);
+      const stage2Cards = [cardWebRef.current, cardWordpressRef.current].filter(Boolean);
+      if (stage2Cards.length > 0) {
+        tl.to(stage2Cards, { opacity: 0, y: -60, duration: 1, ease: 'power2.in' }, 6.0);
+      }
 
     }, containerRef);
 
     return () => ctx.revert();
-  }, [isMounted, isLoaded]);
+  }, [isMounted, isLoaded, renderFrame]);
 
   if (!isMounted) return null;
 
@@ -348,8 +447,8 @@ export const Hero: React.FC = () => {
       {/* Loading Screen Overlay */}
       {!isLoaded && (
         <div className={styles.preloader}>
-          <div className={styles['preloader-spinner']} />
-          <div className={styles['preloader-text']}>
+          <div className={styles.preloaderSpinner} />
+          <div className={styles.preloaderText}>
             {useProceduralFallback 
               ? 'INITIALIZING 3D STONE ENGINE...' 
               : `LOADING 3D STONE ASSETS (${Math.floor((loadedCount / TOTAL_FRAMES) * 100)}%)`}
@@ -358,12 +457,12 @@ export const Hero: React.FC = () => {
       )}
 
       {/* Pinned Services Scroll Section */}
-      <section className={styles.heroPinnedContainer}>
-        <div className={styles['sticky-viewport']}>
+      <section ref={sectionRef} className={styles.heroPinnedContainer}>
+        <div className={styles.stickyViewport}>
           
           {/* Phase 1 Text Headline Overlay */}
-          <div className={styles['hero-text-overlay']}>
-            <h1 className={styles['hero-title']}>
+          <div ref={heroTextRef} className={styles.heroTextOverlay}>
+            <h1 className={styles.heroTitle}>
               <span>A.I.</span>
               <span>DESIGN</span>
               <span>DEVELOPMENT</span>
@@ -372,18 +471,18 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Phase 2 Full-Screen 3D Stone Canvas */}
-          <div className={styles['stone-canvas-wrapper']}>
+          <div ref={stoneWrapperRef} className={styles.stoneCanvasWrapper}>
             <canvas ref={canvasRef} id="stone-canvas" className={styles.stoneCanvas} />
           </div>
 
           {/* Phase 3 Floating Interactive Service Cards */}
-          <div className={styles['services-cards-layer']}>
+          <div className={styles.servicesCardsLayer}>
             
             {/* Card 1: AI & Intelligent Automation */}
-            <div className={`${styles['service-card']} ${styles.left}`} id="card-ai">
-              <div className={styles['card-top']}>
-                <h2 className={styles['card-title']}>AI & Intelligent<br/>Automation</h2>
-                <div className={styles['card-icon']}>
+            <div ref={cardAiRef} className={`${styles.serviceCard} ${styles.left}`} id="card-ai">
+              <div className={styles.cardTop}>
+                <h2 className={styles.cardTitle}>AI & Intelligent<br/>Automation</h2>
+                <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <circle cx="50" cy="50" r="40" />
                     <circle cx="50" cy="50" r="32" />
@@ -393,16 +492,16 @@ export const Hero: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <p className={styles['card-description']}>
+              <p className={styles.cardDescription}>
                 AI-powered solutions designed to enhance products, automate complex workflows, and unlock smarter digital experiences.
               </p>
             </div>
 
             {/* Card 2: Website & Mobile Design */}
-            <div className={`${styles['service-card']} ${styles.right}`} id="card-mobile">
-              <div className={styles['card-top']}>
-                <h2 className={styles['card-title']}>Website &<br/>Mobile Design</h2>
-                <div className={styles['card-icon']}>
+            <div ref={cardMobileRef} className={`${styles.serviceCard} ${styles.right}`} id="card-mobile">
+              <div className={styles.cardTop}>
+                <h2 className={styles.cardTitle}>Website &<br/>Mobile Design</h2>
+                <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <path d="M 50 10 A 40 40 0 1 1 10 50" />
                     <path d="M 50 18 A 32 32 0 1 1 18 50" />
@@ -413,16 +512,16 @@ export const Hero: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <p className={styles['card-description']}>
+              <p className={styles.cardDescription}>
                 High-quality website and mobile app experiences meticulously crafted to attract users and maintain engagement.
               </p>
             </div>
 
             {/* Card 3: Web Development */}
-            <div className={`${styles['service-card']} ${styles.left}`} id="card-web">
-              <div className={styles['card-top']}>
-                <h2 className={styles['card-title']}>Web<br/>Development</h2>
-                <div className={styles['card-icon']}>
+            <div ref={cardWebRef} className={`${styles.serviceCard} ${styles.left}`} id="card-web">
+              <div className={styles.cardTop}>
+                <h2 className={styles.cardTitle}>Web<br/>Development</h2>
+                <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <circle cx="50" cy="50" r="40" />
                     <circle cx="50" cy="50" r="32" />
@@ -432,17 +531,17 @@ export const Hero: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <p className={styles['card-description']}>
+              <p className={styles.cardDescription}>
                 Custom web development delivered with a product-focused mindset, high-performance architecture, and design precision.
               </p>
             </div>
 
             {/* Card 4: WordPress Development */}
-            <div className={`${styles['service-card']} ${styles.right}`} id="card-wordpress">
-              <div className={styles['card-top']}>
-                <h2 className={styles['card-title']}>WordPress<br/>Development</h2>
-                <div className={styles['card-icon']}>
-                  <svg viewBox="0 0 100 100" fill="none" stroke-width="1">
+            <div ref={cardWordpressRef} className={`${styles.serviceCard} ${styles.right}`} id="card-wordpress">
+              <div className={styles.cardTop}>
+                <h2 className={styles.cardTitle}>WordPress<br/>Development</h2>
+                <div className={styles.cardIcon}>
+                  <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <path d="M 50 10 A 40 40 0 1 1 10 50" />
                     <path d="M 50 18 A 32 32 0 1 1 18 50" />
                     <path d="M 50 26 A 24 24 0 1 1 26 50" />
@@ -452,7 +551,7 @@ export const Hero: React.FC = () => {
                   </svg>
                 </div>
               </div>
-              <p className={styles['card-description']}>
+              <p className={styles.cardDescription}>
                 WordPress development centered on high speed, modular flexibility, and digital experiences that convert.
               </p>
             </div>
@@ -460,10 +559,26 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Bottom Action & Status Bar */}
-          <div className={styles['bottom-bar']}>
-            <div className={styles['sub-caption']}>
-              {captionText}
+          <div className={styles.bottomBar}>
+            {/* Center: Cookie Notification Box + Monospace Sub-Caption */}
+            <div className={styles.bottomCenter}>
+              <div className={styles.cookieBanner}>
+                <span>WE USE COOKIES TO ENHANCE YOUR EXPERIENCE.</span>
+                <div className={styles.cookieButtons}>
+                  <button type="button" className={styles.cookieBtn} onClick={() => {}}>DECLINE</button>
+                  <button type="button" className={styles.cookieBtn} onClick={() => {}}>ACCEPT</button>
+                </div>
+              </div>
+              <div className={styles.subCaption}>
+                {captionText}
+              </div>
             </div>
+
+            {/* Right: View Services Link */}
+            <Link href="/services" className={styles.viewServicesLink}>
+              <span>VIEW SERVICES</span>
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
 
         </div>
