@@ -489,11 +489,10 @@ export const Hero: React.FC = () => {
                 <h2 className={styles.cardTitle}>AI & Intelligent<br/>Automation</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
-                    <circle cx="50" cy="50" r="40" />
-                    <circle cx="50" cy="50" r="32" />
-                    <circle cx="50" cy="50" r="24" />
-                    <circle cx="50" cy="50" r="16" />
-                    <circle cx="50" cy="50" r="8" />
+                    {Array.from({ length: 12 }).map((_, i) => {
+                      const x = 17 + i * 6;
+                      return <line key={i} x1={x} y1="10" x2={x} y2="90" />;
+                    })}
                   </svg>
                 </div>
               </div>
@@ -508,12 +507,15 @@ export const Hero: React.FC = () => {
                 <h2 className={styles.cardTitle}>Website &<br/>Mobile Design</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
-                    <path d="M 50 10 A 40 40 0 1 1 10 50" />
-                    <path d="M 50 18 A 32 32 0 1 1 18 50" />
-                    <path d="M 50 26 A 24 24 0 1 1 26 50" />
-                    <path d="M 50 34 A 16 16 0 1 1 34 50" />
-                    <path d="M 50 42 A 8 8 0 1 1 42 50" />
-                    <line x1="10" y1="50" x2="50" y2="50" />
+                    <path d="M 20,10 A 40,40 0 0,1 20,90" />
+                    <path d="M 20,20 A 30,30 0 0,1 20,80" />
+                    <path d="M 20,30 A 20,20 0 0,1 20,70" />
+                    <path d="M 20,40 A 10,10 0 0,1 20,60" />
+                    
+                    <path d="M 80,10 A 40,40 0 0,0 80,90" />
+                    <path d="M 80,20 A 30,30 0 0,0 80,80" />
+                    <path d="M 80,30 A 20,20 0 0,0 80,70" />
+                    <path d="M 80,40 A 10,10 0 0,0 80,60" />
                   </svg>
                 </div>
               </div>
@@ -547,12 +549,15 @@ export const Hero: React.FC = () => {
                 <h2 className={styles.cardTitle}>WordPress<br/>Development</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
-                    <path d="M 50 10 A 40 40 0 1 1 10 50" />
-                    <path d="M 50 18 A 32 32 0 1 1 18 50" />
-                    <path d="M 50 26 A 24 24 0 1 1 26 50" />
-                    <path d="M 50 34 A 16 16 0 1 1 34 50" />
-                    <path d="M 50 42 A 8 8 0 1 1 42 50" />
-                    <line x1="10" y1="50" x2="50" y2="50" />
+                    {Array.from({ length: 6 }).map((_, i) => {
+                      const r = 40 - i * 5;
+                      return (
+                        <path
+                          key={i}
+                          d={`M 85,${50 - r} L 45,${50 - r} A ${r},${r} 0 0,0 45,${50 + r} L 85,${50 + r} A ${r},${r} 0 0,0 ${85 - r},50 L 50,50`}
+                        />
+                      );
+                    })}
                   </svg>
                 </div>
               </div>

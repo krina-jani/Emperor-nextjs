@@ -30,7 +30,7 @@
   font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-secondary);
+  color: #14b8a6;
   background-color: rgba(20, 184, 166, 0.05);
   border: 1px solid rgba(20, 184, 166, 0.12);
   padding: 0.35rem 0.8rem;
@@ -93,12 +93,12 @@
   border-radius: var(--radius-full);
   background-color: var(--bg-primary);
   border: 2px solid var(--glass-border);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   box-shadow: var(--glass-shadow);
 }
 
 .timelineItem:hover .marker {
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
   box-shadow: 0 0 15px rgba(20, 184, 166, 0.35);
   color: var(--text-primary);
 }
