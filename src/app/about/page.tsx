@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHero from '../../components/ui/PageHero';
+import AboutHero from '../../components/about/AboutHero';
 import CompanyStory from '../../components/about/CompanyStory';
 import MissionVision from '../../components/about/MissionVision';
 import Values from '../../components/about/Values';
@@ -17,12 +17,7 @@ export const metadata = generatePageMetadata(
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        title="About Emperor Smart Solution"
-        description="We are a technology company focused on building practical, scalable digital products and transforming business ideas into smart digital solutions."
-        badge="ABOUT US"
-        colorTheme="darkBlue"
-      />
+      <AboutHero />
       <CompanyStory />
       <MissionVision />
       <Values />

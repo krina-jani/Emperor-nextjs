@@ -87,6 +87,16 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
 
     document.addEventListener('click', handleAnchorClick);
 
+    // Debounced ScrollTrigger refresh on window resize
+    let resizeTimeout: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 250);
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
       gsap.ticker.remove(tickerUpdate);
       lenis.destroy();
@@ -94,7 +104,9 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
         (window as any).lenis = null;
       }
       clearTimeout(refreshTimer);
+      clearTimeout(resizeTimeout);
       document.removeEventListener('click', handleAnchorClick);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

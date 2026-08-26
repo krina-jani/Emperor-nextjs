@@ -1,5 +1,33 @@
 .hero {
-  padding: 4rem 0 2rem 0;
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-height) + 2rem) 0 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 6rem;
+  }
+}
+
+.copyCol {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
   position: relative;
 }
 
@@ -8,39 +36,127 @@
   font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #14b8a6;
-  background-color: rgba(20, 184, 166, 0.05);
-  border: 1px solid rgba(20, 184, 166, 0.12);
+  color: #ff5722;
+  background-color: rgba(255, 87, 34, 0.05);
+  border: 1px solid rgba(255, 87, 34, 0.15);
   padding: 0.35rem 0.8rem;
   border-radius: var(--radius-full);
   margin-bottom: 1.25rem;
   display: inline-block;
+  width: max-content;
 }
 
 .title {
-  font-size: 2.75rem;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 3.5rem;
-  }
+  color: #ffffff;
 }
 
 .desc {
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 680px;
 }
 
-@media (min-width: 768px) {
-  .desc {
-    font-size: 1.15rem;
-  }
+/* Suspended Graphic Column */
+.visualCol {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.ceilingContainer {
+  position: absolute;
+  top: -6rem;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 6rem);
+  pointer-events: none;
+}
+
+.suspendedGraphic {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.03);
+  cursor: grab;
+  pointer-events: auto;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.suspendedGraphic:active {
+  cursor: grabbing;
+}
+
+.suspendedGraphic:hover {
+  border-color: rgba(255, 87, 34, 0.45);
+  box-shadow: 0 30px 60px rgba(255, 87, 34, 0.18), inset 0 0 20px rgba(255, 87, 34, 0.05);
+}
+
+.node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ff5722;
+  border-radius: 50%;
+  top: 12px;
+  box-shadow: 0 0 10px #ff5722;
+  z-index: 10;
+}
+
+.nodeLeft {
+  left: 45px;
+}
+
+.nodeRight {
+  right: 45px;
+}
+
+.logoIcon {
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1)) brightness(1.25);
+  transition: transform 0.5s var(--transition-spring), filter 0.5s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.suspendedGraphic:hover .logoIcon {
+  transform: scale(1.12) rotate(5deg) translateZ(20px);
+  filter: drop-shadow(0 0 25px rgba(255, 87, 34, 0.5)) brightness(1.4);
+}
+
+/* Page Transition Blinds Overlay */
+.blindsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.blindBar {
+  flex-grow: 1;
+  background-color: #000000;
+  width: 100%;
+  transform: scaleX(1);
+  transform-origin: right center;
 }

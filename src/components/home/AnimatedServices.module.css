@@ -141,7 +141,7 @@
   .cardsWrapper {
     position: relative;
     width: 100%;
-    max-width: 380px;
+    max-width: min(350px, calc(100% - 32px));
     height: 400px;
     margin: 0 auto;
     display: block;

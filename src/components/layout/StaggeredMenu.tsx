@@ -391,6 +391,20 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [closeOnClickAway, open, closeMenu]);
 
   React.useEffect(() => {
+    if (open) {
+      document.body.classList.add('lenis-stopped');
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.classList.remove('lenis-stopped');
+      document.body.style.removeProperty('overflow');
+    }
+    return () => {
+      document.body.classList.remove('lenis-stopped');
+      document.body.style.removeProperty('overflow');
+    };
+  }, [open]);
+
+  React.useEffect(() => {
     return () => {
       openTlRef.current?.kill();
       closeTweenRef.current?.kill();

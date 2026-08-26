@@ -67,7 +67,7 @@
 
     .heroTitle {
       font-family: 'NeueHaasDisplay', 'FamiljenGrotesk', 'Space Grotesk', 'Outfit', sans-serif;
-      font-size: clamp(3.8rem, 8.4vw, 8.6rem);
+      font-size: clamp(2.2rem, 8.4vw, 8.6rem);
       font-weight: 800;
       line-height: 0.90;
       letter-spacing: -0.04em;
