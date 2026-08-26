@@ -42,3 +42,10 @@
   max-width: 680px;
   margin: 0 auto;
 }
+
+.highlight {
+  background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}

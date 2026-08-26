@@ -386,6 +386,11 @@ body.dark-mode .sm-toggle:hover {
     letter-spacing: -1px;
     padding-right: 0.8em;
   }
+  .sm-toggle {
+    padding: 8px 14px;
+    font-size: 10.5px;
+    gap: 6px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -402,5 +407,12 @@ body.dark-mode .sm-toggle:hover {
   .sm-panel-list[data-numbering] .sm-panel-item::after {
     font-size: 14px;
     right: 1.5em;
+  }
+  
+  .sm-toggle {
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    gap: 4px;
   }
 }

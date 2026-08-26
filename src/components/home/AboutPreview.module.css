@@ -48,6 +48,13 @@
   color: var(--text-primary);
 }
 
+.title span {
+  background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 @media (min-width: 768px) {
   .title {
     font-size: 2.75rem;

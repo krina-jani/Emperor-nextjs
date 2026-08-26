@@ -19,6 +19,19 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   gradientTitle = true,
   ...props
 }) => {
+  const formatTitle = (titleStr: string) => {
+    if (!gradientTitle) return titleStr;
+    const words = titleStr.split(' ');
+    if (words.length <= 1) return titleStr;
+    const lastWord = words.pop();
+    const remaining = words.join(' ');
+    return (
+      <>
+        {remaining} <span className={styles.highlight}>{lastWord}</span>
+      </>
+    );
+  };
+
   return (
     <div className={cn(styles.wrapper, styles[align], className)} {...props}>
       {badge && (
@@ -26,8 +39,8 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
           {badge}
         </span>
       )}
-      <h2 className={cn(styles.title, gradientTitle && 'text-gradient-primary')}>
-        {title}
+      <h2 className={styles.title}>
+        {formatTitle(title)}
       </h2>
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
     </div>

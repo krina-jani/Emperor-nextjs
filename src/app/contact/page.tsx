@@ -17,7 +17,7 @@ export default function ContactPage() {
       <div className={styles.hero}>
         <Container>
           <span className={styles.badge}>CONTACT US</span>
-          <h1 className={styles.title}>Connect With Our Experts</h1>
+          <h1 className={styles.title}>Connect With Our <span className={styles.highlight}>Experts</span></h1>
           <p className={styles.subtitle}>
             Have a project in mind or want to know how we can transform your business? Reach out to us below.
           </p>

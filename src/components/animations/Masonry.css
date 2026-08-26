@@ -42,3 +42,10 @@
   text-transform: none;
   line-height: 1.2;
 }
+
+@media (max-width: 480px) {
+  .item-title {
+    font-size: 1.15rem;
+    padding: 1.5rem 1rem 1rem;
+  }
+}

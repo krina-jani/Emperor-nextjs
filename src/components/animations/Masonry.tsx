@@ -132,28 +132,39 @@ const Masonry: React.FC<MasonryProps> = ({
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  const grid = useMemo(() => {
-    if (!width) return [];
+  const [grid, totalHeight] = useMemo(() => {
+    if (!width) return [[], 0];
 
     const colHeights = new Array(columns).fill(0);
     const columnWidth = width / columns;
 
-    return items.map(child => {
+    const mapped = items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = columnWidth * col;
-      const height = child.height / 2;
-      const y = colHeights[col];
+      
+      // Responsive card heights: Landscape on mobile, slightly scaled on tablet
+      let height = child.height / 2;
+      if (columns === 1) {
+        height = columnWidth * 0.58; // elegant landscape ratio around 180-210px
+      } else if (columns === 2) {
+        height = child.height / 2.8; // scaled down for tablet grid rows
+      }
 
+      const y = colHeights[col];
       colHeights[col] += height;
 
       return { ...child, x, y, w: columnWidth, h: height };
     });
+
+    return [mapped, Math.max(...colHeights)];
   }, [columns, items, width]);
 
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
     if (!imagesReady) return;
+
+    const isMobile = columns <= 2;
 
     const ctx = gsap.context(() => {
       grid.forEach((item, index) => {
@@ -180,13 +191,13 @@ const Masonry: React.FC<MasonryProps> = ({
             opacity: 1,
             ...animationProps,
             ...(blurToFocus && { filter: 'blur(0px)' }),
-            duration: 1.5, // Slower duration as requested
-            ease: 'power2.out', // Smoother ease
-            delay: index * stagger,
+            duration: isMobile ? 1.0 : 1.5, // slightly faster fade-in on mobile
+            ease: 'power2.out',
+            delay: isMobile ? 0 : index * stagger,
             scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 75%', // Trigger when container enters viewport
-              toggleActions: 'play none none reset' // Replays animation when scrolling back
+              trigger: isMobile ? selector : containerRef.current,
+              start: isMobile ? 'top 88%' : 'top 75%', // Trigger individual reveal on mobile
+              toggleActions: 'play none none reset'
             }
           });
         } else {
@@ -207,7 +218,7 @@ const Masonry: React.FC<MasonryProps> = ({
       ctx.revert();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, columns]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseEnter = (e: React.MouseEvent, item: any) => {
@@ -258,7 +269,11 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="list">
+    <div
+      ref={containerRef}
+      className="list"
+      style={{ height: totalHeight ? `${totalHeight}px` : 'auto' }}
+    >
       {grid.map(item => {
         return (
           <div

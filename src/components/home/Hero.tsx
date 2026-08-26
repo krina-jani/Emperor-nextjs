@@ -385,54 +385,68 @@ export const Hero: React.FC = () => {
         );
       }
 
+      // Detect if user is on mobile/tablet viewports
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 992;
+
       // 3. Scrub stone 3D rotation frame sequence
       tl.fromTo(stoneObj,
         { frame: 1 },
-        { frame: TOTAL_FRAMES, ease: 'none', duration: 8 },
+        { frame: TOTAL_FRAMES, ease: 'none', duration: isMobile ? 5.5 : 8 },
         0.5
       );
 
       // 4. Floating Interactive Service Cards Sequence
+      const card1Start = isMobile ? 1.0 : 1.5;
+      const card2Start = isMobile ? 1.25 : 1.8;
+      const stage1Exit = isMobile ? 2.65 : 3.5;
+
+      const card3Start = isMobile ? 3.0 : 4.0;
+      const card4Start = isMobile ? 3.25 : 4.3;
+      const stage2Exit = isMobile ? 4.65 : 6.0;
+
+      const fadeInDur = isMobile ? 0.9 : 1.2;
+      const fadeOutDur = isMobile ? 0.75 : 1.0;
+
       // Stage 1: AI & Mobile Design
       if (cardAiRef.current) {
         tl.fromTo(cardAiRef.current,
           { opacity: 0, y: 60, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
-          1.5
+          { opacity: 1, y: 0, scale: 1, duration: fadeInDur, ease: 'power2.out' },
+          card1Start
         );
       }
       if (cardMobileRef.current) {
         tl.fromTo(cardMobileRef.current,
           { opacity: 0, y: 60, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
-          1.8
+          { opacity: 1, y: 0, scale: 1, duration: fadeInDur, ease: 'power2.out' },
+          card2Start
         );
       }
       
       const stage1Cards = [cardAiRef.current, cardMobileRef.current].filter(Boolean);
       if (stage1Cards.length > 0) {
-        tl.to(stage1Cards, { opacity: 0, y: -60, duration: 1, ease: 'power2.in' }, 3.5);
+        tl.to(stage1Cards, { opacity: 0, y: -60, duration: fadeOutDur, ease: 'power2.in' }, stage1Exit);
       }
 
       // Stage 2: Web & WordPress Development
       if (cardWebRef.current) {
         tl.fromTo(cardWebRef.current,
           { opacity: 0, y: 60, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
-          4.0
+          { opacity: 1, y: 0, scale: 1, duration: fadeInDur, ease: 'power2.out' },
+          card3Start
         );
       }
       if (cardWordpressRef.current) {
         tl.fromTo(cardWordpressRef.current,
           { opacity: 0, y: 60, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power2.out' },
-          4.3
+          { opacity: 1, y: 0, scale: 1, duration: fadeInDur, ease: 'power2.out' },
+          card4Start
         );
       }
 
       const stage2Cards = [cardWebRef.current, cardWordpressRef.current].filter(Boolean);
       if (stage2Cards.length > 0) {
-        tl.to(stage2Cards, { opacity: 0, y: -60, duration: 1, ease: 'power2.in' }, 6.0);
+        tl.to(stage2Cards, { opacity: 0, y: -60, duration: fadeOutDur, ease: 'power2.in' }, stage2Exit);
       }
 
     }, containerRef);

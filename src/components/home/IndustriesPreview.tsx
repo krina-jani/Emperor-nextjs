@@ -22,7 +22,7 @@ export const IndustriesPreview: React.FC = () => {
           subtitle="We engineer solutions tailored to complex operational demands and strict regulatory landscapes."
         />
 
-        <div style={{ height: '900px', width: '100%', marginTop: '3rem' }}>
+        <div style={{ width: '100%', marginTop: '3rem' }}>
           <Masonry
             items={solutions.map((ind, index) => {
               const images = [

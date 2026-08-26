@@ -14,25 +14,25 @@ const GithubIcon = ({ size = 16 }: { size?: number }) => (
 
 const teamMembers = [
   {
-    name: 'Alexander Vance',
+    name: 'Karan Makwana',
     role: 'Chief Architect & Founder',
     dept: 'Systems Engineering',
-    bio: 'Alexander spent a decade designing low-latency trade routing and signal pipelines for banking grids before founding Emperor.',
-    initial: 'AV'
+    bio: 'Karan spent a decade designing low-latency trade routing and signal pipelines for banking grids before founding Emperor.',
+    initial: 'KM'
   },
   {
-    name: 'Elena Rostova',
-    role: 'Principal ML Scientist',
-    dept: 'Applied AI Lab',
-    bio: 'Elena specializes in neural net quantization and Transformer architectures, adapting heavy LLMs to run on-device or on ESP32 chips.',
-    initial: 'ER'
+    name: 'Ankita Nai',
+    role: 'SEO Executive',
+    dept: 'Marketing & SEO',
+    bio: 'Ankita specializes in neural net quantization and Transformer architectures, adapting heavy LLMs to run on-device or on ESP32 chips.',
+    initial: 'AN'
   },
   {
-    name: 'Christopher Ward',
-    role: 'VP of Cloud Infrastructure',
-    dept: 'Cloud & DevOps',
-    bio: 'Christopher constructs secure VPC networks, automated release triggers, and self-healing Kubernetes clusters for global scale.',
-    initial: 'CW'
+    name: 'Yash Sharma',
+    role: 'Algo Treading',
+    dept: 'Algo & ML',
+    bio: 'Yash constructs secure, automated trading & self-healing algo treading system for global scale.',
+    initial: 'YS'
   }
 ];
 
