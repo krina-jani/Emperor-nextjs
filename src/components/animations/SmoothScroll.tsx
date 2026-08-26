@@ -14,6 +14,14 @@ interface SmoothScrollProps {
 
 export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
   useEffect(() => {
+    // Reset scroll position to top before initializing scroll systems
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    }
+
     // Instantiate Lenis
     const lenis = new Lenis({
       duration: 1.2,
@@ -24,6 +32,11 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       wheelMultiplier: 1.0,
       touchMultiplier: 1.5,
     });
+
+    // Expose Lenis globally to coordinate navigation transitions
+    if (typeof window !== 'undefined') {
+      (window as any).lenis = lenis;
+    }
 
     // Link Lenis scroll event to ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -36,6 +49,11 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
 
     // Disable lag smoothing to align triggers perfectly
     gsap.ticker.lagSmoothing(0);
+
+    // Trigger an initial refresh of ScrollTrigger after DOM is fully painted
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
 
     // Handle clicks on hash links smoothly via Lenis
     const handleAnchorClick = (e: MouseEvent) => {
@@ -72,6 +90,10 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     return () => {
       gsap.ticker.remove(tickerUpdate);
       lenis.destroy();
+      if (typeof window !== 'undefined') {
+        (window as any).lenis = null;
+      }
+      clearTimeout(refreshTimer);
       document.removeEventListener('click', handleAnchorClick);
     };
   }, []);

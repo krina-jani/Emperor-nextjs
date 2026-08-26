@@ -54,10 +54,11 @@ const AnimatedServices = () => {
     const wrapper = scrollWrapperRef.current;
 
     if (!section || !trigger || !wrapper) return;
+    let ctx: gsap.Context | null = null;
 
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         const cards = gsap.utils.toArray(wrapper.children);
 
         const tl = gsap.timeline({
@@ -85,11 +86,12 @@ const AnimatedServices = () => {
         );
 
       }, section);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

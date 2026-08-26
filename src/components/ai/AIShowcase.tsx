@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Container from '../ui/Container';
 import SectionTitle from '../ui/SectionTitle';
 import Button from '../ui/Button';
@@ -54,6 +54,16 @@ export const AIShowcase: React.FC = () => {
   const [logIndex, setLogIndex] = useState(0);
   const [result, setResult] = useState<AnalysisResult | null>(null);
 
+  const logIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const logTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (logIntervalRef.current) clearInterval(logIntervalRef.current);
+      if (logTimeoutRef.current) clearTimeout(logTimeoutRef.current);
+    };
+  }, []);
+
   const logs = [
     'Initializing Emperor Smart Advisor...',
     'Reading bottleneck parameters...',
@@ -68,11 +78,14 @@ export const AIShowcase: React.FC = () => {
     setResult(null);
     setLogIndex(0);
 
-    const logInterval = setInterval(() => {
+    if (logIntervalRef.current) clearInterval(logIntervalRef.current);
+    if (logTimeoutRef.current) clearTimeout(logTimeoutRef.current);
+
+    logIntervalRef.current = setInterval(() => {
       setLogIndex((prev) => {
         if (prev === logs.length - 1) {
-          clearInterval(logInterval);
-          setTimeout(() => {
+          if (logIntervalRef.current) clearInterval(logIntervalRef.current);
+          logTimeoutRef.current = setTimeout(() => {
             setResult(analysisMatrix[bottleneck]);
             setIsLoading(false);
           }, 400);

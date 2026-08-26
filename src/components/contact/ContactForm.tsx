@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowRight, Check } from 'lucide-react';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
@@ -38,6 +38,13 @@ export const ContactForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+    };
+  }, []);
 
   const validateForm = (): boolean => {
     const tempErrors: FormErrors = {};
@@ -101,8 +108,10 @@ export const ContactForm: React.FC = () => {
 
     setIsSubmitting(true);
 
+    if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+
     // Simulate API request
-    setTimeout(() => {
+    submitTimeoutRef.current = setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({

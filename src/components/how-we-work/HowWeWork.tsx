@@ -119,28 +119,30 @@ export const HowWeWork = () => {
   useEffect(() => {
     if (!timelineRef.current) return;
     
-    const stageElements = gsap.utils.toArray('.stage-anim');
-    
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    stageElements.forEach((stage: any) => {
-      gsap.fromTo(stage, 
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1, 
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: stage,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
+    const ctx = gsap.context(() => {
+      const stageElements = gsap.utils.toArray('.stage-anim');
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      stageElements.forEach((stage: any) => {
+        gsap.fromTo(stage, 
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, 
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: stage,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      );
-    });
+        );
+      });
+    }, timelineRef);
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ctx.revert();
     };
   }, []);
 

@@ -1,5 +1,5 @@
 .hero {
-  padding: 8rem 0 4rem;
+  padding: calc(var(--header-height) + 8rem) 0 4rem;
   color: var(--text-on-dark, #ffffff);
   text-align: center;
 }

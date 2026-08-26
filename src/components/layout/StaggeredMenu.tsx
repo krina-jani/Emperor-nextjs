@@ -390,6 +390,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
+  React.useEffect(() => {
+    return () => {
+      openTlRef.current?.kill();
+      closeTweenRef.current?.kill();
+      spinTweenRef.current?.kill();
+      textCycleAnimRef.current?.kill();
+      colorTweenRef.current?.kill();
+      itemEntranceTweenRef.current?.kill();
+    };
+  }, []);
+
   return (
     <div
       className={(className ? className + ' ' : '') + 'staggered-menu-wrapper' + (isFixed ? ' fixed-wrapper' : '')}

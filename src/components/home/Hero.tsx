@@ -437,7 +437,12 @@ export const Hero: React.FC = () => {
 
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      if (typeof window !== 'undefined') {
+        document.body.classList.remove('dark-mode');
+      }
+    };
   }, [isMounted, isLoaded, renderFrame]);
 
   if (!isMounted) return null;

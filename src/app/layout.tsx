@@ -32,7 +32,7 @@ export default function RootLayout({
         <CustomCursor />
         <SmoothScroll>
           <Header />
-          <main style={{ flexGrow: 1, paddingTop: 'var(--header-height)' }}>
+          <main style={{ flexGrow: 1 }}>
             {children}
           </main>
           <Footer />

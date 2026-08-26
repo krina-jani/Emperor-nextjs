@@ -18,10 +18,11 @@ export const Footer: React.FC = () => {
   useEffect(() => {
     const textContainer = textRef.current;
     if (!textContainer) return;
+    let ctx: gsap.Context | null = null;
 
     // Use a small timeout to ensure DOM is fully painted before calculating ScrollTrigger
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         const letters = gsap.utils.toArray('.footer-letter');
         
         gsap.fromTo(
@@ -42,11 +43,12 @@ export const Footer: React.FC = () => {
           }
         );
       }, footerRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

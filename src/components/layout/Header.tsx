@@ -16,23 +16,52 @@ export const Header: React.FC = () => {
     const checkHeaderTheme = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // 1. Check if body has dark-mode or dark background style
+      // 1. Check if body has dark-mode
       if (document.body.classList.contains('dark-mode')) {
         setIsDark(true);
         return;
       }
 
-      // 2. Sample element behind the header (where the logo sits)
-      const sampleY = 50;
-      const sampleEl = document.elementFromPoint(80, sampleY);
+      // 2. Temporarily hide the header to find the element physically underneath it
+      const headerEl = document.querySelector('header');
+      let underlyingEl: Element | null = null;
+      if (headerEl) {
+        const oldDisplay = headerEl.style.display;
+        try {
+          headerEl.style.display = 'none';
+          underlyingEl = document.elementFromPoint(100, 50);
+        } catch (e) {
+          console.error('[Header] Error sampling underlying element:', e);
+        } finally {
+          headerEl.style.display = oldDisplay;
+        }
+      }
 
-      if (sampleEl) {
-        let curr: HTMLElement | null = sampleEl as HTMLElement;
+      let isThemeDark = false;
+
+      // 3. Traverse up the DOM tree from the sampled element to detect theme or background colors
+      if (underlyingEl) {
+        let curr: HTMLElement | null = underlyingEl as HTMLElement;
         while (curr && curr !== document.documentElement && curr !== document.body) {
-          if (curr.classList.contains('dark-section') || curr.dataset.theme === 'dark') {
-            setIsDark(true);
-            return;
+          if (curr.dataset.theme === 'dark' || curr.classList.contains('dark-section') || curr.classList.contains('dark-mode')) {
+            isThemeDark = true;
+            break;
           }
+
+          const className = curr.className || '';
+          const id = curr.id || '';
+          
+          if (
+            className.includes('darkBlue') || 
+            className.includes('black') || 
+            className.includes('bg-dark') ||
+            className.includes('dark-section') ||
+            id.includes('dark')
+          ) {
+            isThemeDark = true;
+            break;
+          }
+
           const bg = window.getComputedStyle(curr).backgroundColor;
           if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
             const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
@@ -41,27 +70,32 @@ export const Header: React.FC = () => {
               const g = parseInt(match[2], 10);
               const b = parseInt(match[3], 10);
               const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-              setIsDark(luminance < 128);
-              return;
+              if (luminance < 140) {
+                isThemeDark = true;
+                break;
+              }
             }
           }
           curr = curr.parentElement;
         }
       }
 
-      // 3. Check body background color
-      const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-      const bodyMatch = bodyBg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-      if (bodyMatch) {
-        const r = parseInt(bodyMatch[1], 10);
-        const g = parseInt(bodyMatch[2], 10);
-        const b = parseInt(bodyMatch[3], 10);
-        const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-        setIsDark(luminance < 128);
-        return;
+      // 4. Fallback to body background check if no specific underlying section background was found
+      if (!isThemeDark) {
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        const bodyMatch = bodyBg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (bodyMatch) {
+          const r = parseInt(bodyMatch[1], 10);
+          const g = parseInt(bodyMatch[2], 10);
+          const b = parseInt(bodyMatch[3], 10);
+          const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+          if (luminance < 140) {
+            isThemeDark = true;
+          }
+        }
       }
 
-      setIsDark(false);
+      setIsDark(isThemeDark);
     };
 
     checkHeaderTheme();

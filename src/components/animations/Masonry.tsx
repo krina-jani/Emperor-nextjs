@@ -155,58 +155,57 @@ const Masonry: React.FC<MasonryProps> = ({
   useLayoutEffect(() => {
     if (!imagesReady) return;
 
-    // We can clear previous scroll triggers to avoid duplicates on re-render
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animationProps = {
-        x: item.x,
-        y: item.y,
-        width: item.w,
-        height: item.h
-      };
-
-      if (!hasMounted.current) {
-        const initialPos = getInitialPosition(item);
-        const initialState = {
-          opacity: 0,
-          x: initialPos.x,
-          y: initialPos.y,
+    const ctx = gsap.context(() => {
+      grid.forEach((item, index) => {
+        const selector = `[data-key="${item.id}"]`;
+        const animationProps = {
+          x: item.x,
+          y: item.y,
           width: item.w,
-          height: item.h,
-          ...(blurToFocus && { filter: 'blur(20px)' }) // increased initial blur
+          height: item.h
         };
 
-        gsap.fromTo(selector, initialState, {
-          opacity: 1,
-          ...animationProps,
-          ...(blurToFocus && { filter: 'blur(0px)' }),
-          duration: 1.5, // Slower duration as requested
-          ease: 'power2.out', // Smoother ease
-          delay: index * stagger,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 75%', // Trigger when container enters viewport
-            toggleActions: 'play none none reset' // Replays animation when scrolling back
-          }
-        });
-      } else {
-        gsap.to(selector, {
-          ...animationProps,
-          duration: duration,
-          ease: ease,
-          overwrite: 'auto'
-        });
-      }
-    });
+        if (!hasMounted.current) {
+          const initialPos = getInitialPosition(item);
+          const initialState = {
+            opacity: 0,
+            x: initialPos.x,
+            y: initialPos.y,
+            width: item.w,
+            height: item.h,
+            ...(blurToFocus && { filter: 'blur(20px)' }) // increased initial blur
+          };
 
-    hasMounted.current = true;
+          gsap.fromTo(selector, initialState, {
+            opacity: 1,
+            ...animationProps,
+            ...(blurToFocus && { filter: 'blur(0px)' }),
+            duration: 1.5, // Slower duration as requested
+            ease: 'power2.out', // Smoother ease
+            delay: index * stagger,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 75%', // Trigger when container enters viewport
+              toggleActions: 'play none none reset' // Replays animation when scrolling back
+            }
+          });
+        } else {
+          gsap.to(selector, {
+            ...animationProps,
+            duration: duration,
+            ease: ease,
+            overwrite: 'auto'
+          });
+        }
+      });
+
+      hasMounted.current = true;
+    }, containerRef);
     
     // Cleanup scroll triggers on unmount
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    }
+      ctx.revert();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 

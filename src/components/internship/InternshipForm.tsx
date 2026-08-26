@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, ArrowRight, Check } from 'lucide-react';
 import Button from '../ui/Button';
 import styles from './InternshipForm.module.css';
@@ -24,6 +24,13 @@ const InternshipForm = () => {
   const [fileName, setFileName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -44,8 +51,10 @@ const InternshipForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+
     // Simulate API request
-    setTimeout(() => {
+    submitTimeoutRef.current = setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
     }, 2000);

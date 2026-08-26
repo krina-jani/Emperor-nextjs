@@ -1,7 +1,7 @@
 /* Light Hero Section */
 .heroSection {
   background-color: #f9f8f4;
-  padding: 8rem 0 6rem;
+  padding: calc(var(--header-height) + 8rem) 0 6rem;
   width: 100%;
 }
 

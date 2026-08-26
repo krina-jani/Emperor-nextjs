@@ -28,9 +28,10 @@ const HorizontalScrollCTA = () => {
     const textEl = textRef.current;
 
     if (!section || !textEl) return;
+    let ctx: gsap.Context | null = null;
 
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctx = gsap.context(() => {
         const scrollWidth = textEl.scrollWidth;
         const windowWidth = window.innerWidth;
         // Let it scroll until the end of the text is near the center of the screen
@@ -68,11 +69,12 @@ const HorizontalScrollCTA = () => {
         });
 
       }, section);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

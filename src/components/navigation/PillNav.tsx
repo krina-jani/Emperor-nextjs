@@ -103,6 +103,8 @@ const PillNav = ({
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', onResize);
+      tlRefs.current.forEach((tl) => tl?.kill());
+      activeTweenRefs.current.forEach((tween) => tween?.kill());
     };
   }, [items, ease]);
 

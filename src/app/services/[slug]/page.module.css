@@ -1,7 +1,7 @@
 .pageWrapper {
   background-color: var(--bg-primary, #F4F1EA);
   min-height: 100vh;
-  padding: 8rem 0 6rem;
+  padding: calc(var(--header-height) + 4rem) 0 6rem;
 }
 
 .backLink {

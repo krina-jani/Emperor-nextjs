@@ -1,5 +1,5 @@
 .hero {
-  padding: 4rem 0;
+  padding: calc(var(--header-height) + 4rem) 0;
   border-bottom: 1px solid var(--glass-border);
 }
 
