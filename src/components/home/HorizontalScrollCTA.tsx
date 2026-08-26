@@ -78,16 +78,18 @@ const HorizontalScrollCTA = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section}>
-      <div className={styles.container}>
-        <h3 ref={textRef} className={styles.text}>
-          {splitTextToChars(text)}
-        </h3>
-      </div>
-      <div className={styles.btnWrapper}>
-        <button className={styles.ctaBtn}>Start a Project &rarr;</button>
-      </div>
-    </section>
+    <div className="horizontal-scroll-cta-wrapper">
+      <section ref={sectionRef} className={styles.section}>
+        <div className={styles.container}>
+          <h3 ref={textRef} className={styles.text}>
+            {splitTextToChars(text)}
+          </h3>
+        </div>
+        <div className={styles.btnWrapper}>
+          <button className={styles.ctaBtn}>Start a Project &rarr;</button>
+        </div>
+      </section>
+    </div>
   );
 };
 

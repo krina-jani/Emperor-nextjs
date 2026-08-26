@@ -4,7 +4,7 @@ import Container from '../ui/Container';
 import Button from '../ui/Button';
 import FadeIn from '../animations/FadeIn';
 import styles from './AboutPreview.module.css';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Users, Activity, Lock } from 'lucide-react';
 
 const highlights = [
   'Zero-Downtime Infrastructure Pipelines',
@@ -47,18 +47,30 @@ export const AboutPreview: React.FC = () => {
         <div className={styles.statsCol}>
           <FadeIn direction="left" className={styles.statsGrid}>
             <div className={styles.statCard}>
+              <div className={styles.statIconWrapper}>
+                <ShieldCheck className={styles.statIcon} size={28} />
+              </div>
               <span className={styles.statVal}>99.99%</span>
               <span className={styles.statLabel}>Uptime SLA Guaranteed</span>
             </div>
             <div className={styles.statCard}>
+              <div className={styles.statIconWrapper}>
+                <Users className={styles.statIcon} size={28} />
+              </div>
               <span className={styles.statVal}>15M+</span>
               <span className={styles.statLabel}>End Users Powered</span>
             </div>
             <div className={styles.statCard}>
+              <div className={styles.statIconWrapper}>
+                <Activity className={styles.statIcon} size={28} />
+              </div>
               <span className={styles.statVal}>50M+</span>
               <span className={styles.statLabel}>Telemetry Signals Ingested</span>
             </div>
             <div className={styles.statCard}>
+              <div className={styles.statIconWrapper}>
+                <Lock className={styles.statIcon} size={28} />
+              </div>
               <span className={styles.statVal}>SOC2</span>
               <span className={styles.statLabel}>Certified Architectures</span>
             </div>

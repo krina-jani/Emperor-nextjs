@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: 2rem 0;
-  background-color: #030712;
+  background-color: #000000;
   color: #ffffff;
   position: relative;
 }
@@ -38,7 +38,7 @@
 
 .ctaBtn {
   background: #ffffff;
-  color: #030712;
+  color: #000000;
   padding: 1rem 2.5rem;
   font-size: 1.125rem;
   font-weight: 700;
