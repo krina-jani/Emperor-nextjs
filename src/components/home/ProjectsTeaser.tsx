@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import Container from '../ui/Container';
 import styles from './ProjectsTeaser.module.css';
 
 const ProjectsTeaser: React.FC = () => {
   return (
     <section className={styles.section}>
-      <div className="container">
+      <Container className={styles.container}>
         <h2 className={styles.title}>Projects</h2>
         
         <p className={styles.subtitle}>
@@ -15,7 +16,7 @@ const ProjectsTeaser: React.FC = () => {
             See More <ArrowUpRight className={styles.icon} size={24} />
           </Link>
         </p>
-      </div>
+      </Container>
     </section>
   );
 };

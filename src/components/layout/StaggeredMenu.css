@@ -82,10 +82,17 @@ body.dark-mode .sm-toggle:hover {
   border-color: rgba(255, 255, 255, 0.8) !important;
 }
 
+.staggered-menu-wrapper[data-open="true"] .sm-toggle,
 [data-open="true"] .sm-toggle {
-  color: #000000 !important;
-  border-color: rgba(0, 0, 0, 0.4) !important;
-  background: rgba(0, 0, 0, 0.05) !important;
+  color: #142134 !important;
+  border-color: rgba(20, 33, 52, 0.3) !important;
+  background: rgba(20, 33, 52, 0.05) !important;
+}
+
+.staggered-menu-wrapper[data-open="true"] .sm-toggle:hover,
+[data-open="true"] .sm-toggle:hover {
+  background: rgba(20, 33, 52, 0.1) !important;
+  border-color: rgba(20, 33, 52, 0.6) !important;
 }
 
 .sm-toggle:focus-visible {
@@ -221,7 +228,7 @@ body.dark-mode .sm-toggle:hover {
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--sm-accent, #ff0000);
+  color: var(--sm-accent, #ff5722);
 }
 
 .sm-socials-list {
@@ -248,7 +255,7 @@ body.dark-mode .sm-toggle:hover {
 }
 
 .sm-socials-link:focus-visible {
-  outline: 2px solid var(--sm-accent, #ff0000);
+  outline: 2px solid var(--sm-accent, #ff5722);
   outline-offset: 3px;
 }
 
@@ -274,7 +281,7 @@ body.dark-mode .sm-toggle:hover {
 }
 
 .sm-socials-link:hover {
-  color: var(--sm-accent, #ff0000);
+  color: var(--sm-accent, #ff5722);
 }
 
 .sm-panel-title {
@@ -308,7 +315,7 @@ body.dark-mode .sm-toggle:hover {
     color 0.25s;
   display: inline-block;
   text-decoration: none;
-  padding-right: 1.4em;
+  padding-right: 2.2em;
 }
 
 .staggered-menu-panel .sm-socials-list .sm-socials-link {
@@ -348,9 +355,9 @@ body.dark-mode .sm-toggle:hover {
   content: counter(smItem, decimal-leading-zero);
   position: absolute;
   top: 0.1em;
-  right: 2.8em;
-  font-size: 18px;
-  font-weight: 400;
+  right: 0.2em;
+  font-size: 0.5em;
+  font-weight: 600;
   color: var(--sm-accent, #5227ff);
   letter-spacing: 0;
   pointer-events: none;
@@ -371,9 +378,8 @@ body.dark-mode .sm-toggle:hover {
   }
 
   .sm-panel-item {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     letter-spacing: -1.5px;
-    padding-right: 1em;
   }
 }
 
@@ -382,9 +388,8 @@ body.dark-mode .sm-toggle:hover {
     padding: 5em 2em 2em 2em;
   }
   .sm-panel-item {
-    font-size: 2.3rem;
+    font-size: 3.0rem;
     letter-spacing: -1px;
-    padding-right: 0.8em;
   }
   .sm-toggle {
     padding: 8px 14px;
@@ -399,15 +404,11 @@ body.dark-mode .sm-toggle:hover {
   }
 
   .sm-panel-item {
-    font-size: clamp(1.5rem, 8vw, 2rem);
+    font-size: clamp(2.0rem, 9vw, 2.5rem);
     letter-spacing: -0.5px;
-    padding-right: 0.6em;
   }
   
-  .sm-panel-list[data-numbering] .sm-panel-item::after {
-    font-size: 14px;
-    right: 1.5em;
-  }
+  /* Number font-size inherits scale dynamically */
   
   .sm-toggle {
     padding: 8px 12px;

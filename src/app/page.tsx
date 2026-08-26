@@ -6,6 +6,7 @@ import WhyChooseUs from '../components/home/WhyChooseUs';
 import IndustriesPreview from '../components/home/IndustriesPreview';
 import AboutPreview from '../components/home/AboutPreview';
 import HorizontalScrollCTA from '../components/home/HorizontalScrollCTA';
+import ProjectsTeaser from '../components/home/ProjectsTeaser';
 
 export const metadata = generatePageMetadata(
   'Emperor Smart Solution | Smart Digital Solutions',
@@ -18,6 +19,10 @@ export default function Home() {
     <>
       <div id="home">
         <Hero />
+      </div>
+
+      <div id="projects-teaser">
+        <ProjectsTeaser />
       </div>
 
       <div id="services">

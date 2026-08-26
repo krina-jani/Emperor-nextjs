@@ -87,6 +87,33 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
 
     document.addEventListener('click', handleAnchorClick);
 
+    // Snapping configuration for homepage full-screen sections
+    let snapTriggers: ScrollTrigger[] = [];
+    let snapTimer: NodeJS.Timeout | null = null;
+    
+    if (typeof window !== 'undefined' && window.location.pathname === '/') {
+      snapTimer = setTimeout(() => {
+        const homeSections = ['#home', '#projects-teaser', '#services'];
+        homeSections.forEach((id) => {
+          const el = document.querySelector(id);
+          if (!el) return;
+
+          const trigger = ScrollTrigger.create({
+            trigger: el,
+            start: 'top 12%',
+            end: 'bottom 12%',
+            snap: {
+              snapTo: [0, 1], // Snap to the start or end of the section
+              duration: { min: 0.3, max: 0.6 },
+              delay: 0.1,
+              ease: 'power2.out'
+            }
+          });
+          snapTriggers.push(trigger);
+        });
+      }, 600);
+    }
+
     // Debounced ScrollTrigger refresh on window resize
     let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
@@ -104,6 +131,8 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
         (window as any).lenis = null;
       }
       clearTimeout(refreshTimer);
+      if (snapTimer) clearTimeout(snapTimer);
+      snapTriggers.forEach(t => t.kill());
       clearTimeout(resizeTimeout);
       document.removeEventListener('click', handleAnchorClick);
       window.removeEventListener('resize', handleResize);

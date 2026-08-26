@@ -332,7 +332,7 @@ export const Hero: React.FC = () => {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 0.8,
+          scrub: 1.5,
           onUpdate: (self) => {
             renderFrame(stoneObj.frame);
 

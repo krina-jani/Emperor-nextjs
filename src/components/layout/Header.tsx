@@ -171,7 +171,7 @@ export const Header: React.FC = () => {
             openMenuButtonColor={isDark ? '#ffffff' : '#000000'}
             changeMenuColorOnOpen={true}
             colors={['#f4f1ea', '#000000']}
-            accentColor="#E53E3E"
+            accentColor="#ff5722"
           />
         </div>
       </div>
