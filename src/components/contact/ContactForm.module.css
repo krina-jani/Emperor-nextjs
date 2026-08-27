@@ -273,9 +273,9 @@ a.itemValue:hover {
 }
 
 .chipActive {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-secondary);
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #ffffff !important;
 }
 
 .submitBtn {
@@ -462,4 +462,9 @@ a.itemValue:hover {
     padding: 1.5rem;
     box-shadow: none;
   }
+}
+
+.customInterestWrapper {
+  margin-top: 1.25rem;
+  width: 100%;
 }

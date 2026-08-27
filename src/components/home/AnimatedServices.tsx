@@ -60,30 +60,33 @@ const AnimatedServices = () => {
     const timer = setTimeout(() => {
       ctx = gsap.context(() => {
         const cards = gsap.utils.toArray(wrapper.children);
+        const mm = gsap.matchMedia();
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: trigger,
-            start: 'top top',
-            end: '+=800%', // Doubled scroll distance to make the animation much slower
-            pin: true,
-            scrub: 1,
-          }
+        mm.add("(min-width: 992px)", () => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: trigger,
+              start: 'top top',
+              end: '+=800%', // Doubled scroll distance to make the animation much slower
+              pin: true,
+              scrub: 1,
+            }
+          });
+
+          // 1. Cards slide up and fade in step-by-step
+          tl.fromTo(cards,
+            { y: 300, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 1.5, duration: 1, ease: 'power2.out' } // Increased stagger for distinct steps
+          );
+
+          // 2. Long pause so they stay fully visible
+          tl.to({}, { duration: 3 }); // Increased pause to account for slower scroll
+
+          // 3. Cards slide up further and fade out step-by-step
+          tl.to(cards,
+            { y: -300, opacity: 0, stagger: 1.5, duration: 1, ease: 'power2.in' } // Increased stagger for distinct steps
+          );
         });
-
-        // 1. Cards slide up and fade in step-by-step
-        tl.fromTo(cards,
-          { y: 300, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 1.5, duration: 1, ease: 'power2.out' } // Increased stagger for distinct steps
-        );
-
-        // 2. Long pause so they stay fully visible
-        tl.to({}, { duration: 3 }); // Increased pause to account for slower scroll
-
-        // 3. Cards slide up further and fade out step-by-step
-        tl.to(cards,
-          { y: -300, opacity: 0, stagger: 1.5, duration: 1, ease: 'power2.in' } // Increased stagger for distinct steps
-        );
 
       }, section);
     }, 100);
@@ -133,6 +136,12 @@ const AnimatedServices = () => {
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className={styles.btnWrapper}>
+            <Link href="/services" className={styles.seeMoreBtn}>
+              See More Services <ArrowRight className={styles.btnIcon} size={20} />
+            </Link>
           </div>
         </div>
       </div>

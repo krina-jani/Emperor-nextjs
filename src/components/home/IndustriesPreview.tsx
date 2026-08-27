@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Container from '../ui/Container';
 import SectionTitle from '../ui/SectionTitle';
@@ -13,6 +15,19 @@ import { ArrowRight, ShieldCheck } from 'lucide-react';
 import Masonry from '../animations/Masonry';
 
 export const IndustriesPreview: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const displayedSolutions = isMobile ? solutions.slice(0, 5) : solutions;
+
   return (
     <section className={styles.section}>
       <Container>
@@ -24,7 +39,7 @@ export const IndustriesPreview: React.FC = () => {
 
         <div style={{ width: '100%', marginTop: '3rem' }}>
           <Masonry
-            items={solutions.map((ind, index) => {
+            items={displayedSolutions.map((ind, index) => {
               const images = [
                 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop', // AI
                 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop', // Automation
@@ -54,7 +69,7 @@ export const IndustriesPreview: React.FC = () => {
 
         <div className={styles.bottomAction}>
           <Link href="/solutions">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" rightIcon={<ArrowRight size={16} />}>
               Check All Solutions
             </Button>
           </Link>

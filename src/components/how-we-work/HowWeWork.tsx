@@ -114,15 +114,19 @@ const standards = [
 ];
 
 export const HowWeWork = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!timelineRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
     
     const ctx = gsap.context(() => {
+      const hero = container.querySelector('.stack-section-hero');
+      const sections = gsap.utils.toArray<HTMLElement>('.stack-section');
+
+      // Stage slide animation
       const stageElements = gsap.utils.toArray('.stage-anim');
-      
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       stageElements.forEach((stage: any) => {
         gsap.fromTo(stage, 
           { opacity: 0, y: 50 },
@@ -139,7 +143,39 @@ export const HowWeWork = () => {
           }
         );
       });
-    }, timelineRef);
+
+      // Stacking effect only on desktop
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 992px)", () => {
+        if (hero) {
+          ScrollTrigger.create({
+            trigger: hero,
+            start: "top top",
+            end: () => `+=${window.innerHeight * 1.5}`,
+            pin: true,
+            pinSpacing: false,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          });
+        }
+
+        sections.forEach((section, index) => {
+          gsap.set(section, {
+            zIndex: index + 2,
+          });
+
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          });
+        });
+      });
+
+      ScrollTrigger.refresh();
+    }, container);
 
     return () => {
       ctx.revert();
@@ -147,9 +183,9 @@ export const HowWeWork = () => {
   }, []);
 
   return (
-    <>
+    <div ref={containerRef} className={styles.stackContainer}>
       {/* Light Hero Section */}
-      <section className={styles.heroSection}>
+      <section className={`${styles.heroSection} stack-section-hero`}>
         <div className={styles.heroContainer}>
           <div className={styles.heroBadge}>Live • Free • Online</div>
           <h1 className={styles.heroTitle}>
@@ -163,7 +199,7 @@ export const HowWeWork = () => {
       </section>
 
       {/* Dark Timeline Section */}
-      <section className={styles.section} id="delivery-machine">
+      <section className={`${styles.section} stack-section`} id="delivery-machine" style={{ backgroundColor: '#0d1117' }}>
         <div className={styles.container}>
           
           {/* 10 Stages Timeline */}
@@ -197,58 +233,65 @@ export const HowWeWork = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-        {/* Quality Standards */}
-        <div className={styles.qualitySection}>
-          <div className={styles.qualityHeader}>
-            <div className={styles.qualityBadge}>QUALITY GUARDRAILS</div>
-            <h2 className={styles.qualityTitle}>Non-Negotiable Quality Standards</h2>
-            <p className={styles.qualitySubtitle}>The fundamental guardrails applied across all Emperor production codebases.</p>
-          </div>
+      {/* Quality Standards Section */}
+      <section className={`${styles.section} stack-section`} style={{ backgroundColor: '#0c0f14' }}>
+        <div className={styles.container}>
+          <div className={styles.qualitySection}>
+            <div className={styles.qualityHeader}>
+              <div className={styles.qualityBadge}>QUALITY GUARDRAILS</div>
+              <h2 className={styles.qualityTitle}>Non-Negotiable Quality Standards</h2>
+              <p className={styles.qualitySubtitle}>The fundamental guardrails applied across all Emperor production codebases.</p>
+            </div>
 
-          <div className={styles.qualityGrid}>
-            {standards.map((std, i) => (
-              <div key={i} className={styles.qualityCardWhite}>
-                <div className={styles.qualityCardNumWhite}>{std.num}</div>
-                <h3 className={styles.qualityCardTitleWhite}>{std.title}</h3>
-                <p className={styles.qualityCardDescWhite}>{std.desc}</p>
-              </div>
-            ))}
+            <div className={styles.qualityGrid}>
+              {standards.map((std, i) => (
+                <div key={i} className={styles.qualityCardWhite}>
+                  <div className={styles.qualityCardNumWhite}>{std.num}</div>
+                  <h3 className={styles.qualityCardTitleWhite}>{std.title}</h3>
+                  <p className={styles.qualityCardDescWhite}>{std.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Horizontal Cards */}
-        <div className={styles.horizontalSection}>
-          <div className={styles.sixStepsTitleWrapper}>
-            <h2 className={styles.sixStepsTitle}>6 Steps: Predictable, tested, and disciplined .</h2>
-          </div>
-          <div className={styles.horizontalList}>
-            {horizontalPoints.map((pt, i) => (
-              <div key={i} className={styles.wideCard}>
-                <div className={styles.wideCardLeft}>
-                  <div className={styles.wideCardNumber}>{pt.num}</div>
-                  <div>
-                    <div className={styles.wideCardCategory}>{pt.category}</div>
-                    <div className={styles.wideCardTitle}>{pt.title}</div>
+      {/* Horizontal Steps Section */}
+      <section className={`${styles.section} stack-section`} style={{ backgroundColor: '#090b0e', borderBottom: 'none' }}>
+        <div className={styles.container}>
+          <div className={styles.horizontalSection}>
+            <div className={styles.sixStepsTitleWrapper}>
+              <h2 className={styles.sixStepsTitle}>6 Steps: Predictable, tested, and disciplined .</h2>
+            </div>
+            <div className={styles.horizontalList}>
+              {horizontalPoints.map((pt, i) => (
+                <div key={i} className={styles.wideCard}>
+                  <div className={styles.wideCardLeft}>
+                    <div className={styles.wideCardNumber}>{pt.num}</div>
+                    <div>
+                      <div className={styles.wideCardCategory}>{pt.category}</div>
+                      <div className={styles.wideCardTitle}>{pt.title}</div>
+                    </div>
+                  </div>
+                  <div className={styles.wideCardMiddle}>
+                    <p className={styles.wideCardDesc}>{pt.desc}</p>
+                  </div>
+                  <div className={styles.wideCardRight}>
+                    <div className={styles.milestoneBadge}>
+                      <span>Milestone Gate Approved</span>
+                      <CheckCircle2 size={18} className={styles.milestoneIcon} />
+                    </div>
                   </div>
                 </div>
-                <div className={styles.wideCardMiddle}>
-                  <p className={styles.wideCardDesc}>{pt.desc}</p>
-                </div>
-                <div className={styles.wideCardRight}>
-                  <div className={styles.milestoneBadge}>
-                    <span>Milestone Gate Approved</span>
-                    <CheckCircle2 size={18} className={styles.milestoneIcon} />
-                  </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-
-      </div>
-    </section>
-    </>
+      </section>
+    </div>
   );
 };
 

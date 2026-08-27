@@ -3,6 +3,10 @@
   border-bottom: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
+  --accent-color: #ff5722;
+  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  --badge-bg: rgba(255, 87, 34, 0.06);
+  --badge-border: rgba(255, 87, 34, 0.18);
 }
 
 .container {
@@ -30,9 +34,9 @@
   font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-secondary);
-  background-color: rgba(20, 184, 166, 0.05);
-  border: 1px solid rgba(20, 184, 166, 0.12);
+  color: var(--accent-color);
+  background-color: var(--badge-bg);
+  border: 1px solid var(--badge-border);
   padding: 0.35rem 0.8rem;
   border-radius: var(--radius-full);
   margin-bottom: 1.25rem;
@@ -148,4 +152,23 @@
 
 .statIcon {
   color: #ff5722;
+}
+
+.copyCol button,
+.copyCol [class*="btn"] {
+  border-radius: var(--radius-full) !important;
+}
+
+@media (max-width: 991px) {
+  .copyCol button,
+  .copyCol [class*="btn"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+  .copyCol button:hover,
+  .copyCol [class*="btn"]:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
 }

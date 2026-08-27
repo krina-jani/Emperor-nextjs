@@ -102,3 +102,9 @@
   justify-content: flex-start; /* Left aligned, starting from the left side */
   gap: 0.25rem 0.6rem; /* Consistent spacing between animating words */
 }
+
+@media (max-width: 991px) {
+  .section {
+    padding-top: 12rem !important;
+  }
+}

@@ -1,8 +1,17 @@
+.stackContainer {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  background-color: #000000;
+}
+
 /* Light Hero Section */
 .heroSection {
   background-color: #f9f8f4;
   padding: calc(var(--header-height) + 8rem) 0 6rem;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .heroContainer {

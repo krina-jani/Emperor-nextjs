@@ -138,22 +138,26 @@
 }
 
 @media (max-width: 991px) {
+  .pinWrapper {
+    height: auto !important;
+    overflow: visible;
+  }
+
   .cardsWrapper {
     position: relative;
     width: 100%;
-    max-width: min(350px, calc(100% - 32px));
-    height: 400px;
+    max-width: min(600px, calc(100% - 32px));
+    height: auto;
     margin: 0 auto;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 0;
   }
 
   .card {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
     min-height: auto;
     padding: 2rem;
   }
@@ -196,5 +200,60 @@
   
   .summaryList {
     text-align: left;
+  }
+}
+
+@media (max-width: 991px) {
+  .introSlide {
+    margin-bottom: 2.5rem !important;
+  }
+  .learnMore {
+    display: none !important;
+  }
+  .rightCol {
+    display: none !important;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem 4vw 3rem;
+}
+
+.seeMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 1.2rem 2rem;
+  border-radius: 0.75rem;
+  width: 100%;
+  max-width: min(600px, calc(100% - 32px));
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.seeMoreBtn:hover {
+  background-color: #e2e8f0;
+}
+
+.btnIcon {
+  transition: transform 0.3s ease;
+}
+
+.seeMoreBtn:hover .btnIcon {
+  transform: translateX(4px);
+}
+
+@media (min-width: 992px) {
+  .btnWrapper {
+    display: none;
   }
 }

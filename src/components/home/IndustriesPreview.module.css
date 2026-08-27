@@ -3,6 +3,10 @@
   border-bottom: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
+  --accent-color: #ff5722;
+  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  --badge-bg: rgba(255, 87, 34, 0.06);
+  --badge-border: rgba(255, 87, 34, 0.18);
 }
 
 .cardWrapper {
@@ -146,4 +150,24 @@
   display: flex;
   justify-content: center;
   margin-top: 4rem;
+}
+
+.bottomAction button,
+.bottomAction [class*="btn"] {
+  border-radius: var(--radius-full) !important;
+}
+
+@media (max-width: 991px) {
+
+  .bottomAction button,
+  .bottomAction [class*="btn"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+  .bottomAction button:hover,
+  .bottomAction [class*="btn"]:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
 }

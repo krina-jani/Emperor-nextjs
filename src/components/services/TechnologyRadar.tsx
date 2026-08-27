@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import Container from '../ui/Container';
 import styles from './TechnologyRadar.module.css';
 
 import { TechLogo } from './TechLogo';
+import OptionWheel from '../ui/OptionWheel';
 
 // Technology categories exactly as shown in the shared image
 const CATEGORIES = [
@@ -88,6 +89,12 @@ const TECHNOLOGIES_DATA: TechItem[] = [
 export const TechnologyRadar: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedWheelIndex, setSelectedWheelIndex] = useState(0);
+
+  // Reset selected index when filters change
+  useEffect(() => {
+    setSelectedWheelIndex(0);
+  }, [activeCategory, searchQuery]);
 
   // Filter and search logic
   const filteredTechnologies = useMemo(() => {
@@ -101,6 +108,8 @@ export const TechnologyRadar: React.FC = () => {
     });
   }, [activeCategory, searchQuery]);
 
+  const selectedTech = filteredTechnologies[selectedWheelIndex];
+
   return (
     <section className={styles.section}>
       <Container>
@@ -110,10 +119,10 @@ export const TechnologyRadar: React.FC = () => {
             TECHNOLOGY RADAR & STACK
           </span>
           <h2 className={styles.title}>
-            Our production technology stack. Verified, typed, and battle-tested.
+            Explore Our Tech Stack
           </h2>
           <p className={styles.desc}>
-            From native mobile and cross-platform ecosystems to modern frontend frameworks, high-throughput backends, vector databases, and autonomous AI pipelines.
+            {/* From native mobile and cross-platform ecosystems to modern frontend frameworks, high-throughput backends, vector databases, and autonomous AI pipelines. */}
           </p>
         </div>
 
@@ -143,6 +152,50 @@ export const TechnologyRadar: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+        </div>
+
+        {/* Mobile Wheel View (Only visible on mobile/responsive) */}
+        <div className={styles.wheelContainer}>
+          {filteredTechnologies.length > 0 ? (
+            <div className={styles.wheelWrapper}>
+              <div className={styles.wheelLeft}>
+                <OptionWheel
+                  key={`${activeCategory}-${searchQuery}`}
+                  items={filteredTechnologies.map((tech) => tech.name)}
+                  defaultSelected={0}
+                  onChange={(idx) => setSelectedWheelIndex(idx)}
+                  side="left"
+                  fontSize={1.75}
+                  spacing={1.6}
+                  curve={1.2}
+                  tilt={12}
+                  inset={24}
+                  textColor="rgba(255, 255, 255, 0.35)"
+                  activeColor="#ffffff"
+                />
+              </div>
+
+              <div className={styles.wheelRight}>
+                {selectedTech && (
+                  <div className={styles.floatingCard}>
+                    <div className={styles.floatingCardInner}>
+                      <div className={styles.wheelLogoBox}>
+                        <TechLogo name={selectedTech.name} size={64} />
+                      </div>
+                      <div className={styles.wheelLogoInfo}>
+                        <h4 className={styles.wheelLogoName}>{selectedTech.name}</h4>
+                        <span className={styles.wheelLogoCat}>{selectedTech.category}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className={styles.noResultsMobile}>
+              No technologies found matching your filter or query.
+            </div>
+          )}
         </div>
 
         {/* Technologies Grid */}

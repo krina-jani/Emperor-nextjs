@@ -1,0 +1,18 @@
+.stackContainer {
+  position: relative;
+  width: 100%;
+}
+
+.stackSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .stackSection {
+    min-height: 100svh;
+  }
+}

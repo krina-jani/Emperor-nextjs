@@ -95,7 +95,7 @@ const Masonry: React.FC<MasonryProps> = ({
   );
 
   const [containerRef, { width }] = useMeasure();
-  const [imagesReady, setImagesReady] = useState(false);
+  const [imagesReady, setImagesReady] = useState(true);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getInitialPosition = (item: any) => {
@@ -129,7 +129,7 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+    preloadImages(items.map(i => i.img));
   }, [items]);
 
   const [grid, totalHeight] = useMemo(() => {

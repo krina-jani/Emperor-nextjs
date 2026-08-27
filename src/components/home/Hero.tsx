@@ -44,6 +44,7 @@ export const Hero: React.FC = () => {
   const cardMobileRef = useRef<HTMLDivElement>(null);
   const cardWebRef = useRef<HTMLDivElement>(null);
   const cardWordpressRef = useRef<HTMLDivElement>(null);
+  const bottomBarRef = useRef<HTMLDivElement>(null);
   const ambientParticlesRef = useRef<{ x: number; y: number; z: number; r: number; }[]>([]);
 
   const [loadedCount, setLoadedCount] = useState(0);
@@ -449,6 +450,78 @@ export const Hero: React.FC = () => {
         tl.to(stage2Cards, { opacity: 0, y: -60, duration: fadeOutDur, ease: 'power2.in' }, stage2Exit);
       }
 
+      // 5. Vertical Lines guide reveal
+      const verticalLines = containerRef.current?.querySelectorAll(`.${styles.verticalLine}`) || [];
+      gsap.set(verticalLines, {
+        opacity: 0.12,
+        scaleY: 0.8,
+        transformOrigin: 'center center'
+      });
+
+      tl.to(verticalLines, {
+        opacity: 0.45,
+        scaleY: 1.15,
+        ease: 'none',
+        duration: isMobile ? 3.5 : 4.5,
+        stagger: {
+          each: 0.04,
+          from: 'center'
+        }
+      }, 0);
+
+      // 6. Horizontal Shutter Wipe-Line Transition
+      const wipeLines = containerRef.current?.querySelectorAll(`.${styles.wipeLine}`) || [];
+      const transitionBackground = containerRef.current?.querySelector(`.${styles.transitionBackground}`);
+
+      gsap.set(wipeLines, {
+        scaleY: 0,
+        transformOrigin: 'center center'
+      });
+      if (transitionBackground) {
+        gsap.set(transitionBackground, { opacity: 0 });
+      }
+
+      const transitionStart = isMobile ? 5.0 : 7.0;
+      const transitionDuration = isMobile ? 1.0 : 1.2;
+
+      // Stagger scaleY to 1 for wipe lines
+      tl.to(wipeLines, {
+        scaleY: 1,
+        ease: 'power2.inOut',
+        duration: transitionDuration * 0.7,
+        stagger: {
+          each: 0.08,
+          from: 'center'
+        }
+      }, transitionStart);
+
+      // Fade in black background behind shutter lines
+      if (transitionBackground) {
+        tl.to(transitionBackground, {
+          opacity: 1,
+          ease: 'none',
+          duration: transitionDuration * 0.5
+        }, transitionStart + 0.25);
+      }
+
+      // Fade out stone canvas wrapper and bottom bar
+      if (stoneWrapperRef.current) {
+        tl.to(stoneWrapperRef.current, {
+          opacity: 0,
+          scale: 0.95,
+          duration: transitionDuration * 0.6,
+          ease: 'power2.inOut'
+        }, transitionStart + 0.1);
+      }
+
+      if (bottomBarRef.current) {
+        tl.to(bottomBarRef.current, {
+          opacity: 0,
+          duration: transitionDuration * 0.6,
+          ease: 'power2.inOut'
+        }, transitionStart);
+      }
+
     }, containerRef);
 
     return () => {
@@ -478,6 +551,16 @@ export const Hero: React.FC = () => {
       {/* Pinned Services Scroll Section */}
       <section ref={sectionRef} className={styles.heroPinnedContainer}>
         <div className={styles.stickyViewport}>
+          
+          {/* Vertical guide lines */}
+          <div className={styles.verticalLines}>
+            <span className={`${styles.verticalLine} ${styles.line1}`} />
+            <span className={`${styles.verticalLine} ${styles.line2}`} />
+            <span className={`${styles.verticalLine} ${styles.line3}`} />
+            <span className={`${styles.verticalLine} ${styles.line4}`} />
+            <span className={`${styles.verticalLine} ${styles.line5}`} />
+            <span className={`${styles.verticalLine} ${styles.line6}`} />
+          </div>
           
           {/* Phase 1 Text Headline Overlay */}
           <div ref={heroTextRef} className={styles.heroTextOverlay}>
@@ -582,8 +665,21 @@ export const Hero: React.FC = () => {
 
           </div>
 
+          {/* Horizontal line transition */}
+          <div className={styles.lineTransition}>
+            <div className={styles.transitionBackground} />
+            <span className={`${styles.wipeLine} ${styles.wipe1}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe2}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe3}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe4}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe5}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe6}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe7}`} />
+            <span className={`${styles.wipeLine} ${styles.wipe8}`} />
+          </div>
+
           {/* Bottom Action & Status Bar */}
-          <div className={styles.bottomBar}>
+          <div ref={bottomBarRef} className={styles.bottomBar}>
             {/* Center: Cookie Notification Box + Monospace Sub-Caption */}
             <div className={styles.bottomCenter}>
               <div className={styles.cookieBanner}>

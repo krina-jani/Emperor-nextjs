@@ -67,4 +67,23 @@
   --header-height: 80px;
   --header-scroll-height: 70px;
   --container-max-width: 1720px; /* Expanded premium container width */
+
+  /* Accent themes (Teal #14b8a6 by default for light/white backgrounds) */
+  --accent-color: #14b8a6;
+  --accent-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  --badge-bg: rgba(20, 184, 166, 0.06);
+  --badge-border: rgba(20, 184, 166, 0.18);
+}
+
+.theme-dark,
+.bg-dark,
+.section-dark,
+[class*="section-dark"],
+[class*="sectionDark"],
+[class*="dark-theme"],
+[class*="darkTheme"] {
+  --accent-color: #ff5722 !important;
+  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%) !important;
+  --badge-bg: rgba(255, 87, 34, 0.06) !important;
+  --badge-border: rgba(255, 87, 34, 0.18) !important;
 }

@@ -423,4 +423,77 @@
       :global(#card-web) { top: 56%; }
       :global(#card-wordpress) { top: 74%; }
     }
+
+    /* Shutter and Vertical Lines Transition styles */
+    .verticalLines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .verticalLine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    .line1 { left: 41.5%; }
+    .line2 { left: 47.5%; }
+    .line3 { left: 54%; }
+    .line4 { left: 58.5%; }
+    .line5 { left: 61%; }
+    .line6 { left: 64%; }
+
+    .lineTransition {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .transitionBackground {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .wipeLine {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 12.5%;
+      background: #ffffff;
+      transform: scaleY(0);
+      transform-origin: center center;
+      will-change: transform;
+      z-index: 2;
+    }
+
+    .wipe1 { top: 0; }
+    .wipe2 { top: 12.5%; }
+    .wipe3 { top: 25%; }
+    .wipe4 { top: 37.5%; }
+    .wipe5 { top: 50%; }
+    .wipe6 { top: 62.5%; }
+    .wipe7 { top: 75%; }
+    .wipe8 { top: 87.5%; }
+
+    @media (max-width: 767px) {
+      .line1 { left: 25%; }
+      .line2 { left: 40%; }
+      .line3 { left: 50%; }
+      .line4 { left: 60%; }
+      .line5 { left: 75%; }
+      .line6 { display: none; }
+    }
   

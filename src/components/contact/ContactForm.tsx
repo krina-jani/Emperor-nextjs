@@ -10,12 +10,14 @@ interface FormState {
   name: string;
   email: string;
   interest: string;
+  customInterest: string;
   message: string;
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
+  customInterest?: string;
   message?: string;
 }
 
@@ -32,6 +34,7 @@ export const ContactForm: React.FC = () => {
     name: '',
     email: '',
     interest: 'Web Development',
+    customInterest: '',
     message: ''
   });
   
@@ -67,6 +70,11 @@ export const ContactForm: React.FC = () => {
       isValid = false;
     }
 
+    if (formData.interest === 'Other' && !formData.customInterest.trim()) {
+      tempErrors.customInterest = 'Please specify what you are looking to build';
+      isValid = false;
+    }
+
     if (!formData.message.trim()) {
       tempErrors.message = 'Message content is required';
       isValid = false;
@@ -98,8 +106,17 @@ export const ContactForm: React.FC = () => {
   const handleInterestSelect = (interest: string) => {
     setFormData((prev) => ({
       ...prev,
-      interest
+      interest,
+      customInterest: interest === 'Other' ? prev.customInterest : ''
     }));
+
+    // Clear error for customInterest when selection changes
+    if (errors.customInterest) {
+      setErrors((prev) => ({
+        ...prev,
+        customInterest: undefined
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -118,6 +135,7 @@ export const ContactForm: React.FC = () => {
         name: '',
         email: '',
         interest: 'Web Development',
+        customInterest: '',
         message: ''
       });
     }, 1500);
@@ -278,6 +296,21 @@ export const ContactForm: React.FC = () => {
                       </button>
                     ))}
                   </div>
+
+                  {formData.interest === 'Other' && (
+                    <div className={styles.customInterestWrapper}>
+                      <input
+                        type="text"
+                        name="customInterest"
+                        value={formData.customInterest}
+                        onChange={handleInputChange}
+                        placeholder="Please specify what you are looking to build..."
+                        className={`${styles.input} ${errors.customInterest ? styles.errorInput : ''}`}
+                        disabled={isSubmitting}
+                      />
+                      {errors.customInterest && <span className={styles.errorText}>{errors.customInterest}</span>}
+                    </div>
+                  )}
                 </div>
 
                 {/* Message */}
