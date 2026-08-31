@@ -34,8 +34,8 @@ docker compose build
 
 echo ""
 echo "🌐 Step 3: Updating frontend service..."
-# Stop old container first to release port 3000 and avoid network bind conflict
-docker compose stop frontend || true
+# Force stop and remove old container to release port 3000 completely and avoid network bind conflicts
+docker compose rm -f -s frontend || true
 docker compose up -d frontend
 
 echo "⏳ Waiting for frontend to pass health check..."
