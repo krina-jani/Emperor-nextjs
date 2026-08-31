@@ -48,8 +48,12 @@ export const Header: React.FC = () => {
             break;
           }
 
-          const className = typeof curr.className === 'string' ? curr.className : '';
-          const id = typeof curr.id === 'string' ? curr.id : '';
+          const className = typeof curr.className === 'string'
+            ? curr.className
+            : (curr.className && typeof curr.className === 'object' && 'baseVal' in curr.className
+              ? String((curr.className as any).baseVal)
+              : '');
+          const id = curr.id || '';
           
           if (
             className.includes('darkBlue') || 
