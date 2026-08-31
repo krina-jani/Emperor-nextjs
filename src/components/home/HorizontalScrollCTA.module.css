@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   padding: 2rem 0;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   position: relative;
 }
 
@@ -24,7 +24,7 @@
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding-left: 100vw; /* Start from right edge */
-  color: #ffffff;
+  color: #000000;
 }
 
 @media (min-width: 768px) {
@@ -43,8 +43,8 @@
 }
 
 .ctaBtn {
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   padding: 1rem 2.5rem;
   font-size: 1.125rem;
   font-weight: 700;
@@ -55,6 +55,6 @@
 }
 
 .ctaBtn:hover {
-  background: #e2e8f0;
+  background: #1a202c;
   transform: translateY(-2px);
 }

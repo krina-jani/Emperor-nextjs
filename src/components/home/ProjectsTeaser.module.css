@@ -1,6 +1,6 @@
 .section {
   background-color: #ffffff;
-  color: #142134;
+  color: #000000;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   letter-spacing: -0.04em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: #142134;
+  color: #000000;
   display: inline-block;
 }
 
@@ -25,7 +25,7 @@
   line-height: 1.4;
   font-weight: 400;
   max-width: 95%;
-  color: #142134;
+  color: #000000;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
 }

@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.autoHeight {
+  min-height: auto !important;
+}
+
 @media (max-width: 768px) {
   .stackSection {
     min-height: 100svh;
