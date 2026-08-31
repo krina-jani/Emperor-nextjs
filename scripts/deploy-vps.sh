@@ -34,6 +34,8 @@ docker compose build
 
 echo ""
 echo "🌐 Step 3: Updating frontend service..."
+# Stop old container first to release port 3000 and avoid network bind conflict
+docker compose stop frontend || true
 docker compose up -d frontend
 
 echo "⏳ Waiting for frontend to pass health check..."
