@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Outfit, Inter } from 'next/font/google';
+import { Outfit, Inter, Caveat } from 'next/font/google';
 import './globals.css';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -18,6 +18,12 @@ const inter = Inter({
   weight: ['400', '500', '600'],
 });
 
+const caveat = Caveat({
+  variable: '--font-script',
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+});
+
 export const metadata: Metadata = generatePageMetadata();
 
 export default function RootLayout({
@@ -26,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable} ${caveat.variable}`}>
       <body suppressHydrationWarning>
         <SmoothScroll>
           <Header />

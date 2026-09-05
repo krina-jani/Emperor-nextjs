@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHero from '../../components/ui/PageHero';
+import SolutionsHero from '../../components/solutions/SolutionsHero';
 import IndustryGrid from '../../components/industries/IndustryGrid';
 import IndustriesCTA from '../../components/industries/IndustriesCTA';
 import HomeCTA from '../../components/home/HomeCTA';
@@ -14,12 +14,7 @@ export const metadata = generatePageMetadata(
 export default function IndustriesPage() {
   return (
     <>
-      <PageHero
-        title="Solutions For Every Industry"
-        description="We tailor our core engineering and AI expertise to solve complex challenges across healthcare, finance, manufacturing, and e-commerce."
-        badge="SOLUTIONS"
-        colorTheme="darkBlue"
-      />
+      <SolutionsHero />
       <IndustryGrid />
       <IndustriesCTA />
       <HomeCTA />

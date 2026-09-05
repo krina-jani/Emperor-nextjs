@@ -1,11 +1,11 @@
 import React from 'react';
-import AboutHero from '../../components/about/AboutHero';
+import Hero from '../../components/home/Hero';
+import AboutStack from '../../components/about/AboutStack';
 import CompanyStory from '../../components/about/CompanyStory';
 import MissionVision from '../../components/about/MissionVision';
 import Values from '../../components/about/Values';
 import Team from '../../components/about/Team';
 import AboutCTA from '../../components/about/AboutCTA';
-import HomeCTA from '../../components/home/HomeCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
 export const metadata = generatePageMetadata(
@@ -17,13 +17,26 @@ export const metadata = generatePageMetadata(
 export default function AboutPage() {
   return (
     <>
-      <AboutHero />
-      <CompanyStory />
-      <MissionVision />
-      <Values />
-      <Team />
-      <AboutCTA />
-      <HomeCTA />
+      <div id="about-hero">
+        <Hero />
+      </div>
+      <AboutStack>
+        <div id="company-story">
+          <CompanyStory />
+        </div>
+        <div id="mission-vision">
+          <MissionVision />
+        </div>
+        <div id="values">
+          <Values />
+        </div>
+        <div id="team">
+          <Team />
+        </div>
+        <div id="about-cta">
+          <AboutCTA />
+        </div>
+      </AboutStack>
     </>
   );
 }

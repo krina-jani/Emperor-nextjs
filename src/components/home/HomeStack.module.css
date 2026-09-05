@@ -13,6 +13,7 @@
 
 .autoHeight {
   min-height: auto !important;
+  overflow: visible !important;
 }
 
 @media (max-width: 768px) {

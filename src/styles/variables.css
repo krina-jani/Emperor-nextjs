@@ -81,9 +81,24 @@
 [class*="section-dark"],
 [class*="sectionDark"],
 [class*="dark-theme"],
-[class*="darkTheme"] {
+[class*="darkTheme"],
+body.dark-mode {
+  --bg-base: #000000;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border-hover: rgba(255, 255, 255, 0.20);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.16);
   --accent-color: #ff5722 !important;
   --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%) !important;
   --badge-bg: rgba(255, 87, 34, 0.06) !important;
   --badge-border: rgba(255, 87, 34, 0.18) !important;
 }
+

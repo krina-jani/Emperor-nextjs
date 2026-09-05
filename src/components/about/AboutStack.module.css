@@ -1,0 +1,7 @@
+.stackContainer {
+  position: relative;
+  width: 100%;
+  margin-top: -100vh;
+  z-index: 30;
+  background-color: #000000;
+}

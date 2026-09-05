@@ -1,8 +1,15 @@
 .section {
   padding: 6rem 0;
-  border-bottom: 1px solid var(--glass-border);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -60px 120px rgba(0, 0, 0, 1);
   position: relative;
   overflow: hidden;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .container {
@@ -45,7 +52,7 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
@@ -57,7 +64,7 @@
 .desc {
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1.5rem;
 }
 
@@ -91,16 +98,16 @@
   width: 56px;
   height: 56px;
   border-radius: var(--radius-full);
-  background-color: var(--bg-primary);
-  border: 2px solid var(--glass-border);
-  color: var(--color-primary);
-  box-shadow: var(--glass-shadow);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  color: #14b8a6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .timelineItem:hover .marker {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 15px rgba(20, 184, 166, 0.35);
-  color: var(--text-primary);
+  border-color: #14b8a6;
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.4);
+  color: #ffffff;
 }
 
 .yearText {
@@ -112,7 +119,7 @@
 .markerLine {
   width: 2px;
   flex-grow: 1;
-  background-color: var(--glass-border);
+  background-color: rgba(255, 255, 255, 0.12);
   margin-top: 0.5rem;
 }
 
@@ -126,12 +133,12 @@
 .msTitle {
   font-size: 1.15rem;
   font-weight: 750;
-  color: var(--text-primary);
+  color: #ffffff;
   letter-spacing: -0.01em;
 }
 
 .msDesc {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
 }

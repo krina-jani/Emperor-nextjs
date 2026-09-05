@@ -257,3 +257,60 @@
     letter-spacing: 0.8px;
   }
 }
+
+/* Center Desktop Navigation */
+.centerNav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .centerNav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    z-index: 101;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .centerNavLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    position: relative;
+    padding: 4px 0;
+  }
+
+  .centerNavLink:hover {
+    opacity: 0.75;
+  }
+
+  .centerNavActive {
+    font-weight: 600;
+  }
+
+  .activeDot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000000;
+    margin-top: 4px;
+  }
+
+  .darkTheme .centerNavLink,
+  :global(body.dark-mode) .centerNavLink {
+    color: #ffffff !important;
+  }
+
+  .darkTheme .activeDot,
+  :global(body.dark-mode) .activeDot {
+    background-color: #ffffff !important;
+  }
+}

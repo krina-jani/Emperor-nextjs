@@ -156,6 +156,29 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
+        {/* Center Desktop Navigation matching mockup */}
+        <nav className={styles.centerNav} aria-label="Main Navigation">
+          {[
+            { label: 'Home', href: '/' },
+            { label: 'Services', href: '/services' },
+            { label: 'Work', href: '/work' },
+            { label: 'About', href: '/about' },
+            { label: 'Contact', href: '/contact' },
+          ].map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(styles.centerNavLink, isActive && styles.centerNavActive)}
+              >
+                <span>{item.label}</span>
+                {isActive && <span className={styles.activeDot} aria-hidden="true" />}
+              </Link>
+            );
+          })}
+        </nav>
+
         {/* Right: Let's Talk + Menu Trigger */}
         <div className={styles.rightActions}>
           {/* Let's Talk Pill Button */}
@@ -164,7 +187,7 @@ export const Header: React.FC = () => {
             className={styles.ctaBtn}
             onClick={handleCtaClick}
           >
-            LET&apos;S TALK
+            LET&apos;S TALK &rarr;
           </button>
 
           {/* Staggered Menu Trigger */}

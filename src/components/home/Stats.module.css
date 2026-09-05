@@ -1,19 +1,50 @@
 .section {
-  padding: 4rem 0;
+  padding: 6rem 0;
   position: relative;
   overflow: hidden;
+  background-color: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: #ff5722;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.intro {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 540px;
 }
 
 .panel {
-  background: rgba(15, 23, 42, 0.45);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-xl);
-  padding: 3rem 2rem;
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 3.5rem 2.5rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .panel::before {
@@ -22,20 +53,26 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.3), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff5722, transparent);
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
-  align-items: center;
+  align-items: stretch;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -46,35 +83,34 @@
   text-align: center;
   gap: 0.5rem;
   padding: 1rem;
-}
-
-.highlightBox {
   position: relative;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .statBox:not(:last-child) {
-    border-right: 1px solid var(--glass-border);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
 .value {
-  font-size: 2.25rem;
+  font-size: clamp(2.5rem, 4vw, 3.75rem);
   font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  font-family: var(--font-mono);
-}
-
-.highlightValue {
-  color: var(--color-secondary);
-  text-shadow: 0 0 15px rgba(20, 184, 166, 0.35);
+  color: #ff5722;
+  letter-spacing: -0.03em;
+  font-family: monospace;
+  line-height: 1;
 }
 
 .label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-top: 0.5rem;
+}
+
+.desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 220px;
 }

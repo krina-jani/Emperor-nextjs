@@ -1,0 +1,313 @@
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F7F5F0;
+  background: radial-gradient(circle at 65% 42%, #FFFFFF 0%, #F7F5F0 50%, #ECE9E2 100%);
+  color: #000000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 130px;
+  padding-bottom: 30px;
+}
+
+.heroContainer {
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+}
+
+/* Left Column Content */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 780px;
+  z-index: 3;
+}
+
+/* Eyebrow Row */
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrowText {
+  font-family: var(--font-mono, monospace), monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 46px;
+  height: 1.5px;
+  background-color: #1a1a1a;
+}
+
+/* Main Title */
+.heroTitle {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.6rem, 4.5vw, 5.1rem);
+  font-weight: 850;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0 0 28px 0;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+}
+
+.heroTitle span {
+  display: block;
+}
+
+/* Subtitle Description */
+.heroDescription {
+  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+  line-height: 1.55;
+  color: #3f3f46;
+  max-width: 530px;
+  margin-bottom: 34px;
+  font-weight: 400;
+}
+
+/* Actions Wrapper */
+.actionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Black Primary Pill Button */
+.pitchBtn {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 9999px;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.pitchBtn:hover {
+  background-color: #1f1f1f;
+  border-color: #1f1f1f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+.arrowIcon {
+  font-size: 1.15rem;
+  transition: transform 0.25s ease;
+}
+
+.pitchBtn:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+/* White Outline Pill Buttons */
+.outlineBtn {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 9999px;
+  padding: 13px 24px;
+  font-size: 0.95rem;
+  font-weight: 550;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+}
+
+.outlineBtn:hover {
+  border-color: #000000;
+  background-color: #faf9f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Contact Pill */
+.contactPill {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 9999px;
+  padding: 12px 22px;
+  font-size: 0.92rem;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s ease;
+}
+
+.contactPill:hover {
+  border-color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.emailLink {
+  color: #111111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.emailLink:hover {
+  color: #000000;
+}
+
+.searchIcon {
+  color: #888888;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+/* Editorial Bottom Left Note */
+.bottomEditorial {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editorialDash {
+  width: 32px;
+  height: 2px;
+  background-color: #1a1a1a;
+}
+
+.editorialText {
+  font-family: var(--font-mono, monospace), monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #4b4b52;
+  line-height: 1.65;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Right Column Robot Visual */
+.heroVisual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  min-height: 600px;
+}
+
+.robotWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.robotImage {
+  width: 100%;
+  height: auto;
+  max-height: min(84vh, 760px);
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.16));
+  transform-origin: bottom center;
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .heroContainer {
+    padding: 0 32px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .heroSection {
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+
+  .heroContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .heroContent {
+    max-width: 100%;
+  }
+
+  .heroVisual {
+    min-height: 480px;
+    order: -1;
+  }
+
+  .robotImage {
+    max-height: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroContainer {
+    padding: 0 20px;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pitchBtn, .outlineBtn, .contactPill {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}

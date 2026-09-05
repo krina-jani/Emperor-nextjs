@@ -82,7 +82,20 @@ export const HomeStack: React.FC<HomeStackProps> = ({ children }) => {
     <div ref={containerRef} className={styles.stackContainer}>
       {React.Children.map(children, (child) => {
         if (!child) return null;
-        const isAutoHeight = React.isValidElement(child) && (child as React.ReactElement<any>).props.id === 'about';
+        const childProps = React.isValidElement(child) ? (child.props as Record<string, any>) : {};
+        const isAutoHeight = 
+          childProps.id === 'about' || 
+          childProps.id === 'why-choose-us' || 
+          childProps.id === 'services' || 
+          childProps.id === 'process' || 
+          childProps.id === 'stats' || 
+          childProps.id === 'case-studies' || 
+          childProps.id === 'testimonials' || 
+          childProps.id === 'clients' || 
+          childProps.id === 'blog' || 
+          childProps.id === 'consultation' ||
+          childProps.id === 'solutions' ||
+          childProps['data-auto-height'] === true;
         return (
           <div className={`${styles.stackSection} ${isAutoHeight ? styles.autoHeight : ''}`}>
             {child}

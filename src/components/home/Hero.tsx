@@ -34,7 +34,17 @@ const stone3DFaces = [
   { v: [14, 15, 17], baseCol: [110, 125, 160] }, { v: [15, 12, 17], baseCol: [80, 95, 125] }
 ];
 
-export const Hero: React.FC = () => {
+export interface HeroProps {
+  eyebrow?: string;
+  titleLines?: string[];
+  subheading?: string;
+}
+
+export const Hero: React.FC<HeroProps> = ({
+  eyebrow = 'IT Solutions Company in Ahmedabad — Web, Software & Digital Marketing',
+  titleLines = ['A.I.', 'DESIGN', 'DEVELOPMENT', 'BRANDING'],
+  subheading = 'Emperor Smart Solutions is an IT solutions company in Ahmedabad, building websites, custom software, algo trading platforms, MLM systems, and digital marketing campaigns. Projects start with a real conversation about what the business actually needs.'
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -52,6 +62,8 @@ export const Hero: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [useProceduralFallback, setUseProceduralFallback] = useState(false);
   const [captionText, setCaptionText] = useState('✦ DESIGN WITH INTENT. BUILT TO WORK.');
+  const [cookieDismissed, setCookieDismissed] = useState(false);
+  const [isStoneActive, setIsStoneActive] = useState(false);
 
   const stoneObjRef = useRef({ frame: 1 });
   const lastRenderedIndexRef = useRef<number>(0);
@@ -340,8 +352,10 @@ export const Hero: React.FC = () => {
             // Synchronize theme class & caption symmetrically in forward and reverse scroll
             if (self.progress > 0.08) {
               document.body.classList.add('dark-mode');
+              setIsStoneActive(true);
             } else {
               document.body.classList.remove('dark-mode');
+              setIsStoneActive(false);
             }
 
             if (self.progress > 0.12) {
@@ -352,6 +366,7 @@ export const Hero: React.FC = () => {
           },
           onLeaveBack: () => {
             document.body.classList.remove('dark-mode');
+            setIsStoneActive(false);
             setCaptionText('✦ DESIGN WITH INTENT. BUILT TO WORK.');
             renderFrame(1);
           },
@@ -469,58 +484,17 @@ export const Hero: React.FC = () => {
         }
       }, 0);
 
-      // 6. Horizontal Shutter Wipe-Line Transition
-      const wipeLines = containerRef.current?.querySelectorAll(`.${styles.wipeLine}`) || [];
-      const transitionBackground = containerRef.current?.querySelector(`.${styles.transitionBackground}`);
-
-      gsap.set(wipeLines, {
-        scaleY: 0,
-        transformOrigin: 'center center'
-      });
-      if (transitionBackground) {
-        gsap.set(transitionBackground, { opacity: 0 });
-      }
-
-      const transitionStart = isMobile ? 5.0 : 7.0;
-      const transitionDuration = isMobile ? 1.0 : 1.2;
-
-      // Stagger scaleY to 1 for wipe lines
-      tl.to(wipeLines, {
-        scaleY: 1,
-        ease: 'power2.inOut',
-        duration: transitionDuration * 0.7,
-        stagger: {
-          each: 0.08,
-          from: 'center'
-        }
-      }, transitionStart);
-
-      // Fade in black background behind shutter lines
-      if (transitionBackground) {
-        tl.to(transitionBackground, {
-          opacity: 1,
-          ease: 'none',
-          duration: transitionDuration * 0.5
-        }, transitionStart + 0.25);
-      }
-
-      // Fade out stone canvas wrapper and bottom bar
-      if (stoneWrapperRef.current) {
-        tl.to(stoneWrapperRef.current, {
-          opacity: 0,
-          scale: 0.95,
-          duration: transitionDuration * 0.6,
-          ease: 'power2.inOut'
-        }, transitionStart + 0.1);
-      }
-
+      // 6. Smooth exit transition - fade out bottom bar only, keep stone visible at final frame
       if (bottomBarRef.current) {
         tl.to(bottomBarRef.current, {
           opacity: 0,
-          duration: transitionDuration * 0.6,
+          duration: 0.6,
           ease: 'power2.inOut'
-        }, transitionStart);
+        }, isMobile ? 4.8 : 6.8);
       }
+
+      // 7. Settle & hold stone at frame 410 so section 2 can overlap it cleanly without active cards
+      tl.to({}, { duration: isMobile ? 2.7 : 2.7 }, isMobile ? 6.0 : 8.5);
 
     }, containerRef);
 
@@ -564,12 +538,25 @@ export const Hero: React.FC = () => {
           
           {/* Phase 1 Text Headline Overlay */}
           <div ref={heroTextRef} className={styles.heroTextOverlay}>
-            <h1 className={styles.heroTitle}>
-              <span>A.I.</span>
-              <span>DESIGN</span>
-              <span>DEVELOPMENT</span>
-              <span>BRANDING</span>
-            </h1>
+            <div className={styles.heroContentInner}>
+              <p className={styles.heroEyebrow}>{eyebrow}</p>
+              <h1 className={styles.heroTitle}>
+                {titleLines.map((line, idx) => (
+                  <span key={idx}>{line}</span>
+                ))}
+              </h1>
+              <p className={styles.heroSubheading}>
+                {subheading}
+              </p>
+              <div className={styles.heroCtaRow}>
+                <Link href="/contact" className={styles.heroPrimaryCta}>
+                  Book a Free Consultation
+                </Link>
+                <Link href="/services" className={styles.heroSecondaryCta}>
+                  Explore Our Services &rarr;
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Phase 2 Full-Screen 3D Stone Canvas */}
@@ -594,14 +581,14 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
               <p className={styles.cardDescription}>
-                AI-powered solutions designed to enhance products, automate complex workflows, and unlock smarter digital experiences.
+                AI-powered solutions and autonomous agentic workflows designed to enhance products, automate complex operations, and unlock smarter digital growth.
               </p>
             </div>
 
-            {/* Card 2: Website & Mobile Design */}
+            {/* Card 2: Web & Custom Software */}
             <div ref={cardMobileRef} className={`${styles.serviceCard} ${styles.right}`} id="card-mobile">
               <div className={styles.cardTop}>
-                <h2 className={styles.cardTitle}>Website &<br/>Mobile Design</h2>
+                <h2 className={styles.cardTitle}>Web & Custom<br/>Software</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <path d="M 20,10 A 40,40 0 0,1 20,90" />
@@ -617,14 +604,14 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
               <p className={styles.cardDescription}>
-                High-quality website and mobile app experiences meticulously crafted to attract users and maintain engagement.
+                Custom websites, SaaS platforms, and enterprise software engineered around how a business actually works, built for speed, security, and conversions.
               </p>
             </div>
 
-            {/* Card 3: Web Development */}
+            {/* Card 3: Algo Trading Platforms */}
             <div ref={cardWebRef} className={`${styles.serviceCard} ${styles.left}`} id="card-web">
               <div className={styles.cardTop}>
-                <h2 className={styles.cardTitle}>Web<br/>Development</h2>
+                <h2 className={styles.cardTitle}>Algo Trading<br/>Software</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     <circle cx="50" cy="50" r="40" />
@@ -636,14 +623,14 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
               <p className={styles.cardDescription}>
-                Custom web development delivered with a product-focused mindset, high-performance architecture, and design precision.
+                Algorithmic trading platforms combining AI-driven signals with automated low-latency order execution, built within compliant regulatory frameworks.
               </p>
             </div>
 
-            {/* Card 4: WordPress Development */}
+            {/* Card 4: Mobile & MLM Systems */}
             <div ref={cardWordpressRef} className={`${styles.serviceCard} ${styles.right}`} id="card-wordpress">
               <div className={styles.cardTop}>
-                <h2 className={styles.cardTitle}>WordPress<br/>Development</h2>
+                <h2 className={styles.cardTitle}>Mobile & MLM<br/>Development</h2>
                 <div className={styles.cardIcon}>
                   <svg viewBox="0 0 100 100" fill="none" strokeWidth="1">
                     {Array.from({ length: 6 }).map((_, i) => {
@@ -659,36 +646,25 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
               <p className={styles.cardDescription}>
-                WordPress development centered on high speed, modular flexibility, and digital experiences that convert.
+                High-performance iOS and Android mobile applications paired with binary, matrix, and unilevel MLM distributor compensation engines.
               </p>
             </div>
 
-          </div>
-
-          {/* Horizontal line transition */}
-          <div className={styles.lineTransition}>
-            <div className={styles.transitionBackground} />
-            <span className={`${styles.wipeLine} ${styles.wipe1}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe2}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe3}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe4}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe5}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe6}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe7}`} />
-            <span className={`${styles.wipeLine} ${styles.wipe8}`} />
           </div>
 
           {/* Bottom Action & Status Bar */}
           <div ref={bottomBarRef} className={styles.bottomBar}>
             {/* Center: Cookie Notification Box + Monospace Sub-Caption */}
             <div className={styles.bottomCenter}>
-              <div className={styles.cookieBanner}>
-                <span>WE USE COOKIES TO ENHANCE YOUR EXPERIENCE.</span>
-                <div className={styles.cookieButtons}>
-                  <button type="button" className={styles.cookieBtn} onClick={() => {}}>DECLINE</button>
-                  <button type="button" className={styles.cookieBtn} onClick={() => {}}>ACCEPT</button>
+              {!cookieDismissed && (
+                <div className={`${styles.cookieBanner} ${isStoneActive ? styles.cookieBannerVisible : ''}`}>
+                  <span>WE USE COOKIES TO ENHANCE YOUR EXPERIENCE.</span>
+                  <div className={styles.cookieButtons}>
+                    <button type="button" className={styles.cookieBtn} onClick={() => setCookieDismissed(true)}>DECLINE</button>
+                    <button type="button" className={styles.cookieBtn} onClick={() => setCookieDismissed(true)}>ACCEPT</button>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className={styles.subCaption}>
                 {captionText}
               </div>

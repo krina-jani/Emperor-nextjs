@@ -2,25 +2,33 @@
   background-color: var(--bg-base);
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: monospace;
+  font-size: 0.85rem;
   letter-spacing: 0.15em;
-  color: var(--text-primary);
-  opacity: 0.6;
+  color: #ff5722;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   display: block;
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-primary);
   line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.introDesc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 640px;
 }
 
 /* ==========================================================================
@@ -28,33 +36,37 @@
    ========================================================================== */
 .desktopTimeline {
   display: none;
-  padding: 8rem 0;
+  padding: 7rem 0 9rem;
 }
 
 .headerContainer {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+}
+
+.headerLeft {
+  max-width: 720px;
 }
 
 .track {
   position: relative;
   width: 100%;
-  padding: 6rem 0;
+  padding: 4rem 0;
 }
 
 .progressLine {
   position: absolute;
-  top: 153px; /* Align with stepCircles vertically */
+  top: 105px;
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: rgba(20, 33, 52, 0.08);
+  background-color: rgba(255, 255, 255, 0.1);
   z-index: 1;
 }
 
 .progressLineFill {
   width: 100%;
   height: 100%;
-  background-color: var(--color-primary);
+  background-color: #ff5722;
   transform: scaleX(0);
   transform-origin: left;
   will-change: transform;
@@ -62,47 +74,53 @@
 
 .scrollWrapper {
   display: flex;
-  gap: 12vw;
-  padding-left: 10vw;
-  padding-right: 25vw; /* Generous right spacing so the final card doesn't hit edge immediately */
+  gap: 3.5rem;
+  padding-left: clamp(2rem, 6vw, 6rem);
+  padding-right: 30vw;
   width: max-content;
   position: relative;
   z-index: 2;
 }
 
 .stepCard {
-  width: clamp(280px, 22vw, 360px);
+  width: clamp(340px, 26vw, 420px);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background: var(--bg-secondary);
-  border: 1px solid rgba(20, 33, 52, 0.06);
-  border-radius: var(--radius-xl);
-  padding: 2.5rem 2rem;
-  box-shadow: var(--glass-shadow);
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.stepCard:hover {
+  border-color: rgba(255, 87, 34, 0.4);
+  transform: translateY(-4px);
 }
 
 .stepHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
 .stepNum {
   font-size: 2.25rem;
   font-weight: 800;
-  color: var(--text-primary);
-  font-family: var(--font-mono), monospace;
-  opacity: 0.8;
+  color: #ffffff;
+  font-family: monospace;
+  opacity: 0.9;
 }
 
 .stepCircle {
   width: 16px;
   height: 16px;
-  background-color: var(--bg-base);
-  border: 3px solid var(--color-primary);
+  background-color: #000000;
+  border: 3px solid #ff5722;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -112,17 +130,61 @@
 }
 
 .stepTitle {
-  font-size: 1.25rem;
-  font-weight: 750;
+  font-size: 1.35rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
 }
 
 .stepDesc {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.seoCard {
+  border-color: rgba(255, 87, 34, 0.3);
+}
+
+.seoBox {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.seoBoxTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ff5722;
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: monospace;
+}
+
+.seoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.seoItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.seoCheck {
+  color: #ff5722;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -130,20 +192,26 @@
    ========================================================================== */
 .mobileTimeline {
   display: block;
-  padding: 5rem 0;
+  padding: 4.5rem 0;
 }
 
 .headerMobile {
-  text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+}
+
+.introDescMobile {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
 }
 
 .verticalTimeline {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  padding-left: 2.5rem;
+  gap: 2rem;
+  padding-left: 2.25rem;
 }
 
 .verticalThread {
@@ -152,7 +220,7 @@
   bottom: 10px;
   left: 17px;
   width: 2px;
-  background-color: rgba(20, 33, 52, 0.08);
+  background-color: rgba(255, 87, 34, 0.3);
   z-index: 1;
 }
 
@@ -165,42 +233,54 @@
 
 .numMarker {
   position: absolute;
-  left: -2.5rem;
+  left: -2.25rem;
   top: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--color-primary);
-  color: var(--text-primary);
+  width: 34px;
+  height: 34px;
+  background-color: #09090b;
+  border: 2px solid #ff5722;
+  color: #ffffff;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  font-family: var(--font-mono), monospace;
+  font-family: monospace;
   z-index: 3;
 }
 
 .mobileCardContent {
-  background-color: var(--bg-secondary);
-  border: 1px solid rgba(20, 33, 52, 0.06);
-  border-radius: var(--radius-lg);
+  background-color: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
   padding: 1.5rem 1.25rem;
   width: 100%;
 }
 
 .stepTitleMobile {
   font-size: 1.15rem;
-  font-weight: 750;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
 .stepDescMobile {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.seoBoxMobile {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.seoGridMobile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
 }
 
 /* ==========================================================================

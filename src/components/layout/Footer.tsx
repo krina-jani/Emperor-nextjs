@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
         if (!letters.length) return;
 
         // Set initial state: down below the overflow mask
-        gsap.set(letters, { yPercent: 125, opacity: 0 });
+        gsap.set(letters, { yPercent: 130, opacity: 0 });
 
         const anim = gsap.to(letters, {
           yPercent: 0,

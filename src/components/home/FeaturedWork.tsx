@@ -4,53 +4,45 @@ import React from 'react';
 import Link from 'next/link';
 import Container from '../ui/Container';
 import FadeIn from '../animations/FadeIn';
-import { ArrowRight, ExternalLink, Folder } from 'lucide-react';
+import { ArrowRight, TrendingUp, Zap, Users, CheckCircle2 } from 'lucide-react';
 import styles from './FeaturedWork.module.css';
 
-const featuredProjects = [
+const caseStudies = [
   {
-    id: 'enterprise-crm',
-    type: 'Web Application',
-    name: 'Enterprise CRM',
-    subtitle: 'Global Sales Automation',
-    description:
-      'A scalable CRM system designed to streamline sales, automate workflows, and deliver real-time insights for enterprise clients. Built for speed and massive data handling.',
-    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'AWS'],
-    accentColor: '#4f46e5',
-    slug: 'enterprise-crm',
+    id: 'algo-trading-engine',
+    type: 'Algo Trading Software',
+    title: 'High-Frequency Broker Execution Engine',
+    problem: 'Client experienced severe execution lag and slippage during peak market volatility using off-the-shelf trading tools.',
+    solution: 'Built a custom algorithmic trading engine directly connected to broker REST and WebSocket APIs with automated risk parameters and failsafes.',
+    metric: '96% Latency Reduction',
+    metricDesc: 'Execution dropped from 450ms down to 18ms with 0 manual intervention.',
+    icon: <Zap size={22} className={styles.metricIcon} />,
+    technologies: ['Python', 'FastAPI', 'WebSockets', 'Redis', 'Docker'],
+    accentColor: '#ff5722',
   },
   {
-    id: 'nova-fintech',
-    type: 'Mobile Application',
-    name: 'Nova FinTech',
-    subtitle: 'Secure Payments & Insights',
-    description:
-      'A secure fintech application enabling instant payments, transaction tracking, and AI-powered financial insights to help users master their wealth.',
-    technologies: ['React Native', 'Firebase', 'Stripe API'],
-    accentColor: '#0891b2',
-    slug: 'nova-fintech',
+    id: 'headless-ecommerce-erp',
+    type: 'Web & E-commerce',
+    title: 'Omnichannel E-commerce & Inventory System',
+    problem: 'Slow page loads, checkout drop-offs, and disjointed inventory tracking across retail stores and digital channels.',
+    solution: 'Engineered a lightning-fast headless e-commerce store with unified inventory management, instant payment gateways, and SEO architecture.',
+    metric: '+40% Traffic & 3.4x Checkout',
+    metricDesc: 'Search rankings climbed immediately, resulting in 40% more organic buyers.',
+    icon: <TrendingUp size={22} className={styles.metricIcon} />,
+    technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
+    accentColor: '#3b82f6',
   },
   {
-    id: 'nexus-cloud',
-    type: 'Cloud Solution',
-    name: 'Nexus Cloud',
-    subtitle: 'Infrastructure Monitoring',
-    description:
-      'A real-time cloud monitoring dashboard providing performance analytics, alerts, and infrastructure optimization for high-availability systems.',
-    technologies: ['React', 'D3.js', 'AWS', 'Docker'],
-    accentColor: '#059669',
-    slug: 'nexus-cloud',
-  },
-  {
-    id: 'cortex-ai',
-    type: 'AI & Automation',
-    name: 'Cortex AI',
-    subtitle: 'Predictive Analytics Engine',
-    description:
-      'A data analytics platform that uses AI to predict trends, automate reporting, and visualize complex datasets for actionable business intelligence.',
-    technologies: ['Python', 'TensorFlow', 'React', 'PostgreSQL'],
-    accentColor: '#d97706',
-    slug: 'cortex-ai',
+    id: 'enterprise-mlm-platform',
+    type: 'MLM & Software',
+    title: 'Real-Time MLM Genealogy & Commission Engine',
+    problem: 'Legacy system crashed under high distributor volume, leading to payout calculation errors and distributor frustration.',
+    solution: 'Architected a resilient multi-tier MLM management portal supporting binary and matrix plans, instant wallet payouts, and visual tree tracking.',
+    metric: '5,000+ Active Distributors',
+    metricDesc: 'Handled 5,000+ concurrent network nodes with 100% calculation accuracy.',
+    icon: <Users size={22} className={styles.metricIcon} />,
+    technologies: ['React', 'Node.js', 'MongoDB', 'Redis', 'GCP'],
+    accentColor: '#10b981',
   },
 ];
 
@@ -58,97 +50,73 @@ export const FeaturedWork: React.FC = () => {
   return (
     <section className={styles.section} id="our-projects">
       <Container>
-        {/* ── Section Header ── */}
+        {/* Section Header */}
         <FadeIn direction="up">
           <div className={styles.sectionHeader}>
-            <span className={styles.eyebrow}>OUR PROJECTS</span>
-            <h2 className={styles.title}>
-              Discover our innovative solutions that have{' '}
-              <span className={styles.titleAccent}>transformed businesses</span> across industries
-            </h2>
+            <span className={styles.eyebrow}>[06] Case Studies</span>
+            <h2 className={styles.title}>A Glimpse of the Work Done So Far</h2>
+            <p className={styles.introDesc}>
+              Real projects, real challenges, across web development, software, and other services.
+            </p>
           </div>
         </FadeIn>
 
-        {/* ── Project Cards Grid ── */}
+        {/* Case Studies Grid */}
         <div className={styles.projectGrid}>
-          {featuredProjects.map((project, index) => (
-            <FadeIn key={project.id} direction="up" delay={`${index * 80}ms`}>
-              <div className={styles.projectCard} style={{ '--accent': project.accentColor } as React.CSSProperties}>
-                <div className={styles.cardTop}>
-                  <span className={styles.projectType}>{project.type}</span>
-                  <div className={styles.folderIcon}>
-                    <Folder size={18} />
+          {caseStudies.map((study, index) => (
+            <FadeIn key={study.id} direction="up" delay={`${index * 100}ms`}>
+              <div className={styles.caseCard}>
+                <div className={styles.cardHeader}>
+                  <span className={styles.cardType}>{study.type}</span>
+                  <div className={styles.metricPill}>
+                    {study.icon}
+                    <span className={styles.metricHighlight}>{study.metric}</span>
                   </div>
                 </div>
 
-                <div className={styles.cardBody}>
-                  <h3 className={styles.projectName}>{project.name}</h3>
-                  <p className={styles.projectSubtitle}>{project.subtitle}</p>
-                  <p className={styles.projectDesc}>{project.description}</p>
+                <h3 className={styles.caseTitle}>{study.title}</h3>
+
+                <div className={styles.caseDetails}>
+                  <div className={styles.detailBlock}>
+                    <span className={styles.detailLabel}>The Problem:</span>
+                    <p className={styles.detailText}>{study.problem}</p>
+                  </div>
+
+                  <div className={styles.detailBlock}>
+                    <span className={styles.detailLabel}>What Was Built:</span>
+                    <p className={styles.detailText}>{study.solution}</p>
+                  </div>
+
+                  <div className={styles.resultBlock}>
+                    <div className={styles.resultHeader}>
+                      <CheckCircle2 size={16} className={styles.checkIcon} />
+                      <span className={styles.resultLabel}>The Result:</span>
+                    </div>
+                    <p className={styles.resultText}>{study.metricDesc}</p>
+                  </div>
                 </div>
 
                 <div className={styles.cardFooter}>
                   <div className={styles.techRow}>
-                    {project.technologies.map((tech) => (
+                    {study.technologies.map((tech) => (
                       <span key={tech} className={styles.techBadge}>
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <Link href={`/projects/${project.slug}`} className={styles.caseStudyLink}>
-                    View Case Study <ArrowRight size={14} />
-                  </Link>
                 </div>
               </div>
             </FadeIn>
           ))}
         </div>
 
-        {/* ── Explore All Banner ── */}
+        {/* View All Case Studies CTA */}
         <FadeIn direction="up" delay="200ms">
-          <div className={styles.exploreBanner}>
-            <div className={styles.exploreLeft}>
-              <span className={styles.exploreCount}>20+</span>
-              <span className={styles.exploreLabel}>Projects</span>
-            </div>
-            <div className={styles.exploreDivider} />
-            <div className={styles.exploreCenter}>
-              <h3 className={styles.exploreTitle}>Explore Our Portfolio</h3>
-              <p className={styles.exploreSubtitle}>Complete Project Collection</p>
-            </div>
-            <Link href="/projects" className={styles.exploreBtn}>
-              Explore All <ArrowRight size={16} />
+          <div className={styles.bottomCtaRow}>
+            <Link href="/projects" className={styles.viewAllBtn}>
+              <span>View All Case Studies</span>
+              <ArrowRight size={18} className={styles.arrowIcon} />
             </Link>
-          </div>
-        </FadeIn>
-
-        {/* ── Portfolio CTA Card ── */}
-        <FadeIn direction="up" delay="300ms">
-          <div className={styles.portfolioCta}>
-            <div className={styles.ctaContent}>
-              <h3 className={styles.ctaTitle}>Explore Our Portfolio</h3>
-              <p className={styles.ctaSubtitle}>Complete Project Collection</p>
-              <p className={styles.ctaDesc}>
-                Discover our complete portfolio of innovative solutions across web development,
-                mobile apps, AI, cloud solutions, and more. See how we&apos;ve helped businesses
-                transform digitally.
-              </p>
-              <div className={styles.ctaFeatures}>
-                <span className={styles.ctaFeature}>✓ 20+ Successful Projects</span>
-                <span className={styles.ctaFeature}>✓ Multiple Industries Covered</span>
-                <span className={styles.ctaFeature}>✓ Detailed Case Studies</span>
-              </div>
-            </div>
-            <div className={styles.ctaAction}>
-              <Link
-                href="https://www.emperorsmartsolutions.com/projects.php"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.ctaPrimaryBtn}
-              >
-                View All Projects <ExternalLink size={16} />
-              </Link>
-            </div>
           </div>
         </FadeIn>
       </Container>

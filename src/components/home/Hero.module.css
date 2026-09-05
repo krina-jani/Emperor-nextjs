@@ -33,9 +33,15 @@
     .heroPinnedContainer {
       position: relative;
       width: 100%;
-      height: 650vh; /* Scroll distance for multi-stage pinning */
+      height: 520vh; /* Matches timeline duration with 100vh overlap buffer for section 2 */
       margin-top: 0;
       background-color: var(--bg-base);
+    }
+
+    @media (max-width: 991px) {
+      .heroPinnedContainer {
+        height: 420vh;
+      }
     }
 
     .stickyViewport {
@@ -65,11 +71,37 @@
       pointer-events: none;
     }
 
+    .heroContentInner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: min(1080px, 92vw);
+      padding: 0 16px;
+      padding-bottom: 3rem;
+      pointer-events: none;
+    }
+
+    .heroEyebrow {
+      font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+      font-size: clamp(0.72rem, 1.2vw, 0.85rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.65);
+      margin-bottom: 0.65rem;
+    }
+
+    body.dark-mode .heroEyebrow {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
     .heroTitle {
       font-family: 'NeueHaasDisplay', 'FamiljenGrotesk', 'Space Grotesk', 'Outfit', sans-serif;
-      font-size: clamp(2.2rem, 8.4vw, 8.6rem);
+      font-size: clamp(2rem, 6.2vw, 6.2rem);
       font-weight: 800;
-      line-height: 0.90;
+      line-height: 0.88;
       letter-spacing: -0.04em;
       text-transform: uppercase;
       text-align: center;
@@ -82,6 +114,88 @@
 
     .heroTitle span {
       display: block;
+    }
+
+    .heroSubheading {
+      font-family: var(--font-sans), sans-serif;
+      font-size: clamp(0.85rem, 1.15vw, 1.02rem);
+      line-height: 1.45;
+      font-weight: 450;
+      color: rgba(0, 0, 0, 0.75);
+      max-width: 740px;
+      margin-top: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    body.dark-mode .heroSubheading {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .heroCtaRow {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      pointer-events: auto;
+      margin-bottom: 0.5rem;
+    }
+
+    .heroPrimaryCta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      color: #ffffff;
+      padding: 12px 26px;
+      border-radius: 9999px;
+      font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .heroPrimaryCta:hover {
+      background: #1e1e24;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .heroSecondaryCta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: #000000;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .heroSecondaryCta:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.7);
+      transform: translateY(-2px);
+    }
+
+    body.dark-mode .heroPrimaryCta {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body.dark-mode .heroSecondaryCta {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
     }
 
     /* Phase 2: FULL-SCREEN 3D Stone Canvas Wrapper */
@@ -236,12 +350,22 @@
       color: inherit;
       text-transform: uppercase;
       white-space: nowrap;
-      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .cookieBannerVisible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      pointer-events: auto !important;
     }
 
     body.dark-mode .cookieBanner {
       border-color: rgba(255, 255, 255, 0.18);
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.55);
+      color: #ffffff;
     }
 
     .cookieButtons {
@@ -451,42 +575,6 @@
     .line5 { left: 61%; }
     .line6 { left: 64%; }
 
-    .lineTransition {
-      position: absolute;
-      inset: 0;
-      z-index: 40;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .transitionBackground {
-      position: absolute;
-      inset: 0;
-      background: #ffffff;
-      opacity: 0;
-      z-index: 0;
-    }
-
-    .wipeLine {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 12.5%;
-      background: #ffffff;
-      transform: scaleY(0);
-      transform-origin: center center;
-      will-change: transform;
-      z-index: 2;
-    }
-
-    .wipe1 { top: 0; }
-    .wipe2 { top: 12.5%; }
-    .wipe3 { top: 25%; }
-    .wipe4 { top: 37.5%; }
-    .wipe5 { top: 50%; }
-    .wipe6 { top: 62.5%; }
-    .wipe7 { top: 75%; }
-    .wipe8 { top: 87.5%; }
 
     @media (max-width: 767px) {
       .line1 { left: 25%; }
