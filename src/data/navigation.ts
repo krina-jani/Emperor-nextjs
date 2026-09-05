@@ -3,10 +3,10 @@ import { NavLink } from '../types/common';
 export const mainNavLinks: NavLink[] = [
   { label: 'HOME', href: '/' },
   { label: 'SERVICES', href: '/services' },
-  { label: 'SOLUTIONS', href: '/solutions' },
-  { label: 'PROJECTS', href: '/projects' },
-  { label: 'HOW WE WORK', href: '/how-we-work' },
   { label: 'ABOUT US', href: '/about' },
+  { label: 'HOW\nWE WORKS', href: '/how-we-work' },
+  { label: 'SOLUTION', href: '/solutions' },
+  { label: 'PROJECTS', href: '/projects' },
   { label: 'CONTACT US', href: '/contact' }
 ];
 

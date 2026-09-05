@@ -8,6 +8,7 @@ interface StaggeredMenuItem {
   label: string;
   link: string;
   ariaLabel?: string;
+  isActive?: boolean;
 }
 
 interface StaggeredMenuSocialItem {
@@ -36,11 +37,11 @@ interface StaggeredMenuProps {
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
-  colors = ['#f4f1ea', '#000000'],
+  colors = ['#f4f4f4', '#ffffff'],
   items = [],
   socialItems = [],
   displaySocials = true,
-  displayItemNumbering = true,
+  displayItemNumbering = false,
   className,
   logoUrl = '', // Removed default logo as it's not needed in this header
   menuButtonColor = '#111', // Adjusted default for light header
@@ -124,7 +125,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
     const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
     const socialTitle = panel.querySelector('.sm-socials-title');
-    const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
+    const socialLinks = Array.from(panel.querySelectorAll('.sm-bottom-link, .sm-socials-link'));
 
     const offscreen = position === 'left' ? -100 : 100;
     const layerStates = layers.map(el => ({ el, start: offscreen }));
@@ -265,7 +266,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           gsap.set(numberEls, { '--sm-num-opacity': 0 });
         }
         const socialTitle = panel.querySelector('.sm-socials-title');
-        const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
+        const socialLinks = Array.from(panel.querySelectorAll('.sm-bottom-link, .sm-socials-link'));
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
         busyRef.current = false;
@@ -479,13 +480,37 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             <div className="sm-panel-inner">
               <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
                 {items && items.length ? (
-                  items.map((it, idx) => (
-                    <li className="sm-panel-itemWrap" key={it.label + idx}>
-                      <Link className="sm-panel-item" href={it.link} aria-label={it.ariaLabel} data-index={idx + 1} onClick={closeMenu}>
-                        <span className="sm-panel-itemLabel">{it.label}</span>
-                      </Link>
-                    </li>
-                  ))
+                  (() => {
+                    const hasActive = items.some(i => i.isActive);
+                    return items.map((it, idx) => {
+                      const isActive = it.isActive || (!hasActive && idx === 0);
+                      return (
+                        <li className="sm-panel-itemWrap" key={it.label + idx}>
+                          <Link 
+                            className="sm-panel-item" 
+                            href={it.link} 
+                            aria-label={it.ariaLabel} 
+                            data-index={idx + 1} 
+                            data-active={isActive ? "true" : undefined}
+                            onClick={closeMenu}
+                          >
+                            <span className="sm-panel-itemLabel">
+                              {it.label.includes('\n') ? (
+                                it.label.split('\n').map((line, li) => (
+                                  <React.Fragment key={li}>
+                                    {li > 0 && <br />}
+                                    {line}
+                                  </React.Fragment>
+                                ))
+                              ) : (
+                                it.label
+                              )}
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    });
+                  })()
                 ) : (
                   <li className="sm-panel-itemWrap" aria-hidden="true">
                     <span className="sm-panel-item">
@@ -494,18 +519,24 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                   </li>
                 )}
               </ul>
-              {displaySocials && socialItems && socialItems.length > 0 && (
-                <div className="sm-socials" aria-label="Social links">
-                  <h3 className="sm-socials-title">Socials</h3>
-                  <ul className="sm-socials-list" role="list">
-                    {socialItems.map((s, i) => (
-                      <li key={s.label + i} className="sm-socials-item">
-                        <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-socials-link">
-                          {s.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+              {displaySocials && (
+                <div className="sm-bottom-bar" aria-label="Footer links">
+                  <div className="sm-bottom-left">
+                    <Link href="/about" className="sm-bottom-link" onClick={closeMenu}>
+                      Showreel
+                    </Link>
+                  </div>
+                  {socialItems && socialItems.length > 0 && (
+                    <ul className="sm-socials-list" role="list">
+                      {socialItems.map((s, i) => (
+                        <li key={s.label + i} className="sm-socials-item">
+                          <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-bottom-link">
+                            {s.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
             </div>

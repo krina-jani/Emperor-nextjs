@@ -37,11 +37,13 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  padding-left: 35px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 992px) {
   .leftCol {
-    max-width: 500px;
+    max-width: 535px;
   }
 }
 
@@ -51,6 +53,7 @@
   line-height: 1.1;
   margin-bottom: 2rem;
   color: #ffffff;
+  padding-left: 0;
 }
 
 .letsTalkBtn {
@@ -168,29 +171,95 @@
 
 .giantTextContainer {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  max-width: 100vw;
   overflow: hidden;
-  line-height: 0.8;
-  padding-top: 2rem;
+  line-height: 0.85;
+  padding-top: clamp(2rem, 5vw, 4.5rem);
+  padding-bottom: clamp(0.5rem, 1.5vw, 1.25rem);
+  box-sizing: border-box;
 }
 
 .giantText {
-  font-size: clamp(3rem, 13.8vw, 18.5rem);
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-helvetica-neue, "helveticaNeue", "helveticaNeue Fallback", "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: clamp(3.8rem, 18.2vw, 24vw);
   font-weight: 900;
-  letter-spacing: -0.06em;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
   color: #ffffff;
   margin: 0;
-  text-align: center;
-  white-space: nowrap;
-  transform: scaleY(1.3); /* Stretch it vertically to match the user's drawing */
+  padding: 0 clamp(8px, 1.8vw, 28px);
+  box-sizing: border-box;
+  user-select: none;
+  text-transform: uppercase;
+  transform: scaleY(1.18);
   transform-origin: bottom center;
 }
 
-@media (min-width: 768px) {
+.letterWrapper {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 0.82;
+  padding-bottom: 0.08em;
+  flex-shrink: 0;
+  vertical-align: bottom;
+}
+
+.letterWrapper > span,
+.letterWrapper :global(.footer-letter) {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: bottom center;
+}
+
+@media (max-width: 768px) {
+  .leftCol {
+    padding-left: clamp(16px, 4.5vw, 28px);
+    padding-right: clamp(16px, 4.5vw, 28px);
+  }
+
+  .tagline {
+    padding-left: 0;
+  }
+
+  .giantTextContainer {
+    width: 100%;
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+  }
+
   .giantText {
-    font-size: clamp(8rem, 13.8vw, 22rem);
-    transform: scaleY(1.3);
-    letter-spacing: -0.05em;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 clamp(4px, 1vw, 10px);
+    font-size: clamp(3.8rem, 20.8vw, 7.6rem);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .giantText {
+    padding: 0 4px;
+    font-size: clamp(3.4rem, 20.8vw, 5.2rem);
+    letter-spacing: -0.03em;
+  }
+}
+
+@media (max-width: 360px) {
+  .giantText {
+    padding: 0 2px;
+    font-size: clamp(3rem, 20.5vw, 3.8rem);
+    letter-spacing: -0.025em;
   }
 }

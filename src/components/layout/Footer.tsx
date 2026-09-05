@@ -13,40 +13,66 @@ if (typeof window !== 'undefined') {
 
 export const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const textContainer = textRef.current;
     if (!textContainer) return;
     let ctx: gsap.Context | null = null;
+    let observer: IntersectionObserver | null = null;
 
-    // Use a small timeout to ensure DOM is fully painted before calculating ScrollTrigger
+    // Small delay ensures DOM paint, fonts loaded, and accurate dimensions
     const timer = setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
       ctx = gsap.context(() => {
-        const letters = gsap.utils.toArray('.footer-letter');
-        
-        gsap.fromTo(
-          letters,
-          { y: 150, opacity: 0 }, // Reduced y offset so it doesn't get clipped as easily
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: textContainer,
-              start: 'top 95%', // Start slightly before it enters fully
-              end: 'bottom 95%', // End before it reaches the absolute bottom to ensure completion
-              scrub: 1,
-              invalidateOnRefresh: true,
+        const letters = textContainer.querySelectorAll('.footer-letter');
+        if (!letters.length) return;
+
+        // Set initial state: down below the overflow mask
+        gsap.set(letters, { yPercent: 125, opacity: 0 });
+
+        const anim = gsap.to(letters, {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.95,
+          ease: 'power3.out',
+          stagger: 0.08, // 1 by 1 showing text from down to up
+          paused: true,
+        });
+
+        // 1. Primary ScrollTrigger (triggers as soon as footer enters viewport)
+        ScrollTrigger.create({
+          trigger: footerRef.current || textContainer,
+          start: 'top 85%',
+          onEnter: () => anim.play(),
+          onEnterBack: () => anim.play(),
+          onLeaveBack: () => anim.reverse(),
+        });
+
+        // 2. IntersectionObserver (failsafe for mobile browsers and Lenis instances)
+        if ('IntersectionObserver' in window) {
+          observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  anim.play();
+                }
+              });
             },
-          }
-        );
+            { rootMargin: '0px 0px 40px 0px', threshold: 0.05 }
+          );
+          observer.observe(textContainer);
+        } else {
+          anim.play();
+        }
       }, footerRef);
-    }, 100);
+    }, 120);
 
     return () => {
       clearTimeout(timer);
+      if (observer) observer.disconnect();
       if (ctx) ctx.revert();
     };
   }, []);
@@ -103,15 +129,17 @@ export const Footer: React.FC = () => {
         </div>
       </div>
       
-      {/* Huge Bottom Text */}
+      {/* Huge Bottom Text - Full Screen Width */}
       <div className={styles.giantTextContainer}>
-        <h1 ref={textRef} className={styles.giantText}>
+        <div ref={textRef} className={styles.giantText} aria-label="EMPEROR">
           {"EMPEROR".split("").map((char, index) => (
-            <span key={index} className="footer-letter" style={{ display: 'inline-block' }}>
-              {char}
+            <span key={index} className={styles.letterWrapper}>
+              <span className="footer-letter">
+                {char}
+              </span>
             </span>
           ))}
-        </h1>
+        </div>
       </div>
     </footer>
   );

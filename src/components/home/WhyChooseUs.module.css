@@ -16,32 +16,44 @@
 .container {
   position: absolute;
   inset: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10vw;
   z-index: 5;
+  pointer-events: none;
 }
 
 .leftCol {
+  position: absolute;
+  right: calc(50% + clamp(145px, 12.5vw, 195px));
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: max-content;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
+  max-width: calc(50vw - clamp(155px, 13.5vw, 210px));
+  padding-right: clamp(10px, 1.5vw, 24px);
   will-change: transform, opacity;
+  pointer-events: auto;
+  z-index: 6;
 }
 
 .rightCol {
   position: absolute;
-  left: calc(50% + 200px);
+  left: calc(50% + clamp(145px, 12.5vw, 195px));
   top: 0;
   bottom: 0;
+  margin: auto 0;
+  height: max-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   text-align: left;
+  max-width: calc(50vw - clamp(155px, 13.5vw, 210px));
+  padding-left: clamp(10px, 1.5vw, 24px);
   will-change: transform, opacity;
+  pointer-events: auto;
+  z-index: 6;
 }
 
 .imageWrapper {
@@ -50,8 +62,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  width: 320px;
-  height: 180px; /* 16:9 ratio */
+  width: clamp(250px, 21vw, 320px);
+  aspect-ratio: 16 / 9;
   border: 1px solid rgba(255, 87, 34, 0.25);
   box-shadow: 0 0 45px rgba(255, 87, 34, 0.18);
   border-radius: 4px;
@@ -68,7 +80,7 @@
 
 .whiteText {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(2rem, 4.8vw, 4.6rem);
+  font-size: clamp(1.8rem, 3.6vw, 4.2rem);
   font-weight: 750;
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -77,24 +89,24 @@
   display: flex;
   flex-direction: column;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .bottomRow {
   position: absolute;
-  top: calc(50% + 150px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
+  bottom: clamp(5vh, 8vh, 12vh);
+  left: 0;
   width: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
+  z-index: 6;
   will-change: transform, opacity;
 }
 
 .orangeText {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(2rem, 6.2vw, 6.2rem);
+  font-size: clamp(1.8rem, 5.5vw, 5.8rem);
   font-weight: 750;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -106,16 +118,30 @@
 
 @media (max-width: 768px) {
   .container {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15rem; /* Large gap so the stacked text doesn't overlap the center image */
+    align-items: center;
+    gap: clamp(150px, 28vh, 200px);
     padding: 0 5vw;
   }
   
   .leftCol {
+    position: static;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    margin: 0;
+    height: auto;
     align-items: center;
     text-align: center;
     width: 100%;
+    max-width: 100%;
+    padding-right: 0;
   }
 
   .rightCol {
@@ -123,30 +149,30 @@
     left: auto;
     top: auto;
     bottom: auto;
-    transform: none;
+    margin: 0;
+    height: auto;
     align-items: center;
     text-align: center;
     width: 100%;
+    max-width: 100%;
+    padding-left: 0;
   }
 
   .whiteText {
-    font-size: clamp(2rem, 7vw, 3.2rem);
+    font-size: clamp(1.8rem, 6.5vw, 2.8rem);
   }
 
   .imageWrapper {
-    width: 240px;
-    height: 135px;
+    width: clamp(200px, 58vw, 260px);
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 
   .bottomRow {
-    position: absolute;
-    top: auto;
-    bottom: 6%;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: clamp(1.5rem, 5vh, 3rem);
   }
 
   .orangeText {
-    font-size: clamp(2.2rem, 8vw, 4.2rem);
+    font-size: clamp(1.6rem, 6.2vw, 3rem);
   }
 }

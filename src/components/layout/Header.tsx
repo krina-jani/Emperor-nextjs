@@ -3,18 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { cn } from '../../lib/utils';
 import StaggeredMenu from './StaggeredMenu';
 import { mainNavLinks } from '../../data/navigation';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const checkHeaderTheme = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // 0. If at the top of page and body is not dark-mode, always light
+      if (window.scrollY < 40 && !document.body.classList.contains('dark-mode')) {
+        setIsDark(false);
+        return;
+      }
 
       // 1. Check if body has dark-mode
       if (document.body.classList.contains('dark-mode')) {
@@ -22,25 +31,29 @@ export const Header: React.FC = () => {
         return;
       }
 
-      // 2. Temporarily hide the header to find the element physically underneath it
+      // 2. Temporarily hide header visibility to find the element physically underneath it
       const headerEl = document.querySelector('header');
       let underlyingEl: Element | null = null;
       if (headerEl) {
-        const oldDisplay = headerEl.style.display;
+        const oldVisibility = headerEl.style.visibility;
+        const oldPointerEvents = headerEl.style.pointerEvents;
         try {
-          headerEl.style.display = 'none';
-          underlyingEl = document.elementFromPoint(100, 50);
+          headerEl.style.visibility = 'hidden';
+          headerEl.style.pointerEvents = 'none';
+          const sampleX = Math.min(Math.max(window.innerWidth / 2, 150), 500);
+          underlyingEl = document.elementFromPoint(sampleX, 40);
         } catch (e) {
           console.error('[Header] Error sampling underlying element:', e);
         } finally {
-          headerEl.style.display = oldDisplay;
+          headerEl.style.visibility = oldVisibility;
+          headerEl.style.pointerEvents = oldPointerEvents;
         }
       }
 
       let isThemeDark = false;
 
       // 3. Traverse up the DOM tree from the sampled element to detect theme or background colors
-      if (underlyingEl) {
+      if (underlyingEl && (!headerEl || !headerEl.contains(underlyingEl))) {
         let curr: HTMLElement | null = underlyingEl as HTMLElement;
         while (curr && curr !== document.documentElement && curr !== document.body) {
           if (curr.dataset.theme === 'dark' || curr.classList.contains('dark-section') || curr.classList.contains('dark-mode')) {
@@ -48,35 +61,23 @@ export const Header: React.FC = () => {
             break;
           }
 
-          const className = typeof curr.className === 'string'
-            ? curr.className
-            : (curr.className && typeof curr.className === 'object' && 'baseVal' in curr.className
-              ? String((curr.className as any).baseVal)
-              : '');
-          const id = curr.id || '';
-          
-          if (
-            className.includes('darkBlue') || 
-            className.includes('black') || 
-            className.includes('bg-dark') ||
-            className.includes('dark-section') ||
-            id.includes('dark')
-          ) {
-            isThemeDark = true;
-            break;
-          }
-
           const bg = window.getComputedStyle(curr).backgroundColor;
           if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
-            const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
             if (match) {
               const r = parseInt(match[1], 10);
               const g = parseInt(match[2], 10);
               const b = parseInt(match[3], 10);
-              const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-              if (luminance < 140) {
-                isThemeDark = true;
-                break;
+              const alpha = match[4] !== undefined ? parseFloat(match[4]) : 1;
+              if (alpha > 0.4) {
+                const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                if (luminance < 130) {
+                  isThemeDark = true;
+                  break;
+                } else {
+                  isThemeDark = false;
+                  break;
+                }
               }
             }
           }
@@ -93,7 +94,7 @@ export const Header: React.FC = () => {
           const g = parseInt(bodyMatch[2], 10);
           const b = parseInt(bodyMatch[3], 10);
           const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-          if (luminance < 140) {
+          if (luminance < 130) {
             isThemeDark = true;
           }
         }
@@ -130,8 +131,13 @@ export const Header: React.FC = () => {
 
   return (
     <header 
-      className={cn(styles.header, isScrolled && styles.scrolled, isDark && styles.darkTheme)}
-      data-theme={isDark ? 'dark' : 'light'}
+      className={cn(
+        styles.header, 
+        isScrolled && styles.scrolled, 
+        (isDark && !isMenuOpen) && styles.darkTheme,
+        isMenuOpen && styles.menuOpen
+      )}
+      data-theme={isMenuOpen ? 'light' : (isDark ? 'dark' : 'light')}
     >
       <div className={styles.container}>
         {/* Left: Emperor Brand Logo */}
@@ -164,18 +170,25 @@ export const Header: React.FC = () => {
           {/* Staggered Menu Trigger */}
           <StaggeredMenu
             position="right"
-            items={mainNavLinks.map(l => ({ label: l.label, link: l.href, ariaLabel: `Go to ${l.label}` }))}
+            items={mainNavLinks.map(l => ({
+              label: l.label,
+              link: l.href,
+              ariaLabel: `Go to ${l.label.replace(/\n/g, ' ')}`,
+              isActive: pathname === l.href
+            }))}
             socialItems={[
-              { label: 'LinkedIn', link: 'https://linkedin.com' },
               { label: 'Instagram', link: 'https://instagram.com' },
+              { label: 'LinkedIn', link: 'https://linkedin.com' },
             ]}
             displaySocials={true}
-            displayItemNumbering={true}
+            displayItemNumbering={false}
             menuButtonColor={isDark ? '#ffffff' : '#000000'}
-            openMenuButtonColor={isDark ? '#ffffff' : '#000000'}
+            openMenuButtonColor="#000000"
             changeMenuColorOnOpen={true}
-            colors={['#f4f1ea', '#000000']}
-            accentColor="#ff5722"
+            colors={['#f4f4f4', '#ffffff']}
+            accentColor="#000000"
+            onMenuOpen={() => setIsMenuOpen(true)}
+            onMenuClose={() => setIsMenuOpen(false)}
           />
         </div>
       </div>

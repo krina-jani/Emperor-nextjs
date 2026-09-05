@@ -10,7 +10,7 @@ interface NavbarProps {
 
 // Map the nav links data to PillNav's item format
 const navItems = mainNavLinks.map((link) => ({
-  label: link.label,
+  label: link.label.replace(/\n/g, ' '),
   href: link.href,
 }));
 

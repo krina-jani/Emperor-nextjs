@@ -116,7 +116,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({
                 onClick={onItemClick}
                 className={cn(styles.link, isLinkActiveVal && styles.active)}
               >
-                {link.label}
+                {link.label.replace(/\n/g, ' ')}
               </Link>
             )}
           </li>
