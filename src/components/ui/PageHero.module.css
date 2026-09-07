@@ -5,11 +5,11 @@
 }
 
 .darkBlue {
-  background-color: var(--bg-dark, #142134);
+  background-color: #050505;
 }
 
 .black {
-  background-color: #0A0A0A;
+  background-color: #050505;
 }
 
 .badge {
@@ -17,15 +17,15 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: #ff5722 !important;
-  background-color: rgba(255, 87, 34, 0.06) !important;
-  border: 1px solid rgba(255, 87, 34, 0.18) !important;
+  color: #008cff !important;
+  background-color: rgba(0, 140, 255, 0.1) !important;
+  border: 1px solid rgba(0, 140, 255, 0.25) !important;
   opacity: 1 !important;
   text-transform: uppercase;
   margin-bottom: 1.25rem;
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-full, 9999px);
-  box-shadow: 0 0 10px rgba(255, 87, 34, 0.03);
+  box-shadow: 0 0 10px rgba(0, 140, 255, 0.1);
 }
 
 .title {
@@ -46,7 +46,7 @@
 }
 
 .highlight {
-  background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  background: linear-gradient(135deg, #008cff 0%, #00a8ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;

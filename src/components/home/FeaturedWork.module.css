@@ -1,7 +1,7 @@
 .section {
   padding: 6.5rem 0;
   position: relative;
-  background-color: #000000;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -17,7 +17,7 @@
   font-family: monospace;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
-  color: #ff5722;
+  color: #008cff;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
@@ -50,8 +50,8 @@
 }
 
 .caseCard {
-  background: #09090b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #081321;
+  border: 1px solid #163451;
   border-radius: 1.25rem;
   padding: 2.25rem 1.75rem;
   display: flex;
@@ -59,11 +59,12 @@
   justify-content: space-between;
   gap: 1.5rem;
   position: relative;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .caseCard:hover {
-  border-color: rgba(255, 87, 34, 0.4);
+  border-color: #008CFF;
+  box-shadow: 0 0 30px rgba(0, 140, 255, 0.15);
   transform: translateY(-4px);
 }
 
@@ -79,9 +80,9 @@
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ff5722;
-  background: rgba(255, 87, 34, 0.1);
-  border: 1px solid rgba(255, 87, 34, 0.25);
+  color: #008cff;
+  background: rgba(0, 140, 255, 0.1);
+  border: 1px solid rgba(0, 140, 255, 0.25);
   padding: 0.3rem 0.65rem;
   border-radius: 6px;
 }
@@ -97,7 +98,7 @@
 }
 
 .metricIcon {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .metricHighlight {
@@ -142,8 +143,8 @@
 }
 
 .resultBlock {
-  background: rgba(255, 87, 34, 0.06);
-  border: 1px solid rgba(255, 87, 34, 0.2);
+  background: rgba(0, 140, 255, 0.08);
+  border: 1px solid rgba(0, 140, 255, 0.25);
   border-radius: 8px;
   padding: 0.85rem;
   display: flex;
@@ -158,7 +159,7 @@
 }
 
 .checkIcon {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .resultLabel {
@@ -167,7 +168,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-family: monospace;
-  color: #ff5722;
+  color: #008cff;
 }
 
 .resultText {
@@ -205,18 +206,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #ffffff;
-  color: #000000;
+  background: #008CFF;
+  color: #FFFFFF;
   font-size: 1rem;
   font-weight: 600;
   padding: 1rem 2.25rem;
   border-radius: 9999px;
   text-decoration: none;
+  box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
   transition: all 0.25s ease;
 }
 
 .viewAllBtn:hover {
-  background: #f1f5f9;
+  background: #00A8FF;
+  box-shadow: 0 0 30px rgba(0, 168, 255, 0.4);
+  transform: translateY(-2px);
   gap: 0.85rem;
 }
 

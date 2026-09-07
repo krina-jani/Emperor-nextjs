@@ -1,12 +1,13 @@
 .section {
   padding: 3.5rem 0;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   border-bottom: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
-  --accent-color: #ff5722;
-  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
-  --badge-bg: rgba(255, 87, 34, 0.06);
-  --badge-border: rgba(255, 87, 34, 0.18);
+  --accent-color: #008cff;
+  --accent-gradient: linear-gradient(135deg, #008cff 0%, #00a8ff 100%);
+  --badge-bg: rgba(0, 140, 255, 0.08);
+  --badge-border: rgba(0, 140, 255, 0.25);
 }
 
 .container {
@@ -53,7 +54,7 @@
 }
 
 .title span {
-  background: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  background: linear-gradient(135deg, #008cff 0%, #00a8ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -114,8 +115,8 @@
 }
 
 .statCard {
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #081321;
+  border: 1px solid #163451;
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
   display: flex;
@@ -126,15 +127,15 @@
 
 .statCard:hover {
   background: #111111;
-  border-color: rgba(255, 87, 34, 0.35);
+  border-color: rgba(0, 140, 255, 0.4);
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(255, 87, 34, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 140, 255, 0.2);
 }
 
 .statVal {
   font-size: 2.25rem;
   font-weight: 800;
-  color: #ff5722;
+  color: #008cff;
 }
 
 .statLabel {
@@ -151,7 +152,7 @@
 }
 
 .statIcon {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .copyCol button,

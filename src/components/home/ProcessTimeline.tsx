@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Container from '../ui/Container';
 import styles from './ProcessTimeline.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -64,6 +64,27 @@ export const ProcessTimeline: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const progressLineRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(0);
+
+  // Navigate to step index (0 to 7)
+  const scrollToStep = (index: number) => {
+    const scrollWrapper = scrollRef.current;
+    if (!scrollWrapper) return;
+
+    const st = ScrollTrigger.getById('process-timeline-trigger');
+
+    if (st) {
+      const progress = index / (steps.length - 1);
+      const targetScroll = st.start + progress * (st.end - st.start);
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    } else {
+      const card = scrollWrapper.children[index] as HTMLElement;
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      }
+    }
+    setActiveStep(index);
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -72,76 +93,98 @@ export const ProcessTimeline: React.FC = () => {
 
     if (!section || !scrollWrapper || !progressFill) return;
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
+    let ctx: gsap.Context | null = null;
 
-      mm.add('(min-width: 1025px)', () => {
-        const totalScroll = scrollWrapper.scrollWidth - window.innerWidth;
+    const initGSAP = () => {
+      ctx = gsap.context(() => {
+        const mm = gsap.matchMedia();
 
-        const scrollTween = gsap.to(scrollWrapper, {
-          x: -totalScroll,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            pin: true,
-            scrub: 0.5,
-            start: 'top top',
-            end: () => `+=${totalScroll}`,
-            invalidateOnRefresh: true,
-          }
-        });
+        mm.add('(min-width: 1025px)', () => {
+          const getScrollAmount = () => {
+            return Math.max(0, scrollWrapper.scrollWidth - window.innerWidth + 140);
+          };
 
-        gsap.to(progressFill, {
-          scaleX: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            scrub: 0.5,
-            start: 'top top',
-            end: () => `+=${totalScroll}`,
-            invalidateOnRefresh: true,
-          }
-        });
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        gsap.utils.toArray('.process-step-card').forEach((card: any) => {
-          gsap.fromTo(card,
-            { opacity: 0.35, scale: 0.96 },
-            {
-              opacity: 1,
-              scale: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                containerAnimation: scrollTween,
-                start: 'left 85%',
-                end: 'left 35%',
-                scrub: true,
+          const scrollTween = gsap.to(scrollWrapper, {
+            x: () => -getScrollAmount(),
+            ease: 'none',
+            scrollTrigger: {
+              id: 'process-timeline-trigger',
+              trigger: section,
+              pin: true,
+              scrub: 0.5,
+              start: 'top top',
+              end: () => `+=${getScrollAmount()}`,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const idx = Math.min(
+                  steps.length - 1,
+                  Math.round(self.progress * (steps.length - 1))
+                );
+                setActiveStep(idx);
               }
             }
-          );
-        });
-      });
+          });
 
-      mm.add('(max-width: 1024px)', () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        gsap.utils.toArray('.process-step-card-mobile').forEach((card: any) => {
-          gsap.from(card, {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: 'power3.out',
+          gsap.to(progressFill, {
+            scaleX: 1,
+            ease: 'none',
             scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              toggleActions: 'play none none none'
+              trigger: section,
+              scrub: 0.5,
+              start: 'top top',
+              end: () => `+=${getScrollAmount()}`,
+              invalidateOnRefresh: true,
             }
           });
-        });
-      });
-    }, sectionRef);
 
-    return () => ctx.revert();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          gsap.utils.toArray('.process-step-card').forEach((card: any) => {
+            gsap.fromTo(
+              card,
+              { opacity: 0.4, scale: 0.95 },
+              {
+                opacity: 1,
+                scale: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: card,
+                  containerAnimation: scrollTween,
+                  start: 'left 90%',
+                  end: 'left 30%',
+                  scrub: true,
+                }
+              }
+            );
+          });
+        });
+
+        mm.add('(max-width: 1024px)', () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          gsap.utils.toArray('.process-step-card-mobile').forEach((card: any) => {
+            gsap.from(card, {
+              opacity: 0,
+              y: 30,
+              duration: 0.6,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            });
+          });
+        });
+      }, sectionRef);
+
+      ScrollTrigger.refresh();
+    };
+
+    const timer = setTimeout(initGSAP, 150);
+
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (
@@ -150,12 +193,51 @@ export const ProcessTimeline: React.FC = () => {
         {/* Desktop Layout (Horizontal Pinned Scroll) */}
         <div className={styles.desktopTimeline}>
           <Container className={styles.headerContainer}>
-            <div className={styles.headerLeft}>
-              <span className={styles.eyebrow}>[04] Structured Methodology</span>
-              <h2 className={styles.title}>Process Followed on Every Project</h2>
-              <p className={styles.introDesc}>
-                Every project moves through the same eight stages, whether it&apos;s a website, a mobile app, or an algo trading platform. Each step builds on the one before it.
-              </p>
+            <div className={styles.headerFlex}>
+              <div className={styles.headerLeft}>
+                <span className={styles.eyebrow}>[04] Structured Methodology</span>
+                <h2 className={styles.title}>Process Followed on Every Project</h2>
+                <p className={styles.introDesc}>
+                  Every project moves through the same eight stages, whether it&apos;s a website, a mobile app, or an algo trading platform. Each step builds on the one before it.
+                </p>
+              </div>
+
+              {/* Navigation Controls: Arrows + Step Badges */}
+              <div className={styles.navControls}>
+                <div className={styles.stepBadges}>
+                  {steps.map((step, idx) => (
+                    <button
+                      key={step.num}
+                      type="button"
+                      className={`${styles.stepBadgeBtn} ${activeStep === idx ? styles.activeBadge : ''}`}
+                      onClick={() => scrollToStep(idx)}
+                      aria-label={`Jump to step ${step.num}`}
+                    >
+                      {step.num}
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.arrowBtns}>
+                  <button
+                    type="button"
+                    className={styles.arrowBtn}
+                    onClick={() => scrollToStep(Math.max(0, activeStep - 1))}
+                    disabled={activeStep === 0}
+                    aria-label="Previous Step"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.arrowBtn}
+                    onClick={() => scrollToStep(Math.min(steps.length - 1, activeStep + 1))}
+                    disabled={activeStep === steps.length - 1}
+                    aria-label="Next Step"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
             </div>
           </Container>
 
@@ -240,3 +322,4 @@ export const ProcessTimeline: React.FC = () => {
 };
 
 export default ProcessTimeline;
+

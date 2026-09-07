@@ -7,7 +7,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #000000;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   overflow: hidden;
 }
 

@@ -1,15 +1,15 @@
 .section {
   padding: 6rem 0 7rem;
   position: relative;
-  background-color: #000000;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
 /* 1. Urgency Banner */
 .urgencyBanner {
-  background: linear-gradient(135deg, rgba(255, 87, 34, 0.12) 0%, rgba(20, 20, 25, 0.95) 100%);
-  border: 1px solid rgba(255, 87, 34, 0.35);
+  background: linear-gradient(135deg, rgba(0, 140, 255, 0.12) 0%, rgba(20, 20, 25, 0.95) 100%);
+  border: 1px solid rgba(0, 140, 255, 0.35);
   border-radius: 1.25rem;
   padding: 2.25rem 2.5rem;
   display: flex;
@@ -20,7 +20,7 @@
   margin-bottom: 3.5rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 16px 32px -8px rgba(255, 87, 34, 0.15);
+  box-shadow: 0 16px 32px -8px rgba(0, 140, 255, 0.15);
 }
 
 @media (min-width: 992px) {
@@ -37,7 +37,7 @@
   right: -50px;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(255, 87, 34, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 140, 255, 0.25) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
 }
@@ -58,7 +58,7 @@
   font-family: monospace;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
-  color: #ff5722;
+  color: #008cff;
   font-weight: 700;
 }
 
@@ -66,8 +66,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #ff5722;
-  box-shadow: 0 0 10px #ff5722;
+  background-color: #008cff;
+  box-shadow: 0 0 10px #008cff;
   animation: pulse 1.8s infinite;
 }
 
@@ -100,7 +100,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #ff5722;
+  background: #008cff;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
@@ -108,11 +108,11 @@
   border-radius: 0.75rem;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 140, 255, 0.3);
 }
 
 .slotBtn:hover {
-  background: #ff7043;
+  background: #0066ff;
   transform: translateY(-2px);
   gap: 0.85rem;
 }
@@ -136,7 +136,7 @@
   transform: translate(-50%, -50%);
   width: 600px;
   height: 400px;
-  background: radial-gradient(circle, rgba(255, 87, 34, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 140, 255, 0.12) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -155,7 +155,7 @@
   font-family: monospace;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
-  color: #ff5722;
+  color: #008cff;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
@@ -198,7 +198,7 @@
 }
 
 .featureIcon {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .actionRow {
@@ -271,11 +271,11 @@
 }
 
 a.contactItem:hover {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .contactIcon {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .contactDivider {

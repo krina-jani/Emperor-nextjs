@@ -1,5 +1,5 @@
 .section {
-  background-color: #000000;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   color: #ffffff;
   position: relative;
   padding-top: 6rem;
@@ -35,12 +35,12 @@
   font-family: monospace;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
-  color: #ff5722;
+  color: #008cff;
   text-transform: uppercase;
-  background: rgba(255, 87, 34, 0.1);
+  background: rgba(0, 140, 255, 0.1);
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 87, 34, 0.25);
+  border: 1px solid rgba(0, 140, 255, 0.25);
 }
 
 .title {
@@ -63,16 +63,16 @@
   gap: 0.5rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #ff5722;
+  color: #008cff;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 87, 34, 0.4);
+  border-bottom: 1px solid rgba(0, 140, 255, 0.4);
   padding-bottom: 0.25rem;
   width: max-content;
   transition: all 0.25s ease;
 }
 
 .learnMore:hover {
-  border-color: #ff5722;
+  border-color: #008cff;
   gap: 0.75rem;
 }
 
@@ -121,8 +121,8 @@
 }
 
 .capBadge:hover {
-  background: rgba(255, 87, 34, 0.15);
-  border-color: rgba(255, 87, 34, 0.4);
+  background: rgba(0, 140, 255, 0.15);
+  border-color: rgba(0, 140, 255, 0.4);
   color: #ffffff;
 }
 
@@ -151,8 +151,8 @@
 }
 
 .card {
-  background: #09090b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #081321;
+  border: 1px solid #163451;
   border-radius: 1rem;
   padding: 1.75rem 1.5rem;
   display: flex;
@@ -165,8 +165,8 @@
 }
 
 .card:hover {
-  border-color: rgba(255, 87, 34, 0.4);
-  box-shadow: 0 16px 32px -8px rgba(255, 87, 34, 0.12);
+  border-color: #008CFF;
+  box-shadow: 0 0 30px rgba(0, 140, 255, 0.15);
   transform: translateY(-4px);
 }
 
@@ -180,16 +180,16 @@
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: rgba(255, 87, 34, 0.1);
-  border: 1px solid rgba(255, 87, 34, 0.25);
+  background: rgba(0, 140, 255, 0.1);
+  border: 1px solid rgba(0, 140, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff5722;
+  color: #008cff;
 }
 
 .cardIconSvg {
-  color: #ff5722;
+  color: #008cff;
 }
 
 .serviceTag {
@@ -231,7 +231,7 @@
   gap: 0.5rem;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #ff5722;
+  color: #008cff;
   text-decoration: none;
   transition: all 0.2s ease;
 }

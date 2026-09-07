@@ -1,59 +1,77 @@
 :root {
-  /* Color Palette - Crisp Light Off-White & Pitch Black Theme */
-  --bg-base: #ededeb;
-  --bg-primary: #ededeb;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #e2e1dd; /* Tonal variation of base for tracks/borders */
-  --bg-dark: #000000;
+  /* Exact Requested Theme Variables */
+  --background: #010610;
+  --background-secondary: #050D1A;
+  --surface: #081321;
+  --surface-elevated: #0B1728;
 
-  --text-primary: #000000;
-  --text-secondary: rgba(0, 0, 0, 0.75);
-  --text-muted: rgba(0, 0, 0, 0.50);
+  --primary: #008CFF;
+  --primary-hover: #00A8FF;
+  --primary-dark: #0066CC;
 
-  --text-on-dark: #ffffff;
-  --text-on-dark-secondary: rgba(255, 255, 255, 0.75);
-  --text-on-dark-muted: rgba(255, 255, 255, 0.45);
+  --secondary: #061023;
+  --border: #163451;
 
-  /* Brand Colors matching #142134 and #ffffff */
-  --color-primary: #142134;
-  --color-primary-hover: rgba(20, 33, 52, 0.88);
-  --color-primary-rgb: 20, 33, 52;
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAB8CC;
+  --text-muted: #718096;
 
-  --color-secondary: #ffffff;
-  --color-secondary-hover: rgba(255, 255, 255, 0.9);
-  --color-secondary-rgb: 255, 255, 255;
+  --glow: rgba(0, 140, 255, 0.35);
 
-  --color-accent: #142134;
-  --color-accent-hover: rgba(20, 33, 52, 0.88);
+  /* Color Palette Tokens */
+  --bg-base: #010610;
+  --bg-primary: #010610;
+  --bg-secondary: #050D1A;
+  --bg-tertiary: #081321;
+  --bg-elevated: #0B1728;
+  --bg-dark: #010610;
 
-  --color-border: rgba(20, 33, 52, 0.08);
-  --color-border-hover: rgba(20, 33, 52, 0.15);
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-secondary: #AAB8CC;
+  --text-on-dark-muted: #718096;
 
-  --color-error: #b91c1c; /* Muted red for validation errors */
-  --color-success: #15803d; /* Muted green for successes */
+  /* Primary Blue Theme Palette */
+  --color-primary: #008CFF;
+  --color-primary-hover: #00A8FF;
+  --color-primary-highlight: #00A8FF;
+  --color-primary-dark: #0066CC;
+  --color-primary-rgb: 0, 140, 255;
 
-  /* Glassmorphism Design Tokens suited for Cream Light Mode */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-bg-hover: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(20, 33, 52, 0.08);
-  --glass-border-hover: rgba(20, 33, 52, 0.15);
+  --color-secondary: #061023;
+  --color-secondary-hover: #0B1728;
+  --color-secondary-rgb: 6, 16, 35;
+
+  --color-accent: #008CFF;
+  --color-accent-hover: #00A8FF;
+
+  --color-border: #163451;
+  --color-border-hover: rgba(0, 140, 255, 0.40);
+
+  --color-error: #ef4444;
+  --color-success: #10b981;
+
+  /* Glassmorphism Design Tokens */
+  --glass-bg: rgba(8, 19, 33, 0.75);
+  --glass-bg-hover: rgba(11, 23, 40, 0.85);
+  --glass-border: #163451;
+  --glass-border-hover: rgba(0, 140, 255, 0.4);
   --glass-blur: 16px;
-  --glass-shadow: 0 8px 32px 0 rgba(20, 33, 52, 0.04);
+  --glass-shadow: 0 8px 32px 0 rgba(1, 6, 16, 0.6);
 
-  /* Shadows - Minimal & Sophisticated */
-  --shadow-sm: 0 1px 2px 0 rgba(20, 33, 52, 0.02);
-  --shadow-md: 0 4px 10px rgba(20, 33, 52, 0.03);
-  --shadow-lg: 0 12px 24px rgba(20, 33, 52, 0.04);
-  --shadow-glow-primary: 0 0 20px rgba(20, 33, 52, 0.08);
-  --shadow-glow-secondary: 0 0 20px rgba(255, 255, 255, 0.5);
+  /* Shadows & Glows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 10px rgba(1, 6, 16, 0.5);
+  --shadow-lg: 0 12px 24px rgba(1, 6, 16, 0.7);
+  --shadow-glow-primary: 0 0 25px rgba(0, 140, 255, 0.35);
+  --shadow-glow-secondary: 0 0 30px rgba(0, 140, 255, 0.20);
 
-  /* Border Radii (16px - 24px for cards, 12px - 14px for buttons) */
+  /* Border Radii */
   --radius-xs: 4px;
   --radius-sm: 8px;
-  --radius-button: 12px; /* Standard button radius 12px-14px */
+  --radius-button: 12px;
   --radius-md: 14px;
-  --radius-lg: 16px; /* Cards lower bounds */
-  --radius-xl: 24px; /* Cards upper bounds */
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-2xl: 32px;
   --radius-full: 9999px;
 
@@ -66,13 +84,13 @@
   /* Layout Sizes */
   --header-height: 80px;
   --header-scroll-height: 70px;
-  --container-max-width: 1720px; /* Expanded premium container width */
+  --container-max-width: 1720px;
 
-  /* Accent themes (Teal #14b8a6 by default for light/white backgrounds) */
-  --accent-color: #14b8a6;
-  --accent-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-  --badge-bg: rgba(20, 184, 166, 0.06);
-  --badge-border: rgba(20, 184, 166, 0.18);
+  /* Accent themes */
+  --accent-color: #008cff;
+  --accent-gradient: linear-gradient(135deg, #008cff 0%, #00a8ff 100%);
+  --badge-bg: rgba(0, 140, 255, 0.1);
+  --badge-border: rgba(0, 140, 255, 0.25);
 }
 
 .theme-dark,
@@ -82,23 +100,22 @@
 [class*="sectionDark"],
 [class*="dark-theme"],
 [class*="darkTheme"],
-body.dark-mode {
-  --bg-base: #000000;
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #141414;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.45);
-  --color-border: rgba(255, 255, 255, 0.10);
-  --color-border-hover: rgba(255, 255, 255, 0.20);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-hover: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.16);
-  --accent-color: #ff5722 !important;
-  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%) !important;
-  --badge-bg: rgba(255, 87, 34, 0.06) !important;
-  --badge-border: rgba(255, 87, 34, 0.18) !important;
+body[data-theme='dark'] {
+  --bg-base: #010610;
+  --bg-primary: #010610;
+  --bg-secondary: #050D1A;
+  --bg-tertiary: #081321;
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAB8CC;
+  --text-muted: #718096;
+  --color-border: #163451;
+  --color-border-hover: rgba(0, 140, 255, 0.40);
+  --glass-bg: rgba(8, 19, 33, 0.75);
+  --glass-bg-hover: rgba(11, 23, 40, 0.85);
+  --glass-border: #163451;
+  --glass-border-hover: rgba(0, 140, 255, 0.35);
+  --accent-color: #008CFF !important;
+  --accent-gradient: linear-gradient(135deg, #008CFF 0%, #00A8FF 100%) !important;
+  --badge-bg: rgba(0, 140, 255, 0.1) !important;
+  --badge-border: rgba(0, 140, 255, 0.25) !important;
 }
-

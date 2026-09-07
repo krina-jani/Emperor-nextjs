@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { cn } from '../../lib/utils';
 import styles from './Footer.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -79,7 +78,19 @@ export const Footer: React.FC = () => {
 
   return (
     <footer ref={footerRef} className={styles.footer}>
-      <div className={cn('container', styles.container)}>
+      {/* Background Dotted World Map & Ambient Atmosphere */}
+      <div className={styles.mapBackground} aria-hidden="true">
+        <div className={styles.mapAura} />
+        <img
+          src="/images/footer/world-map-dots.svg"
+          alt=""
+          className={styles.mapSvg}
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div className={styles.footerContainer}>
         <div className={styles.contentSection}>
           {/* Left Side */}
           <div className={styles.leftCol}>

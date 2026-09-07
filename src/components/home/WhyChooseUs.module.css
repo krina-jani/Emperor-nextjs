@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   min-height: 100vh;
-  background-color: #000000;
+  background: radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%);
   position: relative;
   overflow: visible;
 }
@@ -64,8 +64,8 @@
   z-index: 10;
   width: clamp(250px, 21vw, 320px);
   aspect-ratio: 16 / 9;
-  border: 1px solid rgba(255, 87, 34, 0.25);
-  box-shadow: 0 0 45px rgba(255, 87, 34, 0.18);
+  border: 1px solid rgba(0, 140, 255, 0.35);
+  box-shadow: 0 0 45px rgba(0, 140, 255, 0.25);
   border-radius: 4px;
   overflow: hidden;
   will-change: width, height, border-radius, box-shadow;
@@ -110,7 +110,7 @@
   font-weight: 750;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: #ff5722;
+  color: #008cff;
   margin: 0;
   text-align: center;
   text-transform: uppercase;
@@ -203,7 +203,7 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: #ff5722;
+  color: #008cff;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
@@ -243,7 +243,7 @@
 
 .pillarCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 87, 34, 0.4);
+  border-color: rgba(0, 140, 255, 0.4);
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -251,7 +251,7 @@
   font-family: 'Space Grotesk', var(--font-sans), sans-serif;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #ff5722;
+  color: #008cff;
   letter-spacing: 0.1em;
   margin-bottom: 14px;
 }

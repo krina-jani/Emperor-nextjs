@@ -1,12 +1,61 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import styles from './HomeHero.module.css';
 
 export const HomeHero: React.FC = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const targetPos = useRef({ x: -500, y: -500 });
+  const currentPos = useRef({ x: -500, y: -500 });
+  const animFrameId = useRef<number | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    targetPos.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  };
+
+  const handleMouseEnter = () => {
+    if (wrapperRef.current) {
+      wrapperRef.current.style.setProperty('--shadow-opacity', '1');
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (wrapperRef.current) {
+      wrapperRef.current.style.setProperty('--shadow-opacity', '0');
+    }
+  };
+
+  useEffect(() => {
+    const updatePosition = () => {
+      // Smooth lerp easing for high-end fluid movement
+      const ease = 0.2;
+      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * ease;
+      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * ease;
+
+      if (wrapperRef.current) {
+        wrapperRef.current.style.setProperty('--mouse-x', `${currentPos.current.x.toFixed(1)}px`);
+        wrapperRef.current.style.setProperty('--mouse-y', `${currentPos.current.y.toFixed(1)}px`);
+      }
+
+      animFrameId.current = requestAnimationFrame(updatePosition);
+    };
+
+    animFrameId.current = requestAnimationFrame(updatePosition);
+    return () => {
+      if (animFrameId.current) {
+        cancelAnimationFrame(animFrameId.current);
+      }
+    };
+  }, []);
+
   return (
     <section className={styles.heroSection} aria-label="Hero Section">
       <div className={styles.heroContainer}>
@@ -75,7 +124,14 @@ export const HomeHero: React.FC = () => {
 
         {/* Right Column: Cybernetic Robot Figure */}
         <div className={styles.heroVisual}>
-          <div className={styles.robotWrapper}>
+          <div
+            ref={wrapperRef}
+            className={styles.robotWrapper}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Base Layer: Bright Robot Image */}
             <Image
               src="/images/robot.png"
               alt="Emperor Smart Solution AI & Software Robot"
@@ -85,6 +141,18 @@ export const HomeHero: React.FC = () => {
               quality={95}
               className={styles.robotImage}
             />
+
+            {/* Top Layer: Dark Robot Image masked to mouse cursor position */}
+            <Image
+              src="/images/robot.png"
+              alt=""
+              width={680}
+              height={850}
+              priority
+              quality={95}
+              aria-hidden="true"
+              className={styles.darkRobotImage}
+            />
           </div>
         </div>
       </div>
@@ -93,3 +161,5 @@ export const HomeHero: React.FC = () => {
 };
 
 export default HomeHero;
+
+

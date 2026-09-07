@@ -50,18 +50,23 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-tertiary);
+  background: #163451;
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: #008CFF;
 }
 
-/* Custom Text Selection suited for Navy / Cream colors */
+/* Global High-Contrast Text Selection Styling */
 ::selection {
-  background: rgba(20, 33, 52, 0.1);
-  color: var(--text-primary);
+  background: #008cff !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background: #008cff !important;
+  color: #ffffff !important;
 }
 
 /* Typography Editorial Settings */
@@ -76,26 +81,26 @@ p {
   color: var(--text-secondary);
 }
 
-/* Gradient Text Utilities restricted to our palette */
+/* Gradient Text Utilities restricted to Black + Blue palette */
 .text-gradient-primary {
-  background: linear-gradient(135deg, var(--text-primary) 0%, rgba(20, 33, 52, 0.8) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #008cff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Decorative Blur Backgrounds - restricted to Navy opacity tints */
+/* Decorative Blur Backgrounds */
 .glow-blur {
   position: absolute;
   pointer-events: none;
   z-index: 0;
   border-radius: var(--radius-full);
   filter: blur(100px);
-  opacity: 0.05;
+  opacity: 0.12;
 }
 
-.glow-navy {
-  background: var(--bg-dark);
+.glow-blue {
+  background: #008cff;
   width: 400px;
   height: 400px;
 }

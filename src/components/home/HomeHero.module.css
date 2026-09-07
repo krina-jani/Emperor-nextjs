@@ -2,9 +2,9 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #F7F5F0;
-  background: radial-gradient(circle at 65% 42%, #FFFFFF 0%, #F7F5F0 50%, #ECE9E2 100%);
-  color: #000000;
+  background-color: #010610;
+  background: radial-gradient(circle at 65% 42%, #050D1A 0%, #010610 60%, #000000 100%);
+  color: #FFFFFF;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.22em;
-  color: #1a1a1a;
+  color: #008CFF;
   text-transform: uppercase;
 }
 
@@ -57,7 +57,7 @@
   display: inline-block;
   width: 46px;
   height: 1.5px;
-  background-color: #1a1a1a;
+  background-color: #008CFF;
 }
 
 /* Main Title */
@@ -67,7 +67,7 @@
   font-weight: 850;
   line-height: 0.96;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: #FFFFFF;
   margin: 0 0 28px 0;
   text-transform: uppercase;
   display: flex;
@@ -82,7 +82,7 @@
 .heroDescription {
   font-size: clamp(1.05rem, 1.25vw, 1.25rem);
   line-height: 1.55;
-  color: #3f3f46;
+  color: #AAB8CC;
   max-width: 530px;
   margin-bottom: 34px;
   font-weight: 400;
@@ -103,11 +103,11 @@
   gap: 12px;
 }
 
-/* Black Primary Pill Button */
+/* Electric Blue Primary Pill Button */
 .pitchBtn {
-  background-color: #000000;
-  color: #ffffff;
-  border: 1px solid #000000;
+  background-color: #008CFF;
+  color: #FFFFFF;
+  border: 1px solid #008CFF;
   border-radius: 9999px;
   padding: 13px 26px;
   font-size: 0.95rem;
@@ -117,15 +117,16 @@
   align-items: center;
   gap: 10px;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
   cursor: pointer;
 }
 
 .pitchBtn:hover {
-  background-color: #1f1f1f;
-  border-color: #1f1f1f;
+  background-color: #00A8FF;
+  border-color: #00A8FF;
+  color: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 30px rgba(0, 168, 255, 0.4);
 }
 
 .arrowIcon {
@@ -137,11 +138,11 @@
   transform: translateX(4px);
 }
 
-/* White Outline Pill Buttons */
+/* Dark Secondary Outline Pill Buttons */
 .outlineBtn {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: #081321;
+  color: #FFFFFF;
+  border: 1px solid #163451;
   border-radius: 9999px;
   padding: 13px 24px;
   font-size: 0.95rem;
@@ -150,39 +151,41 @@
   display: inline-flex;
   align-items: center;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
 .outlineBtn:hover {
-  border-color: #000000;
-  background-color: #faf9f6;
+  border-color: #008CFF;
+  color: #008CFF;
+  background-color: #0B1728;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 20px rgba(0, 140, 255, 0.2);
 }
 
 /* Contact Pill */
 .contactPill {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: #081321;
+  border: 1px solid #163451;
   border-radius: 9999px;
   padding: 12px 22px;
   font-size: 0.92rem;
-  color: #555555;
+  color: #AAB8CC;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.25s ease;
 }
 
 .contactPill:hover {
-  border-color: #000000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: #008CFF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 140, 255, 0.15);
 }
 
 .emailLink {
-  color: #111111;
+  color: #008CFF;
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 600;
@@ -190,7 +193,7 @@
 }
 
 .emailLink:hover {
-  color: #000000;
+  color: #00A8FF;
 }
 
 .searchIcon {
@@ -240,6 +243,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  transform-origin: bottom center;
+  animation: subtleFloat 6s ease-in-out infinite;
+  cursor: pointer;
 }
 
 .robotImage {
@@ -249,8 +255,42 @@
   object-fit: contain;
   object-position: bottom center;
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.16));
-  transform-origin: bottom center;
-  animation: subtleFloat 6s ease-in-out infinite;
+  display: block;
+}
+
+.darkRobotImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: min(84vh, 760px);
+  object-fit: contain;
+  object-position: bottom center;
+  pointer-events: none;
+  z-index: 2;
+  
+  /* Darken filter turns white robot armor into sleek black shadow */
+  filter: brightness(0.1) contrast(1.25) drop-shadow(0 25px 45px rgba(0, 0, 0, 0.25));
+  
+  opacity: var(--shadow-opacity, 0);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radial spotlight mask centered precisely on cursor position */
+  -webkit-mask-image: radial-gradient(
+    circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    #000000 0%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0.35) 72%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 180px at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    #000000 0%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0.35) 72%,
+    transparent 100%
+  );
 }
 
 @keyframes subtleFloat {
@@ -290,7 +330,8 @@
     order: -1;
   }
 
-  .robotImage {
+  .robotImage,
+  .darkRobotImage {
     max-height: 480px;
   }
 }

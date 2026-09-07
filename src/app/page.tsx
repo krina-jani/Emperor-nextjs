@@ -11,8 +11,6 @@ import TrustBar from '../components/home/TrustBar';
 import IndustriesPreview from '../components/home/IndustriesPreview';
 import AboutPreview from '../components/home/AboutPreview';
 import BlogPreview from '../components/home/BlogPreview';
-import HorizontalScrollCTA from '../components/home/HorizontalScrollCTA';
-import ConsultationSection from '../components/home/ConsultationSection';
 import ProjectsTeaser from '../components/home/ProjectsTeaser';
 import HomeStack from '../components/home/HomeStack';
 
@@ -24,7 +22,7 @@ export const metadata = generatePageMetadata(
 
 export default function Home() {
   return (
-    <>
+    <div style={{ background: 'radial-gradient(circle at 65% 42%, rgb(5, 13, 26) 0%, rgb(1, 6, 16) 60%, rgb(0, 0, 0) 100%)', overflow: 'hidden', width: '100%' }}>
       <div id="home">
         <HomeHero />
       </div>
@@ -74,14 +72,8 @@ export default function Home() {
       <div id="blog">
         <BlogPreview />
       </div>
-
-      <div id="cta-scatter">
-        <HorizontalScrollCTA />
-      </div>
-
-      <div id="consultation">
-        <ConsultationSection />
-      </div>
-    </>
+    </div>
   );
 }
+
+

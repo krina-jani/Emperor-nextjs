@@ -9,7 +9,7 @@
   font-family: monospace;
   font-size: 0.85rem;
   letter-spacing: 0.15em;
-  color: #ff5722;
+  color: #008cff;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
   display: block;
@@ -43,8 +43,89 @@
   margin-bottom: 3rem;
 }
 
+.headerFlex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
 .headerLeft {
-  max-width: 720px;
+  max-width: 680px;
+}
+
+.navControls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.stepBadges {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.stepBadgeBtn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.55rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stepBadgeBtn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.activeBadge {
+  background: #008cff !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0, 140, 255, 0.4);
+}
+
+.arrowBtns {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.arrowBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arrowBtn:hover:not(:disabled) {
+  background: #008cff;
+  border-color: #008cff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0, 140, 255, 0.35);
+}
+
+.arrowBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .track {
@@ -66,7 +147,7 @@
 .progressLineFill {
   width: 100%;
   height: 100%;
-  background-color: #ff5722;
+  background-color: #008cff;
   transform: scaleX(0);
   transform-origin: left;
   will-change: transform;
@@ -96,7 +177,7 @@
 }
 
 .stepCard:hover {
-  border-color: rgba(255, 87, 34, 0.4);
+  border-color: rgba(0, 140, 255, 0.4);
   transform: translateY(-4px);
 }
 
@@ -120,7 +201,7 @@
   width: 16px;
   height: 16px;
   background-color: #000000;
-  border: 3px solid #ff5722;
+  border: 3px solid #008cff;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -144,7 +225,7 @@
 }
 
 .seoCard {
-  border-color: rgba(255, 87, 34, 0.3);
+  border-color: rgba(0, 140, 255, 0.35);
 }
 
 .seoBox {
@@ -158,7 +239,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #ff5722;
+  color: #008cff;
   display: block;
   margin-bottom: 0.75rem;
   font-family: monospace;
@@ -183,7 +264,7 @@
 }
 
 .seoCheck {
-  color: #ff5722;
+  color: #008cff;
   flex-shrink: 0;
 }
 
@@ -220,7 +301,7 @@
   bottom: 10px;
   left: 17px;
   width: 2px;
-  background-color: rgba(255, 87, 34, 0.3);
+  background-color: rgba(0, 140, 255, 0.35);
   z-index: 1;
 }
 
@@ -241,7 +322,7 @@
   width: 34px;
   height: 34px;
   background-color: #09090b;
-  border: 2px solid #ff5722;
+  border: 2px solid #008cff;
   color: #ffffff;
   border-radius: 50%;
   font-size: 0.8rem;

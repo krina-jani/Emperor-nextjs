@@ -1,96 +1,153 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import Container from '../ui/Container';
-import FadeIn from '../animations/FadeIn';
 import { testimonials } from '../../data/testimonials';
-import { cn } from '../../lib/utils';
 import styles from './Testimonials.module.css';
-import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
+import { Star, Target, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Testimonials: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const cardsPerPage = 3;
+  const totalCards = testimonials.length;
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+    setStartIndex((prev) => (prev === 0 ? Math.max(0, totalCards - cardsPerPage) : prev - 1));
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    setStartIndex((prev) => (prev >= totalCards - cardsPerPage ? 0 : prev + 1));
   };
 
-  const current = testimonials[activeIndex];
+  const visibleCards = testimonials.slice(startIndex, startIndex + cardsPerPage);
 
   return (
     <section className={styles.section} id="testimonials">
       <Container>
-        <div className={styles.header}>
-          <span className={styles.eyebrow}>[07] Client Feedback</span>
-          <h2 className={styles.title}>What Clients Say</h2>
-          <p className={styles.introDesc}>
-            A few words from businesses that worked directly on these projects.
-          </p>
+        {/* Top Header Split: Left Studio Image, Right Header Text & Buttons */}
+        <div className={styles.topHeaderGrid}>
+          <div className={styles.imageCol}>
+            <div className={styles.officeImageWrapper}>
+              <Image
+                src="/images/client_reviews_office.jpg"
+                alt="Emperor Smart Solution Studio & Office"
+                width={640}
+                height={420}
+                quality={95}
+                className={styles.officeImage}
+              />
+            </div>
+          </div>
+
+          <div className={styles.contentCol}>
+            <div className={styles.badgePill}>
+              <Target size={14} className={styles.badgeIcon} />
+              <span>Design services</span>
+            </div>
+
+            <h2 className={styles.mainTitle}>Client Reviews</h2>
+
+            <p className={styles.description}>
+              Real feedback from clients who trusted our design expertise to elevate their brands.
+            </p>
+
+            <div className={styles.btnRow}>
+              <Link href="/contact" className={styles.primaryBtn}>
+                Book a Free Call
+              </Link>
+              <Link href="/services" className={styles.secondaryBtn}>
+                See Services
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <div className={styles.carouselWrapper}>
-          <FadeIn direction="none" duration="400ms" className={styles.cardContainer}>
-            <div className={styles.card}>
-              <div className={styles.topRow}>
-                <div className={styles.rating}>
-                  {Array.from({ length: current.rating }).map((_, i) => (
-                    <Star key={i} className={styles.star} size={18} fill="#ff5722" color="#ff5722" />
+        {/* Reviews Navigation Bar (< > Arrow Controls) */}
+        <div className={styles.reviewsHeaderRow}>
+          <div className={styles.reviewsCounter}>
+            <span className={styles.reviewsCounterText}>
+              Showing <strong>{startIndex + 1} &ndash; {Math.min(startIndex + cardsPerPage, totalCards)}</strong> of {totalCards} Client Reviews
+            </span>
+          </div>
+
+          <div className={styles.carouselNavBtns}>
+            <button
+              type="button"
+              onClick={handlePrev}
+              className={styles.carouselArrowBtn}
+              aria-label="Previous Reviews"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              className={styles.carouselArrowBtn}
+              aria-label="Next Reviews"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Middle Testimonial Cards Grid (3 Cards without avatars) */}
+        <div className={styles.reviewsGrid}>
+          {visibleCards.map((item) => (
+            <div key={item.id} className={styles.reviewCard}>
+              {/* Author Name & Role/Company (No Client Image) */}
+              <h3 className={styles.authorName}>{item.author}</h3>
+              <p className={styles.authorRole}>
+                {item.role} &bull; <span className={styles.companyName}>{item.company}</span>
+              </p>
+
+              <div className={styles.divider} />
+
+              {/* Quote text */}
+              <p className={styles.quoteText}>
+                &ldquo;{item.quote}&rdquo;
+              </p>
+
+              {/* Bottom Rating Stars */}
+              <div className={styles.ratingRow}>
+                <span className={styles.ratingScore}>{item.rating.toFixed(1)}</span>
+                <div className={styles.stars}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={15}
+                      className={styles.starIcon}
+                      fill="#eab308"
+                      color="#eab308"
+                    />
                   ))}
                 </div>
-                <Quote size={28} className={styles.quoteIcon} />
-              </div>
-
-              <blockquote className={styles.quote}>
-                &ldquo;{current.quote}&rdquo;
-              </blockquote>
-
-              <div className={styles.authorRow}>
-                <div className={styles.avatar}>
-                  {current.author.charAt(0)}
-                </div>
-                <div className={styles.info}>
-                  <cite className={styles.name}>{current.author}</cite>
-                  <span className={styles.role}>
-                    {current.role} &mdash; <span className={styles.company}>{current.company}</span>
-                  </span>
-                </div>
               </div>
             </div>
-          </FadeIn>
+          ))}
+        </div>
 
-          {/* Navigation Controls */}
-          <div className={styles.controls}>
-            <button
-              onClick={handlePrev}
-              className={styles.navBtn}
-              aria-label="Previous Testimonial"
-            >
-              <ChevronLeft size={22} />
-            </button>
-            <div className={styles.indicators}>
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className={cn(
-                    styles.indicator,
-                    i === activeIndex && styles.activeIndicator
-                  )}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-            <button
-              onClick={handleNext}
-              className={styles.navBtn}
-              aria-label="Next Testimonial"
-            >
-              <ChevronRight size={22} />
-            </button>
+        {/* Bottom Stats Banner */}
+        <div className={styles.statsBanner}>
+          <div className={styles.statCol}>
+            <span className={styles.statNumber}>200+</span>
+            <span className={styles.statLabel}>design projects completed.</span>
+          </div>
+
+          <div className={styles.statDivider} />
+
+          <div className={styles.statCol}>
+            <span className={styles.statNumber}>98%</span>
+            <span className={styles.statLabel}>Client satisfaction rate.</span>
+          </div>
+
+          <div className={styles.statDivider} />
+
+          <div className={styles.statCol}>
+            <span className={styles.statNumber}>5+</span>
+            <span className={styles.statLabel}>Years of experience</span>
           </div>
         </div>
       </Container>
@@ -99,3 +156,5 @@ export const Testimonials: React.FC = () => {
 };
 
 export default Testimonials;
+
+

@@ -18,7 +18,7 @@ const caseStudies = [
     metricDesc: 'Execution dropped from 450ms down to 18ms with 0 manual intervention.',
     icon: <Zap size={22} className={styles.metricIcon} />,
     technologies: ['Python', 'FastAPI', 'WebSockets', 'Redis', 'Docker'],
-    accentColor: '#ff5722',
+    accentColor: '#008cff',
   },
   {
     id: 'headless-ecommerce-erp',

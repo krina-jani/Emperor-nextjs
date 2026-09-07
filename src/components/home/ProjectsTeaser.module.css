@@ -1,6 +1,6 @@
 .section {
-  background-color: #ffffff;
-  color: #000000;
+  background: transparent;
+  color: #FFFFFF;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   letter-spacing: -0.04em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: #000000;
+  color: #FFFFFF;
   display: inline-block;
 }
 
@@ -25,18 +25,18 @@
   line-height: 1.4;
   font-weight: 400;
   max-width: 95%;
-  color: #000000;
+  color: #AAB8CC;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
 .link {
-  color: #14b8a6; /* Teal accent on white background */
+  color: #008CFF;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color 0.3s ease;
   position: relative;
 }
 
@@ -47,14 +47,15 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #14b8a6; /* Teal accent on white background */
+  background-color: #008CFF;
   transform: scaleX(1);
   transform-origin: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .link:hover {
-  opacity: 0.8;
+  color: #00A8FF;
+  opacity: 0.9;
 }
 
 .link:hover::after {
