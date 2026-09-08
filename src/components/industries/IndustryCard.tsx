@@ -63,6 +63,3 @@ export const IndustryCard: React.FC<IndustryCardProps> = ({ industry }) => {
 };
 
 export default IndustryCard;
-
-
-
