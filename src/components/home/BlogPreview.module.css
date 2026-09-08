@@ -43,6 +43,13 @@
   gap: 2rem;
 }
 
+@media (min-width: 640px) and (max-width: 991px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
 @media (min-width: 992px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -170,4 +177,20 @@
   background: rgba(0, 140, 255, 0.15);
   border-color: rgba(0, 140, 255, 0.4);
   color: #008cff;
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 4rem 0;
+  }
+  .articleCard {
+    padding: 1.5rem 1.25rem;
+  }
+  .moreArticlesRow {
+    margin-top: 2.5rem;
+  }
+  .viewBlogBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

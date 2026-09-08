@@ -21,6 +21,12 @@
   }
 }
 
+@media (max-width: 360px) {
+  .formContainer {
+    padding: 1.25rem 0.85rem;
+  }
+}
+
 .header {
   text-align: center;
   margin-bottom: 3rem;
@@ -87,7 +93,7 @@
 .select:focus,
 .textarea:focus {
   border-color: var(--color-primary);
-  background-color: #ffffff;
+  background-color: var(--bg-tertiary, #0B1728);
   outline: none;
 }
 
@@ -148,6 +154,12 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .uploadLabel {
+    padding: 1.5rem 1rem;
+  }
 }
 
 .uploadLabel:hover {

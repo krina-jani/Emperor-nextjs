@@ -15,9 +15,9 @@
 
 .card:hover {
   background: var(--glass-bg-hover);
-  border-color: rgba(20, 184, 166, 0.3);
+  border-color: rgba(0, 168, 255, 0.4);
   transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(20, 184, 166, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 140, 255, 0.12);
 }
 
 .header {
@@ -32,18 +32,21 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(20, 184, 166, 0.06);
-  border: 1px solid rgba(20, 184, 166, 0.18);
-  color: var(--color-secondary);
+  border-radius: 12px;
+  background-color: rgba(0, 140, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.35);
+  color: #00A8FF;
   transition: all var(--transition-normal);
   flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(0, 140, 255, 0.15);
 }
 
 .card:hover .iconBox {
-  background-color: var(--color-secondary);
-  color: var(--text-primary);
-  box-shadow: 0 0 12px rgba(20, 184, 166, 0.4);
+  background-color: #008CFF;
+  border-color: #00A8FF;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+  transform: scale(1.05);
 }
 
 .name {
@@ -78,7 +81,7 @@
 }
 
 .shieldIcon {
-  color: var(--color-secondary);
+  color: #00A8FF;
 }
 
 .badgeRow {
@@ -93,8 +96,8 @@
 }
 
 .card:hover .badge {
-  border-color: rgba(20, 184, 166, 0.25);
-  color: var(--text-secondary);
+  border-color: rgba(0, 168, 255, 0.35);
+  color: var(--text-primary);
 }
 
 /* Features Block */
@@ -119,7 +122,7 @@
 }
 
 .checkIcon {
-  color: var(--color-secondary);
+  color: #00A8FF;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -139,3 +142,21 @@
 .btn {
   width: 100%;
 }
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 1.25rem 1rem;
+  }
+}
+

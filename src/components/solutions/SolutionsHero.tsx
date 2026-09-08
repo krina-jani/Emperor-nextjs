@@ -62,7 +62,7 @@ export const SolutionsHero: React.FC = () => {
             {/* Left Column: Copy Content */}
             <div className={styles.copyCol}>
               <Breadcrumbs />
-              <div style={{ marginTop: '1.5rem' }}>
+              <div style={{ marginTop: '0.85rem' }}>
                 <FadeIn direction="down" delay="100ms">
                   <span className={styles.badge}>SOLUTIONS</span>
                   <h1 className={styles.title}>

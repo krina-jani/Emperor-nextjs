@@ -1,10 +1,10 @@
 .hero {
   background-color: #000000;
   color: #ffffff;
-  min-height: 80vh;
+  min-height: auto;
   display: flex;
   align-items: center;
-  padding: calc(var(--header-height) + 2rem) 0 4rem 0;
+  padding: calc(var(--header-height) + 1rem) 0 2.25rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -12,15 +12,15 @@
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 2.5rem;
   align-items: center;
   width: 100%;
 }
 
 @media (min-width: 1024px) {
   .gridContainer {
-    grid-template-columns: 1fr 1.15fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 3rem;
   }
 }
 
@@ -54,19 +54,19 @@
   color: #008cff;
   background-color: rgba(0, 140, 255, 0.1);
   border: 1px solid rgba(0, 140, 255, 0.25);
-  padding: 0.35rem 0.8rem;
+  padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.9rem;
   display: inline-block;
   width: max-content;
 }
 
 .title {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.1rem;
   color: #ffffff;
 }
 
@@ -78,17 +78,17 @@
 }
 
 .desc {
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  line-height: 1.6;
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  line-height: 1.55;
   color: rgba(255, 255, 255, 0.7);
-  max-width: 680px;
+  max-width: 600px;
 }
 
 /* Suspended Graphic Column */
 .visualCol {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,14 +97,14 @@
 
 @media (min-width: 1024px) {
   .visualCol {
-    height: 440px;
+    height: 330px;
   }
 }
 
 .svgWrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,7 +115,7 @@
 
 .svgScaleContainer {
   width: 100%;
-  max-width: 550px;
+  max-width: 480px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,7 +123,7 @@
 
 @media (min-width: 1024px) {
   .svgScaleContainer {
-    transform: scale(1.36);
+    transform: scale(1.1);
   }
 }
 
@@ -146,10 +146,9 @@
 /* Page Transition Blinds Overlay */
 .blindsOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -162,4 +161,14 @@
   width: 100%;
   transform: scaleX(1);
   transform-origin: right center;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: calc(var(--header-height, 70px) + 1.25rem);
+    padding-bottom: 2rem;
+  }
+  .title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
 }

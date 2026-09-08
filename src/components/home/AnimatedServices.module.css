@@ -9,21 +9,18 @@
 
 .introSlide {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   width: 100%;
   padding-left: clamp(1.5rem, 5vw, 5rem);
   padding-right: clamp(1.5rem, 5vw, 5rem);
-  margin-bottom: 4rem;
-  gap: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .leftCol {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 680px;
+  max-width: 820px;
 }
 
 .badgeRow {
@@ -76,90 +73,41 @@
   gap: 0.75rem;
 }
 
-.rightCol {
-  display: flex;
-  justify-content: flex-end;
-  max-width: 480px;
-}
-
-.summary {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  backdrop-filter: blur(10px);
-}
-
-.summaryLabel {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
-  font-family: monospace;
-}
-
-.capabilitiesTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.capBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  color: #e2e8f0;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.capBadge:hover {
-  background: rgba(0, 140, 255, 0.15);
-  border-color: rgba(0, 140, 255, 0.4);
-  color: #ffffff;
-}
-
-/* Pinned Wrapper for Cards */
-.pinWrapper {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  padding: 2rem 0;
-}
-
 .scrollContainer {
   width: 100%;
 }
 
 .cardsWrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
   width: 100%;
   padding: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+@media (max-width: 1024px) {
+  .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsWrapper {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
   background: #081321;
   border: 1px solid #163451;
   border-radius: 1rem;
-  padding: 1.75rem 1.5rem;
+  padding: 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.25rem;
-  min-height: 310px;
+  gap: 1.5rem;
+  min-height: 320px;
   position: relative;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -336,5 +284,29 @@
   .introSlide {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+  .card {
+    padding: 1.5rem 1.25rem;
+    gap: 1.25rem;
+  }
+  .title {
+    font-size: clamp(2rem, 8.5vw, 3rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .cardsWrapper {
+    padding: 0 12px;
+  }
+  .introSlide {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }

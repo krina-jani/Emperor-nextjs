@@ -1,60 +1,53 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Service } from '../../types/service';
 import Icon from '../ui/Icon';
-import Badge from '../ui/Badge';
-import Button from '../ui/Button';
+import { ArrowUpRight } from 'lucide-react';
 import styles from './ServiceCard.module.css';
-import { ArrowRight, Check } from 'lucide-react';
 
 interface ServiceCardProps {
   service: Service;
+  index?: number;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
+export const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
+  const displayNumber = service.serviceNumber || (index !== undefined ? String(index + 1).padStart(2, '0') : '01');
+  const ctaLabel = service.ctaText || `Explore ${service.title} →`;
+
   return (
-    <div className={styles.card}>
-      <div className={styles.header}>
-        <div className={styles.iconWrapper}>
-          <Icon name={service.iconName} size={26} />
+    <Link
+      href={`/services/${service.slug}`}
+      className={styles.card}
+      aria-label={`${service.title} - ${ctaLabel}`}
+    >
+      {/* Header with Number Badge, Icon, and Arrow */}
+      <div className={styles.cardHeader}>
+        <div className={styles.headerLeft}>
+          <span className={styles.numberBadge}>{displayNumber}</span>
+          <div className={styles.iconBox}>
+            <Icon name={service.iconName || 'Code2'} size={24} />
+          </div>
         </div>
-        <h2 className={styles.title}>{service.title}</h2>
+        <div className={styles.arrowCircle} aria-hidden="true">
+          <ArrowUpRight size={16} />
+        </div>
       </div>
 
-      <p className={styles.summary}>{service.summary}</p>
-
-      {/* Checklist of features */}
-      <div className={styles.features}>
-        <h4 className={styles.featureTitle}>Practice Focus Areas</h4>
-        <ul className={styles.list}>
-          {service.features.map((feat) => (
-            <li key={feat} className={styles.item}>
-              <div className={styles.checkWrapper}>
-                <Check size={10} />
-              </div>
-              <span className={styles.itemText}>{feat}</span>
-            </li>
-          ))}
-        </ul>
+      {/* Content */}
+      <div className={styles.cardContent}>
+        <h3 className={styles.title}>{service.title}</h3>
+        <p className={styles.description}>{service.summary || service.description}</p>
       </div>
 
-      {/* Tech badges */}
-      <div className={styles.techRow}>
-        {service.technologies.slice(0, 4).map((tech) => (
-          <Badge key={tech} variant="outline" className={styles.badge}>
-            {tech}
-          </Badge>
-        ))}
+      {/* Footer CTA */}
+      <div className={styles.cardFooter}>
+        <span className={styles.ctaButton}>
+          {ctaLabel}
+        </span>
       </div>
-
-      <div className={styles.footer}>
-        <Link href={`/services/${service.slug}`}>
-          <Button variant="outline" rightIcon={<ArrowRight size={14} />} className={styles.btn}>
-            Launch Practice
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </Link>
   );
 };
 

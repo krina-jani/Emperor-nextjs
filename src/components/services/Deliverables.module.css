@@ -1,0 +1,87 @@
+.section {
+  padding: 3.5rem 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sectionHeader {
+  margin-bottom: 2rem;
+}
+
+.badge {
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00A8FF;
+  margin-bottom: 0.5rem;
+}
+
+.heading {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 750;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  background: rgba(8, 19, 33, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: rgba(12, 26, 46, 0.85);
+  border-color: rgba(0, 168, 255, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 140, 255, 0.1);
+}
+
+.checkIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 140, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.3);
+  color: #00A8FF;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.card:hover .checkIconWrapper {
+  background: #008CFF;
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(0, 168, 255, 0.4);
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #E2E8F0;
+  font-weight: 500;
+}

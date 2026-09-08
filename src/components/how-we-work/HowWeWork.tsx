@@ -189,11 +189,11 @@ export const HowWeWork = () => {
         <div className={styles.heroContainer}>
           <div className={styles.heroBadge}>Live • Free • Online</div>
           <h1 className={styles.heroTitle}>
-            The 10-Stage <span className={styles.heroTitleHighlight}>Delivery Machine.</span>
+            The 05-Stage <span className={styles.heroTitleHighlight}>Delivery Machine.</span>
           </h1>
           <p className={styles.heroSubtitle}>
             Predictable, tested, and disciplined. We eliminate chaos from software development.<br/>
-            Every project follows our structured 10-stage execution pipeline with clear milestone gates, test coverage, and transparent Git access.
+            Every project follows our structured 05-stage execution pipeline with clear milestone gates, test coverage, and transparent Git access.
           </p>
         </div>
       </section>

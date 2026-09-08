@@ -11,15 +11,18 @@ export interface Service {
   title: string;
   slug: string;
   iconName: string;
+  serviceNumber?: string;
+  eyebrow?: string;
+  ctaText?: string;
   image3d?: string;
   colorTheme?: string;
   tag?: string;
   summary: string;
   description: string;
-  features: string[];
-  benefits: string[];
+  features?: string[];
+  benefits?: string[];
   deliverables?: string[];
-  process: ProcessStep[];
-  technologies: string[];
-  faqs: FAQItem[];
+  process?: ProcessStep[];
+  technologies?: string[];
+  faqs?: FAQItem[];
 }

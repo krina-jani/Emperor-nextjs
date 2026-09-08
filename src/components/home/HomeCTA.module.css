@@ -1,12 +1,14 @@
 .sectionAnimated {
   overflow: hidden;
   height: 100vh;
+  min-height: 480px;
   display: flex;
   align-items: center;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   background: #010610;
   color: #FFFFFF;
   position: relative;
+  box-sizing: border-box;
 }
 
 .containerAnimated {
@@ -21,19 +23,19 @@
   display: flex;
   width: max-content;
   white-space: nowrap;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 35vw; /* MASSIVE text on mobile */
+  font-family: var(--font-heading, "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-size: clamp(3.75rem, 16vw, 6.5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
   margin: 0;
-  padding-left: 100vw;
+  padding-left: 100%;
   color: #FFFFFF;
 }
 
 @media (min-width: 768px) {
   .horizontalText {
-    font-size: clamp(8rem, 15vw, 12rem);
+    font-size: clamp(6.5rem, 12vw, 12rem);
   }
 }
 
@@ -41,26 +43,40 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 10%;
+  bottom: 12%;
   left: 0;
   right: 0;
+  padding: 0 1rem;
 }
 
 .ctaBtn {
   background: #008CFF;
   color: #FFFFFF;
-  padding: 1rem 2.5rem;
-  font-size: 1.125rem;
+  padding: clamp(0.85rem, 2.5vw, 1rem) clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
   font-weight: 700;
   border-radius: 100px;
   border: none;
   cursor: pointer;
   box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
 }
 
 .ctaBtn:hover {
   background: #00A8FF;
   box-shadow: 0 0 30px rgba(0, 168, 255, 0.4);
   transform: translateY(-2px);
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .sectionAnimated {
+    min-height: 360px;
+  }
+  .btnWrapper {
+    bottom: 5%;
+  }
+  .horizontalText {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
 }

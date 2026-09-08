@@ -2,15 +2,13 @@ import React from 'react';
 import { generatePageMetadata } from '../lib/seo';
 import HomeHero from '../components/home/HomeHero';
 import AnimatedServices from '../components/home/AnimatedServices';
-import WhyChooseUs from '../components/home/WhyChooseUs';
 import ProcessTimeline from '../components/home/ProcessTimeline';
-import Stats from '../components/home/Stats';
 import FeaturedWork from '../components/home/FeaturedWork';
 import Testimonials from '../components/home/Testimonials';
 import TrustBar from '../components/home/TrustBar';
-import IndustriesPreview from '../components/home/IndustriesPreview';
 import AboutPreview from '../components/home/AboutPreview';
 import BlogPreview from '../components/home/BlogPreview';
+import HorizontalScrollCTA from '../components/home/HorizontalScrollCTA';
 import ProjectsTeaser from '../components/home/ProjectsTeaser';
 import HomeStack from '../components/home/HomeStack';
 
@@ -35,22 +33,10 @@ export default function Home() {
         <div id="services">
           <AnimatedServices />
         </div>
-
-        <div id="why-choose-us">
-          <WhyChooseUs />
-        </div>
-
-        <div id="solutions">
-          <IndustriesPreview />
-        </div>
       </HomeStack>
 
       <div id="process">
         <ProcessTimeline />
-      </div>
-
-      <div id="stats">
-        <Stats />
       </div>
 
       <div id="case-studies">
@@ -71,6 +57,10 @@ export default function Home() {
 
       <div id="blog">
         <BlogPreview />
+      </div>
+
+      <div id="cta-scatter">
+        <HorizontalScrollCTA />
       </div>
     </div>
   );

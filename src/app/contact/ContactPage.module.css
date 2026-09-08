@@ -4,10 +4,16 @@
 }
 
 .hero {
-  padding: calc(var(--header-height) + 8rem) 0 4rem;
+  padding: calc(var(--header-height, 80px) + clamp(2rem, 5vw, 6rem)) 0 clamp(2rem, 4vw, 4rem);
   background-color: var(--bg-dark);
   color: var(--text-on-dark);
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(var(--header-height, 80px) + 2rem) 0 2rem;
+  }
 }
 
 .badge {

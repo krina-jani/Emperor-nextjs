@@ -21,15 +21,21 @@ export const HomeCTA: React.FC = () => {
     const chars = textRef.current.querySelectorAll('.char');
 
     const ctx = gsap.context(() => {
+      const getScrollAmount = () => {
+        const textWidth = textRef.current ? textRef.current.scrollWidth : 0;
+        const windowWidth = window.innerWidth;
+        return -(textWidth - windowWidth + 80);
+      };
+
       // Horizontal scroll tween
       const scrollTween = gsap.to(textRef.current, {
-        xPercent: -100,
+        x: getScrollAmount,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
-          end: '+=5000px',
-          scrub: 1.5, // Smooth scrub
+          end: () => `+=${Math.min(3000, Math.max(1200, window.innerHeight * 2))}px`,
+          scrub: 1.2, // Smooth scrub
           invalidateOnRefresh: true, // Recalculate on resize
         },
       });

@@ -37,9 +37,9 @@
   width: 42px;
   height: 42px;
   border-radius: var(--radius-sm);
-  background-color: rgba(20, 184, 166, 0.08);
-  border: 1px solid rgba(20, 184, 166, 0.15);
-  color: var(--color-secondary);
+  background-color: rgba(0, 140, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.35);
+  color: #00A8FF;
 }
 
 .title {
@@ -106,7 +106,7 @@
 }
 
 .shieldIcon {
-  color: var(--color-secondary);
+  color: #00A8FF;
 }
 
 .badgeRowWrap {
@@ -145,9 +145,9 @@
   font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-secondary);
-  background-color: rgba(20, 184, 166, 0.05);
-  border: 1px solid rgba(20, 184, 166, 0.12);
+  color: #00A8FF;
+  background-color: rgba(0, 140, 255, 0.1);
+  border: 1px solid rgba(0, 140, 255, 0.25);
   padding: 0.35rem 0.8rem;
   border-radius: var(--radius-full);
   margin-bottom: 1rem;
@@ -168,15 +168,16 @@
 @media (min-width: 768px) {
   .featuresGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
   }
 }
 
 .featureCard {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 1.75rem;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -185,12 +186,12 @@
 
 .featureCard:hover {
   background: var(--glass-bg-hover);
-  border-color: rgba(20, 184, 166, 0.25);
+  border-color: rgba(0, 168, 255, 0.35);
   transform: translateY(-2px);
 }
 
 .checkIcon {
-  color: var(--color-secondary);
+  color: #00A8FF;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -231,4 +232,35 @@
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--header-height, 80px) + 2rem) 0;
+  }
+
+  .featuresSection,
+  .projectsSection {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .complianceCard {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .featureCard {
+    padding: 1.25rem 1rem;
+  }
+
+  .emptyCard {
+    padding: 3rem 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .complianceCard {
+    padding: 1.25rem 0.85rem;
+  }
 }

@@ -12,16 +12,18 @@ import styles from './Header.module.css';
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const checkHeaderTheme = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // 0. If at the top of page and body is not dark-mode, always light
-      if (window.scrollY < 40 && !document.body.classList.contains('dark-mode')) {
-        setIsDark(false);
+      // 0. If at the top of page, check if page is explicitly light
+      const isLightPage = document.querySelector('[data-page-theme="light"]') !== null ||
+                          document.querySelector('[data-theme="light"]') !== null;
+      if (window.scrollY < 40) {
+        setIsDark(!isLightPage);
         return;
       }
 
@@ -118,7 +120,7 @@ export const Header: React.FC = () => {
       window.removeEventListener('resize', checkHeaderTheme);
       observer.disconnect();
     };
-  }, []);
+  }, [pathname]);
 
   const handleCtaClick = () => {
     const ctaSection = document.getElementById('consultation-cta');
@@ -156,38 +158,17 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Center Desktop Navigation matching mockup */}
-        <nav className={styles.centerNav} aria-label="Main Navigation">
-          {[
-            { label: 'Home', href: '/' },
-            { label: 'Services', href: '/services' },
-            { label: 'Work', href: '/work' },
-            { label: 'About', href: '/about' },
-            { label: 'Contact', href: '/contact' },
-          ].map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(styles.centerNavLink, isActive && styles.centerNavActive)}
-              >
-                <span>{item.label}</span>
-                {isActive && <span className={styles.activeDot} aria-hidden="true" />}
-              </Link>
-            );
-          })}
-        </nav>
-
         {/* Right: Let's Talk + Menu Trigger */}
         <div className={styles.rightActions}>
-          {/* Let's Talk Pill Button */}
+          {/* Start a Project Pill Button */}
           <button
             type="button"
             className={styles.ctaBtn}
             onClick={handleCtaClick}
+            aria-label="Start a Project"
           >
-            LET&apos;S TALK &rarr;
+            <span className={styles.ctaBtnFull}>START A PROJECT &rarr;</span>
+            <span className={styles.ctaBtnShort}>START &rarr;</span>
           </button>
 
           {/* Staggered Menu Trigger */}

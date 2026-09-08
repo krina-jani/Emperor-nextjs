@@ -226,3 +226,42 @@
     grid-template-columns: repeat(4, 1fr); /* Exact 4 cards per row */
   }
 }
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+  .sectionHeader {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+  .image3d {
+    width: 100px;
+    height: 100px;
+  }
+  .cardHeader,
+  .cardSummary {
+    max-width: 100%;
+  }
+  .bottomAction {
+    margin-top: 2.5rem;
+  }
+  .bottomAction button,
+  .bottomAction [class*="btn"],
+  .bottomAction a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 1.25rem 1rem;
+  }
+}

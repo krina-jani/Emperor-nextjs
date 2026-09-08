@@ -222,8 +222,14 @@ a.itemValue:hover {
 .input:focus,
 .textarea:focus {
   border-color: var(--color-primary);
-  background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(20, 33, 52, 0.04);
+  background-color: var(--bg-tertiary, #0B1728);
+  box-shadow: 0 0 0 4px rgba(0, 140, 255, 0.15);
+}
+
+@media (max-width: 360px) {
+  .formCard {
+    padding: 1.25rem 0.85rem;
+  }
 }
 
 .textarea {

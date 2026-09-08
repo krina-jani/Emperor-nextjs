@@ -41,6 +41,26 @@ export const TrustBar: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Reference Stats Banner */}
+      <div className={styles.statsBannerContainer}>
+        <div className={styles.statsBanner}>
+          <div className={styles.bannerItem}>
+            <span className={styles.bannerVal}>200+</span>
+            <span className={styles.bannerLabel}>design projects completed.</span>
+          </div>
+          <div className={styles.bannerDivider} aria-hidden="true" />
+          <div className={styles.bannerItem}>
+            <span className={styles.bannerVal}>98%</span>
+            <span className={styles.bannerLabel}>Client satisfaction rate.</span>
+          </div>
+          <div className={styles.bannerDivider} aria-hidden="true" />
+          <div className={styles.bannerItem}>
+            <span className={styles.bannerVal}>5+</span>
+            <span className={styles.bannerLabel}>Years of experience</span>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

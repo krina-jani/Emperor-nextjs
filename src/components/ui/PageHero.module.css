@@ -1,5 +1,5 @@
 .hero {
-  padding: calc(var(--header-height) + 8rem) 0 4rem;
+  padding: calc(var(--header-height, 80px) + clamp(2rem, 5vw, 6rem)) clamp(1rem, 3.5vw, 2rem) clamp(2rem, 4vw, 4rem);
   color: var(--text-on-dark, #ffffff);
   text-align: center;
 }
@@ -29,7 +29,7 @@
 }
 
 .title {
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-size: clamp(2rem, 5vw, 3.75rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -38,7 +38,7 @@
 }
 
 .description {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
   line-height: 1.6;
   color: var(--text-on-dark-secondary, rgba(255, 255, 255, 0.75));
   max-width: 680px;
@@ -50,4 +50,17 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: calc(var(--header-height, 70px) + 2rem);
+    padding-bottom: 2rem;
+  }
+  .title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
+  .description {
+    font-size: 0.95rem;
+  }
 }

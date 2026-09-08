@@ -11,51 +11,118 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const steps = [
+interface ProcessStep {
+  num: string;
+  title: string;
+  desc: string;
+  bgImage: string;
+  highlightsTitle: string;
+  highlights: string[];
+}
+
+const steps: ProcessStep[] = [
   {
     num: '01',
     title: 'Requirement Gathering',
-    desc: "The conversation starts here. Goals, target audience, technical requirements, and business constraints get laid out clearly. Nothing moves forward until both sides agree on what's being built."
+    desc: "The conversation starts here. Goals, target audience, technical requirements, and business constraints get laid out clearly. Nothing moves forward until both sides agree on what's being built.",
+    bgImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Key Focus Areas:',
+    highlights: [
+      'Goal Alignment',
+      'User Personas',
+      'Tech Feasibility',
+      'Scope & Roadmap'
+    ]
   },
   {
     num: '02',
     title: 'Designs, Wireframes & Mockups',
-    desc: 'Ideas turn into visuals. Wireframes show the structure; mockups show the final look. Feedback happens here before any code gets written, which saves time and avoids surprises later.'
+    desc: 'Ideas turn into visuals. Wireframes show the structure; mockups show the final look. Feedback happens here before any code gets written, which saves time and avoids surprises later.',
+    bgImage: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Design Deliverables:',
+    highlights: [
+      'UX Wireframes',
+      'UI Mockups',
+      'Interactive Prototypes',
+      'Design System'
+    ]
   },
   {
     num: '03',
     title: 'Development',
-    desc: 'The actual build happens. Clean, maintainable code following modern standards. Front-end, back-end, database architecture, and any third-party integrations come together here.'
+    desc: 'The actual build happens. Clean, maintainable code following modern standards. Front-end, back-end, database architecture, and any third-party integrations come together here.',
+    bgImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Engineering Standards:',
+    highlights: [
+      'Clean Code & APIs',
+      'Responsive UI',
+      'Secure Architecture',
+      'CI/CD Pipelines'
+    ]
   },
   {
     num: '04',
     title: 'Testing',
-    desc: 'Functionality, performance, security, and device compatibility get tested thoroughly. Bugs get found and fixed before any user sees the product.'
+    desc: 'Functionality, performance, security, and device compatibility get tested thoroughly. Bugs get found and fixed before any user sees the product.',
+    bgImage: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'QA Verification:',
+    highlights: [
+      'Automated Tests',
+      'Speed Benchmarking',
+      'Cross-Device QA',
+      'Security Auditing'
+    ]
   },
   {
     num: '05',
     title: 'Changes & Confirmation',
-    desc: 'You review the working product. Any adjustments or tweaks get made and confirmed before final sign-off.'
+    desc: 'You review the working product. Any adjustments or tweaks get made and confirmed before final sign-off.',
+    bgImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Client Review:',
+    highlights: [
+      'Live Staging Demo',
+      'Feedback Sprints',
+      'UAT Sign-off',
+      'Milestone Approval'
+    ]
   },
   {
     num: '06',
     title: 'Deployment',
-    desc: 'The solution goes live. Domain setup, hosting configuration, SSL certificates, database migration, and live environment checks ensure a smooth launch.'
+    desc: 'The solution goes live. Domain setup, hosting configuration, SSL certificates, database migration, and live environment checks ensure a smooth launch.',
+    bgImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Launch Checklist:',
+    highlights: [
+      'Cloud Provisioning',
+      'Zero-Downtime Launch',
+      'SSL & DNS Setup',
+      'Production Smoke Tests'
+    ]
   },
   {
     num: '07',
     title: 'Support & Maintenance',
-    desc: "Launch isn't the finish line. Regular updates, security patches, performance monitoring, and quick bug fixes keep everything running without downtime."
+    desc: "Launch isn't the finish line. Regular updates, security patches, performance monitoring, and quick bug fixes keep everything running without downtime.",
+    bgImage: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'Ongoing Support:',
+    highlights: [
+      '24/7 Monitoring',
+      'Security Patches',
+      'Automated Backups',
+      'Fast SLA Response'
+    ]
   },
   {
     num: '08',
     title: 'SEO & Search Visibility',
     desc: 'Every website and web app gets built with SEO in mind from day one. Proper site structure, fast load times, mobile optimization, meta tags, and schema markup give the project the search visibility it needs to attract the right audience.',
-    seoSteps: [
+    bgImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
+    highlightsTitle: 'How SEO Works:',
+    highlights: [
       'Free SEO Audit',
-      'Custom SEO Strategy',
-      'Execution',
-      'Reporting & Growth'
+      'Custom Strategy',
+      'Technical Execution',
+      'Growth Reporting'
     ]
   }
 ];
@@ -101,7 +168,7 @@ export const ProcessTimeline: React.FC = () => {
 
         mm.add('(min-width: 1025px)', () => {
           const getScrollAmount = () => {
-            return Math.max(0, scrollWrapper.scrollWidth - window.innerWidth + 140);
+            return Math.max(0, scrollWrapper.scrollWidth - window.innerWidth);
           };
 
           const scrollTween = gsap.to(scrollWrapper, {
@@ -141,7 +208,7 @@ export const ProcessTimeline: React.FC = () => {
           gsap.utils.toArray('.process-step-card').forEach((card: any) => {
             gsap.fromTo(
               card,
-              { opacity: 0.4, scale: 0.95 },
+              { opacity: 0.75, scale: 0.98 },
               {
                 opacity: 1,
                 scale: 1,
@@ -248,27 +315,42 @@ export const ProcessTimeline: React.FC = () => {
             </div>
 
             <div ref={scrollRef} className={styles.scrollWrapper}>
-              {steps.map((step) => (
-                <div key={step.num} className={`${styles.stepCard} process-step-card ${step.seoSteps ? styles.seoCard : ''}`}>
-                  <div className={styles.stepHeader}>
-                    <span className={styles.stepNum}>{step.num}</span>
-                    <div className={styles.stepCircle} />
+              {steps.map((step, idx) => (
+                <div key={step.num} className={`${styles.stepCard} process-step-card`}>
+                  {/* Background Image & Soft Tint Overlay */}
+                  <div className={styles.cardBgWrapper} aria-hidden="true">
+                    <img
+                      src={step.bgImage}
+                      alt=""
+                      className={styles.cardBgImage}
+                      loading="lazy"
+                    />
+                    <div className={styles.cardOverlay} />
                   </div>
-                  <h3 className={styles.stepTitle}>{step.title}</h3>
-                  <p className={styles.stepDesc}>{step.desc}</p>
-                  {step.seoSteps && (
-                    <div className={styles.seoBox}>
-                      <span className={styles.seoBoxTitle}>How the SEO Process Works:</span>
-                      <div className={styles.seoGrid}>
-                        {step.seoSteps.map((seoItem, idx) => (
-                          <div key={idx} className={styles.seoItem}>
-                            <CheckCircle2 size={14} className={styles.seoCheck} />
-                            <span>{seoItem}</span>
+
+                  {/* Foreground Content */}
+                  <div className={styles.cardContent}>
+                    <div>
+                      <div className={styles.stepHeader}>
+                        <span className={styles.stepNum}>{step.num}</span>
+                        {idx < steps.length - 1 && <div className={styles.stepCircle} />}
+                      </div>
+                      <h3 className={styles.stepTitle}>{step.title}</h3>
+                      <p className={styles.stepDesc}>{step.desc}</p>
+                    </div>
+
+                    <div className={styles.highlightsBox}>
+                      <span className={styles.highlightsTitle}>{step.highlightsTitle}</span>
+                      <div className={styles.highlightsGrid}>
+                        {step.highlights.map((item, idx) => (
+                          <div key={idx} className={styles.highlightItem}>
+                            <CheckCircle2 size={13} className={styles.highlightCheck} />
+                            <span>{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -295,21 +377,32 @@ export const ProcessTimeline: React.FC = () => {
                     <span>{step.num}</span>
                   </div>
                   <div className={styles.mobileCardContent}>
-                    <h3 className={styles.stepTitleMobile}>{step.title}</h3>
-                    <p className={styles.stepDescMobile}>{step.desc}</p>
-                    {step.seoSteps && (
-                      <div className={styles.seoBoxMobile}>
-                        <span className={styles.seoBoxTitle}>How the SEO Process Works:</span>
-                        <div className={styles.seoGridMobile}>
-                          {step.seoSteps.map((seoItem, idx) => (
-                            <div key={idx} className={styles.seoItem}>
-                              <CheckCircle2 size={13} className={styles.seoCheck} />
-                              <span>{seoItem}</span>
+                    {/* Background Image & Overlay */}
+                    <div className={styles.cardBgWrapper} aria-hidden="true">
+                      <img
+                        src={step.bgImage}
+                        alt=""
+                        className={styles.cardBgImage}
+                        loading="lazy"
+                      />
+                      <div className={styles.cardOverlay} />
+                    </div>
+
+                    <div className={styles.mobileCardInner}>
+                      <h3 className={styles.stepTitleMobile}>{step.title}</h3>
+                      <p className={styles.stepDescMobile}>{step.desc}</p>
+                      <div className={styles.highlightsBoxMobile}>
+                        <span className={styles.highlightsTitle}>{step.highlightsTitle}</span>
+                        <div className={styles.highlightsGridMobile}>
+                          {step.highlights.map((item, idx) => (
+                            <div key={idx} className={styles.highlightItem}>
+                              <CheckCircle2 size={13} className={styles.highlightCheck} />
+                              <span>{item}</span>
                             </div>
                           ))}
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               ))}

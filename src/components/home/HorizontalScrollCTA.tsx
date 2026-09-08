@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HorizontalScrollCTA.module.css';
@@ -9,11 +10,15 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const HorizontalScrollCTA = () => {
+interface HorizontalScrollCTAProps {
+  text?: string;
+}
+
+const HorizontalScrollCTA: React.FC<HorizontalScrollCTAProps> = ({
+  text = "Ready to Transform Your Business?"
+}) => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-
-  const text = "Ready to Transform Your Business?";
 
   // Utility to split text into chars wrapped in spans manually since we don't have SplitText
   const splitTextToChars = (str: string) => {
@@ -38,14 +43,15 @@ const HorizontalScrollCTA = () => {
         const maxScroll = scrollWidth - windowWidth * 0.3;
 
         const scrollTween = gsap.to(textEl, {
-          x: -maxScroll,
+          x: () => -(textEl.scrollWidth - window.innerWidth * 0.3),
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             pin: true,
             start: 'center center',
-            end: `+=${scrollWidth}px`, // Dynamic scroll length based on text size
+            end: () => `+=${textEl.scrollWidth}px`,
             scrub: 1,
+            invalidateOnRefresh: true,
           },
         });
 
@@ -68,14 +74,15 @@ const HorizontalScrollCTA = () => {
           });
         });
 
+        ScrollTrigger.refresh();
       }, section);
-    }, 100);
+    }, 150);
 
     return () => {
       clearTimeout(timer);
       if (ctx) ctx.revert();
     };
-  }, []);
+  }, [text]);
 
   return (
     <div className="horizontal-scroll-cta-wrapper">
@@ -86,7 +93,9 @@ const HorizontalScrollCTA = () => {
           </h3>
         </div>
         <div className={styles.btnWrapper}>
-          <button className={styles.ctaBtn}>Start a Project &rarr;</button>
+          <Link href="/contact" className={styles.ctaBtn}>
+            Start a Project &rarr;
+          </Link>
         </div>
       </section>
     </div>

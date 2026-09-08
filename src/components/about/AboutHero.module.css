@@ -135,10 +135,9 @@
 /* Page Transition Blinds Overlay */
 .blindsOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -151,4 +150,14 @@
   width: 100%;
   transform: scaleX(1);
   transform-origin: right center;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: calc(var(--header-height, 70px) + 1.5rem);
+    padding-bottom: 2.5rem;
+  }
+  .title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
 }

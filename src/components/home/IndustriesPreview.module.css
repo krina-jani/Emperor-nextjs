@@ -48,18 +48,21 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(20, 184, 166, 0.06);
-  border: 1px solid rgba(20, 184, 166, 0.18);
-  color: var(--color-secondary);
+  border-radius: 12px;
+  background-color: rgba(0, 140, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.35);
+  color: #00A8FF;
   transition: all var(--transition-normal);
   flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(0, 140, 255, 0.15);
 }
 
 .card:hover .iconBox {
-  background-color: rgba(20, 184, 166, 0.12);
-  color: var(--text-primary);
-  box-shadow: 0 0 10px rgba(20, 184, 166, 0.25);
+  background-color: #008CFF;
+  border-color: #00A8FF;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+  transform: scale(1.05);
 }
 
 .name {
@@ -97,7 +100,7 @@
 }
 
 .shieldIcon {
-  color: var(--color-secondary);
+  color: #00A8FF;
 }
 
 .badgeRow {
@@ -114,7 +117,7 @@
 }
 
 .card:hover .badge {
-  border-color: rgba(20, 184, 166, 0.25);
+  border-color: rgba(0, 168, 255, 0.35);
   color: var(--text-secondary);
 }
 
@@ -135,7 +138,7 @@
 }
 
 .card:hover .link {
-  color: var(--color-secondary);
+  color: #00A8FF;
 }
 
 .arrow {
@@ -169,5 +172,35 @@
   .bottomAction [class*="btn"]:hover {
     background-color: rgba(255, 255, 255, 0.9) !important;
     border-color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .bottomAction {
+    margin-top: 2.5rem;
+  }
+
+  .bottomAction button,
+  .bottomAction [class*="btn"],
+  .bottomAction a {
+    width: 100% !important;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 1.25rem 1rem;
   }
 }

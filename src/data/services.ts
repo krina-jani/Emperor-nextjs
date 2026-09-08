@@ -2,204 +2,892 @@ import { Service } from '../types/service';
 
 export const services: Service[] = [
   {
-    id: 'software-development',
-    title: 'Custom Software Engineering',
-    slug: 'software-development',
-    iconName: 'Code2',
-    tag: 'ENTERPRISE CORE',
-    summary: 'We architect and engineer mission-critical custom software systems that handle complex business workflows, multi-tenant databases, strict compliance mandates, and high-concurrency throughput.',
-    description: 'Off-the-shelf software forces your enterprise into rigid constraints. We build bespoke software platforms crafted around your unique business operations, eliminating recurring license overhead, vendor lock-in, and operational bottlenecks.',
-    features: [],
-    benefits: [],
-    deliverables: [
-      'Production-Ready Source Code & Git Repository',
-      'Interactive OpenAPI / Swagger Documentation',
-      'Docker Compose & Kubernetes Deployment Manifests',
-      'Comprehensive Architecture & Security Specification'
-    ],
-    process: [
-      { stepNumber: 1, title: 'Domain Discovery', description: 'Mapping entities, transaction flows, and state machines.' },
-      { stepNumber: 2, title: 'System Blueprint', description: 'Designing database schemas, API contracts, and security boundaries.' },
-      { stepNumber: 3, title: 'Core Engineering', description: 'Building test-driven backend services and intuitive frontend interfaces.' },
-      { stepNumber: 4, title: 'Load & Security QA', description: 'Stress-testing concurrency limits and vulnerability scanning.' },
-      { stepNumber: 5, title: 'Production Deployment', description: 'Automated zero-downtime deployment with observability pipelines.' }
-    ],
-    technologies: [],
-    faqs: [
-      {
-        id: 'faq-1',
-        question: 'How do you ensure software maintainability over 5-10 years?',
-        answer: 'We enforce strict TypeScript typing, automated CI/CD unit and integration test coverage (>85%), clear domain boundaries, and complete architectural documentation.'
-      },
-      {
-        id: 'faq-2',
-        question: 'Who owns the intellectual property and codebase?',
-        answer: 'You have 100% full intellectual property ownership and direct repository access from day one.'
-      }
-    ]
-  },
-  {
-    id: 'ai-development',
-    title: 'AI & Machine Learning Engineering',
-    slug: 'ai-development',
-    iconName: 'Brain',
-    tag: 'AI & DATA',
-    summary: 'We engineer production-ready AI solutions that move beyond superficial wrappers to deliver measurable business automation, semantic knowledge search, and autonomous multi-agent pipelines.',
-    description: 'We integrate enterprise-grade AI models directly into your operational software. From Retrieval-Augmented Generation (RAG) over proprietary documentation to autonomous multi-agent pipelines, we build AI that acts with verifiable precision.',
-    features: [],
-    benefits: [],
-    deliverables: [
-      'Custom AI Engine & API Microservice',
-      'Vector Ingestion & Re-indexing Pipeline',
-      'Evaluation Benchmark Suite & Accuracy Report',
-      'Admin Dashboard for Prompt & Guardrail Management'
-    ],
-    process: [
-      { stepNumber: 1, title: 'Data Audit & Feasibility', description: 'Evaluating source data cleanliness, privacy requirements, and baseline accuracy.' },
-      { stepNumber: 2, title: 'Chunking & Vectorization', description: 'Implementing semantic document splitting and vector embedding pipelines.' },
-      { stepNumber: 3, title: 'Agentic Logic & Tools', description: 'Connecting LLMs to internal database APIs and operational toolkits.' },
-      { stepNumber: 4, title: 'Evaluation & Benchmarking', description: 'Testing retrieval precision, recall, and hallucination bounds.' },
-      { stepNumber: 5, title: 'Production Hardening', description: 'Deploying rate limits, caching, and observability monitoring.' }
-    ],
-    technologies: [],
-    faqs: [
-      {
-        id: 'faq-1',
-        question: 'How do you prevent AI hallucinations in business-critical workflows?',
-        answer: 'We utilize strict RAG architectures where the LLM is restricted to answering exclusively from verified retrieved chunks with explicit source citations, combined with JSON schema validators.'
-      },
-      {
-        id: 'faq-2',
-        question: 'Can we use AI without exposing confidential customer data to third parties?',
-        answer: 'Yes. We deploy private instance models on your AWS/GCP infrastructure or utilize enterprise zero-data-retention APIs.'
-      }
-    ]
-  },
-  {
-    id: 'web-app-development',
-    title: 'Web Application & SaaS Engineering',
-    slug: 'web-app-development',
+    id: 'web-development',
+    serviceNumber: '01',
+    title: 'Web Development',
+    eyebrow: 'Website Development Company in Ahmedabad',
+    slug: 'web-development',
     iconName: 'Globe',
-    tag: 'ENGINEERING',
-    summary: 'We build enterprise-grade SaaS platforms, high-velocity customer portals, and internal business applications using modern React, Next.js, and TypeScript architectures.',
-    description: 'Modern web applications require the responsiveness of desktop software with the accessibility and reach of the web. We build clean, component-driven web apps with lightning-fast initial load times and robust state management.',
+    tag: 'WEB & PWA',
+    summary: 'Custom websites and web applications built for speed, security, and conversions. Full-stack builds, progressive web apps, and API integrations, all covered.',
+    description: 'Your site is often the first thing people see about your company, so it needs to look good and build trust right away. As a top website development company in Ahmedabad, we create digital platforms that help your company look professional and turn visitors into real customers. Every project starts with your goals in mind, using clean code and modern methods so the final result loads fast, works well on mobile, and is easy to find on Google.',
+    ctaText: 'Explore Web Development →',
     features: [],
     benefits: [],
     deliverables: [
-      'Full Web Application Codebase & Design System',
-      'Automated Stripe / Payment Subscription Integration',
-      'Multi-Tenant Admin & Organization Management',
-      'CI/CD Build Pipelines & Production Hosting'
+      'Corporate, e-commerce, or custom web application',
+      'SEO-optimized structure with clean code and fast loading',
+      'CMS setup (WordPress, Shopify, or fully custom)',
+      'Mobile-responsive design tested across devices'
     ],
     process: [
-      { stepNumber: 1, title: 'Product Wireframing', description: 'Mapping user stories, UX wireframes, and interactive clickable prototypes.' },
-      { stepNumber: 2, title: 'Design System Assembly', description: 'Constructing accessible, responsive UI component libraries.' },
-      { stepNumber: 3, title: 'Full-Stack Implementation', description: 'Developing responsive frontend views and secure backend API endpoints.' },
-      { stepNumber: 4, title: 'End-to-End Testing', description: 'Automated Playwright browser tests across Chrome, Safari, and Firefox.' },
-      { stepNumber: 5, title: 'Launch & Telemetry', description: 'Production release with Sentry error monitoring and performance telemetry.' }
+      {
+        stepNumber: 1,
+        title: 'Consultation & Requirement Analysis',
+        description: 'We talk with you and understand what your company really needs, your goals, your audience, your competitors.'
+      },
+      {
+        stepNumber: 2,
+        title: 'UI/UX Design & Wireframing',
+        description: 'We create the layout before writing any code, so you know exactly what the final product will look like.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Frontend & Backend Development',
+        description: 'Our team codes the platform using clean, modern practices, the part users see and the part that runs behind the scenes.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & Quality Assurance',
+        description: 'We check everything on different devices, browsers, and screen sizes to find and fix problems before your users do.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Launch & Post-Launch Support',
+        description: 'Once you approve everything, we go live, and we keep supporting you so small issues get fixed quickly.'
+      }
     ],
-    technologies: [],
+    technologies: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Tailwind CSS'],
     faqs: [
       {
         id: 'faq-1',
-        question: 'Can you scale the application from 100 to 100,000 active users?',
-        answer: 'Yes. Our architectures leverage stateless containerized backends, database read-replicas, and edge CDN distribution capable of scaling smoothly with user demand.'
+        question: 'How much does website development cost in Ahmedabad?',
+        answer: 'The cost depends on how complex the project is, a simple corporate page costs less than a custom online store or application.'
+      },
+      {
+        id: 'faq-2',
+        question: 'How long does it take to develop a website?',
+        answer: 'A normal corporate project usually takes 2–4 weeks. Custom applications or bigger online stores can take 6–12 weeks.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Should I choose a custom-built platform or a CMS like WordPress?',
+        answer: 'It depends on your goals. CMS platforms are affordable and easy to manage for simple projects. A custom-built solution works better for unique features or more scale.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Do you provide maintenance after launch?',
+        answer: 'Yes, we offer maintenance and support plans that cover updates, security checks, and bug fixes after you go live.'
       }
     ]
   },
   {
-    id: 'mobile-development',
-    title: 'Mobile App Development (iOS, Android & Flutter)',
-    slug: 'mobile-development',
-    iconName: 'Smartphone',
-    tag: 'ENGINEERING',
-    summary: 'We build intuitive, fluid mobile applications for iOS and Android that combine native performance with seamless backend synchronization and offline reliability.',
-    description: 'From native iOS and Android to cost-effective cross-platform Flutter and React Native architectures, we build mobile apps that achieve 60fps animations, intuitive gesture navigation, and robust hardware sensor integrations.',
+    id: 'custom-software-development',
+    serviceNumber: '02',
+    title: 'Custom Software Development',
+    eyebrow: 'Enterprise Custom Software Development in India',
+    slug: 'custom-software-development',
+    iconName: 'Code2',
+    tag: 'CUSTOM LOGIC',
+    summary: 'Software built around how a business actually works, not a generic tool with the logo swapped out. Enterprise applications, SaaS platforms, and API development included.',
+    description: 'Emperor Smart Solutions builds custom software development services for businesses in India. Enterprise apps, SaaS platforms, database systems. Whatever the challenge is, the software gets shaped around it, not the other way around.',
+    ctaText: 'Explore Custom Software →',
     features: [],
     benefits: [],
     deliverables: [
-      'Signed iOS (.ipa) & Android (.aab) Production Builds',
-      'Complete Mobile Source Code Repository',
-      'App Store & Play Store Metadata, Screenshots & Privacy Policies',
-      'Push Notification & Remote Config Dashboard'
+      'Custom enterprise applications (ERP, CRM, workflow automation)',
+      'Scalable SaaS platforms with multi-tenant architecture',
+      'RESTful and GraphQL API development with security built in',
+      'Cloud-native infrastructure on AWS, Azure, or GCP'
     ],
     process: [
-      { stepNumber: 1, title: 'Mobile UX Architecture', description: 'Designing thumb-zone friendly navigation patterns and native gestures.' },
-      { stepNumber: 2, title: 'Core App Development', description: 'Building views, state management, and offline cache storage.' },
-      { stepNumber: 3, title: 'API & Sensor Integration', description: 'Connecting push notifications, payment gateways, and backend endpoints.' },
-      { stepNumber: 4, title: 'Device Matrix QA', description: 'Testing across 30+ physical iOS and Android form factors and screen sizes.' },
-      { stepNumber: 5, title: 'Store Submission & Launch', description: 'Guiding approval through Apple App Store and Google Play reviews.' }
+      {
+        stepNumber: 1,
+        title: 'Discovery & Analysis',
+        description: 'Requirements get gathered and the project gets planned before any architecture gets drawn.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Architecture Design',
+        description: 'Picking a tech stack that actually fits the project.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Agile Development',
+        description: "Iterative work with regular demos so nobody's surprised months later."
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & QA',
+        description: 'Comprehensive checks run across the build.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Deployment & Support',
+        description: 'The software launches and keeps running with ongoing maintenance.'
+      }
     ],
-    technologies: [],
+    technologies: ['TypeScript', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
     faqs: [
       {
         id: 'faq-1',
-        question: 'Should we choose Flutter or React Native for our project?',
-        answer: 'We analyze your existing team skills and project requirements. Flutter offers pixel-perfect consistency and raw canvas performance, while React Native is ideal if you have an existing React web codebase to share logic.'
+        question: 'How much do custom software development services cost?',
+        answer: 'Depends on the system\'s complexity and integrations needed. Real numbers come only after requirements get scoped.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Can custom software integrate with existing business systems?',
+        answer: 'Yes, that\'s usually the point. APIs and integration work get planned early so new software connects with CRMs, ERPs, or other tools already in use.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Does custom software development include support after launch?',
+        answer: 'Yes. Updates, monitoring, and maintenance continue after launch, same as any software.'
+      },
+      {
+        id: 'faq-4',
+        question: 'How long does a custom software project take?',
+        answer: 'A focused application usually takes a few months. Larger enterprise systems or SaaS platforms with multiple integrations run longer.'
+      }
+    ]
+  },
+  {
+    id: 'algo-trading-software',
+    serviceNumber: '03',
+    title: 'Algo Trading Software',
+    eyebrow: 'Best Algo Trading Software in Ahmedabad & India',
+    slug: 'algo-trading-software',
+    iconName: 'TrendingUp',
+    tag: 'FINTECH & AUTOMATION',
+    summary: 'Algorithmic trading platforms combining AI-powered decisions with automated execution. Built within SEBI\'s regulatory framework for traders across India.',
+    description: 'Algo trading software runs on pre-set rules built for consistency, entering and exiting trades automatically the moment market conditions actually match what\'s been programmed. Emperor Smart Solutions builds this within SEBI\'s regulatory framework, pairing AI-driven decision logic with automated execution for traders across India.',
+    ctaText: 'Explore Algo Trading →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Custom trading software engine (Mean Reversion, Trend Following, Arbitrage)',
+      'Process and risk management suite',
+      'Broker API integration with multi-account support',
+      'Real-time performance analytics dashboard'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Strategy Design',
+        description: 'Trading logic and parameters get worked out first, shaped around exactly what the strategy needs to capture in the market.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Process',
+        description: 'The strategy runs against historical data until it holds up, so nothing goes live on a hunch.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Broker Integration',
+        description: 'Once validated, the strategy connects to brokerage APIs and links straight into a live trading account.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Live Deployment',
+        description: 'The strategy goes live, with monitoring and support running alongside it so it keeps working the way it\'s supposed to.'
+      }
+    ],
+    technologies: ['Python', 'FastAPI', 'WebSockets', 'Redis', 'Docker'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'Is algo trading legal in India?',
+        answer: 'Yes. SEBI and the exchanges regulate it, and every trade runs through a registered broker with approved API access.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Do I need coding skills to use algo trading software?',
+        answer: 'Not really. Pre-built strategy templates and configurable tools cover most of what\'s needed without writing a line of code. Knowing some Python just opens up more room for custom logic later.'
+      }
+    ]
+  },
+  {
+    id: 'mobile-app-development',
+    serviceNumber: '04',
+    title: 'Mobile App Development',
+    eyebrow: 'Best Mobile App Development Company in India',
+    slug: 'mobile-app-development',
+    iconName: 'Smartphone',
+    tag: 'IOS & ANDROID',
+    summary: 'Native and cross-platform apps for iOS and Android. Built on the same architecture and standards as the web version, not a separate afterthought.',
+    description: 'Emperor Smart Solutions provides mobile app development services in India, building apps for iOS, Android, and cross-platform use alongside web and desktop software. From the first idea to launch, apps get built scalable and secure, not just functional on paper. Custom application development is the thread that runs through every platform.',
+    ctaText: 'Explore Mobile App Development →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Native and cross-platform mobile apps (iOS & Android)',
+      'Full backend and API integration',
+      'Scalable architecture built to handle growth',
+      'Custom security and data protection across every build'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Discovery & Planning',
+        description: 'Gathering requirements before any screen gets touched.'
+      },
+      {
+        stepNumber: 2,
+        title: 'UI/UX Design',
+        description: 'Wireframes and user experience mapped out for mobile and web alike.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Development',
+        description: 'Sprints run through the actual build rather than one long stretch of coding.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & QA',
+        description: 'Everything gets checked, not just the parts that are easy to test.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Deployment & Support',
+        description: 'The build launches, with support running well after release.'
+      }
+    ],
+    technologies: ['Flutter', 'React Native', 'Swift', 'Kotlin', 'Firebase'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'How much does mobile app development cost?',
+        answer: 'Depends on complexity, platform count, and features involved. Real numbers come only after the actual scope is clear.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Native app or cross-platform, which one\'s better?',
+        answer: 'Native apps run faster and use device features more fully, but cost more since iOS and Android get built separately. Depends on what the project actually needs.'
+      },
+      {
+        id: 'faq-3',
+        question: 'How long does building a mobile app take?',
+        answer: 'A simple app usually takes a couple of months. More complex builds run longer.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Is support available after the app goes live?',
+        answer: 'Yes. Updates, bug fixes, and performance monitoring continue post-launch, especially with OS updates rolling out regularly.'
+      }
+    ]
+  },
+  {
+    id: 'digital-marketing',
+    serviceNumber: '05',
+    title: 'Digital Marketing',
+    eyebrow: 'Best Digital Marketing Company in India & Ahmedabad',
+    slug: 'digital-marketing',
+    iconName: 'Megaphone',
+    tag: 'GROWTH & ROI',
+    summary: 'SEO, PPC, social media, and content strategy working as one campaign. Results get tracked back to actual business outcomes, not vanity numbers.',
+    description: 'Traffic numbers on a dashboard don\'t pay the bills. Sales do. Digital marketing only works when traffic converts into leads that go somewhere. Emperor Smart Solutions runs as a digital marketing company in India built on that idea, pulling SEO, PPC, social media, content strategy, and conversion optimization into one campaign aimed at numbers that actually matter to the business.',
+    ctaText: 'Explore Digital Marketing →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Technical SEO, content optimization, and link building strategy',
+      'PPC and paid social campaigns (Google Ads, Facebook, Instagram, LinkedIn)',
+      'Content and social media marketing across the right channels',
+      'Analytics, reporting, and CRO tied back to real ROI'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Audit & Analysis',
+        description: 'An honest look at where things stand and where the real gaps are.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Strategy Development',
+        description: 'Building around actual business goals rather than pulling a template off a shelf.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Campaign Execution',
+        description: 'The multi-channel plan gets put into motion.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Performance Tracking',
+        description: 'Things get watched live, catching problems before a monthly report would even notice them.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Reporting & Scaling',
+        description: 'Results feed straight into the next round of strategy.'
+      }
+    ],
+    technologies: ['Google Analytics 4', 'Google Tag Manager', 'Meta Ads', 'SEMrush', 'Ahrefs'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'Which service should come first, SEO or PPC?',
+        answer: 'Depends on the timeline. PPC brings traffic almost immediately but stops the second the spend does. SEO takes longer to build up but keeps working without ongoing ad cost.'
+      },
+      {
+        id: 'faq-2',
+        question: 'How long does SEO take to show results?',
+        answer: 'A few months usually, longer for competitive keywords. It compounds over time instead of fixing anything overnight.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Is social media marketing worth it for B2B businesses?',
+        answer: 'Yes, though the platform makes a real difference. LinkedIn usually wins for B2B lead generation, while Instagram and Facebook tend to do better for consumer brands.'
+      },
+      {
+        id: 'faq-4',
+        question: 'How is ROI measured across marketing campaigns?',
+        answer: 'Campaign tracking and analytics dashboards connect spend to leads and sales. Attribution models tie it back to acquisition cost.'
+      }
+    ]
+  },
+  {
+    id: 'ecommerce-website-design',
+    serviceNumber: '06',
+    title: 'E-commerce Website Design',
+    eyebrow: 'E-commerce Website Design & Development Company in India',
+    slug: 'ecommerce-website-design',
+    iconName: 'ShoppingCart',
+    tag: 'COMMERCE & RETAIL',
+    summary: 'High-converting online stores on Shopify, WooCommerce, or a custom build. Designed around how people actually shop, not just how a store looks in a mockup.',
+    description: 'E-commerce website development turns an online store into something people actually buy from, not just browse. Emperor Smart Solutions builds stores meant to convert, not just exist, for businesses across Ahmedabad and India, with responsive design, secure payments, and shopping flows that don\'t lose people halfway through checkout.',
+    ctaText: 'Explore E-commerce Development →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Custom-built online store (Shopify, WooCommerce, or fully custom)',
+      'Optimized checkout and conversion funnel',
+      'Secure, PCI-compliant payment integration',
+      'Advanced search, filtering, and review system'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Discovery & Strategy',
+        description: 'Figuring out the market and what the store actually needs to do before any screens get designed.'
+      },
+      {
+        stepNumber: 2,
+        title: 'UI/UX Design',
+        description: 'Wireframes and visual direction get mapped out around how shoppers actually browse and decide.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Development',
+        description: 'The design turns into a working front end and backend, built on the right platform for the business.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & QA',
+        description: 'Every flow gets checked so issues get caught before customers do.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Launch & Support',
+        description: 'The store goes live, with maintenance and performance checks continuing well after launch day.'
+      }
+    ],
+    technologies: ['Shopify', 'WooCommerce', 'Next.js Commerce', 'Stripe', 'Razorpay'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'How much does e-commerce website development cost?',
+        answer: 'Depends on the platform, how many products are involved, and how much custom functionality gets built in. A standard Shopify setup costs a lot less than a fully custom platform with unique workflows.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Which platform is better, Shopify or WooCommerce?',
+        answer: 'Shopify wins on speed and low maintenance. WooCommerce wins on control and customization for anyone already on WordPress. It depends on the business.'
+      },
+      {
+        id: 'faq-3',
+        question: 'How long does it take to build an e-commerce website?',
+        answer: 'A standard Shopify or WooCommerce store usually takes a few weeks. Custom platforms with heavy integrations take longer.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Is there support after the store goes live?',
+        answer: 'Yes. Maintenance, security patches, and performance checks continue after launch, since a store needs upkeep the same way any live system does.'
+      }
+    ]
+  },
+  {
+    id: 'mlm-software-development',
+    serviceNumber: '07',
+    title: 'MLM Software Development',
+    eyebrow: 'MLM Software Development Services in India',
+    slug: 'mlm-software-development',
+    iconName: 'GitFork',
+    tag: 'NETWORK CORE',
+    summary: 'Binary, matrix, unilevel, and hybrid compensation plans, calculated with the accuracy a growing distributor network actually needs.',
+    description: 'Emperor Smart Solutions builds MLM software for network marketing businesses. Commission calculations, distributor management, and compensation plans all run without manual errors creeping in. Binary, matrix, or unilevel, whatever structure the business runs on, the software handles it correctly, every time.',
+    ctaText: 'Explore MLM Software →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Custom compensation plan engine (Binary, Matrix, Unilevel, Hybrid)',
+      'Secure payment gateway with commission payouts and e-wallet',
+      'Distributor management with genealogy tree and downline tracking',
+      'Real-time analytics dashboard and mobile app for distributors'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Requirement Analysis',
+        description: 'Understanding the compensation plan and business model before any code gets written.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Plan Architecture',
+        description: 'Designing the MLM structure and commission logic everything else builds on.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Development',
+        description: 'Building the secure, scalable platform itself.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & QA',
+        description: 'Comprehensive commission calculation checks, since a bug here directly costs money.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Deployment',
+        description: 'Launching the software with training and ongoing support included.'
+      }
+    ],
+    technologies: ['Node.js', 'React', 'PostgreSQL', 'Redis', 'Docker'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'How much does MLM software development cost?',
+        answer: 'Depends on the compensation plan complexity, number of features, and whether it\'s a custom build or white-label solution. Real pricing comes only after the requirements are mapped out.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Which compensation plan works best for a new MLM business?',
+        answer: 'Depends on how the business is structured. Binary works well for fast team-building models. Matrix suits companies focused on width over depth.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Can existing MLM software be upgraded instead of rebuilt?',
+        answer: 'Often, yes. New compensation plans or upgraded security can usually get added without starting from zero.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Does MLM software include mobile access for distributors?',
+        answer: 'Yes. Native mobile apps for iOS and Android let distributors track their downline, check commissions, and manage their business without needing a desktop.'
+      }
+    ]
+  },
+  {
+    id: 'software-development',
+    serviceNumber: '08',
+    title: 'Software Development',
+    eyebrow: 'Software Development Company in Ahmedabad',
+    slug: 'software-development',
+    iconName: 'Layers',
+    tag: 'ENTERPRISE CORE',
+    summary: 'End-to-end software solutions for CRM systems, enterprise platforms, and custom web applications, built to match how the business runs.',
+    description: 'Emperor Smart Solutions is a software company. It builds custom software for businesses across India. The software gets built around real business problems, not generic ones. If the need is a CRM, an ERP, or something else, the software gets made to fit it.',
+    ctaText: 'Explore Software Development →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Custom CRM, ERP, and business tools',
+      'Web apps that work fast and grow with the business',
+      'Strong, secure system design from day one',
+      'Automated testing setup for fewer bugs'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Discovery & Planning',
+        description: 'The team learns what\'s needed before any design work starts.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Design & Architecture',
+        description: 'System design and UI mockups get built to last under real use.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Development',
+        description: 'Development happens step by step, with testing built in along the way.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Testing & QA',
+        description: 'Bugs get caught before launch, not after.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Deployment & Support',
+        description: 'The software goes live, and support keeps going as the business grows.'
+      }
+    ],
+    technologies: ['TypeScript', 'Node.js', 'Next.js', 'PostgreSQL', 'AWS'],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'How much does custom software development cost?',
+        answer: 'It depends on the size and complexity of the project. Real numbers come once the actual needs are clear.'
+      },
+      {
+        id: 'faq-2',
+        question: 'What\'s the difference between custom software and off-the-shelf tools?',
+        answer: 'Off-the-shelf tools work fine until they don\'t fit the business anymore. Custom software gets built around how the business already works.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Does the company build both web and mobile versions of the same software?',
+        answer: 'Yes. Mobile apps often get built alongside the web version, using the same backend.'
       }
     ]
   },
   {
     id: 'crm-development',
-    title: 'Custom CRM & Lead Automation Systems',
+    serviceNumber: '09',
+    title: 'Custom CRM Development',
+    eyebrow: 'Custom CRM Development Services',
     slug: 'crm-development',
     iconName: 'Users',
     tag: 'SYSTEMS & AUTOMATION',
-    summary: 'Off-the-shelf CRMs charge exorbitant per-user fees for features you never use. We build custom CRM platforms structured around your exact sales funnel, team roles, and automation rules.',
-    description: 'Every business has unique lead stages, commission structures, and customer communication channels. We build custom CRM platforms that unify phone, email, WhatsApp, and form submissions into a single high-velocity sales cockpit.',
+    summary: 'Every pipeline stage and every automation gets shaped around the real sales process. Emperor Smart Solutions builds custom CRM systems this way.',
+    description: 'Custom CRM development means building a CRM around how one business actually sells, not generic software made for everyone. Every pipeline stage and every automation gets shaped around the real sales process. Emperor Smart Solutions builds custom CRM systems this way, since one generic CRM rarely works well for two different businesses.',
+    ctaText: 'Explore Custom CRM →',
     features: [],
     benefits: [],
     deliverables: [
-      'Custom CRM Web & Mobile App',
-      'Lead Webhook Ingestion API Gateway',
-      'WhatsApp & Email Automation Templates',
-      'Executive Sales Performance Dashboard'
+      'Sales pipeline management with automatic stage tracking',
+      'Lead capture and routing from every source',
+      'CRM integration with email, accounting, and support tools',
+      'Custom dashboards, reporting, and role-based access'
     ],
     process: [
-      { stepNumber: 1, title: 'Sales Funnel Audit', description: 'Documenting lead sources, qualification steps, and closing stages.' },
-      { stepNumber: 2, title: 'Pipeline & Data Modeling', description: 'Structuring custom fields, permissions, and stage transitions.' },
-      { stepNumber: 3, title: 'Automation Engine Setup', description: 'Configuring auto-responders, reminders, and lead scoring logic.' },
-      { stepNumber: 4, title: 'User Training & Migration', description: 'Importing existing customer data from legacy spreadsheets or old CRMs.' },
-      { stepNumber: 5, title: 'Deployment & Optimization', description: 'Launching system and refining sales rep conversion dashboards.' }
+      {
+        stepNumber: 1,
+        title: 'Sales Process Mapping',
+        description: 'Understanding how deals actually move through the business before any pipeline gets built.'
+      },
+      {
+        stepNumber: 2,
+        title: 'CRM Architecture & Build',
+        description: 'The platform gets built around that real sales process, not a generic funnel.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Integration',
+        description: 'The CRM gets connected to email platforms, accounting software, booking systems, and other tools already in place.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Automation Setup',
+        description: 'Follow-ups, reminders, and stage alerts get configured to fire on their own based on activity.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Launch & Support',
+        description: 'The CRM goes live, with updates and new features continuing as the sales process itself evolves.'
+      }
     ],
     technologies: [],
     faqs: [
       {
         id: 'faq-1',
-        question: 'Can we migrate our existing contacts and deals from Salesforce or HubSpot?',
-        answer: 'Yes. We perform automated CSV and API database migrations with deduplication and historical data cleansing.'
+        question: 'Is a custom CRM better than Odoo, Salesforce, or HubSpot?',
+        answer: 'Depends on the business honestly. Ready-made platforms handle standard sales processes fine. A custom CRM starts making more sense once the sales process stops fitting a generic template.'
+      },
+      {
+        id: 'faq-2',
+        question: 'Can a custom CRM integrate with existing business systems?',
+        answer: 'Yes, and this is usually one of the first things that gets discussed. One connected system replaces five disconnected ones holding pieces of the same customer\'s information.'
+      },
+      {
+        id: 'faq-3',
+        question: 'How long does custom CRM development take?',
+        answer: 'A focused build for a small sales team usually takes a few weeks to a couple of months. Bigger builds with several integrations take longer.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Does custom CRM development include data migration?',
+        answer: 'Yes. Existing customer records, deal history, and contact data move over as part of the build. Nothing gets lost in the switch.'
       }
     ]
   },
   {
     id: 'erp-development',
-    title: 'Enterprise ERP & Operations Platforms',
+    serviceNumber: '10',
+    title: 'ERP Development',
+    eyebrow: 'ERP Development Services',
     slug: 'erp-development',
     iconName: 'Database',
     tag: 'SYSTEMS & AUTOMATION',
-    summary: 'We design and engineer bespoke Enterprise Resource Planning (ERP) systems that consolidate manufacturing, inventory tracking, vendor procurement, and financial reporting into a unified system.',
-    description: 'Legacy ERP systems like SAP or Oracle are notoriously bloated and expensive to customize. We engineer agile, modern ERP systems built specifically for mid-market and growing enterprises.',
+    summary: 'ERP development means building one connected system that handles finance, inventory, HR, and every other department together.',
+    description: 'ERP development means building one connected system that handles finance, inventory, HR, and every other department together. Emperor Smart Solutions builds this kind of software for businesses running on too many disconnected tools right now.',
+    ctaText: 'Explore ERP Development →',
     features: [],
     benefits: [],
     deliverables: [
-      'Custom Enterprise ERP Web Application',
-      'Warehouse Barcode / QR Scanning Mobile Module',
-      'Automated Tax Invoicing & General Ledger Engine',
-      'Complete Data Backup & Disaster Recovery Protocol'
+      'Financial management (budgeting, ledger, payroll, tax handling)',
+      'Inventory and supply chain management with automatic reordering',
+      'Production, HR, and sales modules connected to one system',
+      'Business intelligence dashboards with real-time reporting'
     ],
     process: [
-      { stepNumber: 1, title: 'Operations Mapping', description: 'Analyzing supply chain, warehouse paths, and accounting logic.' },
-      { stepNumber: 2, title: 'Schema & Architecture Design', description: 'Designing normalized relational schemas and transaction boundaries.' },
-      { stepNumber: 3, title: 'Module Development', description: 'Building inventory, procurement, billing, and reporting modules.' },
-      { stepNumber: 4, title: 'Data Verification & Stress QA', description: 'Validating reconciliation balances and stress-testing order volume.' },
-      { stepNumber: 5, title: 'Phased Rollout & Support', description: 'Staged deployment by department with dedicated user training.' }
+      {
+        stepNumber: 1,
+        title: 'Discovery',
+        description: 'Business needs, existing workflows, and the current IT environment all get mapped out before any design work starts.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Design & Planning',
+        description: 'System architecture, module scope, and the right tech stack get decided, along with a clear budget and timeline.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Development & Testing',
+        description: 'Frontend and backend development happen alongside integration work, with testing running throughout.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Deployment',
+        description: 'The system goes live, whether on-premises or in the cloud, with data migration and user training as part of the rollout.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Post-Launch Support',
+        description: 'Fine-tuning, troubleshooting, and updates continue after launch, since a growing business rarely stays static for long.'
+      }
     ],
     technologies: [],
     faqs: [
       {
         id: 'faq-1',
-        question: 'How long does a custom ERP take to build?',
-        answer: 'Depending on scope, core ERP MVP modules are typically deployed in 8-12 weeks, followed by iterative additions of specialized departmental modules.'
+        question: 'Is a custom ERP better than SAP or Oracle?',
+        answer: 'For most growing businesses, yes. SAP and Oracle suit large global corporations. A custom build covers the same core needs without the licensing cost or lengthy rollout.'
+      },
+      {
+        id: 'faq-2',
+        question: 'What factors affect the cost of ERP development?',
+        answer: 'Cost gets fixed based on the actual requirements, system complexity, the number of modules needed, and deployment type.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Can ERP software integrate with existing business tools?',
+        answer: 'Yes. Accounting software, CRM platforms, e-commerce tools, and other systems already in use typically connect directly.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Does ERP development include data migration from old systems?',
+        answer: 'Yes. Existing inventory records, financial data, and vendor information move into the new system as part of the build.'
+      }
+    ]
+  },
+  {
+    id: 'legacy-modernization',
+    serviceNumber: '11',
+    title: 'Legacy Modernization',
+    eyebrow: 'Legacy Modernization Services',
+    slug: 'legacy-modernization',
+    iconName: 'RefreshCw',
+    tag: 'ENGINEERING',
+    summary: 'Legacy modernization services update old software so it runs on current technology instead of infrastructure that\'s outdated and hard to maintain.',
+    description: 'Legacy modernization services update old software so it runs on current technology instead of infrastructure that\'s outdated and hard to maintain. Emperor Smart Solutions delivers these services for businesses stuck on systems built years ago, systems that still run the business but are quietly getting harder to fix, harder to secure, and harder to staff every year.',
+    ctaText: 'Explore Legacy Modernization →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'Legacy application migration to modern, cloud-based infrastructure',
+      'Cloud modernization with services that scale independently',
+      'Database modernization for current data volume and performance',
+      'Security and compliance review (HIPAA, GDPR, PCI DSS)'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'Assessment',
+        description: 'The system gets reviewed on its own terms, what\'s actually broken, what\'s just old, and what approach fits the business\'s risk tolerance and timeline.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Approach Selection',
+        description: 'The right modernization approach gets chosen, rehost, replatform, re-architect, rebuild, or replace, based on what the system actually needs.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Migration & Development',
+        description: 'Work happens across cloud platforms, containerization, and databases, with testing running throughout the engagement.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Parallel Run & Cutover',
+        description: 'Old and new systems run side by side, so the switch happens only once the new system has been validated against real usage.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Post-Launch Support',
+        description: 'Support continues after the project wraps up, since a modernized system still needs monitoring and occasional adjustment.'
+      }
+    ],
+    technologies: [],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'What is legacy modernization?',
+        answer: 'Updating old software so it runs on current technology and works with modern tools. It doesn\'t always mean rebuilding the whole thing.'
+      },
+      {
+        id: 'faq-2',
+        question: 'How long does legacy system migration take?',
+        answer: 'Depends heavily on the size of the system and how many other things connect to it. A smaller migration might wrap up in a few months.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Does modernization always mean moving to the cloud?',
+        answer: 'No. Cloud modernization is common, but plenty of systems get modernized while staying on-site, usually because of compliance needs or sensitive data.'
+      },
+      {
+        id: 'faq-4',
+        question: 'Does legacy modernization address compliance requirements like HIPAA or GDPR?',
+        answer: 'Yes, when relevant to the business. Compliance checks typically run alongside the technical assessment.'
+      }
+    ]
+  },
+  {
+    id: 'ui-ux',
+    serviceNumber: '12',
+    title: 'UI/UX & Design Systems',
+    eyebrow: 'UI/UX & Design Systems Services',
+    slug: 'ui-ux',
+    iconName: 'Layout',
+    tag: 'GROWTH & DESIGN',
+    summary: 'UI/UX design services shape how people actually experience a product, not just how it looks on the surface.',
+    description: 'UI/UX design services shape how people actually experience a product, not just how it looks on the surface. Emperor Smart Solutions builds interfaces and design systems that make a website, app, or platform easier to use, not just easier to look at. A good design gets out of the way, people find what they need and don\'t think twice about the interface itself.',
+    ctaText: 'Explore UI/UX Design →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'User research and usability testing reports',
+      'Wireframes and interactive prototypes',
+      'Complete design system (components, typography, spacing rules)',
+      'Responsive UI design across all devices'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'User Research',
+        description: 'Understanding who\'s actually using the product and what they\'re trying to accomplish, before any screen gets designed.'
+      },
+      {
+        stepNumber: 2,
+        title: 'Wireframes & Prototypes',
+        description: 'Low-fidelity layouts map out structure and flow early, with interactive prototypes tested before a single line of code gets written.'
+      },
+      {
+        stepNumber: 3,
+        title: 'Design System Development',
+        description: 'A component library gets built once, covering typography, color systems, and reusable UI components.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Interaction Design',
+        description: 'Micro-interactions, transitions, and feedback get designed deliberately instead of left to default behavior.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Usability Testing',
+        description: 'Real people try the actual interface and get watched doing it, surfacing friction points internal teams usually miss.'
+      }
+    ],
+    technologies: [],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'What is the difference between UI and UX design?',
+        answer: 'UI is the visual layer, what a product looks like. UX is the experience layer, how a product actually works and feels to use.'
+      },
+      {
+        id: 'faq-2',
+        question: 'What is a design system used for?',
+        answer: 'A design system keeps a product visually and functionally consistent as it grows, by giving every designer and developer the same set of reusable components and rules.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Does every product need a full design system?',
+        answer: 'Not necessarily. Smaller products or early-stage MVPs might only need a lightweight style guide.'
+      },
+      {
+        id: 'faq-4',
+        question: 'How long does a UI/UX design project take?',
+        answer: 'A focused redesign of a single product usually takes a few weeks. A full design system built from scratch takes longer, often a couple of months.'
+      }
+    ]
+  },
+  {
+    id: 'ai-development',
+    serviceNumber: '13',
+    title: 'AI & Machine Learning',
+    eyebrow: 'AI & Machine Learning Services',
+    slug: 'ai-development',
+    iconName: 'Brain',
+    tag: 'AI & DATA',
+    summary: 'AI and machine learning services turn raw data and static workflows into systems that can retrieve answers, hold conversations, and take action on their own.',
+    description: 'AI and machine learning services turn raw data and static workflows into systems that can retrieve answers, hold conversations, and take action on their own. Emperor Smart Solutions builds these systems for businesses that want AI doing real work, not just running as a demo. Seven services sit under this umbrella, and most businesses only need two or three of them working together.',
+    ctaText: 'Explore AI & Machine Learning →',
+    features: [],
+    benefits: [],
+    deliverables: [
+      'RAG-powered AI grounded in real business documents and data',
+      'AI chatbot or voice agent for support and customer queries',
+      'AI agent for multi-step task automation',
+      'AI model and API integration with existing systems (CRM, ERP)'
+    ],
+    process: [
+      {
+        stepNumber: 1,
+        title: 'RAG Solutions',
+        description: 'Connecting an AI model to a business\'s actual documents, policies, and data, so answers come from real sources instead of guesses.'
+      },
+      {
+        stepNumber: 2,
+        title: 'AI Chatbot or Voice Agent Development',
+        description: 'Building conversational systems that retrieve accurate answers from a business\'s knowledge base, escalating to a human when needed.'
+      },
+      {
+        stepNumber: 3,
+        title: 'AI Agent Development',
+        description: 'Building systems that complete multi-step tasks on their own, built around specific workflows a business wants automated.'
+      },
+      {
+        stepNumber: 4,
+        title: 'Business Automation',
+        description: 'Connecting AI models to existing workflows, approvals, data entry, and scheduling, so repetitive tasks run on their own.'
+      },
+      {
+        stepNumber: 5,
+        title: 'Model & API Integration',
+        description: 'Connecting the right AI model to existing systems, handling authentication, data flow, and error handling.'
+      }
+    ],
+    technologies: [],
+    faqs: [
+      {
+        id: 'faq-1',
+        question: 'What is RAG in AI development?',
+        answer: 'Retrieval-Augmented Generation. It connects an AI model to real documents and data, so answers come from actual sources instead of the model guessing.'
+      },
+      {
+        id: 'faq-2',
+        question: 'How is an AI agent different from a chatbot?',
+        answer: 'A chatbot answers questions. An agent takes multi-step actions, checking systems, updating records, completing tasks.'
+      },
+      {
+        id: 'faq-3',
+        question: 'Which AI models get used for these projects?',
+        answer: 'Depends on the use case. Options typically include OpenAI, Anthropic Claude, Google Gemini, or open-source models.'
+      },
+      {
+        id: 'faq-4',
+        question: 'How long does an AI chatbot or agent project take?',
+        answer: 'A focused RAG chatbot for a specific use case usually takes a few weeks. More complex agentic systems take longer.'
       }
     ]
   },
@@ -360,70 +1048,6 @@ export const services: Service[] = [
         id: 'faq-1',
         question: 'Can we achieve zero downtime during database schema migrations?',
         answer: 'Yes. We implement expand-and-contract migration patterns where new columns and tables are added non-destructively before the application code is updated.'
-      }
-    ]
-  },
-  {
-    id: 'legacy-modernization',
-    title: 'Legacy Modernization & Code Refactoring',
-    slug: 'legacy-modernization',
-    iconName: 'RefreshCw',
-    tag: 'ENGINEERING',
-    summary: 'Outdated software holding your business hostage? We refactor brittle legacy monolithic applications into clean, testable Next.js and microservice architectures without disrupting ongoing business operations.',
-    description: 'Legacy software slows down feature development, repels top engineering talent, and exposes your company to critical security vulnerabilities. We use the proven Strangler Fig migration pattern to incrementally replace old code with modern services.',
-    features: [],
-    benefits: [],
-    deliverables: [
-      'Modernized Next.js / TypeScript Codebase',
-      'Migrated & Normalized PostgreSQL Database',
-      'Automated End-to-End Test Suite',
-      'Legacy Decommissioning & Cutover Documentation'
-    ],
-    process: [
-      { stepNumber: 1, title: 'Legacy Code Audit', description: 'Analyzing codebase complexity, dependencies, and database schemas.' },
-      { stepNumber: 2, title: 'Migration Roadmap', description: 'Segmenting the monolith into modular, low-risk incremental migration phases.' },
-      { stepNumber: 3, title: 'Proxy & API Gateway Setup', description: 'Deploying reverse proxy to intercept and route live production traffic.' },
-      { stepNumber: 4, title: 'Incremental Rewriting', description: 'Rebuilding modules with modern TypeScript and comprehensive tests.' },
-      { stepNumber: 5, title: 'Decommissioning & Celebration', description: 'Retiring legacy servers once 100% traffic is verified on the modern platform.' }
-    ],
-    technologies: [],
-    faqs: [
-      {
-        id: 'faq-1',
-        question: 'Can we modernize our software without pausing customer operations?',
-        answer: 'Yes. By using the Strangler Fig pattern, we migrate one feature at a time while the rest of your system continues running seamlessly in production.'
-      }
-    ]
-  },
-  {
-    id: 'ui-ux',
-    title: 'UI/UX Product Design & Design Systems',
-    slug: 'ui-ux',
-    iconName: 'Layout',
-    tag: 'GROWTH & DESIGN',
-    summary: 'We craft thoughtful digital product experiences that combine intuitive user journeys, high-contrast visual clarity, and scalable design token systems ready for engineering handoff.',
-    description: 'Great software is not just functional; it is a joy to use. We combine deep user research with cutting-edge visual craft to design interfaces that reduce cognitive friction and drive measurable conversions.',
-    features: [],
-    benefits: [],
-    deliverables: [
-      'Complete Figma Master File & Component Library',
-      'Interactive Clickable Prototype',
-      'Design System Documentation & Token Specs',
-      'Tailwind CSS Configuration File'
-    ],
-    process: [
-      { stepNumber: 1, title: 'User Journey Discovery', description: 'Mapping user mental models, wireflows, and friction points.' },
-      { stepNumber: 2, title: 'Information Architecture', description: 'Structuring clean navigation hierarchies and page layouts.' },
-      { stepNumber: 3, title: 'Visual Exploration & Identity', description: 'Developing distinct typography, color palettes, and component styles.' },
-      { stepNumber: 4, title: 'High-Fidelity Interactive Prototyping', description: 'Building realistic Figma prototypes for user usability testing.' },
-      { stepNumber: 5, title: 'Engineering Token Handoff', description: 'Exporting typed tokens and assisting frontend developers during implementation.' }
-    ],
-    technologies: [],
-    faqs: [
-      {
-        id: 'faq-1',
-        question: 'Do your designers understand real-world frontend engineering constraints?',
-        answer: 'Yes. Our design team works directly alongside our senior frontend engineers, ensuring all designs are 100% buildable, responsive, and performance-conscious.'
       }
     ]
   },

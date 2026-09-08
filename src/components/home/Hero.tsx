@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({
 
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.strokeStyle = 'rgba(0, 168, 255, 0.75)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
     });
@@ -243,79 +243,43 @@ export const Hero: React.FC<HeroProps> = ({
     }));
   }, []);
 
-  // Preload Images Sequence into Global Cache (Runs ONCE across re-renders)
+  // Preload Images Sequence into Global Cache
   useEffect(() => {
     if (!isMounted) return;
 
-    if (isPreloadingStarted && globalImagesCache.length === TOTAL_FRAMES) {
-      // Already preloaded or in progress
-      let ready = 0;
-      globalImagesCache.forEach(img => { if (img.complete && img.naturalWidth > 0) ready++; });
-      setLoadedCount(ready);
-      if (ready > 0) {
-        setIsLoaded(true);
-        setTimeout(() => renderFrame(1), 50);
-      }
-      return;
-    }
+    // Immediately unlock UI - timeline and procedural fallback are ready instantly
+    setIsLoaded(true);
 
-    isPreloadingStarted = true;
-    let localLoaded = 0;
-    let localFailed = 0;
+    if (!isPreloadingStarted) {
+      isPreloadingStarted = true;
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = getFrameUrl(i, 'webp');
 
-    // Safety timeout: Unlock UI quickly once initial frames arrive
-    const fallbackTimeout = setTimeout(() => {
-      setIsLoaded(true);
-      if (localLoaded === 0) {
-        setUseProceduralFallback(true);
-      }
-    }, 4000);
-
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = getFrameUrl(i, 'webp');
-
-      img.onload = () => {
-        localLoaded++;
-        setLoadedCount(localLoaded);
-
-        if (localLoaded === 1) {
-          // Paint frame 1 immediately
-          renderFrame(1);
-        }
-
-        // Show page as soon as first 10 frames are ready (progressive background load)
-        if (localLoaded >= 10) {
-          setIsLoaded(true);
-          clearTimeout(fallbackTimeout);
-        }
-
-        if (localLoaded === TOTAL_FRAMES) {
-          clearTimeout(fallbackTimeout);
-          setIsLoaded(true);
-        }
-      };
-
-      img.onerror = () => {
-        if (!img.dataset.triedJpg) {
-          img.dataset.triedJpg = 'true';
-          img.src = getFrameUrl(i, 'jpg');
-        } else {
-          localFailed++;
-          if (localFailed > 20 && localLoaded === 0) {
-            setUseProceduralFallback(true);
-            setIsLoaded(true);
-            clearTimeout(fallbackTimeout);
+        img.onload = () => {
+          setLoadedCount(prev => prev + 1);
+          if (stoneObjRef.current.frame === i || i === 1) {
+            renderFrame(stoneObjRef.current.frame);
           }
-        }
-      };
+        };
 
-      globalImagesCache.push(img);
+        img.onerror = () => {
+          if (!img.dataset.triedJpg) {
+            img.dataset.triedJpg = 'true';
+            img.src = getFrameUrl(i, 'jpg');
+          }
+        };
+
+        globalImagesCache.push(img);
+      }
+    } else {
+      let ready = 0;
+      globalImagesCache.forEach(img => {
+        if (img.complete && img.naturalWidth > 0) ready++;
+      });
+      setLoadedCount(ready);
+      setTimeout(() => renderFrame(1), 50);
     }
-
-    return () => {
-      clearTimeout(fallbackTimeout);
-    };
   }, [isMounted, renderFrame]);
 
   // Handle Window Resize
@@ -324,15 +288,16 @@ export const Hero: React.FC<HeroProps> = ({
 
     const handleResize = () => {
       renderFrame(stoneObjRef.current.frame);
+      ScrollTrigger.refresh();
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMounted, isLoaded, renderFrame]);
+  }, [isMounted, renderFrame]);
 
   // Initialize GSAP Animation Timeline with Direct Ref Bindings & Deterministic Bidirectional Tweens
   useEffect(() => {
-    if (!isMounted || !isLoaded) return;
+    if (!isMounted) return;
 
     const ctx = gsap.context(() => {
       const stoneObj = stoneObjRef.current;
@@ -496,6 +461,11 @@ export const Hero: React.FC<HeroProps> = ({
       // 7. Settle & hold stone at frame 410 so section 2 can overlap it cleanly without active cards
       tl.to({}, { duration: isMobile ? 2.7 : 2.7 }, isMobile ? 6.0 : 8.5);
 
+      // Refresh ScrollTrigger to calculate exact pinned track dimensions
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
+
     }, containerRef);
 
     return () => {
@@ -504,7 +474,7 @@ export const Hero: React.FC<HeroProps> = ({
         document.body.classList.remove('dark-mode');
       }
     };
-  }, [isMounted, isLoaded, renderFrame]);
+  }, [isMounted, renderFrame]);
 
   if (!isMounted) return null;
 
@@ -548,14 +518,6 @@ export const Hero: React.FC<HeroProps> = ({
               <p className={styles.heroSubheading}>
                 {subheading}
               </p>
-              <div className={styles.heroCtaRow}>
-                <Link href="/contact" className={styles.heroPrimaryCta}>
-                  Book a Free Consultation
-                </Link>
-                <Link href="/services" className={styles.heroSecondaryCta}>
-                  Explore Our Services &rarr;
-                </Link>
-              </div>
             </div>
           </div>
 
