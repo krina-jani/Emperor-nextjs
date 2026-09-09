@@ -58,7 +58,7 @@ export const HomeHero: React.FC = () => {
       // Staggered text entrance
       if (contentRef.current) {
         const textElements = contentRef.current.querySelectorAll(
-          `.${styles.eyebrow}, .${styles.heroTitle}, .${styles.heroTagline}, .${styles.actionsRow}, .${styles.statsRow}`
+          `.${styles.eyebrow}, .${styles.heroTitle}, .${styles.heroTagline}, .${styles.actionsRow}`
         );
         gsap.fromTo(
           textElements,
@@ -256,24 +256,6 @@ export const HomeHero: React.FC = () => {
                 <span>START A PROJECT</span>
                 <span className={styles.btnArrow} aria-hidden="true">&rarr;</span>
               </Link>
-            </div>
-          </div>
-
-          {/* Metrics / Stats Row */}
-          <div className={styles.statsRow}>
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>50+</span>
-              <span className={styles.statLabel}>PROJECTS</span>
-            </div>
-            <div className={styles.statDivider} aria-hidden="true" />
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>20+</span>
-              <span className={styles.statLabel}>CLIENTS</span>
-            </div>
-            <div className={styles.statDivider} aria-hidden="true" />
-            <div className={styles.statItem}>
-              <span className={styles.statNumber}>5+</span>
-              <span className={styles.statLabel}>YEARS</span>
             </div>
           </div>
         </div>

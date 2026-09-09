@@ -223,6 +223,14 @@
   }
 }
 
+.locationGrid {
+  margin-top: 2.5rem;
+}
+
+.mobileSocialIcons {
+  display: none;
+}
+
 .navLinks, .socialLinks {
   display: flex;
   flex-direction: column;
@@ -254,17 +262,20 @@
 }
 
 .legal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   font-size: 0.875rem;
   color: #94A3B8;
-  line-height: 1.65;
+  line-height: 1.3;
   text-align: left;
 }
 
 .legalLink {
   color: #CBD5E1;
   text-decoration: none;
-  display: block;
-  margin-bottom: 0.35rem;
+  display: inline-block;
+  margin-bottom: 0;
   font-weight: 500;
   transition: color 0.2s ease;
   text-shadow: 0 1px 3px rgba(1, 6, 16, 0.8);
@@ -333,14 +344,128 @@
 }
 
 @media (max-width: 768px) {
+  .footer {
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .contentSection {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
   .leftCol {
-    padding-left: clamp(12px, 3.5vw, 24px);
-    padding-right: clamp(12px, 3.5vw, 24px);
+    padding-left: clamp(12px, 3.5vw, 20px);
+    padding-right: clamp(12px, 3.5vw, 20px);
   }
 
   .tagline {
     padding-left: 0;
-    font-size: clamp(1.75rem, 6.5vw, 2.5rem);
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    margin-bottom: 0.85rem;
+    line-height: 1.15;
+  }
+
+  .letsTalkBtn {
+    padding: 0.8rem 1.75rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .contactInfo {
+    gap: 0.25rem;
+  }
+
+  .contactLabel {
+    font-size: 0.75rem;
+  }
+
+  .contactEmail {
+    font-size: 0.95rem;
+  }
+
+  .linksGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-left: clamp(12px, 3.5vw, 20px);
+    padding-right: clamp(12px, 3.5vw, 20px);
+  }
+
+  .navLinks {
+    gap: 0.75rem;
+  }
+
+  .navLink {
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* REMOVE THIS text on responsive mode only */
+  .socialLinks {
+    display: none !important;
+  }
+
+  /* 3 colorful favicons / icons on responsive mode only */
+  .mobileSocialIcons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 1.1rem;
+    margin-bottom: 0.25rem;
+    padding-left: clamp(12px, 3.5vw, 20px);
+    padding-right: clamp(12px, 3.5vw, 20px);
+  }
+
+  .mobileSocialBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .mobileSocialBtn:hover {
+    transform: translateY(-2px);
+  }
+
+  .mobileSocialBtn:active {
+    transform: scale(0.92);
+  }
+
+  .instagramBtn {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    box-shadow: 0 4px 12px rgba(214, 36, 159, 0.4);
+  }
+
+  .linkedinBtn {
+    background: #0A66C2;
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
+  }
+
+  .facebookBtn {
+    background: #1877F2;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+  }
+
+  .locationGrid {
+    margin-top: 1.1rem;
+    gap: 0.85rem;
+  }
+
+  .location {
+    font-size: 0.825rem;
+    line-height: 1.5;
+  }
+
+  .legal {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    gap: 0.2rem;
   }
 
   .giantTextContainer {
@@ -348,6 +473,8 @@
     max-width: 100%;
     padding-left: 0;
     padding-right: 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.25rem;
     overflow: hidden;
   }
 
@@ -358,7 +485,7 @@
     justify-content: center;
     gap: 0;
     padding: 0;
-    font-size: clamp(3rem, 15.5vw, 6rem);
+    font-size: clamp(2.75rem, 15.5vw, 5.5rem);
     letter-spacing: 0;
     white-space: nowrap;
     box-sizing: border-box;
@@ -367,18 +494,14 @@
 
 @media (max-width: 480px) {
   .giantText {
-    font-size: clamp(2.6rem, 15.2vw, 4.5rem);
+    font-size: clamp(2.4rem, 15.2vw, 4.2rem);
     letter-spacing: 0;
   }
 }
 
 @media (max-width: 360px) {
   .giantText {
-    font-size: clamp(2.2rem, 14.8vw, 3.4rem);
+    font-size: clamp(2.1rem, 14.8vw, 3.2rem);
     letter-spacing: 0;
-  }
-  .linksGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 }
