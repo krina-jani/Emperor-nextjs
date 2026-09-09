@@ -213,39 +213,52 @@ header[data-theme="light"]:not(.darkTheme) .logoTextSub {
   display: none;
 }
 
-/* Mobile Responsiveness */
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 1080px) {
+  .ctaBtnFull {
+    display: none;
+  }
+  .ctaBtnShort {
+    display: inline;
+  }
+  .ctaBtn {
+    padding: 8px 16px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+
 @media (max-width: 768px) {
   .header {
-    padding: 20px 20px 14px 20px;
+    padding: 20px 24px 14px 24px;
     min-height: 64px;
   }
   .scrolled {
-    padding: 14px 20px 12px 20px;
+    padding: 14px 24px 12px 24px;
   }
   .menuOpen .logo {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
   }
-  .logoTextSub {
-    display: none;
-  }
   .logoTextMain {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     letter-spacing: 0.1em;
   }
-  .ctaBtn {
-    padding: 8px 16px;
-    font-size: 10.5px;
+  .logoTextSub {
+    font-size: 0.48rem;
+    letter-spacing: 0.18em;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile: hide header CTA button so only Logo + MENU + are present */
+@media (max-width: 640px) {
   .header {
-    padding: 14px 16px 10px 16px;
+    padding: 14px 18px 10px 18px;
+    min-height: 56px;
   }
   .scrolled {
-    padding: 12px 16px 10px 16px;
+    padding: 12px 18px 10px 18px;
   }
   .logo {
     gap: 8px;
@@ -254,30 +267,17 @@ header[data-theme="light"]:not(.darkTheme) .logoTextSub {
     height: 28px;
   }
   .logoTextMain {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     letter-spacing: 0.08em;
   }
-  .rightActions {
-    gap: 8px;
-  }
-  .ctaBtn {
-    padding: 7px 12px;
-    font-size: 9.5px;
-    letter-spacing: 0.8px;
-  }
-}
-
-@media (max-width: 420px) {
-  .ctaBtnFull {
+  .logoTextSub {
     display: none;
   }
-  .ctaBtnShort {
-    display: inline;
-  }
   .ctaBtn {
-    padding: 7px 11px;
-    font-size: 9.5px;
-    letter-spacing: 0.8px;
+    display: none !important;
+  }
+  .rightActions {
+    gap: 6px;
   }
 }
 

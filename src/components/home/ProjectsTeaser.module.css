@@ -68,10 +68,10 @@
 
 @media (max-width: 991px) {
   .section {
-    padding-top: clamp(4.5rem, 10vh, 7rem);
-    padding-bottom: clamp(4.5rem, 10vh, 7rem);
+    padding-top: clamp(3.2rem, 7vh, 5rem);
+    padding-bottom: clamp(2.5rem, 5vh, 4rem);
     min-height: auto;
-    gap: 3rem;
+    gap: 2rem;
   }
   .title {
     font-size: clamp(3rem, 12vw, 5.5rem);
@@ -83,15 +83,15 @@
 
 @media (max-width: 480px) {
   .section {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
-    gap: 2rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.25rem;
+    gap: 1.5rem;
   }
   .title {
     font-size: clamp(2.5rem, 12.5vw, 3.8rem);
   }
   .subtitle {
-    font-size: 1.1rem;
-    line-height: 1.5;
+    font-size: 1.05rem;
+    line-height: 1.45;
   }
 }

@@ -35,7 +35,6 @@
    Desktop Horizontal Layout
    ========================================================================== */
 .desktopTimeline {
-  display: none;
   min-height: 100vh;
   padding: clamp(1.5rem, 3.5vh, 2.5rem) 0 clamp(1.5rem, 3.5vh, 2.5rem);
   box-sizing: border-box;
@@ -339,173 +338,220 @@
 }
 
 /* ==========================================================================
-   Mobile Vertical Layout
+   Responsive Horizontal Layout (<= 1024px)
+   Desktop layout (>= 1025px) remains completely unchanged.
    ========================================================================== */
-.mobileTimeline {
-  display: block;
-  padding: 4.5rem 0;
+/* ==========================================================================
+   Responsive Horizontal Layout (<= 1024px)
+   Page scroll pins the section and scrolls cards horizontally one by one.
+   Desktop layout (>= 1025px) remains completely unchanged.
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .desktopTimeline {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100dvh;
+    box-sizing: border-box;
+    padding-top: clamp(68px, 11vh, 85px);
+    padding-bottom: clamp(14px, 2.5vh, 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .headerContainer {
+    margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    box-sizing: border-box;
+  }
+
+  .headerFlex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.45rem, 1.2vh, 0.75rem);
+  }
+
+  .headerLeft {
+    max-width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .title {
+    font-size: clamp(1.35rem, 4.2vw, 1.75rem);
+    margin-bottom: 0.35rem;
+    line-height: 1.2;
+  }
+
+  .introDesc {
+    font-size: clamp(0.78rem, 2.4vw, 0.86rem);
+    line-height: 1.4;
+  }
+
+  .navControls {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .stepBadges {
+    display: none !important;
+  }
+
+  .arrowBtns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    width: 100%;
+  }
+
+  .arrowBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .track {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .progressLine {
+    display: none;
+  }
+
+  .scrollWrapper {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    overflow: visible;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding-left: calc((100vw - min(84vw, 360px)) / 2);
+    padding-right: calc((100vw - min(84vw, 360px)) / 2);
+    box-sizing: border-box;
+  }
+
+  .stepCard {
+    width: min(84vw, 360px);
+    height: clamp(340px, 49vh, 410px);
+    flex-shrink: 0;
+    padding: 1.1rem 1.15rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1 !important;
+  }
+
+  .stepCard:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  .stepHeader {
+    margin-bottom: 0.35rem;
+  }
+
+  .stepNum {
+    font-size: 1.45rem;
+  }
+
+  .stepCircle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .stepTitle {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .stepDesc {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .highlightsBox {
+    margin-top: auto;
+    padding: 0.5rem 0.65rem;
+    border-radius: 0.65rem;
+  }
+
+  .highlightsTitle {
+    font-size: 0.62rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .highlightsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+  }
+
+  .highlightItem {
+    font-size: 0.66rem;
+    padding: 0.25rem 0.4rem;
+  }
+
+  .mobileTimeline {
+    display: none !important;
+  }
 }
 
-.headerMobile {
-  margin-bottom: 3rem;
-}
-
-.introDescMobile {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
-}
-
-.verticalTimeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding-left: 2.25rem;
-}
-
-.verticalThread {
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 17px;
-  width: 2px;
-  background-color: rgba(0, 140, 255, 0.35);
-  z-index: 1;
-}
-
-.stepCardMobile {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  z-index: 2;
-}
-
-.numMarker {
-  position: absolute;
-  left: -2.25rem;
-  top: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  background-color: #09090b;
-  border: 2px solid #008cff;
-  color: #ffffff;
-  border-radius: 50%;
-  font-size: 0.8rem;
-  font-weight: 700;
-  font-family: monospace;
-  z-index: 3;
-}
-
-.mobileCardContent {
-  position: relative;
-  overflow: hidden;
-  background-color: #090d16;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  padding: 1.5rem 1.25rem;
-  width: 100%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-
-.mobileCardInner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
-
-.stepTitleMobile {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-}
-
-.stepDescMobile {
-  font-size: 0.875rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
-}
-
-.highlightsBoxMobile {
-  margin-top: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.highlightsGridMobile {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.4rem;
-}
-
-.highlightsGridMobile .highlightItem {
-  white-space: normal;
-  word-break: break-word;
-  overflow: visible;
-  text-overflow: clip;
-  padding: 0.35rem 0.55rem;
-}
-
-.highlightItemMobile {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #ffffff;
-  background: rgba(0, 140, 255, 0.14);
-  padding: 0.35rem 0.55rem;
-  border-radius: 6px;
-  border: 1px solid rgba(0, 140, 255, 0.28);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-  white-space: normal;
-  word-break: break-word;
-}
-
-/* Tablet Layout (640px - 1024px) */
+/* Tablet adjustments */
 @media (min-width: 640px) and (max-width: 1024px) {
-  .highlightsGridMobile {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+  .desktopTimeline {
+    padding-top: clamp(85px, 12vh, 110px);
+    padding-bottom: clamp(24px, 4vh, 40px);
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .introDesc {
+    font-size: 1rem;
+  }
+
+  .scrollWrapper {
+    padding-left: calc((100vw - clamp(310px, 35vw, 380px)) / 2);
+    padding-right: calc((100vw - clamp(310px, 35vw, 380px)) / 2);
+  }
+
+  .stepCard {
+    width: clamp(310px, 35vw, 380px);
+    height: clamp(400px, 48vh, 460px);
+    padding: 1.35rem;
+  }
+
+  .stepTitle {
+    font-size: 1.25rem;
+  }
+
+  .stepDesc {
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 360px) {
-  .verticalTimeline {
-    padding-left: 1.85rem;
-  }
-
-  .verticalThread {
-    left: 13px;
-  }
-
-  .numMarker {
-    left: -1.85rem;
-    width: 28px;
-    height: 28px;
-    font-size: 0.72rem;
-  }
-
-  .mobileCardContent {
-    padding: 1.25rem 0.85rem;
-  }
-}
-
-/* ==========================================================================
-   Responsive Breakpoints
-   ========================================================================== */
-@media (min-width: 1025px) {
-  .desktopTimeline {
-    display: block;
-  }
-  .mobileTimeline {
-    display: none;
+  .highlightsGrid {
+    grid-template-columns: 1fr;
   }
 }

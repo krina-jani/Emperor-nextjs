@@ -57,6 +57,31 @@
   pointer-events: none;
 }
 
+/* Bottom atmospheric dark gradient overlay for stats clarity on tablet/mobile */
+.bottomGradient {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .bottomGradient {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.65) 45%,
+      rgba(0, 0, 0, 0.2) 75%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 3;
+  }
+}
+
 /* Main Layout */
 .heroContainer {
   width: 100%;
@@ -67,7 +92,7 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  z-index: 3;
+  z-index: 4;
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -79,16 +104,23 @@
   align-items: flex-start;
   max-width: clamp(560px, 52vw, 760px);
   position: relative;
-  z-index: 4;
+  z-index: 5;
   pointer-events: auto;
+}
+
+.heroTextGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 /* Emperor Cybernetic Robot - Firmly Stuck in Hero Section */
 .robotContainer {
   position: absolute;
   bottom: 0;
-  right: clamp(50px, 12.2vw, 240px);
-  height: clamp(540px, 88vh, 860px);
+  right: clamp(70px, 12vw, 220px);
+  height: clamp(520px, 78vh, 760px);
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -101,8 +133,8 @@
   bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(280px, 26vw, 440px);
-  height: clamp(340px, 34vw, 500px);
+  width: clamp(280px, 28vw, 460px);
+  height: clamp(340px, 34vw, 520px);
   background: radial-gradient(
     ellipse at center,
     rgba(0, 140, 255, 0.22) 0%,
@@ -194,6 +226,10 @@
 .titleLineBlue {
   color: #38BDF8;
   text-shadow: 0 0 35px rgba(56, 189, 248, 0.55), 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.titleWord {
+  display: inline;
 }
 
 /* Tagline */
@@ -326,205 +362,471 @@
     max-width: clamp(480px, 48vw, 640px);
   }
   .robotContainer {
-    right: clamp(16px, 4vw, 100px);
-    height: clamp(460px, 75vh, 700px);
+    right: clamp(40px, 8vw, 140px);
+    height: clamp(460px, 74vh, 680px);
   }
   .heroTitle {
     font-size: clamp(2.3rem, 4.2vw, 4rem);
   }
 }
 
-/* Tablet & Mobile Responsiveness */
-@media (max-width: 1080px) {
+/* =========================================================
+   TABLET / IPAD ADAPTED LAYOUT (641px - 1080px)
+   Matches Reference: Centered text, Robot centered in lower half,
+   Side-by-side CTAs, Stats row centered horizontally across bottom
+   ========================================================= */
+@media (max-width: 1080px) and (min-width: 641px) {
   .heroSection {
-    min-height: auto;
-    padding-top: 100px;
-    padding-bottom: 50px;
+    min-height: 100vh;
+    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
+    max-height: 1120px;
+    padding-top: 92px;
+    padding-bottom: 28px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
   }
 
   .heroContainer {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    padding: 0 28px;
+    display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    z-index: 4;
+  }
+
+  .heroContent {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .heroTextGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    z-index: 5;
+  }
+
+  .eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 14px;
     justify-content: center;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.45rem, 5.2vw, 3.65rem);
+    line-height: 1.05;
+    margin-bottom: 14px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .heroTagline {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+
+  .actionsRow {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 13px 26px;
+    font-size: 0.9rem;
+  }
+
+  /* Robot centered in lower half */
+  .robotContainer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    height: clamp(540px, 62vh, 820px);
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .robotGlow {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15%;
+    width: clamp(460px, 55vw, 700px);
+    height: clamp(460px, 55vw, 700px);
+  }
+
+  .robotWrapper {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .robotImage {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-position: bottom center;
+  }
+
+  .robotShadowOverlay {
+    -webkit-mask-position: bottom center;
+    mask-position: bottom center;
+  }
+
+  /* Stats row placed at the bottom */
+  .statsRow {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(28px, 4.5vw, 56px);
+    margin-top: auto;
+    margin-bottom: 0;
+    z-index: 5;
+    position: relative;
+  }
+
+  .statItem {
     align-items: center;
     text-align: center;
   }
 
-  .heroContent {
-    max-width: 100%;
-    align-items: center;
-  }
-
-  .eyebrow {
-    justify-content: center;
-  }
-
-  .actionsRow {
-    justify-content: center;
-  }
-
-  .statsRow {
-    justify-content: center;
-  }
-
-  .robotContainer {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    height: auto;
-    max-height: clamp(380px, 52vh, 520px);
-    margin-top: 36px;
-    justify-content: center;
-  }
-
-  .robotImage {
-    height: auto;
-    max-height: clamp(380px, 52vh, 520px);
-    width: auto;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .heroSection {
-    padding-top: 85px;
-    padding-bottom: 40px;
-  }
-
-  .heroTitle {
-    font-size: clamp(2.2rem, 7.8vw, 3.4rem);
-  }
-
-  .actionsRow {
-    gap: 12px;
-    margin-bottom: 36px;
-  }
-
-  .primaryBtn,
-  .secondaryBtn {
-    padding: 12px 24px;
-    font-size: 0.88rem;
-  }
-
-  .robotContainer {
-    max-height: clamp(300px, 46vh, 400px);
-  }
-
-  .robotImage {
-    max-height: clamp(300px, 46vh, 400px);
-  }
-}
-
-@media (max-width: 480px) {
-  .heroSection {
-    padding-top: 80px;
-    padding-bottom: 35px;
-  }
-
-  .eyebrow {
-    letter-spacing: 0.16em;
-    font-size: 0.74rem;
-  }
-
-  .heroTitle {
-    font-size: clamp(1.95rem, 9.2vw, 2.65rem);
-    margin-bottom: 18px;
-  }
-
-  .actionsRow {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .primaryBtn,
-  .secondaryBtn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .statsRow {
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   .statNumber {
-    font-size: 1.55rem;
+    font-size: clamp(2rem, 3.4vw, 2.55rem);
   }
 
   .statLabel {
-    font-size: 0.68rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
   }
 
-  .robotContainer {
-    max-height: 300px;
-  }
-
-  .robotImage {
-    max-height: 300px;
+  .statDivider {
+    height: 38px;
   }
 }
 
-@media (max-width: 360px) {
+/* =========================================================
+   MOBILE / STACKED LAYOUT (max-width: 640px, e.g. 375 x 812)
+   Matches Reference: Eyebrow, Stacked Title words, Stacked CTAs,
+   Robot centered underneath, Bottom Stats row
+   ========================================================= */
+@media (max-width: 640px) {
+  .heroSection {
+    min-height: 100vh;
+    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
+    padding-top: 68px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
   .heroContainer {
-    padding: 0 14px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    z-index: 4;
+  }
+
+  .heroContent {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .heroTextGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    z-index: 5;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  /* Break title into individual stacked words on mobile matching reference */
+  .titleWord {
+    display: block;
   }
 
   .heroTitle {
-    font-size: clamp(1.75rem, 8.5vw, 2.2rem);
+    font-size: clamp(1.85rem, 8.4vw, 2.35rem);
+    line-height: 1.04;
     letter-spacing: -0.025em;
+    margin-bottom: 10px;
+    text-align: center;
+    align-items: center;
   }
 
   .heroTagline {
-    font-size: 1rem;
-    margin-bottom: 24px;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    margin-bottom: 14px;
+    max-width: 290px;
+    text-align: center;
   }
 
+  /* Full-width Stacked Action Buttons */
+  .actionsRow {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 10.5px 18px;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    box-sizing: border-box;
+  }
+
+  /* Robot centered underneath buttons, head starting under buttons */
+  .robotContainer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    height: clamp(370px, 52vh, 520px);
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .robotGlow {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%;
+    width: clamp(320px, 85vw, 460px);
+    height: clamp(320px, 85vw, 460px);
+  }
+
+  .robotWrapper {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .robotImage {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-position: bottom center;
+  }
+
+  .robotShadowOverlay {
+    -webkit-mask-position: bottom center;
+    mask-position: bottom center;
+  }
+
+  /* Horizontal stats row at bottom */
   .statsRow {
-    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 3.8vw, 20px);
+    margin-top: auto;
+    margin-bottom: 2px;
+    z-index: 5;
+    position: relative;
+  }
+
+  .statItem {
+    align-items: center;
+    text-align: center;
   }
 
   .statNumber {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
   }
 
   .statLabel {
     font-size: 0.62rem;
+    letter-spacing: 0.1em;
   }
 
-  .robotContainer {
-    max-height: 250px;
-  }
-
-  .robotImage {
-    max-height: 250px;
+  .statDivider {
+    height: 26px;
+    background: rgba(255, 255, 255, 0.22);
   }
 }
 
-/* Mobile & Tablet Landscape Orientation */
-@media (max-height: 540px) and (orientation: landscape) {
+/* Extra small devices (max-width: 360px) */
+@media (max-width: 360px) {
   .heroSection {
-    padding-top: 75px;
-    padding-bottom: 30px;
-    min-height: auto;
+    padding-top: 62px;
+    padding-bottom: 10px;
+  }
+
+  .heroContainer {
+    padding: 0 12px;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
   }
 
   .heroTitle {
-    font-size: 2.2rem;
-    margin-bottom: 12px;
-  }
-
-  .actionsRow {
-    margin-bottom: 24px;
-    gap: 10px;
+    font-size: 1.75rem;
+    line-height: 1.04;
+    margin-bottom: 8px;
   }
 
   .heroTagline {
-    margin-bottom: 16px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .actionsRow {
+    max-width: 270px;
+    gap: 6px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 9px 14px;
+    font-size: 0.78rem;
   }
 
   .robotContainer {
-    max-height: 240px;
+    height: clamp(310px, 48vh, 380px);
+  }
+
+  .statsRow {
+    gap: 8px;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.56rem;
+  }
+
+  .statDivider {
+    height: 20px;
+  }
+}
+
+/* Mobile landscape orientation */
+@media (max-height: 520px) and (orientation: landscape) {
+  .heroSection {
+    min-height: auto;
+    height: auto;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+  }
+
+  .heroContainer {
+    height: auto;
+  }
+
+  .heroContent {
+    height: auto;
+  }
+
+  .titleWord {
+    display: inline;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .actionsRow {
+    flex-direction: row;
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .robotContainer {
+    position: relative;
+    left: auto;
+    transform: none;
+    height: 220px;
+    margin: 16px auto;
+  }
+
+  .statsRow {
     margin-top: 16px;
   }
 }

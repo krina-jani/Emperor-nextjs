@@ -16,8 +16,17 @@
   overflow: visible !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
+  .stackSection:first-child {
+    min-height: clamp(480px, 72vh, 640px);
+  }
+}
+
+@media (max-width: 640px) {
   .stackSection {
     min-height: 100svh;
+  }
+  .stackSection:first-child {
+    min-height: clamp(380px, 68vh, 520px);
   }
 }

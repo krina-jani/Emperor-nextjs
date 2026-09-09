@@ -57,7 +57,9 @@ export const HomeHero: React.FC = () => {
 
       // Staggered text entrance
       if (contentRef.current) {
-        const textElements = contentRef.current.children;
+        const textElements = contentRef.current.querySelectorAll(
+          `.${styles.eyebrow}, .${styles.heroTitle}, .${styles.heroTagline}, .${styles.actionsRow}, .${styles.statsRow}`
+        );
         gsap.fromTo(
           textElements,
           { opacity: 0, y: 32 },
@@ -141,11 +143,11 @@ export const HomeHero: React.FC = () => {
     const animate = () => {
       if (shadowOverlayRef.current && robotWrapperRef.current) {
         const rect = robotWrapperRef.current.getBoundingClientRect();
-        // Increased shadow radius: massive atmospheric black shadow covering arm, chest and cloak
-        const shadowRadius = Math.max(560, Math.round(rect.height * 0.72));
+        // Dynamic shadow radius proportional to robot height
+        const shadowRadius = Math.max(460, Math.round(rect.height * 0.7));
 
-        // Smooth, slow fluid glide (lerp = 0.045 makes the shadow glide slowly behind the cursor)
-        const lerp = 0.045;
+        // Smooth, fluid glide
+        const lerp = 0.055;
         currentPosRef.current.x += (targetPosRef.current.x - currentPosRef.current.x) * lerp;
         currentPosRef.current.y += (targetPosRef.current.y - currentPosRef.current.y) * lerp;
 
@@ -218,35 +220,46 @@ export const HomeHero: React.FC = () => {
         </div>
       </div>
 
+      {/* Bottom atmospheric dark gradient overlay for stats clarity */}
+      <div className={styles.bottomGradient} aria-hidden="true" />
+
       <div className={styles.heroContainer}>
-        {/* Left Column: Eyebrow, Headline, Tagline, CTAs, Stats */}
+        {/* Content Column: Eyebrow, Headline, Tagline, CTAs, Stats */}
         <div ref={contentRef} className={styles.heroContent}>
-          {/* Eyebrow */}
-          <div className={styles.eyebrow}>
-            <span>AI &bull; WEB &bull; SOFTWARE &bull; DIGITAL</span>
-          </div>
+          <div className={styles.heroTextGroup}>
+            {/* Eyebrow */}
+            <div className={styles.eyebrow}>
+              <span>AI &bull; WEB &bull; SOFTWARE &bull; DIGITAL</span>
+            </div>
 
-          {/* Main Headline */}
-          <h1 className={styles.heroTitle}>
-            <span className={styles.titleLineWhite}>YOUR VISION</span>
-            <span className={styles.titleLineBlue}>OUR TECHNOLOGY</span>
-            <span className={styles.titleLineWhite}>REAL RESULTS.</span>
-          </h1>
+            {/* Main Headline */}
+            <h1 className={styles.heroTitle}>
+              <span className={styles.titleLineWhite}>YOUR VISION</span>
+              <span className={styles.titleLineBlue}>
+                <span className={styles.titleWord}>OUR</span>{' '}
+                <span className={styles.titleWord}>TECHNOLOGY</span>
+              </span>
+              <span className={styles.titleLineWhite}>
+                <span className={styles.titleWord}>REAL</span>{' '}
+                <span className={styles.titleWord}>RESULTS.</span>
+              </span>
+            </h1>
 
-          {/* Tagline */}
-          <p className={styles.heroTagline}>
-            Building Technology. Driving Growth.
-          </p>
+            {/* Tagline */}
+            <p className={styles.heroTagline}>
+              Building Technology. Driving Growth.
+            </p>
 
-          {/* Dual Action Buttons */}
-          <div className={styles.actionsRow}>
-            <Link href="/contact" className={styles.primaryBtn}>
-              <span>START A PROJECT</span>
-              <span className={styles.btnArrow} aria-hidden="true">&rarr;</span>
-            </Link>
-            <Link href="/work" className={styles.secondaryBtn}>
-              <span>EXPLORE OUR WORK</span>
-            </Link>
+            {/* Dual Action Buttons */}
+            <div className={styles.actionsRow}>
+              <Link href="/contact" className={styles.primaryBtn}>
+                <span>START A PROJECT</span>
+                <span className={styles.btnArrow} aria-hidden="true">&rarr;</span>
+              </Link>
+              <Link href="/work" className={styles.secondaryBtn}>
+                <span>EXPLORE OUR WORK</span>
+              </Link>
+            </div>
           </div>
 
           {/* Metrics / Stats Row */}

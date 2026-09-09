@@ -135,20 +135,12 @@ export const ProcessTimeline: React.FC = () => {
 
   // Navigate to step index (0 to 7)
   const scrollToStep = (index: number) => {
-    const scrollWrapper = scrollRef.current;
-    if (!scrollWrapper) return;
-
     const st = ScrollTrigger.getById('process-timeline-trigger');
 
     if (st) {
       const progress = index / (steps.length - 1);
       const targetScroll = st.start + progress * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    } else {
-      const card = scrollWrapper.children[index] as HTMLElement;
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      }
     }
     setActiveStep(index);
   };
@@ -166,6 +158,7 @@ export const ProcessTimeline: React.FC = () => {
       ctx = gsap.context(() => {
         const mm = gsap.matchMedia();
 
+        // Desktop Layout (>= 1025px) - Pinned horizontal scroll (unchanged)
         mm.add('(min-width: 1025px)', () => {
           const getScrollAmount = () => {
             return Math.max(0, scrollWrapper.scrollWidth - window.innerWidth);
@@ -225,20 +218,44 @@ export const ProcessTimeline: React.FC = () => {
           });
         });
 
+        // Responsive Mode (<= 1024px) - Horizontal cards scrolling with page scrolling
         mm.add('(max-width: 1024px)', () => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          gsap.utils.toArray('.process-step-card-mobile').forEach((card: any) => {
-            gsap.from(card, {
-              opacity: 0,
-              y: 30,
-              duration: 0.6,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
+          const getScrollAmount = () => {
+            return Math.max(0, scrollWrapper.scrollWidth - window.innerWidth);
+          };
+
+          const scrollTween = gsap.to(scrollWrapper, {
+            x: () => -getScrollAmount(),
+            ease: 'none',
+            scrollTrigger: {
+              id: 'process-timeline-trigger',
+              trigger: section,
+              pin: true,
+              anticipatePin: 1,
+              scrub: 0.5,
+              start: 'top top',
+              end: () => `+=${getScrollAmount() * 1.15}`,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const idx = Math.min(
+                  steps.length - 1,
+                  Math.round(self.progress * (steps.length - 1))
+                );
+                setActiveStep(idx);
               }
-            });
+            }
+          });
+
+          gsap.to(progressFill, {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              scrub: 0.5,
+              start: 'top top',
+              end: () => `+=${getScrollAmount() * 1.15}`,
+              invalidateOnRefresh: true,
+            }
           });
         });
       }, sectionRef);
@@ -355,59 +372,6 @@ export const ProcessTimeline: React.FC = () => {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Mobile Layout (Vertical List Timeline) */}
-        <div className={styles.mobileTimeline}>
-          <Container>
-            <div className={styles.headerMobile}>
-              <span className={styles.eyebrow}>[04] Structured Methodology</span>
-              <h2 className={styles.title}>Process Followed on Every Project</h2>
-              <p className={styles.introDescMobile}>
-                Every project moves through the same eight stages, whether it&apos;s a website, a mobile app, or an algo trading platform. Each step builds on the one before it.
-              </p>
-            </div>
-
-            <div className={styles.verticalTimeline}>
-              <div className={styles.verticalThread} />
-
-              {steps.map((step) => (
-                <div key={step.num} className={`${styles.stepCardMobile} process-step-card-mobile`}>
-                  <div className={styles.numMarker}>
-                    <span>{step.num}</span>
-                  </div>
-                  <div className={styles.mobileCardContent}>
-                    {/* Background Image & Overlay */}
-                    <div className={styles.cardBgWrapper} aria-hidden="true">
-                      <img
-                        src={step.bgImage}
-                        alt=""
-                        className={styles.cardBgImage}
-                        loading="lazy"
-                      />
-                      <div className={styles.cardOverlay} />
-                    </div>
-
-                    <div className={styles.mobileCardInner}>
-                      <h3 className={styles.stepTitleMobile}>{step.title}</h3>
-                      <p className={styles.stepDescMobile}>{step.desc}</p>
-                      <div className={styles.highlightsBoxMobile}>
-                        <span className={styles.highlightsTitle}>{step.highlightsTitle}</span>
-                        <div className={styles.highlightsGridMobile}>
-                          {step.highlights.map((item, idx) => (
-                            <div key={idx} className={styles.highlightItem}>
-                              <CheckCircle2 size={13} className={styles.highlightCheck} />
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Container>
         </div>
       </section>
     </div>
