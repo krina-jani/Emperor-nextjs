@@ -53,7 +53,7 @@ export const FeaturedWork: React.FC = () => {
         {/* Section Header */}
         <FadeIn direction="up">
           <div className={styles.sectionHeader}>
-            <span className={styles.eyebrow}>[06] Case Studies</span>
+            <span className={styles.eyebrow}>Case Studies & Impact</span>
             <h2 className={styles.title}>A Glimpse of the Work Done So Far</h2>
             <p className={styles.introDesc}>
               Real projects, real challenges, across web development, software, and other services.

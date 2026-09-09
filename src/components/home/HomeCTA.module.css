@@ -24,8 +24,8 @@
   width: max-content;
   white-space: nowrap;
   font-family: var(--font-heading, "Helvetica Neue", Helvetica, Arial, sans-serif);
-  font-size: clamp(3.75rem, 16vw, 6.5rem);
-  font-weight: 700;
+  font-size: clamp(8rem, 36vw, 14rem);
+  font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
   margin: 0;

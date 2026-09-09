@@ -46,7 +46,7 @@ export const BlogPreview: React.FC = () => {
       <Container>
         <FadeIn direction="up">
           <div className={styles.header}>
-            <span className={styles.eyebrow}>[09] Knowledge & Insights</span>
+            <span className={styles.eyebrow}>Knowledge & Insights</span>
             <h2 className={styles.title}>From the Blog</h2>
             <p className={styles.introDesc}>
               Thoughts on web development, software, algo trading, and everything in between.

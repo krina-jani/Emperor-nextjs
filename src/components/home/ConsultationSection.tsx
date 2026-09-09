@@ -42,7 +42,7 @@ export const ConsultationSection: React.FC = () => {
             <div className={styles.ctaBackgroundAura} />
             
             <div className={styles.ctaContent}>
-              <span className={styles.eyebrow}>[10] Let&apos;s Build Together</span>
+              <span className={styles.eyebrow}>Let&apos;s Build Together</span>
               <h2 className={styles.mainHeading}>Ready to Start Your Project?</h2>
               <p className={styles.mainBody}>
                 A free consultation starts with a conversation, not a sales pitch. Share the requirements, hear a clear opinion on what&apos;s actually needed, and decide the next step from there.

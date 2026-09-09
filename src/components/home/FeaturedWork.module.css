@@ -19,7 +19,14 @@
   letter-spacing: 0.15em;
   color: #008cff;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  background: rgba(0, 140, 255, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 1rem;
 }
 
 .title {

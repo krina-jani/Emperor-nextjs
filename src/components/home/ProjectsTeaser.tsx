@@ -63,6 +63,9 @@ const ProjectsTeaser: React.FC = () => {
     <section className={styles.section}>
       <Container className={styles.container}>
         <div ref={containerRef}>
+          <div className={styles.badgeRow}>
+            <span className={styles.subTag}>Featured Portfolio</span>
+          </div>
           <h2 className={styles.title}>Projects</h2>
           
           <p className={styles.subtitle}>

@@ -154,7 +154,7 @@ const AnimatedServices = () => {
       <div className={styles.introSlide}>
         <div className={styles.leftCol}>
           <div className={styles.badgeRow}>
-            <span className={styles.subTag}>[08 Specialized Capabilities]</span>
+            <span className={styles.subTag}>Specialized Capabilities</span>
           </div>
           <h2 className={styles.title}>Our Core Services</h2>
           <p className={styles.introDesc}>

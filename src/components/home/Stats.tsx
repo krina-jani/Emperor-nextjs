@@ -18,7 +18,7 @@ export const Stats: React.FC = () => {
       <Container>
         <FadeIn direction="up">
           <div className={styles.header}>
-            <span className={styles.eyebrow}>[05] Proven Impact</span>
+            <span className={styles.eyebrow}>Proven Impact</span>
             <h2 className={styles.title}>A Track Record Built on Real Projects</h2>
             <p className={styles.intro}>Numbers only mean something when they&apos;re real. Here&apos;s where things stand.</p>
           </div>

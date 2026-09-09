@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './TrustBar.module.css';
+import AnimatedCounter from '../animations/AnimatedCounter';
 
 const clients = [
   'Vardhman Logistics',
@@ -22,7 +23,7 @@ export const TrustBar: React.FC = () => {
   return (
     <section className={styles.section} id="clients">
       <div className={styles.header}>
-        <span className={styles.eyebrow}>[08] Industry Reach</span>
+        <span className={styles.eyebrow}>Our Clients & Partners</span>
         <h2 className={styles.title}>Our Trusted Clients</h2>
         <p className={styles.intro}>
           Businesses across multiple industries have relied on Emperor Smart Solutions for their technology needs.
@@ -46,17 +47,23 @@ export const TrustBar: React.FC = () => {
       <div className={styles.statsBannerContainer}>
         <div className={styles.statsBanner}>
           <div className={styles.bannerItem}>
-            <span className={styles.bannerVal}>200+</span>
+            <span className={styles.bannerVal}>
+              <AnimatedCounter from={1} to={200} suffix="+" />
+            </span>
             <span className={styles.bannerLabel}>design projects completed.</span>
           </div>
           <div className={styles.bannerDivider} aria-hidden="true" />
           <div className={styles.bannerItem}>
-            <span className={styles.bannerVal}>98%</span>
+            <span className={styles.bannerVal}>
+              <AnimatedCounter from={1} to={98} suffix="%" />
+            </span>
             <span className={styles.bannerLabel}>Client satisfaction rate.</span>
           </div>
           <div className={styles.bannerDivider} aria-hidden="true" />
           <div className={styles.bannerItem}>
-            <span className={styles.bannerVal}>5+</span>
+            <span className={styles.bannerVal}>
+              <AnimatedCounter from={1} to={5} suffix="+" />
+            </span>
             <span className={styles.bannerLabel}>Years of experience</span>
           </div>
         </div>

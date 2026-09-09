@@ -279,7 +279,7 @@ export const ProcessTimeline: React.FC = () => {
           <Container className={styles.headerContainer}>
             <div className={styles.headerFlex}>
               <div className={styles.headerLeft}>
-                <span className={styles.eyebrow}>[04] Structured Methodology</span>
+                <span className={styles.eyebrow}>Structured Methodology</span>
                 <h2 className={styles.title}>Process Followed on Every Project</h2>
                 <p className={styles.introDesc}>
                   Every project moves through the same eight stages, whether it&apos;s a website, a mobile app, or an algo trading platform. Each step builds on the one before it.

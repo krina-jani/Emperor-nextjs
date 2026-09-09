@@ -31,12 +31,13 @@ export const Testimonials: React.FC = () => {
           <div className={styles.imageCol}>
             <div className={styles.officeImageWrapper}>
               <Image
-                src="/images/client_reviews_office.jpg"
-                alt="Emperor Smart Solution Studio & Office"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop&sat=-100"
+                alt="Emperor Smart Solution Studio & Design Team"
                 width={640}
-                height={420}
-                quality={95}
+                height={480}
+                quality={90}
                 className={styles.officeImage}
+                priority
               />
             </div>
           </div>
@@ -44,7 +45,7 @@ export const Testimonials: React.FC = () => {
           <div className={styles.contentCol}>
             <div className={styles.badgePill}>
               <Target size={14} className={styles.badgeIcon} />
-              <span>Design services</span>
+              <span>Client Reviews & Feedback</span>
             </div>
 
             <h2 className={styles.mainTitle}>Client Reviews</h2>
@@ -127,28 +128,6 @@ export const Testimonials: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom Stats Banner */}
-        <div className={styles.statsBanner}>
-          <div className={styles.statCol}>
-            <span className={styles.statNumber}>200+</span>
-            <span className={styles.statLabel}>design projects completed.</span>
-          </div>
-
-          <div className={styles.statDivider} />
-
-          <div className={styles.statCol}>
-            <span className={styles.statNumber}>98%</span>
-            <span className={styles.statLabel}>Client satisfaction rate.</span>
-          </div>
-
-          <div className={styles.statDivider} />
-
-          <div className={styles.statCol}>
-            <span className={styles.statNumber}>5+</span>
-            <span className={styles.statLabel}>Years of experience</span>
-          </div>
         </div>
       </Container>
     </section>

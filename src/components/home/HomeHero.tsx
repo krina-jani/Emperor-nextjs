@@ -250,14 +250,11 @@ export const HomeHero: React.FC = () => {
               Building Technology. Driving Growth.
             </p>
 
-            {/* Dual Action Buttons */}
+            {/* Action Button */}
             <div className={styles.actionsRow}>
               <Link href="/contact" className={styles.primaryBtn}>
                 <span>START A PROJECT</span>
                 <span className={styles.btnArrow} aria-hidden="true">&rarr;</span>
-              </Link>
-              <Link href="/work" className={styles.secondaryBtn}>
-                <span>EXPLORE OUR WORK</span>
               </Link>
             </div>
           </div>
