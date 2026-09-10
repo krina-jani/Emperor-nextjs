@@ -471,8 +471,10 @@
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    height: clamp(540px, 62vh, 820px);
+    height: clamp(380px, 48vh, 600px);
+    max-height: 52%;
     width: auto;
+    max-width: 90vw;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -490,6 +492,7 @@
 
   .robotWrapper {
     height: 100%;
+    max-height: 100%;
     width: auto;
     display: flex;
     justify-content: center;
@@ -499,7 +502,9 @@
   .robotImage {
     height: 100%;
     width: auto;
+    max-height: 100%;
     max-width: 100%;
+    object-fit: contain;
     object-position: bottom center;
   }
 
@@ -525,13 +530,13 @@
     min-height: 100svh;
     height: 100vh;
     height: 100svh;
-    padding-top: 68px;
-    padding-bottom: 16px;
+    padding-top: clamp(62px, 10vh, 76px);
+    padding-bottom: 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow: hidden;
   }
 
@@ -542,7 +547,7 @@
     padding: 0 16px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     flex: 1;
@@ -552,12 +557,11 @@
   .heroContent {
     width: 100%;
     max-width: 100%;
-    height: 100%;
-    flex: 1;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     text-align: center;
   }
 
@@ -574,7 +578,7 @@
   .eyebrow {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     justify-content: center;
   }
 
@@ -584,18 +588,18 @@
   }
 
   .heroTitle {
-    font-size: clamp(1.85rem, 8.4vw, 2.35rem);
+    font-size: clamp(1.75rem, 7.8vw, 2.3rem);
     line-height: 1.04;
     letter-spacing: -0.025em;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
     align-items: center;
   }
 
   .heroTagline {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.35;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     max-width: 290px;
     text-align: center;
   }
@@ -605,7 +609,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;
+    max-width: 290px;
     gap: 8px;
     margin-bottom: 0;
   }
@@ -620,15 +624,17 @@
     box-sizing: border-box;
   }
 
-  /* Robot centered underneath buttons, head starting under buttons */
+  /* Robot centered underneath buttons, sized so full body & features are properly visible */
   .robotContainer {
     position: absolute;
     bottom: 0;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    height: clamp(370px, 52vh, 520px);
+    height: clamp(260px, 44svh, 440px);
+    max-height: 48%;
     width: auto;
+    max-width: 88vw;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -639,14 +645,16 @@
   .robotGlow {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 10%;
-    width: clamp(320px, 85vw, 460px);
-    height: clamp(320px, 85vw, 460px);
+    bottom: 8%;
+    width: clamp(260px, 75vw, 400px);
+    height: clamp(260px, 75vw, 400px);
   }
 
   .robotWrapper {
     height: 100%;
+    max-height: 100%;
     width: auto;
+    aspect-ratio: 754 / 1024;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -655,7 +663,9 @@
   .robotImage {
     height: 100%;
     width: auto;
+    max-height: 100%;
     max-width: 100%;
+    object-fit: contain;
     object-position: bottom center;
   }
 
@@ -673,8 +683,8 @@
 /* Extra small devices (max-width: 360px) */
 @media (max-width: 360px) {
   .heroSection {
-    padding-top: 62px;
-    padding-bottom: 10px;
+    padding-top: 56px;
+    padding-bottom: 0px;
   }
 
   .heroContainer {
@@ -682,35 +692,37 @@
   }
 
   .eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    margin-bottom: 8px;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
   }
 
   .heroTitle {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     line-height: 1.04;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .heroTagline {
-    font-size: 0.85rem;
-    margin-bottom: 10px;
+    font-size: 0.82rem;
+    margin-bottom: 8px;
   }
 
   .actionsRow {
-    max-width: 270px;
+    max-width: 260px;
     gap: 6px;
   }
 
   .primaryBtn,
   .secondaryBtn {
     padding: 9px 14px;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 
   .robotContainer {
-    height: clamp(310px, 48vh, 380px);
+    height: clamp(210px, 40svh, 320px);
+    max-height: 44%;
+    max-width: 90vw;
   }
 }
 

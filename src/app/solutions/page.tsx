@@ -2,7 +2,7 @@ import React from 'react';
 import SolutionsHero from '../../components/solutions/SolutionsHero';
 import IndustryGrid from '../../components/industries/IndustryGrid';
 import IndustriesCTA from '../../components/industries/IndustriesCTA';
-import HomeCTA from '../../components/home/HomeCTA';
+import ProjectsCTA from '../../components/work/ProjectsCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
 export const metadata = generatePageMetadata(
@@ -17,7 +17,7 @@ export default function IndustriesPage() {
       <SolutionsHero />
       <IndustryGrid />
       <IndustriesCTA />
-      <HomeCTA />
+      <ProjectsCTA />
     </>
   );
 }

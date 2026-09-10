@@ -173,11 +173,13 @@ export const Footer: React.FC = () => {
           <div className={styles.rightCol}>
             <div className={styles.linksGrid}>
               <div className={styles.navLinks}>
-                <Link href="/projects" className={styles.navLink}>WORK</Link>
-                <Link href="/about" className={styles.navLink}>ABOUT</Link>
+                <Link href="/" className={styles.navLink}>HOME</Link>
                 <Link href="/services" className={styles.navLink}>SERVICES</Link>
-                <Link href="/careers" className={styles.navLink}>CAREERS</Link>
-                <Link href="/contact" className={styles.navLink}>CONTACT</Link>
+                <Link href="/about" className={styles.navLink}>ABOUT US</Link>
+                <Link href="/how-we-work" className={styles.navLink}>HOW WE WORK</Link>
+                <Link href="/solutions" className={styles.navLink}>SOLUTIONS</Link>
+                <Link href="/projects" className={styles.navLink}>PROJECTS</Link>
+                <Link href="/contact" className={styles.navLink}>CONTACT US</Link>
                 <Link href="/internship" className={styles.navLink}>APPLY FOR INTERNSHIP</Link>
               </div>
               

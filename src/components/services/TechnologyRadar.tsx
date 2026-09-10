@@ -1,12 +1,18 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../ui/Container';
 import styles from './TechnologyRadar.module.css';
 
 import { TechLogo } from './TechLogo';
 import OptionWheel from '../ui/OptionWheel';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // Technology categories exactly as shown in the shared image
 const CATEGORIES = [
@@ -90,6 +96,7 @@ export const TechnologyRadar: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedWheelIndex, setSelectedWheelIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Reset selected index when filters change
   useEffect(() => {
@@ -108,11 +115,47 @@ export const TechnologyRadar: React.FC = () => {
     });
   }, [activeCategory, searchQuery]);
 
+  // Mobile ScrollTrigger sticky scroll & slow 1-by-1 stepping
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(max-width: 991px)', () => {
+      const count = filteredTechnologies.length;
+      if (count <= 1) return;
+
+      const st = ScrollTrigger.create({
+        trigger: section,
+        pin: true,
+        start: 'top top',
+        end: () => `+=${Math.max(window.innerHeight * 3, count * 220)}px`,
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const rawIdx = self.progress * (count - 1);
+          const targetIdx = Math.min(count - 1, Math.max(0, Math.round(rawIdx)));
+          setSelectedWheelIndex((prev) => (prev !== targetIdx ? targetIdx : prev));
+        },
+      });
+
+      return () => {
+        st.kill();
+      };
+    });
+
+    return () => {
+      mm.revert();
+    };
+  }, [filteredTechnologies.length, activeCategory, searchQuery]);
+
   const selectedTech = filteredTechnologies[selectedWheelIndex];
 
   return (
-    <section className={styles.section}>
-      <Container>
+    <section ref={sectionRef} className={styles.section}>
+      <Container className={styles.container}>
         <div className={styles.header}>
           <span className={styles.badge}>
             <span className={styles.badgeDot} />
@@ -162,6 +205,7 @@ export const TechnologyRadar: React.FC = () => {
                 <OptionWheel
                   key={`${activeCategory}-${searchQuery}`}
                   items={filteredTechnologies.map((tech) => tech.name)}
+                  selectedIndex={selectedWheelIndex}
                   defaultSelected={0}
                   onChange={(idx) => setSelectedWheelIndex(idx)}
                   side="left"
@@ -169,7 +213,9 @@ export const TechnologyRadar: React.FC = () => {
                   spacing={1.6}
                   curve={1.2}
                   tilt={12}
-                  inset={24}
+                  inset={20}
+                  smoothing={220}
+                  draggable={false}
                   textColor="rgba(255, 255, 255, 0.35)"
                   activeColor="#ffffff"
                 />

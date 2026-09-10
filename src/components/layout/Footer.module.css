@@ -471,37 +471,56 @@
   .giantTextContainer {
     width: 100%;
     max-width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0.75rem;
-    padding-bottom: 0.25rem;
+    padding-left: clamp(8px, 2.5vw, 16px);
+    padding-right: clamp(8px, 2.5vw, 16px);
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .giantText {
     width: 100%;
     max-width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: 0;
     padding: 0;
-    font-size: clamp(2.75rem, 15.5vw, 5.5rem);
-    letter-spacing: 0;
+    font-size: clamp(3.2rem, 18.5vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
     white-space: nowrap;
     box-sizing: border-box;
+    transform: scaleY(1.15);
+    transform-origin: bottom center;
   }
 }
 
 @media (max-width: 480px) {
+  .giantTextContainer {
+    padding-left: clamp(6px, 2vw, 12px);
+    padding-right: clamp(6px, 2vw, 12px);
+    padding-top: 1.25rem;
+    padding-bottom: 0.35rem;
+  }
+
   .giantText {
-    font-size: clamp(2.4rem, 15.2vw, 4.2rem);
-    letter-spacing: 0;
+    font-size: clamp(3rem, 18vw, 4.8rem);
+    letter-spacing: -0.01em;
   }
 }
 
 @media (max-width: 360px) {
+  .giantTextContainer {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 1rem;
+    padding-bottom: 0.25rem;
+  }
+
   .giantText {
-    font-size: clamp(2.1rem, 14.8vw, 3.2rem);
-    letter-spacing: 0;
+    font-size: clamp(2.6rem, 17.5vw, 3.6rem);
+    letter-spacing: -0.015em;
   }
 }

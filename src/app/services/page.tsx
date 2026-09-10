@@ -1,7 +1,7 @@
 import React from 'react';
 import PageHero from '../../components/ui/PageHero';
 import ServicesGrid from '../../components/services/ServicesGrid';
-import HomeCTA from '../../components/home/HomeCTA';
+import ProjectsCTA from '../../components/work/ProjectsCTA';
 import { generatePageMetadata } from '../../lib/seo';
 
 export const metadata = generatePageMetadata(
@@ -23,7 +23,7 @@ export default function ServicesPage() {
       />
       <ServicesGrid />
       <TechnologyRadar />
-      <HomeCTA />
+      <ProjectsCTA />
     </>
   );
 }

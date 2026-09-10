@@ -21,6 +21,7 @@ const DEFAULT_ITEMS = [
 interface OptionWheelProps {
   items?: string[];
   defaultSelected?: number;
+  selectedIndex?: number;
   onChange?: (index: number, item: string) => void;
   textColor?: string;
   activeColor?: string;
@@ -44,6 +45,7 @@ interface OptionWheelProps {
 const OptionWheel: React.FC<OptionWheelProps> = ({
   items = DEFAULT_ITEMS,
   defaultSelected = 3,
+  selectedIndex: controlledIndex,
   onChange,
   textColor = '#a6a6a6',
   activeColor = '#ffffff',
@@ -63,22 +65,23 @@ const OptionWheel: React.FC<OptionWheelProps> = ({
   soundVolume = 0.5,
   className = ''
 }) => {
+  const initialIndex = controlledIndex !== undefined ? controlledIndex : defaultSelected;
   const rootRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const posRef = useRef<number>(defaultSelected);
-  const targetRef = useRef<number>(defaultSelected);
+  const posRef = useRef<number>(initialIndex);
+  const targetRef = useRef<number>(initialIndex);
   const rafRef = useRef<number | null>(null);
   const lastRef = useRef<number>(0);
   const cfgRef = useRef<any>({});
   const onChangeRef = useRef<typeof onChange>(onChange);
-  const selectedRef = useRef<number>(defaultSelected);
+  const selectedRef = useRef<number>(initialIndex);
   const wheelTimerRef = useRef<NodeJS.Timeout | null>(null);
   const dragRef = useRef<{ y: number; start: number; id: number } | null>(null);
   const dragMovedRef = useRef<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string>('');
   const lastTickRef = useRef<number>(0);
-  const [selectedIndex, setSelectedIndex] = useState<number>(defaultSelected);
+  const [selectedIndex, setSelectedIndex] = useState<number>(initialIndex);
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const remPx = typeof window !== 'undefined' ? parseFloat(getComputedStyle(document.documentElement).fontSize) || 16 : 16;
@@ -264,6 +267,12 @@ const OptionWheel: React.FC<OptionWheelProps> = ({
     },
     [applyTarget]
   );
+
+  useEffect(() => {
+    if (controlledIndex !== undefined && controlledIndex !== targetRef.current) {
+      applyTarget(controlledIndex, true);
+    }
+  }, [controlledIndex, applyTarget]);
 
   useEffect(() => {
     applyTarget(targetRef.current, false);
