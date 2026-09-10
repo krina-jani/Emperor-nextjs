@@ -38,12 +38,14 @@ export interface HeroProps {
   eyebrow?: string;
   titleLines?: string[];
   subheading?: string;
+  tagline?: string;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   eyebrow = 'IT Solutions Company in Ahmedabad — Web, Software & Digital Marketing',
   titleLines = ['A.I.', 'DESIGN', 'DEVELOPMENT', 'BRANDING'],
-  subheading = 'Emperor Smart Solutions is an IT solutions company in Ahmedabad, building websites, custom software, algo trading platforms, MLM systems, and digital marketing campaigns. Projects start with a real conversation about what the business actually needs.'
+  subheading = 'Emperor Smart Solutions is an IT solutions company in Ahmedabad, building websites, custom software, algo trading platforms, MLM systems, and digital marketing campaigns. Projects start with a real conversation about what the business actually needs.',
+  tagline = 'Innovate. Build. Transform'
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -517,6 +519,9 @@ export const Hero: React.FC<HeroProps> = ({
               </h1>
               <p className={styles.heroSubheading}>
                 {subheading}
+              </p>
+              <p className={styles.heroTaglineMobile}>
+                {tagline}
               </p>
             </div>
           </div>

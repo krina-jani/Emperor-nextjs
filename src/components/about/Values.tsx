@@ -43,7 +43,7 @@ export const Values: React.FC = () => {
             >
               <div className={styles.card}>
                 <div className={styles.iconBox}>
-                  <Icon name={val.iconName} size={22} />
+                  <Icon name={val.iconName} size={24} />
                 </div>
                 <h3 className={styles.cardTitle}>{val.title}</h3>
                 <p className={styles.desc}>{val.desc}</p>

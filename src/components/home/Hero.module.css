@@ -136,6 +136,10 @@
       color: #CBD5E1;
     }
 
+    .heroTaglineMobile {
+      display: none;
+    }
+
     .heroCtaRow {
       display: flex;
       flex-direction: row;
@@ -538,9 +542,47 @@
 
     /* Responsive Adjustments */
     @media (max-width: 768px) {
+      .heroContentInner {
+        padding: 0 16px;
+        padding-top: 2rem;
+      }
+      .heroEyebrow {
+        margin-bottom: clamp(1.5rem, 3.5vh, 2.2rem) !important;
+        font-size: clamp(0.72rem, 2.3vw, 0.82rem) !important;
+        line-height: 1.5 !important;
+        letter-spacing: 0.14em !important;
+        max-width: 360px;
+      }
       .heroTitle {
-        font-size: clamp(2.4rem, 12.5vw, 5rem) !important;
-        line-height: 0.9 !important;
+        font-size: clamp(2.65rem, 13.5vw, 5.2rem) !important;
+        line-height: 1.02 !important;
+        letter-spacing: -0.03em !important;
+      }
+      .heroTitle span {
+        display: block;
+        white-space: nowrap;
+        margin-bottom: 0.06em;
+      }
+      .heroSubheading {
+        display: none !important;
+      }
+      .heroTaglineMobile {
+        display: block !important;
+        font-family: 'Space Grotesk', var(--font-sans), sans-serif;
+        font-size: clamp(0.88rem, 3.4vw, 1.1rem) !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.16em !important;
+        text-transform: uppercase !important;
+        color: #00A8FF !important;
+        margin-top: clamp(2rem, 5vh, 3.5rem) !important;
+        margin-bottom: 0.5rem !important;
+        text-shadow: 0 0 18px rgba(0, 168, 255, 0.5) !important;
+      }
+      .servicesCardsLayer {
+        display: none !important;
+      }
+      .serviceCard {
+        display: none !important;
       }
       .bottomBar {
         padding: 0 20px;
@@ -549,24 +591,31 @@
         gap: 12px;
         align-items: flex-start;
       }
-      .serviceCard {
-        width: 90% !important;
-        left: 5% !important;
-        right: auto !important;
-        padding: 20px 18px;
-        box-sizing: border-box;
-      }
-      :global(#card-ai) { top: 16%; }
-      :global(#card-mobile) { top: 36%; }
-      :global(#card-web) { top: 56%; }
-      :global(#card-wordpress) { top: 74%; }
     }
 
     @media (max-width: 480px) {
+      .heroContentInner {
+        padding: 0 12px;
+        padding-top: 1.5rem;
+      }
+      .heroEyebrow {
+        margin-bottom: clamp(1.4rem, 3vh, 2rem) !important;
+      }
+      .heroTitle {
+        font-size: clamp(2.5rem, 13.2vw, 3.8rem) !important;
+        line-height: 1.04 !important;
+      }
+      .heroTitle span {
+        margin-bottom: 0.08em;
+      }
+      .heroTaglineMobile {
+        margin-top: clamp(1.8rem, 4.5vh, 3rem) !important;
+        font-size: clamp(0.82rem, 3.4vw, 0.98rem) !important;
+        letter-spacing: 0.14em !important;
+      }
+      .servicesCardsLayer,
       .serviceCard {
-        width: calc(100% - 24px) !important;
-        left: 12px !important;
-        padding: 16px 14px !important;
+        display: none !important;
       }
       .bottomBar {
         padding: 0 12px;

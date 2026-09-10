@@ -30,9 +30,9 @@ export default function AboutPage() {
         <div id="values">
           <Values />
         </div>
-        <div id="team">
+        {/* <div id="team">
           <Team />
-        </div>
+        </div> */}
         <div id="about-cta">
           <AboutCTA />
         </div>

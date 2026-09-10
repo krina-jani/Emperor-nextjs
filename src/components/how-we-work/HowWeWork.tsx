@@ -116,6 +116,7 @@ const standards = [
 export const HowWeWork = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -125,16 +126,16 @@ export const HowWeWork = () => {
       const hero = container.querySelector('.stack-section-hero');
       const sections = gsap.utils.toArray<HTMLElement>('.stack-section');
 
-      // Stage slide animation
-      const stageElements = gsap.utils.toArray('.stage-anim');
-      stageElements.forEach((stage: any) => {
+      // Stage slide entrance animation
+      const stageElements = gsap.utils.toArray<HTMLElement>('.stage-anim');
+      stageElements.forEach((stage) => {
         gsap.fromTo(stage, 
-          { opacity: 0, y: 50 },
+          { opacity: 0.35, y: 35 },
           {
             opacity: 1, 
             y: 0,
-            duration: 0.8,
-            ease: "power3.out",
+            duration: 0.7,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: stage,
               start: "top 85%",
@@ -143,6 +144,37 @@ export const HowWeWork = () => {
           }
         );
       });
+
+      // Animated step-by-step connecting vertical line
+      const timelineEl = timelineRef.current;
+      const progressEl = timelineProgressRef.current;
+
+      if (timelineEl && progressEl) {
+        ScrollTrigger.create({
+          trigger: timelineEl,
+          start: 'top 75%',
+          end: 'bottom 80%',
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            gsap.set(progressEl, { height: `${progress * 100}%` });
+
+            const stageNodes = timelineEl.querySelectorAll(`.${styles.stage}`);
+            stageNodes.forEach((node, idx) => {
+              const nodeEl = node as HTMLElement;
+              const nodeOffset = nodeEl.offsetTop;
+              const timelineHeight = timelineEl.offsetHeight;
+              const nodeProgress = Math.max(0, (nodeOffset - 20) / (timelineHeight || 1));
+              
+              if (progress >= nodeProgress - 0.04) {
+                node.classList.add(styles.stageActive);
+              } else {
+                node.classList.remove(styles.stageActive);
+              }
+            });
+          }
+        });
+      }
 
       // Stacking effect only on desktop
       const mm = gsap.matchMedia();
@@ -213,8 +245,17 @@ export const HowWeWork = () => {
             
             <div className={styles.timelineRight}>
               <div className={styles.timeline} ref={timelineRef}>
+                {/* Background Track Line aligned with dots */}
+                <div className={styles.timelineTrack} />
+                {/* Animated Glowing Progress Line on scroll */}
+                <div className={styles.timelineProgress} ref={timelineProgressRef} />
+
                 {stages.slice(0, 5).map((stage) => (
                   <div key={stage.num} className={`${styles.stage} stage-anim`}>
+                    <div className={styles.stageDotWrapper}>
+                      <span className={styles.stageDot} />
+                      <span className={styles.stageDotPulse} />
+                    </div>
                     <div className={styles.stageContent}>
                       <div className={styles.stageHeader}>
                         <span className={styles.stageNumber}>{stage.num}</span>

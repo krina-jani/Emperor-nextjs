@@ -4,13 +4,13 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from './HomeCTA.module.css';
+import styles from './ProjectsCTA.module.css';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export const HomeCTA: React.FC = () => {
+export const ProjectsCTA: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   
@@ -26,12 +26,12 @@ export const HomeCTA: React.FC = () => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // Mobile / Responsive (< 768px): Larger text, perfectly timed to unpin right as all text finishes scrolling
+      // Mobile / Responsive (< 768px): Giant text size, unpins cleanly when all lines/text finish
       mm.add("(max-width: 767px)", () => {
         const scrollTween = gsap.fromTo(
           textEl,
           {
-            x: () => window.innerWidth * 0.98,
+            x: () => window.innerWidth * 0.95,
           },
           {
             x: () => -(textEl.scrollWidth + 20),
@@ -40,7 +40,7 @@ export const HomeCTA: React.FC = () => {
               trigger: section,
               pin: true,
               start: 'top top',
-              end: () => `+=${Math.max(window.innerHeight * 1.0, textEl.scrollWidth * 0.75)}px`,
+              end: () => `+=${Math.max(window.innerHeight * 1.0, textEl.scrollWidth * 0.85)}px`,
               scrub: 0.5,
               invalidateOnRefresh: true,
             },
@@ -51,9 +51,9 @@ export const HomeCTA: React.FC = () => {
           gsap.fromTo(
             char,
             {
-              yPercent: gsap.utils.random(-35, 35),
+              yPercent: gsap.utils.random(-30, 30),
               rotation: gsap.utils.random(-6, 6),
-              opacity: 0.5,
+              opacity: 0.6,
             },
             {
               yPercent: 0,
@@ -64,15 +64,15 @@ export const HomeCTA: React.FC = () => {
                 trigger: char,
                 containerAnimation: scrollTween,
                 start: 'left 100%',
-                end: 'left 65%',
-                scrub: 0.4,
+                end: 'left 70%',
+                scrub: 0.3,
               },
             }
           );
         });
       });
 
-      // Desktop Mode (>= 768px): Slower, smoother scroll pace on desktop
+      // Desktop Mode (>= 768px): Slower, smoother scroll pace
       mm.add("(min-width: 768px)", () => {
         const scrollTween = gsap.fromTo(
           textEl,
@@ -123,7 +123,7 @@ export const HomeCTA: React.FC = () => {
   }, []);
 
   return (
-    <div className="home-cta-wrapper">
+    <div className="projects-cta-wrapper">
       <section ref={sectionRef} className={styles.sectionAnimated}>
         <div className={styles.containerAnimated}>
           <h3 ref={textRef} className={styles.horizontalText}>
@@ -145,4 +145,4 @@ export const HomeCTA: React.FC = () => {
   );
 };
 
-export default HomeCTA;
+export default ProjectsCTA;

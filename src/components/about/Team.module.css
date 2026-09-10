@@ -85,7 +85,8 @@
 .socials {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  width: 100%;
   margin-top: auto;
   padding-top: 1rem;
 }
@@ -94,17 +95,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(255, 255, 255, 0.01);
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: rgba(0, 168, 255, 0.08);
+  border: 1px solid rgba(0, 168, 255, 0.25);
+  color: #00A8FF;
   transition: all var(--transition-fast);
 }
 
 .socialLink:hover {
-  background-color: rgba(99, 102, 241, 0.1);
-  border-color: var(--color-primary);
-  color: var(--text-primary);
+  background-color: #00A8FF;
+  border-color: #00A8FF;
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+  transform: translateY(-2px);
 }

@@ -37,40 +37,75 @@ const HorizontalScrollCTA: React.FC<HorizontalScrollCTAProps> = ({
 
     const timer = setTimeout(() => {
       ctx = gsap.context(() => {
-        const scrollWidth = textEl.scrollWidth;
-        const windowWidth = window.innerWidth;
-        // Let it scroll until the end of the text is near the center of the screen
-        const maxScroll = scrollWidth - windowWidth * 0.3;
+        const mm = gsap.matchMedia();
 
-        const scrollTween = gsap.to(textEl, {
-          x: () => -(textEl.scrollWidth - window.innerWidth * 0.3),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            pin: true,
-            start: 'center center',
-            end: () => `+=${textEl.scrollWidth}px`,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
+        // Responsive / Mobile (< 768px)
+        mm.add("(max-width: 767px)", () => {
+          const scrollTween = gsap.to(textEl, {
+            x: () => -(textEl.scrollWidth - window.innerWidth * 0.3),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              pin: true,
+              start: 'center center',
+              end: () => `+=${textEl.scrollWidth}px`,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          const chars = textEl.querySelectorAll('.split-char');
+
+          chars.forEach((char) => {
+            gsap.from(char, {
+              yPercent: gsap.utils.random(-200, 200),
+              rotation: gsap.utils.random(-20, 20),
+              opacity: 0,
+              ease: 'back.out(1.2)',
+              duration: 1.2,
+              scrollTrigger: {
+                trigger: char,
+                containerAnimation: scrollTween,
+                start: 'left 100%',
+                end: 'left 70%',
+                scrub: 1,
+              },
+            });
+          });
         });
 
-        const chars = textEl.querySelectorAll('.split-char');
-
-        chars.forEach((char) => {
-          gsap.from(char, {
-            yPercent: gsap.utils.random(-200, 200),
-            rotation: gsap.utils.random(-20, 20),
-            opacity: 0, // Adding opacity fade-in for better polish
-            ease: 'back.out(1.2)',
-            duration: 1.2,
+        // Desktop (>= 768px): Slower, smoother scroll pace
+        mm.add("(min-width: 768px)", () => {
+          const scrollTween = gsap.to(textEl, {
+            x: () => -(textEl.scrollWidth - window.innerWidth * 0.3),
+            ease: 'none',
             scrollTrigger: {
-              trigger: char,
-              containerAnimation: scrollTween,
-              start: 'left 100%',
-              end: 'left 70%', // Finish animation early so the last char settles completely
-              scrub: 1,
+              trigger: section,
+              pin: true,
+              start: 'center center',
+              end: () => `+=${Math.max(window.innerHeight * 2.8, textEl.scrollWidth * 1.5)}px`,
+              scrub: 1.5,
+              invalidateOnRefresh: true,
             },
+          });
+
+          const chars = textEl.querySelectorAll('.split-char');
+
+          chars.forEach((char) => {
+            gsap.from(char, {
+              yPercent: gsap.utils.random(-120, 120),
+              rotation: gsap.utils.random(-15, 15),
+              opacity: 0,
+              ease: 'back.out(1.2)',
+              duration: 1.2,
+              scrollTrigger: {
+                trigger: char,
+                containerAnimation: scrollTween,
+                start: 'left 100%',
+                end: 'left 60%',
+                scrub: 1.2,
+              },
+            });
           });
         });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeCTA from '../../components/home/HomeCTA';
+import ProjectsCTA from '../../components/work/ProjectsCTA';
 import ContactForm from '../../components/contact/ContactForm';
 import Container from '../../components/ui/Container';
 import { generatePageMetadata } from '../../lib/seo';
@@ -24,7 +24,7 @@ export default function ContactPage() {
         </Container>
       </div>
       <ContactForm />
-      <HomeCTA />
+      <ProjectsCTA />
     </main>
   );
 }

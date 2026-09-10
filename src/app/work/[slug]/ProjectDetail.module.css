@@ -165,38 +165,45 @@
 }
 
 .deliverableItem {
-  background: #f8f8f6;
-  border: 1px solid #eeeeea;
-  border-radius: 0.5rem;
-  padding: 1rem 1.5rem;
+  background: #0B1728;
+  border: 1px solid #163451;
+  border-radius: 0.75rem;
+  padding: 1.15rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.deliverableItem:hover {
+  border-color: rgba(0, 140, 255, 0.4);
+  background: #0e1c30;
 }
 
 .checkIcon {
-  color: #555;
+  color: #00A8FF;
   flex-shrink: 0;
 }
 
 .deliverableText {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--color-text);
+  color: #FFFFFF;
+  line-height: 1.5;
 }
 
 .stackSection {
-  border-top: 1px solid #eaeaea;
-  padding-top: 2rem;
+  border-top: 1px solid #163451;
+  padding-top: 2.5rem;
 }
 
 .stackTitle {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #008CFF;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
 }
 
 .techTags {
@@ -206,13 +213,20 @@
 }
 
 .techTag {
-  background: #f0f0eb;
-  border: 1px solid #e5e5e0;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
+  background: #061023;
+  border: 1px solid #163451;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+.techTag:hover {
+  border-color: #008CFF;
+  color: #008CFF;
+  background: #08162e;
 }
 
 @media (max-width: 992px) {

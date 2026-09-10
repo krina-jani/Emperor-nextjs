@@ -22,28 +22,42 @@
 
 .card:hover {
   background: var(--glass-bg-hover);
-  border-color: rgba(20, 184, 166, 0.25);
+  border-color: rgba(0, 168, 255, 0.35);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 168, 255, 0.12);
 }
 
 .iconBox {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(20, 184, 166, 0.06);
-  border: 1px solid rgba(20, 184, 166, 0.18);
-  color: var(--color-secondary);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(0, 168, 255, 0.12);
+  border: 1px solid rgba(0, 168, 255, 0.35);
+  color: #00A8FF;
+  box-shadow: 0 0 16px rgba(0, 168, 255, 0.18);
   transition: all var(--transition-normal);
 }
 
+.iconBox svg {
+  stroke: #00A8FF;
+  color: #00A8FF;
+  transition: stroke 0.25s ease, color 0.25s ease;
+}
+
 .card:hover .iconBox {
-  background-color: var(--color-secondary);
-  color: var(--text-primary);
-  box-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+  background: #00A8FF;
+  color: #FFFFFF;
+  border-color: #00A8FF;
+  box-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.card:hover .iconBox svg {
+  stroke: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .cardTitle {

@@ -58,7 +58,7 @@
 
 /* Dark Timeline Section */
 .section {
-  padding: 8rem 0;
+  padding: 4.5rem 0 3.5rem 0;
   background-color: #010610;
   background-image: 
     linear-gradient(to bottom, rgba(1, 6, 16, 0.85), rgba(5, 13, 26, 0.95) 40%, rgba(1, 6, 16, 0.85)),
@@ -148,103 +148,197 @@
 
 .timeline {
   position: relative;
-  padding: 2rem 0 2rem 2rem;
+  padding: 1rem 0 3rem 0;
 }
 
-/* Central vertical line */
-.timeline::before {
-  content: '';
+/* Background vertical track line passing precisely through the center of every dot */
+.timelineTrack {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.2);
+  top: 16px;
+  bottom: 30px;
+  left: 15px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+}
+
+/* Active glowing progress line animated on scroll */
+.timelineProgress {
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  width: 2px;
+  height: 0%;
+  max-height: calc(100% - 46px);
+  background: linear-gradient(180deg, #00A8FF 0%, #00E5FF 100%);
+  box-shadow: 0 0 10px rgba(0, 168, 255, 0.8), 0 0 20px rgba(0, 229, 255, 0.4);
+  border-radius: 2px;
+  z-index: 2;
+  transition: height 0.08s linear;
 }
 
 .stage {
   display: flex;
-  justify-content: flex-start;
   position: relative;
-  margin-bottom: 6rem;
+  margin-bottom: 5.5rem;
   width: 100%;
-  padding-left: 2rem;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Dot on the line */
-.stage::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -6px;
-  width: 12px;
-  height: 12px;
+.stage:last-child {
+  margin-bottom: 1rem;
+}
+
+/* Stage Dot Wrapper - width 32px centers at 16px (aligned with 15px + 1px = 16px track line) */
+.stageDotWrapper {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  margin-top: 2px;
+}
+
+.stageDot {
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #008CFF;
-  box-shadow: 0 0 12px rgba(0, 140, 255, 0.7);
+  background: #081321;
+  border: 2.5px solid #008CFF;
+  box-shadow: 0 0 10px rgba(0, 140, 255, 0.6);
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+.stageDotPulse {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 168, 255, 0.25);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.35s ease;
+  pointer-events: none;
+}
+
+/* Active Stage State when progress line reaches it */
+.stageActive .stageDot {
+  background: #00E5FF;
+  border-color: #FFFFFF;
+  box-shadow: 0 0 16px #00E5FF, 0 0 28px rgba(0, 229, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.stageActive .stageDotPulse {
+  opacity: 1;
+  transform: scale(1.3);
+  animation: pulseDot 2.2s infinite ease-out;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
 .stageContent {
   text-align: left;
-  max-width: 450px;
+  flex: 1;
   position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  transition: opacity 0.35s ease;
+}
+
+.stageActive .stageContent {
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .stageHeader {
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .stageNumber {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 700;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.25rem;
+  color: #008CFF;
+  font-weight: 800;
 }
 
 .stageCategory {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
   font-weight: 800;
   color: #ffffff;
-  margin-left: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 .stageTitle {
-  font-size: 1.125rem;
-  color: #a0aec0;
-  font-weight: 600;
+  font-size: 1.05rem;
+  color: #00A8FF;
+  font-weight: 700;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .stageDesc {
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
 }
 
 /* Floating Images */
 .stageImage {
-  position: absolute;
-  width: 160px;
-  height: 120px;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  border-radius: 10px;
   object-fit: cover;
-  opacity: 0.8;
+  opacity: 0.95;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  top: 100%;
-  right: -50px;
-  transform: translateY(-20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stageImage:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 140, 255, 0.2);
 }
 
 
 /* Quality Standards (What's Included style) */
 .qualitySection {
-  margin-top: 8rem;
-  padding-bottom: 6rem;
+  margin-top: 0;
+  padding-bottom: 2rem;
 }
 
 .qualityHeader {
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .qualityBadge {
@@ -329,13 +423,13 @@
 
 /* Horizontal Cards Section */
 .horizontalSection {
-  margin-top: 8rem;
-  padding-bottom: 6rem;
+  margin-top: 0;
+  padding-bottom: 2rem;
 }
 
 .sixStepsTitleWrapper {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .sixStepsTitle {
@@ -441,18 +535,85 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .timelineWrapper {
+    margin-top: 2.5rem;
+    gap: 2rem;
+  }
+
+  .timelineLeft {
+    position: relative;
+    top: 0;
+  }
+
+  .timeline {
+    padding: 0.5rem 0 2rem 0;
+  }
+
+  .timelineTrack {
+    left: 12px;
+    top: 14px;
+    bottom: 24px;
+  }
+
+  .timelineProgress {
+    left: 12px;
+    top: 14px;
+  }
+
+  .stage {
+    gap: 0.85rem;
+    margin-bottom: 3rem;
+  }
+
+  .stageDotWrapper {
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    margin-top: 4px;
+  }
+
+  .stageDot {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+  }
+
+  .stageDotPulse {
+    width: 22px;
+    height: 22px;
+  }
+
+  .stageContent {
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .stageCategory {
+    font-size: 1.15rem;
+  }
+
+  .section {
+    padding: 3rem 0 2rem 0;
+  }
+
   .qualitySection {
-    margin-top: 4rem;
-    padding-bottom: 3rem;
+    margin-top: 0;
+    padding-bottom: 2rem;
+  }
+
+  .qualityHeader {
+    margin-bottom: 2rem;
   }
 
   .horizontalSection {
-    margin-top: 4rem;
-    padding-bottom: 3rem;
+    margin-top: 0;
+    padding-bottom: 2rem;
   }
 
   .sixStepsTitleWrapper {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 
   .wideCard {
@@ -474,9 +635,9 @@
     top: 0;
     right: 0;
     transform: none;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     width: 100%;
-    height: 180px;
+    height: 170px;
   }
 
   .horizontalGrid {
